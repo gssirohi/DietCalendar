@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    correctErrorTypes = CONST.KOTLIN.correctErrorTypes
+}
+
+android {
+    compileSdkVersion CONST.BUILD.compileSdkVersion
+    buildToolsVersion CONST.BUILD.buildToolsVersion
+    defaultConfig {
+        applicationId CONST.APP.applicationId
+        minSdkVersion CONST.BUILD.minSdkVersion
+        targetSdkVersion CONST.BUILD.targetSdkVersion
+        versionCode CONST.APP.versionCode
+        versionName CONST.APP.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = CONST.DATABINDING.enabled
+    }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "2g"
+    }
+    compileOptions {
+        sourceCompatibility CONST.JAVA.version
+        targetCompatibility CONST.JAVA.version
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation REQUIRE.KOTLIN.JRE
+    kapt REQUIRE.KOTLIN.COMPILER
+
+    implementation REQUIRE.SUPPORT.V7
+    implementation REQUIRE.SUPPORT.DESIGN
+    implementation REQUIRE.SUPPORT.CARDVIEW
+    implementation REQUIRE.SUPPORT.PALETTE
+    implementation REQUIRE.SUPPORT.V4
+    implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
+
+    implementation REQUIRE.NETWORKING.RETROFIT
+    implementation REQUIRE.NETWORKING.RETROFIT_ADAPTER_RXJAVA
+    implementation REQUIRE.NETWORKING.RETROFIT_GSON_CONVERTER
+    implementation REQUIRE.NETWORKING.OKHTTP_INTERCEPTER
+    implementation REQUIRE.NETWORKING.GSON
+    implementation REQUIRE.NETWORKING.TIMBER
+
+    implementation REQUIRE.ARCH.LIFECYCLE.RUNTIME
+    implementation REQUIRE.ARCH.LIFECYCLE.EXTENSION
+    kapt REQUIRE.ARCH.LIFECYCLE.COMPILER
+
+    implementation REQUIRE.ARCH.ROOM.RUNTIME
+    kapt REQUIRE.ARCH.ROOM.COMPILER
+
+    implementation REQUIRE.DAGGER.DAGGER
+    implementation REQUIRE.DAGGER.DAGGER_ANDROID
+    implementation REQUIRE.DAGGER.DAGGER_SUPPORT
+    kapt REQUIRE.DAGGER.PROCESSOR
+    kapt REQUIRE.DAGGER.COMPILER
+
+    testImplementation REQUIRE.TEST.JUNIT
+    androidTestImplementation REQUIRE.TEST.RUNNER
+    androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
+
+}

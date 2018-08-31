@@ -1,0 +1,137 @@
+ext {
+
+    CONST = [
+            JAVA       : [
+                    version: JavaVersion.VERSION_1_8
+            ],
+
+            APP        : [
+                    applicationId: "com.techticz.dietcalendar",
+                    versionCode  : 1,
+                    versionName  : "Version A",
+            ],
+            KOTLIN     : [
+                    version          : '1.2.10',
+                    correctErrorTypes: true,
+            ],
+
+            DATABINDING: [
+                    enabled        : true,
+                    compilerVersion: "3.0.0"
+            ],
+
+            BUILD      : [
+                    compileSdkVersion  : 26,
+                    buildToolsVersion  : "26.0.2",
+                    minSdkVersion      : 19,
+                    targetSdkVersion   : 26,
+                    gradlePluginVersion: "3.0.0",
+            ],
+            ANDROID    : [
+                    LIBS: [
+                            supportLibraryVersion: "27.0.1", //"26.1.0"
+                            playServiceVersion   : "11.6.0",
+                    ],
+                    ARCH: [
+                            lifeCycleVersion: "1.0.0",
+                            roomVersion     : "1.0.0"
+                    ],
+                    UI  : [
+                            constraintLayoutVersion : '1.0.2',
+                            materialDialogVersion   : "0.9.6.0",
+                            scaleImageViewVersion   : "3.6.0",
+                            circleimageviewVersion  : "2.1.0",
+                            picassoVersion          : '2.5.2',
+                            spinKitVersion          : '1.1.0',
+                            aviLibVersion           : '2.1.3',
+                            expectAnimVersion       : '1.0.7',
+                            smartTabLayoutAarVersion: '1.6.1@aar'
+                    ]
+
+            ],
+            NETWORKING : [
+                    okHttp3Version            : '3.8.1',
+                    okHttpVersion             : '2.7.0',
+                    okHttpUrlVersion          : '2.2.0',
+                    ishanBalIntercepterVersion: '2.0.3',
+                    retrofitVersion           : '2.3.0',
+                    gsonVersion               : '2.8.1'
+            ],
+            TEST       : [
+                    junitVersion   : "4.12",
+                    espressoVersion: "3.0.1",
+                    runnerVersion  : "1.0.1"
+            ],
+            OTHER      : [
+                    timberVersion: "4.5.1",
+                    daggerVersion: "2.11"
+            ]
+    ]
+
+    REQUIRE = [
+            KOTLIN    : [
+                    JRE     : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:' + CONST.KOTLIN.version,
+                    COMPILER: 'com.android.databinding:compiler:' + CONST.DATABINDING.compilerVersion
+            ],
+
+            SUPPORT   : [
+                    V7               : 'com.android.support:appcompat-v7:' + CONST.ANDROID.LIBS.supportLibraryVersion,
+                    DESIGN           : 'com.android.support:design:' + CONST.ANDROID.LIBS.supportLibraryVersion,
+                    CARDVIEW         : 'com.android.support:cardview-v7:' + CONST.ANDROID.LIBS.supportLibraryVersion,
+                    PALETTE          : 'com.android.support:palette-v7:' + CONST.ANDROID.LIBS.supportLibraryVersion,
+                    V4               : 'com.android.support:support-v4:' + CONST.ANDROID.LIBS.supportLibraryVersion,
+                    CONSTRAINT_LAYOUT: 'com.android.support.constraint:constraint-layout:' + CONST.ANDROID.UI.constraintLayoutVersion
+            ],
+
+            NETWORKING: [
+                    RETROFIT               : 'com.squareup.retrofit2:retrofit:' + CONST.NETWORKING.retrofitVersion,
+                    RETROFIT_ADAPTER_RXJAVA: 'com.squareup.retrofit2:adapter-rxjava2:' + CONST.NETWORKING.retrofitVersion,
+                    RETROFIT_GSON_CONVERTER: 'com.squareup.retrofit2:converter-gson:' + CONST.NETWORKING.retrofitVersion,
+                    OKHTTP                 : 'com.squareup.okhttp:okhttp:' + CONST.NETWORKING.okHttpVersion,
+                    OKHTTP_URL             : 'com.squareup.okhttp:okhttp-urlconnection:' + CONST.NETWORKING.okHttpUrlVersion,
+                    OKHTTP_INTERCEPTER     : 'com.squareup.okhttp3:logging-interceptor:' + CONST.NETWORKING.okHttp3Version,
+                    ISHANBAL_INTERCEPTER   : 'com.github.ihsanbal:LoggingInterceptor:' + CONST.NETWORKING.ishanBalIntercepterVersion,
+                    GSON                   : 'com.google.code.gson:gson:' + CONST.NETWORKING.gsonVersion,
+                    TIMBER                 : 'com.jakewharton.timber:timber:' + CONST.OTHER.timberVersion
+            ],
+
+            ARCH      : [
+                    LIFECYCLE: [
+                            RUNTIME  : 'android.arch.lifecycle:runtime:' + CONST.ANDROID.ARCH.lifeCycleVersion,
+                            EXTENSION: 'android.arch.lifecycle:extensions:' + CONST.ANDROID.ARCH.lifeCycleVersion,
+                            COMPILER : 'android.arch.lifecycle:compiler:' + CONST.ANDROID.ARCH.lifeCycleVersion
+                    ],
+                    ROOM     : [
+                            RUNTIME : 'android.arch.persistence.room:runtime:' + CONST.ANDROID.ARCH.roomVersion,
+                            COMPILER: 'android.arch.persistence.room:compiler:' + CONST.ANDROID.ARCH.roomVersion
+                    ]
+            ],
+
+            DAGGER    : [
+                    DAGGER        : 'com.google.dagger:dagger:' + CONST.OTHER.daggerVersion,
+                    DAGGER_ANDROID: 'com.google.dagger:dagger-android:' + CONST.OTHER.daggerVersion,
+                    DAGGER_SUPPORT: 'com.google.dagger:dagger-android-support:' + CONST.OTHER.daggerVersion,
+                    PROCESSOR     : 'com.google.dagger:dagger-android-processor:' + CONST.OTHER.daggerVersion,
+                    COMPILER      : 'com.google.dagger:dagger-compiler:' + CONST.OTHER.daggerVersion
+            ],
+
+            UI        : [
+                    DIALOG              : 'com.afollestad.material-dialogs:core:' + CONST.ANDROID.UI.materialDialogVersion,
+                    SCALE_IMAGE_VIEW    : 'com.davemorrissey.labs:subsampling-scale-image-view:' + CONST.ANDROID.UI.scaleImageViewVersion,
+                    CIRCLE_IMAGE_VIEW   : 'de.hdodenhof:circleimageview:' + CONST.ANDROID.UI.circleimageviewVersion,
+                    PICASSO             : 'com.squareup.picasso:picasso:' + CONST.ANDROID.UI.picassoVersion,
+                    SPINKIT             : 'com.github.ybq:Android-SpinKit:' + CONST.ANDROID.UI.spinKitVersion,
+                    AVI_LIB             : 'com.wang.avi:library:' + CONST.ANDROID.UI.aviLibVersion,
+                    EXPECT_ANIM         : 'com.github.florent37:expectanim:' + CONST.ANDROID.UI.expectAnimVersion,
+                    SMART_TAB_LAYOUT_AAR: 'com.ogaclejapan.smarttablayout:library:' + CONST.ANDROID.UI.smartTabLayoutAarVersion
+            ],
+            TEST      : [
+                    JUNIT        : 'junit:junit:' + CONST.TEST.junitVersion,
+                    RUNNER       : 'com.android.support.test:runner:' + CONST.TEST.runnerVersion,
+                    ESPRESSO_CORE: 'com.android.support.test.espresso:espresso-core:' + CONST.TEST.espressoVersion
+            ]
+
+
+    ]
+
+}
