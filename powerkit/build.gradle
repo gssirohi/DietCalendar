@@ -1,24 +1,17 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
-kapt {
-    correctErrorTypes = CONST.KOTLIN.correctErrorTypes
-}
 
 android {
     compileSdkVersion CONST.BUILD.compileSdkVersion
     buildToolsVersion CONST.BUILD.buildToolsVersion
     defaultConfig {
-        applicationId CONST.APP.applicationId
         minSdkVersion CONST.BUILD.minSdkVersion
         targetSdkVersion CONST.BUILD.targetSdkVersion
-        versionCode CONST.APP.versionCode
-        versionName CONST.APP.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -36,15 +29,13 @@ android {
         sourceCompatibility CONST.JAVA.version
         targetCompatibility CONST.JAVA.version
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':powerkit')
-
     implementation REQUIRE.KOTLIN.JRE
-    implementation 'com.android.support:support-v4:26.1.0'
     kapt REQUIRE.KOTLIN.COMPILER
 
     implementation REQUIRE.SUPPORT.V7
@@ -53,6 +44,8 @@ dependencies {
     implementation REQUIRE.SUPPORT.PALETTE
     implementation REQUIRE.SUPPORT.V4
     implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
+
+    implementation REQUIRE.UI.DIALOG
 
     implementation REQUIRE.NETWORKING.RETROFIT
     implementation REQUIRE.NETWORKING.RETROFIT_ADAPTER_RXJAVA
@@ -78,5 +71,7 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
-    compile project(path: ':networking')
 }
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'

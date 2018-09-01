@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DietCalendar.iml" filepath="$PROJECT_DIR$/DietCalendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/networking/networking.iml" filepath="$PROJECT_DIR$/networking/networking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/powerkit/powerkit.iml" filepath="$PROJECT_DIR$/powerkit/powerkit.iml" />
     </modules>
   </component>
 </project>

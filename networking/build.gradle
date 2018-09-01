@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation REQUIRE.SUPPORT.V4
+    implementation REQUIRE.SUPPORT.V7
+    implementation REQUIRE.NETWORKING.RETROFIT
+    implementation REQUIRE.NETWORKING.RETROFIT_ADAPTER_RXJAVA
+    implementation REQUIRE.NETWORKING.RETROFIT_GSON_CONVERTER
+    implementation REQUIRE.NETWORKING.OKHTTP_INTERCEPTER
+    implementation REQUIRE.NETWORKING.OKHTTP
+    implementation REQUIRE.NETWORKING.OKHTTP_URL
+    implementation REQUIRE.NETWORKING.GSON
+    implementation REQUIRE.NETWORKING.TIMBER
+    implementation REQUIRE.NETWORKING.ISHANBAL_INTERCEPTER
+    implementation REQUIRE.DAGGER.DAGGER
+    implementation REQUIRE.DAGGER.DAGGER_ANDROID
+    implementation REQUIRE.DAGGER.DAGGER_SUPPORT
+    annotationProcessor REQUIRE.DAGGER.PROCESSOR
+    annotationProcessor REQUIRE.DAGGER.COMPILER
+    implementation REQUIRE.ARCH.LIFECYCLE.RUNTIME
+    implementation REQUIRE.ARCH.LIFECYCLE.EXTENSION
+    annotationProcessor REQUIRE.ARCH.LIFECYCLE.COMPILER
+    implementation REQUIRE.ARCH.ROOM.RUNTIME
+    annotationProcessor REQUIRE.ARCH.ROOM.COMPILER
+    testImplementation REQUIRE.TEST.JUNIT
+    androidTestImplementation REQUIRE.TEST.RUNNER
+    androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
+    implementation REQUIRE.UI.SMART_TAB_LAYOUT_AAR
+    compile project(path: ':powerkit')
+}

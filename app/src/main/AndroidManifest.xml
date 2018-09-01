@@ -3,6 +3,7 @@
     package="com.techticz.dietcalendar">
 
     <application
+        android:name=".ui.DietCalendarApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LauncherActivity"
+            android:name=".ui.activity.LauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme">
