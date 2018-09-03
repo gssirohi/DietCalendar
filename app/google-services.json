@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "265310580755",
+    "firebase_url": "https://techticz-diet-calendar.firebaseio.com",
+    "project_id": "techticz-diet-calendar",
+    "storage_bucket": "techticz-diet-calendar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265310580755:android:fa87972c4b504c57",
+        "android_client_info": {
+          "package_name": "com.techticz.dietcalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265310580755-p68tsguu0bf2uu5khq2vk9apj5o73lkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techticz.dietcalendar",
+            "certificate_hash": "578ed2b9e160e9c2c4fb08510fee05517a1099fd"
+          }
+        },
+        {
+          "client_id": "265310580755-7m73ndlbihahvt6eualc0cgufu33hf6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG-iSf2WL-vOwlgsazZ2YTpBYbv92yFuE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265310580755-7m73ndlbihahvt6eualc0cgufu33hf6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

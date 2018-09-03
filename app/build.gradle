@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(':powerkit')
 
@@ -74,9 +74,14 @@ dependencies {
     kapt REQUIRE.DAGGER.PROCESSOR
     kapt REQUIRE.DAGGER.COMPILER
 
+    implementation REQUIRE.FIREBASE.CORE
+    implementation REQUIRE.FIREBASE.FIRESTORE
+
     testImplementation REQUIRE.TEST.JUNIT
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
     compile project(path: ':networking')
 }
+
+apply plugin: 'com.google.gms.google-services'

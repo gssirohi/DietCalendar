@@ -2,6 +2,7 @@ package com.techticz.dietcalendar.ui.activity
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,9 +11,11 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import com.techticz.dietcalendar.R
+import com.techticz.dietcalendar.databinding.ActivityLauncherBinding
 import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import com.techticz.networking.model.Resource
+import com.techticz.networking.model.Status
 import com.techticz.powerkit.base.BaseDIActivity
 import kotlinx.android.synthetic.main.activity_launcher.*
 import timber.log.Timber
@@ -27,6 +30,7 @@ class LauncherActivity : BaseDIActivity() {
     @Inject
     lateinit var welcomeMessage: String
     private var launcherViewModel: LauncherViewModel? = null
+    private var launcherBinding: ActivityLauncherBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +55,8 @@ class LauncherActivity : BaseDIActivity() {
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow()
                 .setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setContentView(R.layout.activity_launcher)
-
+        //setContentView(R.layout.activity_launcher)
+        launcherBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher)
         Timber.d(welcomeMessage)
         launcherViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(LauncherViewModel::class.java)
         launcherViewModel?.launcherResponse?.observe(this, Observer {
@@ -62,12 +66,33 @@ class LauncherActivity : BaseDIActivity() {
 
         })
         showToast(welcomeMessage);
+
+        launcherBinding?.viewModel1 = launcherViewModel
+
+        var handler :Handler = Handler()
+        handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },4*1000)
+
+        //launcherViewModel?.triggerLaunch?.value = true
     }
 
+
     private fun onDataLoaded(resource: Resource<LauncherResponse>?) {
-        when(resource!=null) {
-            true->Toast.makeText(this, resource?.data?.launchMessage, Toast.LENGTH_SHORT).show();
+        //launcherBinding?.viewModel1 = launcherViewModel
+        when(resource?.status){
+            Status.LOADING->{
+                launcherBinding?.tvTop?.text = "Loading.."
+            }
+            Status.SUCCESS->
+            {
+                launcherBinding?.tvCenter?.text = resource.data?.launchMessage
+                Toast.makeText(this, resource.data?.launchMessage, Toast.LENGTH_SHORT).show()
+            }
+            Status.ERROR->
+            {
+                launcherBinding?.tvCenter?.text = resource.message
+            }
         }
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

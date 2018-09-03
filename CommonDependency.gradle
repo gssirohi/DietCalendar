@@ -62,6 +62,10 @@ ext {
                     espressoVersion: "3.0.1",
                     runnerVersion  : "1.0.1"
             ],
+            FIREBASE   : [
+                    firebaseVersion:"16.0.1",
+                    firestoreVersion:"17.1.0"
+            ],
             OTHER      : [
                     timberVersion: "4.5.1",
                     daggerVersion: "2.11"
@@ -69,6 +73,11 @@ ext {
     ]
 
     REQUIRE = [
+
+            FIREBASE : [
+              CORE: 'com.google.firebase:firebase-core:'+ CONST.FIREBASE.firebaseVersion,
+              FIRESTORE:'com.google.firebase:firebase-firestore:'+ CONST.FIREBASE.firestoreVersion
+            ],
             KOTLIN    : [
                     JRE     : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:' + CONST.KOTLIN.version,
                     COMPILER: 'com.android.databinding:compiler:' + CONST.DATABINDING.compilerVersion

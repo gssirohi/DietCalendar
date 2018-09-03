@@ -8,13 +8,8 @@ class Environment {
     companion object {
         var showNetworkLogs = true
         var showSnackbarAsDefaultFeedback = true
+        val SERVER_ROOT_URL = "https://diet-chart-app.appspot.com/_ah/api/"
 
-        //public static final String BASE_URL_RFS = "http://172.16.6.227:6060/corpccwebapp/mobile/";
-        val BASE_URL_RFS = "https://securerfs2.yatra.com/corpccwebapp/mobile/common/"
-        //    public static final String BASE_URL_RFS = "http://172.16.1.131:6565/ccwebapp/mobile/";
-        val BASE_URL_RFS_227 = "http://172.16.6.227:6060/corpccwebapp/mobile/"
-        //    public static String BASE_URL_PROD = "http://172.16.1.131:6565/ccwebapp/mobile/";
-        var baseUrl = BASE_URL_RFS
     }
 
 }
