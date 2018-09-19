@@ -1,0 +1,92 @@
+[
+  {
+    "name": "glass",
+    "unit": "ml",
+    "capacity": "100"
+  },
+  {
+    "name": "cup",
+    "unit": "ml",
+    "capacity": "40"
+  },
+  {
+    "name": "smallbowl",
+    "unit": "gm",
+    "capacity": "60"
+  },
+  {
+    "name": "bowl",
+    "unit": "gm",
+    "capacity": "100"
+  },
+  {
+    "name": "smallpiece",
+    "unit": "gm",
+    "capacity": "30"
+  },
+  {
+    "name": "piece",
+    "unit": "gm",
+    "capacity": "40"
+  },
+  {
+    "name": "largepiece",
+    "unit": "gm",
+    "capacity": "60"
+  },
+  {
+    "name": "handfull",
+    "unit": "gm",
+    "capacity": "30"
+  },
+  {
+    "name": "smallslice",
+    "unit": "gm",
+    "capacity": "10"
+  },
+  {
+    "name": "slice",
+    "unit": "gm",
+    "capacity": "20"
+  },
+  {
+    "name": "largeslice",
+    "unit": "gm",
+    "capacity": "30"
+  },
+  {
+    "name": "drop",
+    "unit": "ml",
+    "capacity": "2"
+  },
+  {
+    "name": "teaspoon",
+    "unit": "gm",
+    "capacity": "5"
+  },
+  {
+    "name": "dessertspoon",
+    "unit": "gm",
+    "capacity": "10"
+  },
+  {
+    "name": "tablespoon",
+    "unit": "gm",
+    "capacity": "15"
+  },
+  {
+    "name": "smallbunch",
+    "unit": "gm",
+    "capacity": "10"
+  },
+  {
+    "name": "bunch",
+    "unit": "gm",
+    "capacity": "30"
+  },
+  {
+    "name": "largebunch",
+    "unit": "gm",
+    "capacity": "50"
+  }
+]

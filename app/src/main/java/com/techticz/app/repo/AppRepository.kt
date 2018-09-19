@@ -2,7 +2,7 @@ package com.techticz.dietcalendar.repo
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import com.google.firebase.firestore.FirebaseFirestore
+import android.content.Context
 import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.networking.model.AppExecutors
 import com.techticz.networking.model.DataSource
@@ -14,17 +14,23 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.support.annotation.NonNull
 import android.util.Log
+import android.util.Xml
+import com.google.android.gms.common.util.IOUtils
 import com.google.android.gms.tasks.OnFailureListener
-import com.google.firebase.firestore.DocumentReference
 import com.google.android.gms.tasks.OnSuccessListener
 import com.techticz.app.model.User
-import com.google.firebase.firestore.QueryDocumentSnapshot
 
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.OnCompleteListener
-
-
+import com.google.firebase.firestore.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.techticz.app.model.food.*
+import com.techticz.app.model.food.category.FoodCategory
+import com.techticz.app.model.recipe.category.RecipeCategory
+import com.techticz.app.model.serving.ServingType
+import com.techticz.powerkit.utils.JSONUtils
+import java.lang.reflect.Type
 
 
 /**
@@ -32,7 +38,7 @@ import com.google.android.gms.tasks.OnCompleteListener
  */
 
 class AppRepository @Inject
-constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: SyncPrefDao*/, private val db: FirebaseFirestore) {
+constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: SyncPrefDao*/, private val db: FirebaseFirestore,private val context:Context) {
     // Fetch again if the data is older than 48 hours
     private val rateLimiter = RateLimiter<String>(48, TimeUnit.HOURS)
 
@@ -45,7 +51,11 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
         }
 
     private fun fetchLauncherResponse(): LiveData<Resource<LauncherResponse>> {
-        getUsers()
+        //addFood()
+        //addFoodCategories()
+        //addRecipeCategories()
+        addServingTypes()
+       // getUsers()
         var resp = LauncherResponse()
         resp.launchMessage = "This is local launch message not from network or DB"
         var resource = Resource<LauncherResponse>(Status.LOADING, resp, "Loading Data..", DataSource.LOCAL)
@@ -56,6 +66,79 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
 
         live.value = resourceS
         return live
+    }
+
+    private fun addFoodCategories(){
+        var jsonString : String = JSONUtils.readJsonFromFile(context,"food_categories.json")
+        var listType = object : TypeToken<List<FoodCategory>>(){}.type
+        var gson:Gson = Gson()
+        var cats:List<FoodCategory> = gson.fromJson(jsonString,listType)
+        Log.d("Repo","categories count:"+cats.size)
+        Log.d("Repo","categories[0] name:"+cats.get(0).name)
+
+        var batch:WriteBatch = db.batch()
+        for(cat in  cats){
+            var ref:DocumentReference = db.collection("foodCategories").document(cat.name)
+            batch.set(ref,cat)
+        }
+        batch.commit().addOnSuccessListener { task->Log.d("Repo","Categories insertion success") }
+                .addOnFailureListener(OnFailureListener {task->Log.e("Repo","Categories insertion failed")  })
+
+    }
+
+    private fun addRecipeCategories(){
+        var jsonString : String = JSONUtils.readJsonFromFile(context,"recipe_categories.json")
+        var listType = object : TypeToken<List<RecipeCategory>>(){}.type
+        var gson:Gson = Gson()
+        var cats:List<RecipeCategory> = gson.fromJson(jsonString,listType)
+        Log.d("Repo","categories count:"+cats.size)
+        Log.d("Repo","categories[0] name:"+cats.get(0).name)
+
+        var batch:WriteBatch = db.batch()
+        for(cat in  cats){
+            var ref:DocumentReference = db.collection("recipeCategories").document(cat.name)
+            batch.set(ref,cat)
+        }
+        batch.commit().addOnSuccessListener { task->Log.d("Repo","Categories insertion success") }
+                .addOnFailureListener(OnFailureListener {task->Log.e("Repo","Categories insertion failed")  })
+
+    }
+    private fun addServingTypes(){
+        var jsonString : String = JSONUtils.readJsonFromFile(context,"serving_types.json")
+        var listType = object : TypeToken<List<ServingType>>(){}.type
+        var gson:Gson = Gson()
+        var cats:List<ServingType> = gson.fromJson(jsonString,listType)
+        Log.d("Repo","categories count:"+cats.size)
+        Log.d("Repo","categories[0] name:"+cats.get(0).name)
+
+        var batch:WriteBatch = db.batch()
+        for(cat in  cats){
+            var ref:DocumentReference = db.collection("servingTypes").document(cat.name)
+            batch.set(ref,cat)
+        }
+        batch.commit().addOnSuccessListener { task->Log.d("Repo","Serving Types insertion success") }
+                .addOnFailureListener(OnFailureListener {task->Log.e("Repo","Serving Types insertion failed")  })
+
+    }
+    private fun addFood() {
+        var food:Food = Food()
+        food.basicInfo = BasicInfo()
+        food.basicInfo.id = 1
+        food.basicInfo.nameEnglish = "Orange"
+        food.basicInfo.nameHindi = "Santra"
+        food.basicProperty = BasicProperty()
+        food.cost = Cost()
+        food.nutrition = Nutrition()
+
+        db.collection("foods")
+                .document(food.basicInfo.nameEnglish)
+                .set(food)
+                .addOnSuccessListener { documentReference -> Log.d("appRepo", "DocumentSnapshot added with ID: " ) }
+                .addOnFailureListener { e -> Log.w("appRepo", "Error adding document", e) }
+        /*db.collection("foods")
+                .add(food)
+                .addOnSuccessListener { documentReference -> Log.d("appRepo", "DocumentSnapshot added with ID: " + documentReference.id) }
+                .addOnFailureListener { e -> Log.w("appRepo", "Error adding document", e) }*/
     }
 
     private fun getUsers(){

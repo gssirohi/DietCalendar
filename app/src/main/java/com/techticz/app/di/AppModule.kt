@@ -1,7 +1,10 @@
 package com.techticz.dietcalendar.di
 
+import android.app.Application
 import android.arch.persistence.room.Room
+import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
+import com.techticz.dietcalendar.ui.DietCalendarApplication
 
 import com.techticz.powerkit.constant.Environment
 import dagger.Module
@@ -30,6 +33,13 @@ class AppModule{
         val db = FirebaseFirestore.getInstance()
 
         return db
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideContext(app: DietCalendarApplication): Context {
+        Timber.d("Providing :" + "App Context")
+        return app.baseContext
     }
 
 }

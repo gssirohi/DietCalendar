@@ -1,0 +1,107 @@
+[
+  {
+    "name": "fruit",
+    "subCategories": [
+      "exotic",
+      "berry",
+      "drupe",
+      "nut",
+      "other"
+    ]
+  },
+  {
+    "name": "Juice",
+    "subCategories": [
+      "vegitableJuice",
+      "fruitJuice"
+    ]
+  },
+  {
+    "name": "vegitable",
+    "subCategories": [
+      "leaf",
+      "root",
+      "stem",
+      "fruit"
+    ]
+  },
+  {
+    "name": "spice",
+    "subCategories": []
+  },
+  {
+    "name": "dairyProduct",
+    "subCategories": [
+      "milk",
+      "cheese",
+      "butter",
+      "cream",
+      "curd",
+      "yogurt",
+      "other"
+    ]
+  },
+  {
+    "name": "meat",
+    "subCategories": [
+      "mutton",
+      "chicken",
+      "pork",
+      "other"
+    ]
+  },
+  {
+    "name": "egg",
+    "subCategories": [
+      "chickenEgg",
+      "other"
+    ]
+  },
+  {
+    "name": "dryFruit",
+    "subCategories": []
+  },
+  {
+    "name": "fatAndOil",
+    "subCategories": [
+      "animalFat",
+      "tropicalFat",
+      "nutsOil",
+      "fruitOil",
+      "grainsOil",
+      "seedOil",
+      "other"
+    ]
+  },
+  {
+    "name": "legume",
+    "subCategories": [
+      "lentils",
+      "chickpeas"
+    ]
+  },
+  {
+    "name": "bean",
+    "subCategories": []
+  },
+  {
+    "name": "grain",
+    "subCategories": [
+      "bread",
+      "cereal",
+      "flour"
+    ]
+  },
+  {
+    "name": "seed",
+    "subCategories": []
+  },
+  {
+    "name": "sauce",
+    "subCategories": []
+  },
+  {
+    "name": "pickle",
+    "subCategories": []
+  }
+]
