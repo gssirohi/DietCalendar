@@ -21,10 +21,10 @@ ext {
             ],
 
             BUILD      : [
-                    compileSdkVersion  : 26,
+                    compileSdkVersion  : 28,
                     buildToolsVersion  : "26.0.2",
                     minSdkVersion      : 19,
-                    targetSdkVersion   : 26,
+                    targetSdkVersion   : 28,
                     gradlePluginVersion: "3.0.0",
             ],
             ANDROID    : [
@@ -37,8 +37,11 @@ ext {
                             roomVersion     : "1.0.0"
                     ],
                     UI  : [
+                            parcelerVersion         : '1.1.11',
+                            scrollerVersion         : '1.2.0',
                             constraintLayoutVersion : '1.0.2',
-                            materialDialogVersion   : "0.9.6.0",
+                            materialProgressVersion : '1.0.0',
+                            materialDialogVersion   : "0.9.4.7",
                             scaleImageViewVersion   : "3.6.0",
                             circleimageviewVersion  : "2.1.0",
                             picassoVersion          : '2.5.2',
@@ -125,6 +128,10 @@ ext {
             ],
 
             UI        : [
+                    PARCELER            : 'org.parceler:parceler-api:'+CONST.ANDROID.UI.parcelerVersion,
+                    PARCELER_PROCESSOR  : 'org.parceler:parceler:'+CONST.ANDROID.UI.parcelerVersion,
+                    SCROLLER            : 'com.yarolegovich:discrete-scrollview:'+CONST.ANDROID.UI.scrollerVersion,
+                    PROGRESS            : 'com.github.castorflex.smoothprogressbar:library:'+CONST.ANDROID.UI.materialProgressVersion,
                     DIALOG              : 'com.afollestad.material-dialogs:core:' + CONST.ANDROID.UI.materialDialogVersion,
                     SCALE_IMAGE_VIEW    : 'com.davemorrissey.labs:subsampling-scale-image-view:' + CONST.ANDROID.UI.scaleImageViewVersion,
                     CIRCLE_IMAGE_VIEW   : 'de.hdodenhof:circleimageview:' + CONST.ANDROID.UI.circleimageviewVersion,

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.techticz.app.ui.activity.DeveloperActivity"
+    tools:showIn="@layout/activity_developer"
+    android:background="@color/colorAccent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="48dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_all"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload All"/>
+
+    <Button
+        android:id="@+id/bt_foods"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Foods"/>
+
+    <Button
+        android:id="@+id/bt_recipes"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Recipes"/>
+
+    <Button
+        android:id="@+id/bt_plates"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Plates"/>
+
+    <Button
+        android:id="@+id/bt_plans"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Plans"/>
+    <Button
+        android:id="@+id/bt_food_categories"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Food categories"/>
+
+    <Button
+        android:id="@+id/bt_recipe_categories"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Recipe categories"/>
+
+    <Button
+        android:id="@+id/bt_serving_types"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Serving Types"/>
+
+    <Button
+        android:id="@+id/bt_units"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Units"/>
+
+    <Button
+        android:id="@+id/bt_nutrient_units"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Nutrient Units"/>
+
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

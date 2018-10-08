@@ -8,16 +8,16 @@ public class StandardServing {
 
     @SerializedName("qty")
     @Expose
-    private String qty;
+    private Integer qty;
     @SerializedName("servingType")
     @Expose
     private String servingType;
 
-    public String getQty() {
+    public Integer getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(Integer qty) {
         this.qty = qty;
     }
 

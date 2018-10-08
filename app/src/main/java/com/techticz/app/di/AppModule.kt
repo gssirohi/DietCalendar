@@ -1,16 +1,13 @@
 package com.techticz.dietcalendar.di
 
-import android.app.Application
-import android.arch.persistence.room.Room
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
+import com.techticz.app.ui.Navigator
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 
-import com.techticz.powerkit.constant.Environment
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
-import java.io.IOException
 import javax.inject.Singleton
 
 /**
@@ -23,6 +20,11 @@ class AppModule{
     @Provides
     internal fun providesWelcomeMessage(): String {
         return "Welcome to Dagger 2. You have successfully injected dependency!"
+    }
+
+    @Provides
+    internal fun providesNavigator(context:Context): Navigator {
+        return Navigator(context)
     }
 
     @Singleton

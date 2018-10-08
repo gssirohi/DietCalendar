@@ -1,0 +1,461 @@
+[
+  {
+    "id": "PLN01",
+    "basicInfo": {
+      "name": "Balance Diet Plan 1",
+      "desc": "Normal Plan",
+      "image": "img",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT001",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT004",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT004",
+        "brunch": "PLT005",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT004",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "thursday": {
+        "earlyMorning": "PLT004",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "friday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "saturday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      },
+      "sunday": {
+        "earlyMorning": "PLT001",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT004",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "10-Mar-2018",
+      "createdBy": "user",
+      "published": true,
+      "publishedOn": "10-Mar-2018",
+      "publishedBy": "user",
+      "verified": true,
+      "verifiedOn": "10-Mar-2018",
+      "verifiedBy": "user",
+      "lastModifiedOn": "10-Mar-2018"
+    }
+  },
+  {
+    "id": "PLN02",
+    "basicInfo": {
+      "name": "Balance Diet Plan 2",
+      "desc": "Normal Plan",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT001",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT004",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT001",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT004",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT004",
+        "brunch": "PLT005",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "thursday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT004",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "friday": {
+        "earlyMorning": "PLT004",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "saturday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "sunday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "PLN03",
+    "basicInfo": {
+      "name": "Balance Diet Plan 3",
+      "desc": "Normal Plan",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT002",
+        "lunch": "PLT004",
+        "brunch": "PLT001",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT002",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT006",
+        "brunch": "PLT002",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "thursday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT007",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "friday": {
+        "earlyMorning": "PLT008",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "saturday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "sunday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "PLN04",
+    "basicInfo": {
+      "name": "Balance Diet Plan 4",
+      "desc": "Normal Plan",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT002",
+        "lunch": "PLT004",
+        "brunch": "PLT001",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT002",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT006",
+        "brunch": "PLT002",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "thursday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT007",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "friday": {
+        "earlyMorning": "PLT008",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "saturday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "sunday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "PLN05",
+    "basicInfo": {
+      "name": "Balance Diet Plan 5",
+      "desc": "Normal Plan",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT002",
+        "lunch": "PLT004",
+        "brunch": "PLT001",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT002",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT006",
+        "brunch": "PLT002",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "thursday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT007",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "friday": {
+        "earlyMorning": "PLT008",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "saturday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "sunday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "PLN06",
+    "basicInfo": {
+      "name": "Balance Diet Plan 6",
+      "desc": "Normal Plan",
+      "dailyCalories": 800,
+      "type": "veg"
+    },
+    "calendar": {
+      "monday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT002",
+        "lunch": "PLT004",
+        "brunch": "PLT001",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "tuesday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT002",
+        "lunch": "PLT003",
+        "brunch": "PLT002",
+        "dinner": "PLT005",
+        "bedTime": "PLT006"
+      },
+      "wednesday": {
+        "earlyMorning": "PLT002",
+        "breakfast": "PLT003",
+        "lunch": "PLT006",
+        "brunch": "PLT002",
+        "dinner": "PLT006",
+        "bedTime": "PLT001"
+      },
+      "thursday": {
+        "earlyMorning": "PLT003",
+        "breakfast": "PLT007",
+        "lunch": "PLT005",
+        "brunch": "PLT006",
+        "dinner": "PLT001",
+        "bedTime": "PLT002"
+      },
+      "friday": {
+        "earlyMorning": "PLT008",
+        "breakfast": "PLT005",
+        "lunch": "PLT006",
+        "brunch": "PLT001",
+        "dinner": "PLT002",
+        "bedTime": "PLT003"
+      },
+      "saturday": {
+        "earlyMorning": "PLT005",
+        "breakfast": "PLT006",
+        "lunch": "PLT001",
+        "brunch": "PLT002",
+        "dinner": "PLT003",
+        "bedTime": "PLT004"
+      },
+      "sunday": {
+        "earlyMorning": "PLT006",
+        "breakfast": "PLT001",
+        "lunch": "PLT002",
+        "brunch": "PLT003",
+        "dinner": "PLT004",
+        "bedTime": "PLT005"
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  }
+]

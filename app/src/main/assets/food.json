@@ -1,0 +1,958 @@
+[
+  {
+    "id": "A001",
+    "basicInfo": {
+      "name": {
+        "english": "Amaranth seed, black ",
+        "scientific": "Amaranthus cruentus",
+        "hindi": "hindi"
+      },
+      "desc": "desc",
+      "image": "image",
+      "category": "cat",
+      "subCategory": "subcat",
+      "perServingCalories": 100
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "piece"
+    },
+    "basicProperty": {
+      "servable": false,
+      "availability": 1,
+      "isNatural": false,
+      "naturalForm": "powder",
+      "prefMeals": [
+        "breakfast",
+        "lunch"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1",
+        "alert2"
+      ],
+      "region": "reg",
+      "subRegion": "subreg"
+    },
+    "cost": {
+      "unit": "gm",
+      "qty": 100,
+      "price": 30
+    },
+    "nutrition": {
+      "perQty": 100,
+      "perQtyUnit": "gm",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 9.89,
+          "protien": 14.59,
+          "ash": 2.78,
+          "fat": 5.74,
+          "dietaryFiber": {
+            "total": 7.02,
+            "soluble": 5.76,
+            "inSoluble": 1.26
+          },
+          "carbohydrate": 59.98,
+          "energy": 1490
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.04,
+          "riboflavinB2": 0.04,
+          "niacinB3": 0.45,
+          "pentothenicAcidB5": 0.24,
+          "totalB6": 0.5,
+          "bioinB7": 1.92,
+          "totalFolatesB9": 27.44,
+          "totalAscorbicAcid": 0
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 3.32,
+          "arsenic": 0,
+          "cadium": 0,
+          "calcium": 181,
+          "chromium": 1.227,
+          "cobalt": 0.059,
+          "copper": 0.81,
+          "iron": 9.33,
+          "led": 0.013,
+          "lithium": 0.028,
+          "magnesium": 325,
+          "manganees": 5.29,
+          "mercury": 0,
+          "molebdeum": 0.016,
+          "nickle": 0.345,
+          "phosphorus": 374,
+          "potassium": 433,
+          "selenium": 16.46,
+          "sodium": 2.7,
+          "zinc": 2.66
+        },
+        "starchAndSugars": {
+          "cho": 56.71,
+          "starch": 55.83,
+          "fructose": 0.1,
+          "glucose": 0.22,
+          "sucrose": 0.46,
+          "maltos": 0.1,
+          "totalFreeSugar": 0.88
+        },
+        "fatyAcid": {
+          "totalSaturatedFatyAcids": 0,
+          "totalMonoUnsaturatedFattyAcids": 0,
+          "totalPolyUnsaturatedFattyAcids": 0,
+          "cholesterol": 0
+        },
+        "organicAcids": {
+          "citricAcid": 0,
+          "mallicAcid": 0
+        },
+        "totalCarotenids": 0
+      }
+    },
+    "adminInfo": {
+      "createdOn": "10-Mar-2018",
+      "createdBy": "user",
+      "published": true,
+      "publishedOn": "10-Mar-2018",
+      "publishedBy": "user",
+      "verified": true,
+      "verifiedOn": "10-Mar-2018",
+      "verifiedBy": "user",
+      "lastModifiedOn": "10-Mar-2018"
+    }
+  },
+  {
+    "id": "A002",
+    "basicInfo": {
+      "name": {
+        "english": "Amaranth seed, pale brown ",
+        "scientific": "Amaranthus cruentus",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 9.2,
+          "protien": 13.27,
+          "ash": 3.05,
+          "fat": 5.56,
+          "dietaryFiber": {
+            "total": 7.47,
+            "soluble": 5.8,
+            "inSoluble": 1.67
+          },
+          "carbohydrate": 61.46,
+          "energy": 1489
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.04,
+          "riboflavinB2": 0.04,
+          "niacinB3": 0.52,
+          "pentothenicAcidB5": 0.28,
+          "totalB6": 0.33,
+          "bioinB7": 1.87,
+          "totalFolatesB9": 24.65
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 2.73,
+          "cadium": 0.001,
+          "calcium": 162,
+          "chromium": 0.092,
+          "cobalt": 0.021,
+          "copper": 0.56,
+          "iron": 8.02,
+          "led": 0.018,
+          "lithium": 0.008,
+          "magnesium": 270,
+          "manganees": 4.44,
+          "molebdeum": 0.049,
+          "nickle": 0.048,
+          "phosphorus": 412,
+          "potassium": 413,
+          "selenium": 21.41,
+          "sodium": 2.81,
+          "zinc": 2.52
+        },
+        "starchAndSugars": {
+          "cho": 60.13,
+          "starch": 59.33,
+          "fructose": 0.1,
+          "glucose": 0.22,
+          "sucrose": 0.48,
+          "totalFreeSugar": 0.8
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A003",
+    "basicInfo": {
+      "name": {
+        "english": "Bajra ",
+        "scientific": "Pennisetum typhoideum",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 8.97,
+          "protien": 10.96,
+          "ash": 1.37,
+          "fat": 5.43,
+          "dietaryFiber": {
+            "total": 11.49,
+            "soluble": 9.14,
+            "inSoluble": 2.34
+          },
+          "carbohydrate": 61.78,
+          "energy": 1456
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.25,
+          "riboflavinB2": 0.2,
+          "niacinB3": 0.86,
+          "pentothenicAcidB5": 0.5,
+          "totalB6": 0.27,
+          "bioinB7": 0.64,
+          "totalFolatesB9": 36.11
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 2.21,
+          "arsenic": 0.97,
+          "cadium": 0.003,
+          "calcium": 27.35,
+          "chromium": 0.025,
+          "cobalt": 0.03,
+          "copper": 0.54,
+          "iron": 6.42,
+          "led": 0.008,
+          "lithium": 0.003,
+          "magnesium": 124,
+          "manganees": 1.12,
+          "mercury": 0.77,
+          "molebdeum": 0.05,
+          "nickle": 0.056,
+          "phosphorus": 289,
+          "potassium": 365,
+          "selenium": 30.4,
+          "sodium": 4.11,
+          "zinc": 2.76
+        },
+        "starchAndSugars": {
+          "cho": 56.02,
+          "starch": 55.21,
+          "fructose": 0.21,
+          "glucose": 0.6,
+          "totalFreeSugar": 0.81
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A004",
+    "basicInfo": {
+      "name": {
+        "english": "Barley ",
+        "scientific": "Hordeum vulgare",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 9.77,
+          "protien": 10.94,
+          "ash": 1.06,
+          "fat": 1.3,
+          "dietaryFiber": {
+            "total": 15.64,
+            "soluble": 9.98,
+            "inSoluble": 5.66
+          },
+          "carbohydrate": 61.29,
+          "energy": 1321
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.36,
+          "riboflavinB2": 0.18,
+          "niacinB3": 2.84,
+          "pentothenicAcidB5": 0.14,
+          "totalB6": 0.31,
+          "bioinB7": 2.38,
+          "totalFolatesB9": 31.58
+        },
+        "mineralsAndTraceElements": {
+          "calcium": 28.64,
+          "chromium": 0.029,
+          "cobalt": 0.027,
+          "copper": 0.43,
+          "iron": 1.56,
+          "magnesium": 48.97,
+          "manganees": 1.24,
+          "mercury": 1.84,
+          "molebdeum": 0.032,
+          "phosphorus": 178,
+          "potassium": 268,
+          "selenium": 18.61,
+          "sodium": 7.56,
+          "zinc": 1.5
+        },
+        "starchAndSugars": {
+          "cho": 72.73,
+          "starch": 72.67,
+          "glucose": 0.06,
+          "totalFreeSugar": 0.06
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A005",
+    "basicInfo": {
+      "name": {
+        "english": "Jowar ",
+        "scientific": "Sorghum vulgare",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 9.01,
+          "protien": 9.97,
+          "ash": 1.39,
+          "fat": 1.73,
+          "dietaryFiber": {
+            "total": 10.22,
+            "soluble": 8.49,
+            "inSoluble": 1.73
+          },
+          "carbohydrate": 67.68,
+          "energy": 1398
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.35,
+          "riboflavinB2": 0.14,
+          "niacinB3": 2.1,
+          "pentothenicAcidB5": 0.27,
+          "totalB6": 0.28,
+          "bioinB7": 0.7,
+          "totalFolatesB9": 39.42
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 2.56,
+          "arsenic": 1.53,
+          "cadium": 0.002,
+          "calcium": 27.6,
+          "chromium": 0.01,
+          "cobalt": 0.012,
+          "copper": 0.45,
+          "iron": 3.95,
+          "led": 0.008,
+          "lithium": 0.001,
+          "magnesium": 133,
+          "manganees": 1.19,
+          "mercury": 2.62,
+          "molebdeum": 0.042,
+          "nickle": 0.059,
+          "phosphorus": 274,
+          "potassium": 328,
+          "selenium": 26.29,
+          "sodium": 5.42,
+          "zinc": 1.96
+        },
+        "starchAndSugars": {
+          "cho": 60.96,
+          "starch": 59.7,
+          "fructose": 0.57,
+          "glucose": 0.1,
+          "sucrose": 0.6,
+          "totalFreeSugar": 1.27
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A006",
+    "basicInfo": {
+      "name": {
+        "english": "Maize, dry ",
+        "scientific": "Zea mays",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 9.26,
+          "protien": 8.8,
+          "ash": 1.17,
+          "fat": 3.77,
+          "dietaryFiber": {
+            "total": 12.24,
+            "soluble": 11.29,
+            "inSoluble": 0.94
+          },
+          "carbohydrate": 64.77,
+          "energy": 1398
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.33,
+          "riboflavinB2": 0.09,
+          "niacinB3": 2.69,
+          "pentothenicAcidB5": 0.34,
+          "totalB6": 0.34,
+          "bioinB7": 0.49,
+          "totalFolatesB9": 25.81
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 2.82,
+          "calcium": 8.91,
+          "chromium": 0.01,
+          "cobalt": 0.01,
+          "copper": 0.45,
+          "iron": 2.49,
+          "lithium": 0.002,
+          "magnesium": 145,
+          "manganees": 0.71,
+          "mercury": 3.19,
+          "molebdeum": 0.035,
+          "nickle": 0.035,
+          "phosphorus": 279,
+          "potassium": 291,
+          "selenium": 8.69,
+          "sodium": 4.44,
+          "zinc": 2.27
+        },
+        "starchAndSugars": {
+          "cho": 61.01,
+          "starch": 59.35,
+          "fructose": 0.16,
+          "glucose": 0.8,
+          "sucrose": 0.7,
+          "totalFreeSugar": 1.66
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A007",
+    "basicInfo": {
+      "name": {
+        "english": "Maize, tender, local ",
+        "scientific": "Zea mays",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 6,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 68.29,
+          "protien": 3.57,
+          "ash": 0.38,
+          "fat": 1.4,
+          "dietaryFiber": {
+            "total": 3.67,
+            "soluble": 3.23,
+            "inSoluble": 0.43
+          },
+          "carbohydrate": 22.69,
+          "energy": 502
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.17,
+          "riboflavinB2": 0.12,
+          "niacinB3": 1.13,
+          "pentothenicAcidB5": 0.35,
+          "totalB6": 0.45,
+          "bioinB7": 1.7,
+          "totalFolatesB9": 62.96,
+          "totalAscorbicAcid": 4.26
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 0.12,
+          "calcium": 6.35,
+          "chromium": 0.004,
+          "copper": 0.18,
+          "iron": 0.71,
+          "led": 0.001,
+          "magnesium": 47.62,
+          "manganees": 0.36,
+          "molebdeum": 0.009,
+          "nickle": 0.016,
+          "phosphorus": 163,
+          "potassium": 167,
+          "selenium": 3.83,
+          "sodium": 2.24,
+          "zinc": 0.97
+        },
+        "starchAndSugars": {
+          "cho": 17.35,
+          "starch": 15.88,
+          "fructose": 0.27,
+          "glucose": 0.8,
+          "sucrose": 0.4,
+          "totalFreeSugar": 1.47
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A008",
+    "basicInfo": {
+      "name": {
+        "english": "Maize, tender, sweet ",
+        "scientific": "Zea mays",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 4,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 74.4,
+          "protien": 4.16,
+          "ash": 0.36,
+          "fat": 1.35,
+          "dietaryFiber": {
+            "total": 3.3,
+            "soluble": 2.71,
+            "inSoluble": 0.59
+          },
+          "carbohydrate": 16.42,
+          "energy": 405
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.1,
+          "riboflavinB2": 0.14,
+          "niacinB3": 1.14,
+          "pentothenicAcidB5": 0.32,
+          "totalB6": 0.38,
+          "bioinB7": 1.91,
+          "totalFolatesB9": 59.71,
+          "totalAscorbicAcid": 5.72
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 0.11,
+          "calcium": 6.37,
+          "chromium": 0.002,
+          "cobalt": 0.001,
+          "copper": 0.11,
+          "iron": 0.54,
+          "magnesium": 36.51,
+          "manganees": 0.32,
+          "molebdeum": 0.006,
+          "nickle": 0.009,
+          "phosphorus": 121,
+          "potassium": 297,
+          "selenium": 2.17,
+          "sodium": 2.23,
+          "zinc": 0.77
+        },
+        "starchAndSugars": {
+          "cho": 12.11,
+          "starch": 7.45,
+          "fructose": 0.91,
+          "glucose": 0.97,
+          "sucrose": 2.79,
+          "totalFreeSugar": 4.67
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A009",
+    "basicInfo": {
+      "name": {
+        "english": "Quinoa ",
+        "scientific": "Chenopodium quinoa",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 1,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 10.43,
+          "protien": 13.11,
+          "ash": 2.65,
+          "fat": 5.5,
+          "dietaryFiber": {
+            "total": 14.66,
+            "soluble": 10.21,
+            "inSoluble": 4.46
+          },
+          "carbohydrate": 53.65,
+          "energy": 1374
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.83,
+          "riboflavinB2": 0.22,
+          "niacinB3": 1.7,
+          "pentothenicAcidB5": 0.62,
+          "totalB6": 0.21,
+          "bioinB7": 0.62,
+          "totalFolatesB9": 173
+        },
+        "mineralsAndTraceElements": {
+          "arsenic": 0.03,
+          "cadium": 0.002,
+          "calcium": 198,
+          "chromium": 0.004,
+          "copper": 0.48,
+          "iron": 7.51,
+          "magnesium": 119,
+          "manganees": 1.77,
+          "nickle": 0.004,
+          "phosphorus": 212,
+          "potassium": 474,
+          "selenium": 7.81,
+          "sodium": 4.5,
+          "zinc": 3.31
+        },
+        "starchAndSugars": {
+          "cho": 49.82,
+          "starch": 48.41,
+          "glucose": 1.41,
+          "totalFreeSugar": 1.41
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "A010",
+    "basicInfo": {
+      "name": {
+        "english": "Ragi ",
+        "scientific": "Eleusine coracana",
+        "hindi": ""
+      },
+      "desc": "",
+      "image": "",
+      "category": "",
+      "subCategory": ""
+    },
+    "standardServing": {
+      "servingType": ""
+    },
+    "basicProperty": {
+      "availability": 5,
+      "naturalForm": ""
+    },
+    "additionalInfo": {
+      "region": "",
+      "subRegion": ""
+    },
+    "cost": {
+      "unit": ""
+    },
+    "nutrition": {
+      "perQtyUnit": "",
+      "nutrients": {
+        "principlesAndDietaryFibers": {
+          "moisture": 10.89,
+          "protien": 7.16,
+          "ash": 2.04,
+          "fat": 1.92,
+          "dietaryFiber": {
+            "total": 11.18,
+            "soluble": 9.51,
+            "inSoluble": 1.67
+          },
+          "carbohydrate": 66.82,
+          "energy": 1342
+        },
+        "waterSolubleVitamins": {
+          "thiamineB1": 0.37,
+          "riboflavinB2": 0.17,
+          "niacinB3": 1.34,
+          "pentothenicAcidB5": 0.29,
+          "totalB6": 0.05,
+          "bioinB7": 0.88,
+          "totalFolatesB9": 34.66
+        },
+        "mineralsAndTraceElements": {
+          "aluminium": 3.64,
+          "cadium": 0.004,
+          "calcium": 364,
+          "chromium": 0.032,
+          "cobalt": 0.022,
+          "copper": 0.67,
+          "iron": 4.62,
+          "led": 0.005,
+          "lithium": 0.003,
+          "magnesium": 146,
+          "manganees": 3.19,
+          "mercury": 3.96,
+          "molebdeum": 0.011,
+          "nickle": 0.078,
+          "phosphorus": 210,
+          "potassium": 443,
+          "selenium": 15.3,
+          "sodium": 4.75,
+          "zinc": 2.53
+        },
+        "starchAndSugars": {
+          "cho": 62.47,
+          "starch": 62.13,
+          "glucose": 0.25,
+          "sucrose": 0.12,
+          "totalFreeSugar": 0.34
+        },
+        "fatyAcid": {},
+        "organicAcids": {}
+      }
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  }
+]

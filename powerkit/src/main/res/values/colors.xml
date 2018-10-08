@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/primary</color>
+    <color name="colorPrimaryDark">@color/primary_dark</color>
+    <color name="colorPrimaryLight">@color/primary_light</color>
+    <color name="colorAccent">@color/accent</color>
+    <color name="colorAccentLight">@color/accent_light</color>
+    <color name="colorPrimaryText">@color/primary_text</color>
+    <color name="colorSecondaryText">@color/secondary_text</color>
+    <color name="colorIcon">@color/icons</color>
+    <color name="colorDivider">@color/divider</color>
+
+
+    <color name="hint_text_color_light">#FFFFFF</color>
+    <color name="card_backgroud_primary">@color/colorPrimary</color>
+    <color name="card_content_background">@color/colorPrimary</color>
+    <color name="highlighted_text_color">@color/marina</color>
+    <color name="text_input_color">@color/white</color>
+
+    <color name="translucent">#BBFFFFFF</color>
+
+    <color name="meal_item_bg">@color/transparent</color>
+
+    <color name="peach_eco">#F7786B</color>
+    <color name="serenity">#91A8D0</color>
+    <color name="green_flash">#79C753</color>
+    <color name="butter_cup">#FAE03C</color>
+
+    <color name="emerald">#009B77</color>
+    <color name="emerald_dark">#008062</color>
+    <color name="emerald_light">#00b389</color>
+    <color name="emerald_very_light">#5500b389</color>
+
+    <color name="peach_eco_light">#99F7786B</color>
+    <color name="serenity_light">#9991A8D0</color>
+    <color name="green_flash_light">#9979C753</color>
+    <color name="butter_cup_light">#99FAE03C</color>
+
+    <color name="peach_eco_dark">#F7584B</color>
+    <color name="serenity_dark">#9198B0</color>
+    <color name="green_flash_dark">#79A733</color>
+    <color name="butter_cup_dark">#FAC01C</color>
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="card_heading_text_color">@android:color/white</color>
+
+    <color name="true_red">#BC243C</color>
+    <color name="chilli_pepper_light">#d5445a</color>
+    <color name="chilli_pepper_very_light">#88d5445a</color>
+
+    <color name="marina">#4F84C4</color>
+    <color name="white">@android:color/white</color>
+    <color name="divider_light">@color/white</color>
+
+
+
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="app_background">@color/colorPrimaryLight</color>
+</resources>

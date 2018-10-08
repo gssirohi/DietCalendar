@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:textColorHint">@color/text_color_hint</item>
+        <item name="android:textColorSecondary">@color/text_color_hint</item>
+        <item name="colorControlNormal">@color/color_control_normal</item>
+        <item name="colorControlActivated">@color/color_control_activated</item>
+        <item name = "android:textColor">@color/text_color_dark</item>
+    </style>
+
+    <style name="Text.Dark" parent="Text">
+        <item name = "android:textColor">@color/text_color_dark</item>
+    </style>
+
+    <style name="Text.Dark.Bold" parent="Text.Dark">
+        <item name = "android:textStyle">bold</item>
+    </style>
+    <style name="Text.Dark.Light" parent="Text.Dark">
+        <item name = "android:textStyle">normal</item>
+    </style>
+    <style name="Text.Dark.Small.Light" parent="Text.Dark.Small">
+        <item name = "android:textStyle">normal</item>
+    </style>
+
+    <style name="Text.Dark.Small" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/text_size_small</item>
+    </style>
+    <style name="Text.Dark.VerySmall" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/text_size_very_small</item>
+    </style>
+    <style name="Text.Dark.Smallest" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/text_size_smallest</item>
+    </style>
+    <style name="Text.Dark.Small.Bold" parent="Text.Dark.Small">
+        <item name = "android:textStyle">bold</item>
+    </style>
+    <style name="Text.Dark.VerySmall.Light" parent="Text.Dark.VerySmall">
+        <item name = "android:textStyle">normal</item>
+    </style>
+    <style name="Text.Dark.Smallest.Light" parent="Text.Dark.Smallest">
+        <item name = "android:textStyle">normal</item>
+    </style>
+
+    <style name="Text.Dark.Medium" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/trip_text_size_medium</item>
+    </style>
+    <style name="Text.Dark.Medium.Bold" parent="Text.Dark.Medium">
+        <item name = "android:textStyle">bold</item>
+    </style>
+    <style name="Text.Dark.Medium.Regular" parent="Text.Dark.Medium">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+    <style name="Text.Dark.Small.Regular" parent="Text.Dark.Small">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+    <style name="Text.Dark.VerySmall.Regular" parent="Text.Dark.VerySmall">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+    <style name="Text.Dark.Regular" parent="Text.Dark">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+
+
+    <style name="Text.Dark.Large" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/text_size_largee</item>
+    </style>
+    <style name="Text.Dark.Large.Bold" parent="Text.Dark.Large">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.Light" parent="Text">
+        <item name = "android:textColor">@color/text_color_light</item>
+    </style>
+
+    <style name="Text.Light.Bold" parent="Text.Light">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Light.Small" parent="Text.Light">
+        <item name = "android:textSize">@dimen/text_size_small</item>
+    </style>
+    <style name="Text.Light.Small.Bold" parent="Text.Light.Small">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.Light.Medium" parent="Text.Light">
+        <item name = "android:textSize">@dimen/trip_text_size_medium</item>
+    </style>
+    <style name="Text.Light.Medium.Bold" parent="Text.Light.Medium">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.Light.Large" parent="Text.Light">
+        <item name = "android:textSize">@dimen/text_size_largee</item>
+    </style>
+    <style name="Text.Light.Large.Bold" parent="Text.Light.Large">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.VeryLight" parent="Text">
+        <item name = "android:textColor">@color/text_color_very_light</item>
+    </style>
+    <style name="Text.VeryLight.Bold" parent="Text.VeryLight">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.VeryLight.Small" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/text_size_small_12p</item>
+    </style>
+    <style name="Text.VeryLight.Small.Regular" parent="Text.VeryLight.Small">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+    <style name="Text.VeryLight.VerySmall.Regular" parent="Text.VeryLight.VerySmall">
+        <item name = "android:textStyle">normal</item>
+        <item name = "android:textColor">@color/text_color_very_dark</item>
+    </style>
+    <style name="Text.VeryLight.Small.Bold" parent="Text.VeryLight.Small">
+        <item name = "android:textStyle">bold</item>
+    </style>
+    <style name="Text.VeryLight.Small.Light" parent="Text.VeryLight.Small">
+        <item name = "android:textStyle">normal</item>
+    </style>
+    <style name="Text.Light.VerySmall" parent="Text.Light">
+        <item name = "android:textSize">@dimen/text_size_very_small</item>
+    </style>
+    <style name="Text.Light.Smallest" parent="Text.Light">
+        <item name = "android:textSize">@dimen/text_size_smallest</item>
+    </style>
+    <style name="Text.VeryLight.VerySmall" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/text_size_very_small</item>
+    </style>
+    <style name="Text.VeryLight.Smallest" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/text_size_smallest</item>
+    </style>
+    <style name="Text.VeryLight.VerySmall.Light" parent="Text.VeryLight.VerySmall">
+        <item name = "android:textStyle">normal</item>
+    </style>
+    <style name="Text.VeryLight.Smallest.Light" parent="Text.VeryLight.Smallest">
+        <item name = "android:textStyle">normal</item>
+    </style>
+
+    <style name="Text.VeryLight.Medium" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/trip_text_size_medium</item>
+    </style>
+    <style name="Text.VeryLight.Medium.Bold" parent="Text.VeryLight.Medium">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.VeryLight.Large" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/text_size_largee</item>
+    </style>
+    <style name="Text.VeryLight.Large.Bold" parent="Text.VeryLight.Large">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+
+    <style name="Text.Dark.VeryLarge" parent="Text.Dark">
+        <item name = "android:textSize">@dimen/text_size_very_large</item>
+    </style>
+    <style name="Text.Dark.VeryLarge.Bold" parent="Text.Dark.VeryLarge">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+
+    <style name="Text.Light.VeryLarge" parent="Text.Light">
+        <item name = "android:textSize">@dimen/text_size_very_large</item>
+    </style>
+    <style name="Text.Light.VeryLarge.Bold" parent="Text.Light.VeryLarge">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+    <style name="Text.VeryLight.VeryLarge" parent="Text.VeryLight">
+        <item name = "android:textSize">@dimen/text_size_very_large</item>
+    </style>
+    <style name="Text.VeryLight.VeryLarge.Bold" parent="Text.VeryLight.VeryLarge">
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+
+
+    <style name="TextAction" parent="Text.VeryLight.Bold">
+        <item name = "android:textColor">@color/text_action_color</item>
+        <item name = "android:clickable">true</item>
+        <item name = "android:textAllCaps">true</item>
+        <item name="android:drawableRight">@drawable/ic_keyboard_arrow_right</item>
+
+    </style>
+
+    <style name="FieldTextSmall" parent="Text.Light.Large">
+        <item name = "android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+
+
+
+<!--    <color name="text_color_very_dark">#000000</color>
+    <color name="text_color_dark">#212121</color>
+    <color name="text_color_light">#515151</color>
+    <color name="text_color_very_light">#757575</color>-->
+    <color name="text_color_very_dark">#FFFFFF</color>
+    <color name="text_color_dark">#DDDDDD</color>
+    <color name="text_color_light">#CCCCCC</color>
+    <color name="text_color_very_light">#AAAAAA</color>
+
+    <color name="text_color_status_green">#00CD6F</color>
+    <color name="text_color_status_orange">#FF9800</color>
+    <color name="text_color_status_red">#F44336</color>
+    <color name="text_action_color">@color/colorAccent</color>
+    <color name="text_color_hint">@color/colorAccentLight</color>
+    <color name="color_control_normal">@color/colorAccent</color>
+    <color name="color_control_activated">@color/colorAccentLight</color>
+</resources>

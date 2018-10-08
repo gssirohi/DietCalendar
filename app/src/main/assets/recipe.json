@@ -1,0 +1,416 @@
+[
+  {
+    "id": "RP001",
+    "basicInfo": {
+      "name": {
+        "english": "My First Recipe",
+        "hindi": "Pahli Recipe"
+      },
+      "desc": "desc of Recipe",
+      "image": "img",
+      "category": "cat",
+      "subCategory": "subcat",
+      "type": "typ",
+      "perServingCalories": 100
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "piece"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "breakfast",
+        "evening_snaks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this recipe",
+        "alert2 for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "north"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0001",
+          "qty": 1
+        },
+        {
+          "id": "A0002",
+          "qty": 2
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "10-Mar-2018",
+      "createdBy": "user",
+      "published": true,
+      "publishedOn": "10-Mar-2018",
+      "publishedBy": "user",
+      "verified": true,
+      "verifiedOn": "10-Mar-2018",
+      "verifiedBy": "user",
+      "lastModifiedOn": "10-Mar-2018"
+    }
+  },
+  {
+    "id": "RP002",
+    "basicInfo": {
+      "name": {
+        "english": "My Second Recipe",
+        "hindi": "Dusri Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "slice"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "south"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0002",
+          "qty": 2
+        },
+        {
+          "id": "A0003",
+          "qty": 3
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP003",
+    "basicInfo": {
+      "name": {
+        "english": "My Third Recipe",
+        "hindi": "Teesri Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "bowl"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "breakfast",
+        "evening_snaks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this recipe",
+        "alert2 for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "north"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0003",
+          "qty": 3
+        },
+        {
+          "id": "A0004",
+          "qty": 4
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP004",
+    "basicInfo": {
+      "name": {
+        "english": "My Fourth Recipe",
+        "hindi": "Chouthi Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "piece"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "south"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0004",
+          "qty": 4
+        },
+        {
+          "id": "A0005",
+          "qty": 5
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP005",
+    "basicInfo": {
+      "name": {
+        "english": "My Fifth Recipe",
+        "hindi": "Panchvi Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "slice"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "breakfast",
+        "evening_snaks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this recipe",
+        "alert2 for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "north"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0005",
+          "qty": 5
+        },
+        {
+          "id": "A0006",
+          "qty": 6
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP006",
+    "basicInfo": {
+      "name": {
+        "english": "My Sixth Recipe",
+        "hindi": "Chathvi Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "bowl"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "south"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0006",
+          "qty": 6
+        },
+        {
+          "id": "A0007",
+          "qty": 7
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP007",
+    "basicInfo": {
+      "name": {
+        "english": "My Seventh Recipe",
+        "hindi": "Saatvi Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "piece"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "breakfast",
+        "evening_snaks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this recipe",
+        "alert2 for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "north"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0007",
+          "qty": 7
+        },
+        {
+          "id": "A0008",
+          "qty": 8
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  },
+  {
+    "id": "RP008",
+    "basicInfo": {
+      "name": {
+        "english": "My Eighth Recipe",
+        "hindi": "Aathvi Recipe"
+      },
+      "desc": "desc of Recipe"
+    },
+    "standardServing": {
+      "qty": 1,
+      "servingType": "slice"
+    },
+    "basicProperty": {
+      "availability": 1,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this recipe"
+      ],
+      "region": "india",
+      "subRegion": "south"
+    },
+    "formula": {
+      "ingredients": [
+        {
+          "id": "A0008",
+          "qty": 8
+        },
+        {
+          "id": "A0009",
+          "qty": 9
+        }
+      ],
+      "steps": [
+        "This is step 1 for this recipe",
+        "This is step 2 for this recipe"
+      ]
+    },
+    "adminInfo": {
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": "",
+      "lastModifiedOn": ""
+    }
+  }
+]

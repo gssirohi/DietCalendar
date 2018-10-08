@@ -12,8 +12,8 @@ import com.ihsanbal.logging.Level;
 import com.ihsanbal.logging.Logger;
 import com.ihsanbal.logging.LoggingInterceptor;
 import com.techticz.networking.BuildConfig;
+import com.techticz.networking.constant.Environment;
 import com.techticz.networking.livedata.LiveDataCallAdapterFactory;
-import com.techticz.powerkit.constant.Environment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class RetrofitProvider {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS);
-        if (Environment.Companion.getShowNetworkLogs()) {
+        if (Environment.showNetworkLogs) {
 /*
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -89,7 +89,7 @@ public class RetrofitProvider {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS);
-        if (Environment.Companion.getShowNetworkLogs()) {
+        if (Environment.showNetworkLogs) {
             Interceptor mockResponseInterceptor = new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {

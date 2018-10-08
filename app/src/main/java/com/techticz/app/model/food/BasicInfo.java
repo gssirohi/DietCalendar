@@ -6,21 +6,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class BasicInfo {
 
-    @SerializedName("id")
+    @SerializedName("name")
     @Expose
-    private Integer id;
-    @SerializedName("nameHindi")
-    @Expose
-    private String nameHindi;
-    @SerializedName("nameEnglish")
-    @Expose
-    private String nameEnglish;
+    private Name name;
     @SerializedName("desc")
     @Expose
     private String desc;
-    @SerializedName("alert")
-    @Expose
-    private String alert;
     @SerializedName("image")
     @Expose
     private String image;
@@ -30,38 +21,16 @@ public class BasicInfo {
     @SerializedName("subCategory")
     @Expose
     private String subCategory;
-    @SerializedName("caloriesPerServing")
+    @SerializedName("perServingCalories")
     @Expose
-    private Integer caloriesPerServing;
-    @SerializedName("region")
-    @Expose
-    private String region;
-    @SerializedName("subRegion")
-    @Expose
-    private String subRegion;
+    private Integer perServingCalories;
 
-    public Integer getId() {
-        return id;
+    public Name getName() {
+        return name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNameHindi() {
-        return nameHindi;
-    }
-
-    public void setNameHindi(String nameHindi) {
-        this.nameHindi = nameHindi;
-    }
-
-    public String getNameEnglish() {
-        return nameEnglish;
-    }
-
-    public void setNameEnglish(String nameEnglish) {
-        this.nameEnglish = nameEnglish;
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -70,14 +39,6 @@ public class BasicInfo {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public String getAlert() {
-        return alert;
-    }
-
-    public void setAlert(String alert) {
-        this.alert = alert;
     }
 
     public String getImage() {
@@ -104,28 +65,12 @@ public class BasicInfo {
         this.subCategory = subCategory;
     }
 
-    public Integer getCaloriesPerServing() {
-        return caloriesPerServing;
+    public Integer getPerServingCalories() {
+        return perServingCalories;
     }
 
-    public void setCaloriesPerServing(Integer caloriesPerServing) {
-        this.caloriesPerServing = caloriesPerServing;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getSubRegion() {
-        return subRegion;
-    }
-
-    public void setSubRegion(String subRegion) {
-        this.subRegion = subRegion;
+    public void setPerServingCalories(Integer perServingCalories) {
+        this.perServingCalories = perServingCalories;
     }
 
 }

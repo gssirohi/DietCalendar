@@ -18,6 +18,9 @@ android {
         versionCode CONST.APP.versionCode
         versionName CONST.APP.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -39,12 +42,19 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation project(':powerkit')
-
+    api project(':powerkit')
+    implementation REQUIRE.UI.DIALOG
+    implementation REQUIRE.UI.SCROLLER
     implementation REQUIRE.KOTLIN.JRE
-    implementation 'com.android.support:support-v4:26.1.0'
+
+    implementation REQUIRE.UI.SPINKIT
+
+    implementation REQUIRE.UI.PARCELER
+    kapt REQUIRE.UI.PARCELER_PROCESSOR
+
     kapt REQUIRE.KOTLIN.COMPILER
 
     implementation REQUIRE.SUPPORT.V7

@@ -1,6 +1,8 @@
 package com.techticz.powerkit.base
 
 import android.arch.lifecycle.ViewModelProvider
+import android.graphics.Color
+import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -10,29 +12,35 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
+import android.support.design.widget.Snackbar
+import android.view.View
+
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 
 open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
-    var mToolBar: Toolbar? = null
+
     @Inject
     lateinit var  dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private var progressDialog: MaterialDialog? = null
 
-    var activityToolbar: Toolbar?
-        get() = mToolBar
-        set(mToolBar) {
-            this.mToolBar = mToolBar
-            setSupportActionBar(mToolBar)
+    var activityToolbar: Toolbar? = null
+        get() = field
+        set(toolbar) {
+            field = toolbar
+            setSupportActionBar(toolbar)
             supportActionBar!!.setDisplayShowTitleEnabled(true)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            mToolBar?.setNavigationOnClickListener { view -> onBackPressed() }
-            supportActionBar!!.title = ""
+            toolbar?.setNavigationOnClickListener { view -> onBackPressed() }
+            supportActionBar!!.title = toolbar?.title
         }
+
+
+    var activityCoordinatorLayout: CoordinatorLayout? = null
 
     fun addFragment(id: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction()
@@ -97,5 +105,25 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun showToast(message: String) {
         Toast.makeText(this, message,Toast.LENGTH_SHORT).show()
+    }
+
+    fun showSuccess(s: String) {
+        if(activityCoordinatorLayout != null) {
+            val snackbar = Snackbar
+                    .make(activityCoordinatorLayout!!, s, Snackbar.LENGTH_LONG)
+            snackbar.setAction("OK", View.OnClickListener { snackbar.dismiss() })
+            snackbar.setActionTextColor(Color.GREEN)
+            snackbar.show()
+        }
+    }
+
+    fun showError(s: String) {
+        if(activityCoordinatorLayout != null) {
+            val snackbar = Snackbar
+                    .make(activityCoordinatorLayout!!, s, Snackbar.LENGTH_LONG)
+            snackbar.setAction("OK", View.OnClickListener { snackbar.dismiss() })
+            snackbar.setActionTextColor(Color.RED)
+            snackbar.show()
+        }
     }
 }

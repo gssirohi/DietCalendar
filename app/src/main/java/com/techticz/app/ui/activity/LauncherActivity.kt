@@ -6,10 +6,12 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.Fragment
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import com.techticz.app.ui.Navigator
 import com.techticz.dietcalendar.R
 import com.techticz.dietcalendar.databinding.ActivityLauncherBinding
 import com.techticz.dietcalendar.model.LauncherResponse
@@ -17,6 +19,7 @@ import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.powerkit.base.BaseDIActivity
+import dagger.android.DispatchingAndroidInjector
 import kotlinx.android.synthetic.main.activity_launcher.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -29,6 +32,9 @@ class LauncherActivity : BaseDIActivity() {
 
     @Inject
     lateinit var welcomeMessage: String
+    @Inject
+    lateinit var  navigator:Navigator
+
     private var launcherViewModel: LauncherViewModel? = null
     private var launcherBinding: ActivityLauncherBinding? = null
 
@@ -72,7 +78,7 @@ class LauncherActivity : BaseDIActivity() {
         var handler :Handler = Handler()
         handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },4*1000)
 
-        //launcherViewModel?.triggerLaunch?.value = true
+        //launcherViewModel?.triggerFetchingMealPlans?.value = true
     }
 
 
@@ -86,6 +92,7 @@ class LauncherActivity : BaseDIActivity() {
             {
                 launcherBinding?.tvCenter?.text = resource.data?.launchMessage
                 Toast.makeText(this, resource.data?.launchMessage, Toast.LENGTH_SHORT).show()
+                navigator.startDashBoard()
             }
             Status.ERROR->
             {

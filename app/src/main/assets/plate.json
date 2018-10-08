@@ -1,0 +1,372 @@
+[
+  {
+    "id": "PLT001",
+    "basicInfo": {
+      "name": {
+        "english": "My First Plate",
+        "hindi": "Pahli Plate"
+      },
+      "desc": "desc of plate",
+      "image": "img",
+      "category": "cat",
+      "subCategory": "subcat",
+      "type": "typ",
+      "calories": 100
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "early_morning",
+        "bed_time"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this plate",
+        "alert2 for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP01",
+          "qty": 1
+        }
+      ],
+      "foods": [
+        {
+          "id": "A001",
+          "qty": 1
+        },
+        {
+          "id": "A002",
+          "qty": 2
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "10-Mar-2018",
+      "createdBy": "user",
+      "published": true,
+      "publishedOn": "10-Mar-2018",
+      "publishedBy": "user",
+      "verified": true,
+      "verifiedOn": "10-Mar-2018",
+      "verifiedBy": "user",
+      "lastModifiedOn": "10-Mar-2018"
+    }
+  },
+  {
+    "id": "PLT002",
+    "basicInfo": {
+      "name": {
+        "english": "My Second Plate",
+        "hindi": "Dusri Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "breakfast",
+        "evening_snacks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP02",
+          "qty": 2
+        },
+        {
+          "id": "RP03",
+          "qty": 3
+        }
+      ],
+      "foods": [
+        {
+          "id": "A002",
+          "qty": 2
+        },
+        {
+          "id": "A003",
+          "qty": 3
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  },
+  {
+    "id": "PLT003",
+    "basicInfo": {
+      "name": {
+        "english": "My Third Plate",
+        "hindi": "Teesri Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this plate",
+        "alert2 for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP03",
+          "qty": 3
+        }
+      ],
+      "foods": [
+        {
+          "id": "A003",
+          "qty": 3
+        },
+        {
+          "id": "A004",
+          "qty": 4
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  },
+  {
+    "id": "PLT004",
+    "basicInfo": {
+      "name": {
+        "english": "My Fourth Plate",
+        "hindi": "Chouthi Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "early_morning",
+        "bed_time"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP04",
+          "qty": 4
+        },
+        {
+          "id": "RP05",
+          "qty": 5
+        }
+      ],
+      "foods": [
+        {
+          "id": "A004",
+          "qty": 4
+        },
+        {
+          "id": "A005",
+          "qty": 5
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  },
+  {
+    "id": "PLT005",
+    "basicInfo": {
+      "name": {
+        "english": "My Fifth Plate",
+        "hindi": "Panchvi Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "breakfast",
+        "evening_snacks"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this plate",
+        "alert2 for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP05",
+          "qty": 5
+        }
+      ],
+      "foods": [
+        {
+          "id": "A005",
+          "qty": 5
+        },
+        {
+          "id": "A006",
+          "qty": 6
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  },
+  {
+    "id": "PLT006",
+    "basicInfo": {
+      "name": {
+        "english": "My Sixth Plate",
+        "hindi": "Chathvi Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "lunch",
+        "dinner"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP06",
+          "qty": 6
+        }
+      ],
+      "foods": [
+        {
+          "id": "A006",
+          "qty": 6
+        },
+        {
+          "id": "A007",
+          "qty": 7
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  },
+  {
+    "id": "PLT007",
+    "basicInfo": {
+      "name": {
+        "english": "My Seventh Plate",
+        "hindi": "Saatvi Plate"
+      },
+      "desc": "desc of plate"
+    },
+    "basicProperty": {
+      "availability": 6,
+      "prefMeals": [
+        "early_morning",
+        "bed_time"
+      ]
+    },
+    "additionalInfo": {
+      "alerts": [
+        "alert1 for this plate",
+        "alert2 for this plate"
+      ],
+      "region": "india",
+      "subRegion": "north india"
+    },
+    "items": {
+      "recipies": [
+        {
+          "id": "RP07",
+          "qty": 7
+        }
+      ],
+      "foods": [
+        {
+          "id": "A007",
+          "qty": 7
+        },
+        {
+          "id": "A008",
+          "qty": 8
+        }
+      ]
+    },
+    "adminInfo": {
+      "createdOn": "",
+      "createdBy": "",
+      "publishedOn": "",
+      "publishedBy": "",
+      "verifiedOn": "",
+      "verifiedBy": ""
+    }
+  }
+]

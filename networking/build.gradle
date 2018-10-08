@@ -55,5 +55,5 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
     implementation REQUIRE.UI.SMART_TAB_LAYOUT_AAR
-    compile project(path: ':powerkit')
+
 }

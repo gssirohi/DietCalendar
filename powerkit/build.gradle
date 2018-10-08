@@ -46,6 +46,7 @@ dependencies {
     implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
 
     implementation REQUIRE.UI.DIALOG
+    //implementation REQUIRE.UI.PROGRESS
 
     implementation REQUIRE.NETWORKING.RETROFIT
     implementation REQUIRE.NETWORKING.RETROFIT_ADAPTER_RXJAVA
@@ -71,6 +72,10 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
+    api 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
+
+    compile project(path: ':networking')
 }
 
 apply plugin: 'kotlin-android-extensions'

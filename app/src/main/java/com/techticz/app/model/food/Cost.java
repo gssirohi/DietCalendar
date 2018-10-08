@@ -14,7 +14,7 @@ public class Cost {
     private Integer qty;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Float price;
 
     public String getUnit() {
         return unit;
@@ -32,11 +32,11 @@ public class Cost {
         this.qty = qty;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

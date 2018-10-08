@@ -1,0 +1,61 @@
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="4dp"
+    card_view:cardBackgroundColor="@color/card_content_background"
+    card_view:cardUseCompatPadding="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="180dp"
+    android:orientation="vertical"
+    android:background="@color/meal_item_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Plan Name"
+    android:id="@+id/plan_name"
+    android:gravity="center"
+    android:layout_margin="5dp"
+    style="@style/Text.Dark.Large"
+    />
+    <TextView
+        android:id="@+id/plan_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Plan Description"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        style="@style/Text.Dark.Small"
+        />
+
+    <com.techticz.powerkit.customview.AppImageView
+        android:id="@+id/plan_image"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:src="@drawable/bg_afternoon"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/plan_calory"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:hint="Daily Calory: NA"
+        android:background="@color/text_action_color"
+        android:gravity="center"
+        android:textColor="@color/white"
+        />
+</LinearLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>

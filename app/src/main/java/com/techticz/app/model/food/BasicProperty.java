@@ -1,6 +1,7 @@
 
 package com.techticz.app.model.food;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,16 +12,16 @@ public class BasicProperty {
     private Boolean servable;
     @SerializedName("availability")
     @Expose
-    private Availability availability;
+    private Integer availability;
     @SerializedName("isNatural")
     @Expose
     private Boolean isNatural;
     @SerializedName("naturalForm")
     @Expose
     private String naturalForm;
-    @SerializedName("prefRoutines")
+    @SerializedName("prefMeals")
     @Expose
-    private PrefRoutines prefRoutines;
+    private List<String> prefMeals = null;
 
     public Boolean getServable() {
         return servable;
@@ -30,11 +31,11 @@ public class BasicProperty {
         this.servable = servable;
     }
 
-    public Availability getAvailability() {
+    public Integer getAvailability() {
         return availability;
     }
 
-    public void setAvailability(Availability availability) {
+    public void setAvailability(Integer availability) {
         this.availability = availability;
     }
 
@@ -54,12 +55,12 @@ public class BasicProperty {
         this.naturalForm = naturalForm;
     }
 
-    public PrefRoutines getPrefRoutines() {
-        return prefRoutines;
+    public List<String> getPrefMeals() {
+        return prefMeals;
     }
 
-    public void setPrefRoutines(PrefRoutines prefRoutines) {
-        this.prefRoutines = prefRoutines;
+    public void setPrefMeals(List<String> prefMeals) {
+        this.prefMeals = prefMeals;
     }
 
 }
