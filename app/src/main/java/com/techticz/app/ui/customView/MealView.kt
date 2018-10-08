@@ -10,6 +10,8 @@ import android.widget.FrameLayout
 import com.techticz.app.model.BrowseMealPlanResponse
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.meal.Meal
+import com.techticz.app.repo.MealPlateRepository
+import com.techticz.app.ui.activity.DietChartActivity
 import com.techticz.app.ui.adapter.MealPlanPagerAdapter
 import com.techticz.app.viewmodel.BrowseDietPlanViewModel
 import com.techticz.app.viewmodel.MealPlateViewModel
@@ -20,18 +22,18 @@ import com.techticz.powerkit.base.BaseDIActivity
 import kotlinx.android.synthetic.main.content_browse_diet_plan.*
 import kotlinx.android.synthetic.main.meal_layout.view.*
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
 class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context) {
-    var mealPlateViewModel: MealPlateViewModel? = null
+
     init {
         val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT)
         layoutParams = params
         init(parent)
-        mealPlateViewModel = ViewModelProviders.of(context as BaseDIActivity, (context as BaseDIActivity).viewModelFactory!!).get(MealPlateViewModel::class.java)
     }
 
     private fun init(parent: ViewGroup?) {
@@ -43,13 +45,14 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
     fun fillDetails(meal: Meal){
         tv_meal_name.setText(meal.mealType.mealName)
         tv_meal_plate_id.setText(meal.mealPlateId)
-        mealPlateViewModel?.mealPlateResponse?.observe(context as BaseDIActivity, Observer {
+        var liveData = (context as DietChartActivity).mealPlateRepo?.fetchMealPlateResponse(meal.mealPlateId)
+        liveData?.observe(context as BaseDIActivity, Observer {
             resource ->
             Timber.d("Data Changed : Source=" + resource?.dataSource)
             onDataLoaded(resource)
 
         })
-        mealPlateViewModel?.triggerMealPlateID?.value = meal.mealPlateId
+
     }
 
     private fun onDataLoaded(resource: Resource<MealPlateResponse>?) {

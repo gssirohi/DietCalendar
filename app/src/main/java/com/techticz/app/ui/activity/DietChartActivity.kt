@@ -24,11 +24,13 @@ import kotlinx.android.synthetic.main.activity_diet_chart.*
 import kotlinx.android.synthetic.main.fragment_diet_chart.view.*
 import org.parceler.Parcels
 import com.techticz.app.model.User
-
+import com.techticz.app.repo.MealPlateRepository
+import javax.inject.Inject
 
 
 class DietChartActivity : BaseDIActivity() {
-
+    @Inject
+    lateinit var mealPlateRepo: MealPlateRepository
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a
@@ -54,7 +56,7 @@ class DietChartActivity : BaseDIActivity() {
 
         // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
-
+        container.setOffscreenPageLimit(6);
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
