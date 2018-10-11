@@ -36,7 +36,7 @@ class DietPlanRepository @Inject constructor(private val db: FirebaseFirestore) 
     private fun fetchDietPlans():LiveData<Resource<BrowseMealPlanResponse>>{
 
         var resp = BrowseMealPlanResponse()
-        var resource = Resource<BrowseMealPlanResponse>(Status.LOADING, resp, "Loading Data..", DataSource.LOCAL)
+        var resource = Resource<BrowseMealPlanResponse>(Status.LOADING, resp, "Loading dietplans..", DataSource.LOCAL)
         var live :MediatorLiveData<Resource<BrowseMealPlanResponse>> =  MediatorLiveData<Resource<BrowseMealPlanResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
@@ -51,10 +51,10 @@ class DietPlanRepository @Inject constructor(private val db: FirebaseFirestore) 
                         //callback.onPlansFetched(plans)
                         var resp = BrowseMealPlanResponse()
                         resp.plans = plans
-                        var resource = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+                        var resource = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Loading Success- DietPlans", DataSource.LOCAL)
                         live.value = resource
                     } else {
-                        Log.w("Repo", "Error getting documents.", task.exception)
+                        Log.e("Repo", "Loading Failed- DietPlans", task.exception)
                     }
                 }
         return live

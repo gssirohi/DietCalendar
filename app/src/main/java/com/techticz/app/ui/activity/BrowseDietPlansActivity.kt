@@ -47,7 +47,6 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         dietPlansViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(BrowseDietPlanViewModel::class.java)
         dietPlansViewModel?.dietPlansResponse?.observe(this, Observer {
             resource ->
-            Timber.d("Data Changed : Source=" + resource?.dataSource)
             onDataLoaded(resource)
 
         })
@@ -58,7 +57,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
     }
 
     private fun onDataLoaded(resource: Resource<BrowseMealPlanResponse>?) {
-        //launcherBinding?.viewModel1 = launcherViewModel
+        Timber.d("dietPlansViewModel?.dietPlansResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         when(resource?.status){
             Status.LOADING->{
                 showProgress()

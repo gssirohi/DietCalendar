@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.techticz.powerkit.customview.AppImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/app_icon"/>
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:layout_weight="1"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Small.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorAccent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_food_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Text.Dark.Small"
+                android:text="Food ID"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_food_name"
+                android:layout_width="wrap_content"
+                style="@style/Text.Dark.Small"
+                android:layout_height="wrap_content"
+                android:text="Food Name"
+                android:visibility="invisible"
+                tools:visibility="visible"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_food_qty"
+                android:layout_width="wrap_content"
+                style="@style/Text.Dark.Small"
+                android:layout_height="wrap_content"
+                android:text="Qty"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_food_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Text.Dark.Small"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Veg"
+                android:visibility="invisible"
+                tools:visibility="visible"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_food_calory"
+                android:layout_gravity="right"
+                android:gravity="right"
+                style="@style/Text.Dark.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80 Kcal"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorPrimary"></View>
+</LinearLayout>

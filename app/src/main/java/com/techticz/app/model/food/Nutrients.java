@@ -4,26 +4,29 @@ package com.techticz.app.model.food;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class Nutrients {
 
     @SerializedName("principlesAndDietaryFibers")
     @Expose
-    private PrinciplesAndDietaryFibers principlesAndDietaryFibers;
+    private PrinciplesAndDietaryFibers principlesAndDietaryFibers = new PrinciplesAndDietaryFibers();
     @SerializedName("waterSolubleVitamins")
     @Expose
-    private WaterSolubleVitamins waterSolubleVitamins;
+    private WaterSolubleVitamins waterSolubleVitamins = new WaterSolubleVitamins();
     @SerializedName("mineralsAndTraceElements")
     @Expose
-    private MineralsAndTraceElements mineralsAndTraceElements;
+    private MineralsAndTraceElements mineralsAndTraceElements = new MineralsAndTraceElements();
     @SerializedName("starchAndSugars")
     @Expose
-    private StarchAndSugars starchAndSugars;
+    private StarchAndSugars starchAndSugars = new StarchAndSugars();
     @SerializedName("fatyAcid")
     @Expose
-    private FatyAcid fatyAcid;
+    private FatyAcid fatyAcid = new FatyAcid();
     @SerializedName("organicAcids")
     @Expose
-    private OrganicAcids organicAcids;
+    private OrganicAcids organicAcids = new OrganicAcids();
     @SerializedName("totalCarotenids")
     @Expose
     private Float totalCarotenids;
@@ -84,4 +87,33 @@ public class Nutrients {
         this.totalCarotenids = totalCarotenids;
     }
 
+    @NotNull
+    public Nutrients applyFactor(int finalQtyFactor) {
+        PrinciplesAndDietaryFibers principlesAndDietaryFibers = new PrinciplesAndDietaryFibers();
+        if(this.principlesAndDietaryFibers.getEnergy() == null){
+            principlesAndDietaryFibers.setEnergy(0f);
+        } else {
+            principlesAndDietaryFibers.setEnergy(finalQtyFactor * this.principlesAndDietaryFibers.getEnergy());
+        }
+        Nutrients nutrients = new Nutrients();
+        nutrients.setPrinciplesAndDietaryFibers(principlesAndDietaryFibers);
+        return nutrients;
+    }
+
+    public void addUpNutrients(@Nullable Nutrients nutri) {
+        if(nutri != null) {
+            if(nutri.principlesAndDietaryFibers != null) {
+                this.principlesAndDietaryFibers.setEnergy(addFloats(this.principlesAndDietaryFibers.getEnergy(), nutri.principlesAndDietaryFibers.getEnergy()));
+            }
+        }
+    }
+
+    private Float addFloats(Float output, Float input) {
+        if(output != null && input != null){
+            output = output+input;
+        } else if(input != null){
+            output = 0f+input;
+        }
+        return output;
+    }
 }

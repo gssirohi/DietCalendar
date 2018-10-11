@@ -96,4 +96,9 @@ public class Resource<T> {
                 + ", data=" + data +
                 '}';
     }
+
+
+    public Resource<T> createCopy( Status newStatus) {
+        return new Resource<T>(newStatus,this.data,this.message,this.dataSource);
+    }
 }

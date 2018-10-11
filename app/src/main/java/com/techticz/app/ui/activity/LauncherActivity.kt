@@ -67,7 +67,6 @@ class LauncherActivity : BaseDIActivity() {
         launcherViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(LauncherViewModel::class.java)
         launcherViewModel?.launcherResponse?.observe(this, Observer {
             resource ->
-            Timber.d("Data Changed : Source=" + resource?.dataSource)
             onDataLoaded(resource)
 
         })
@@ -76,14 +75,14 @@ class LauncherActivity : BaseDIActivity() {
         launcherBinding?.viewModel1 = launcherViewModel
 
         var handler :Handler = Handler()
-        handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },4*1000)
+        handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },1*1000)
 
         //launcherViewModel?.triggerFetchingMealPlans?.value = true
     }
 
 
     private fun onDataLoaded(resource: Resource<LauncherResponse>?) {
-        //launcherBinding?.viewModel1 = launcherViewModel
+        Timber.d("Launcher Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         when(resource?.status){
             Status.LOADING->{
                 launcherBinding?.tvTop?.text = "Loading.."

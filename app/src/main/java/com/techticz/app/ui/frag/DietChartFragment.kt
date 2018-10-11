@@ -1,23 +1,22 @@
 package com.techticz.app.ui.frag
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.dietplan.DayPlan
 import com.techticz.app.model.meal.Meal
-import com.techticz.app.model.mealplate.MealPlate
+import com.techticz.app.repo.MealPlateRepository
 import com.techticz.app.ui.activity.DietChartActivity
 import com.techticz.app.ui.adapter.DayMealsAdapter
+import com.techticz.app.viewmodel.MealPlateViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.powerkit.base.BaseDIFragment
 import kotlinx.android.synthetic.main.fragment_diet_chart.*
-import kotlinx.android.synthetic.main.fragment_diet_chart.view.*
 import timber.log.Timber
-import kotlin.text.Typography.section
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 7/10/18.
@@ -39,10 +38,10 @@ class DietChartFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = DayMealsAdapter(arguments?.getInt(ARG_SECTION_NUMBER),getDayMeals(),this)
+        recyclerView.adapter = DayMealsAdapter(arguments?.getInt(ARG_SECTION_NUMBER), getDayMealViewModels(),this)
     }
 
-    private fun getDayMeals(): List<Meal> {
+    private fun getDayMealViewModels(): List<MealPlateViewModel> {
         var dayPlan:DayPlan = DayPlan()
         when(sectionNumber){
             1->{
@@ -75,11 +74,18 @@ class DietChartFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
         meals.add(Meal(Meals.DINNER,dayPlan.dinner))
         meals.add(Meal(Meals.BED_TIME,dayPlan.bedTime))
 
-        return meals
+        var viewModelList = ArrayList<MealPlateViewModel>()
+        for(meal in meals){
+            var mealPlateViewModel = MealPlateViewModel(MealPlateRepository(FirebaseFirestore.getInstance()))
+            mealPlateViewModel.triggerMealPlateID.value = meal
+            viewModelList.add(mealPlateViewModel)
+        }
+
+        return viewModelList
     }
 
-    override fun onMealCardClicked(section:Int,meal:Meal){
-        showSuccess("Meal Clicked:"+meal.mealType.mealName+" with plate:"+meal.mealPlateId)
+    override fun onMealCardClicked(section:Int, mealViewModel: MealPlateViewModel){
+        showSuccess("Meal Clicked:"+ mealViewModel?.triggerMealPlateID?.value?.mealType?.mealName+" with plate:"+ mealViewModel?.triggerMealPlateID?.value?.mealPlateId)
     }
 
 

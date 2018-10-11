@@ -35,11 +35,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0001",
+          "id": "A001",
           "qty": 1
         },
         {
-          "id": "A0002",
+          "id": "A002",
           "qty": 2
         }
       ],
@@ -90,11 +90,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0002",
+          "id": "A002",
           "qty": 2
         },
         {
-          "id": "A0003",
+          "id": "A003",
           "qty": 3
         }
       ],
@@ -141,11 +141,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0003",
+          "id": "A003",
           "qty": 3
         },
         {
-          "id": "A0004",
+          "id": "A004",
           "qty": 4
         }
       ],
@@ -191,11 +191,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0004",
+          "id": "A004",
           "qty": 4
         },
         {
-          "id": "A0005",
+          "id": "A005",
           "qty": 5
         }
       ],
@@ -242,11 +242,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0005",
+          "id": "A005",
           "qty": 5
         },
         {
-          "id": "A0006",
+          "id": "A006",
           "qty": 6
         }
       ],
@@ -292,11 +292,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0006",
+          "id": "A006",
           "qty": 6
         },
         {
-          "id": "A0007",
+          "id": "A007",
           "qty": 7
         }
       ],
@@ -343,11 +343,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0007",
+          "id": "A007",
           "qty": 7
         },
         {
-          "id": "A0008",
+          "id": "A008",
           "qty": 8
         }
       ],
@@ -393,11 +393,11 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A0008",
+          "id": "A008",
           "qty": 8
         },
         {
-          "id": "A0009",
+          "id": "A009",
           "qty": 9
         }
       ],

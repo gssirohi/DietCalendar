@@ -24,13 +24,24 @@ import kotlinx.android.synthetic.main.activity_diet_chart.*
 import kotlinx.android.synthetic.main.fragment_diet_chart.view.*
 import org.parceler.Parcels
 import com.techticz.app.model.User
+import com.techticz.app.model.mealplate.MealPlate
+import com.techticz.app.repo.FoodRepository
 import com.techticz.app.repo.MealPlateRepository
+import com.techticz.app.repo.RecipeRepository
+import com.techticz.app.viewmodel.MealPlateViewModel
+import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import javax.inject.Inject
 
 
 class DietChartActivity : BaseDIActivity() {
     @Inject
     lateinit var mealPlateRepo: MealPlateRepository
+    @Inject
+    lateinit var recipeRepo: RecipeRepository
+    @Inject
+    lateinit var foodRepo: FoodRepository
+
+
     /**
      * The [android.support.v4.view.PagerAdapter] that will provide
      * fragments for each of the sections. We use a

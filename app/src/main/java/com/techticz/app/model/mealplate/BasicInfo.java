@@ -26,7 +26,7 @@ public class BasicInfo {
     private String type;
     @SerializedName("calories")
     @Expose
-    private Integer calories;
+    private Float calories;
 
     public Name getName() {
         return name;
@@ -76,11 +76,11 @@ public class BasicInfo {
         this.type = type;
     }
 
-    public Integer getCalories() {
+    public Float getCalories() {
         return calories;
     }
 
-    public void setCalories(Integer calories) {
+    public void setCalories(Float calories) {
         this.calories = calories;
     }
 

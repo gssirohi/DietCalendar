@@ -55,11 +55,11 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
 
         var resp = LauncherResponse()
         resp.launchMessage = "This is local launch message not from network or DB"
-        var resource = Resource<LauncherResponse>(Status.LOADING, resp, "Loading Data..", DataSource.LOCAL)
+        var resource = Resource<LauncherResponse>(Status.LOADING, resp, "Loading launching data..", DataSource.LOCAL)
         var live :MediatorLiveData<Resource<LauncherResponse>> =  MediatorLiveData<Resource<LauncherResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
-        var resourceS = Resource<LauncherResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+        var resourceS = Resource<LauncherResponse>(Status.SUCCESS, resp, "Loading Success: Launcher data", DataSource.LOCAL)
 
         live.value = resourceS
         return live

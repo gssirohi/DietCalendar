@@ -18,7 +18,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.android.gms.tasks.OnSuccessListener
-
+import com.techticz.app.model.meal.Meal
 
 
 /**
@@ -28,24 +28,33 @@ import com.google.android.gms.tasks.OnSuccessListener
 class MealPlateRepository @Inject constructor(private val db: FirebaseFirestore) : BaseDIRepository() {
 
 
-    fun fetchMealPlateResponse(triggerMealPlateID: String?): LiveData<Resource<MealPlateResponse>> {
+    fun fetchMealPlateResponse(meal: Meal?): LiveData<Resource<MealPlateResponse>> {
 
         var dummyRes = MealPlateResponse()
-        var resource = Resource<MealPlateResponse>(Status.LOADING, dummyRes, "Loading Data..", DataSource.LOCAL)
+        var resource = Resource<MealPlateResponse>(Status.LOADING, dummyRes, "Loading Meal Plate:"+meal?.mealPlateId, DataSource.LOCAL)
         var live : MediatorLiveData<Resource<MealPlateResponse>> = MediatorLiveData<Resource<MealPlateResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
       //  var resourceS = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
 
 
-        db.collection(AppCollections.PLATES.collectionName).document(triggerMealPlateID!!)
+        db.collection(AppCollections.PLATES.collectionName).document(meal?.mealPlateId!!)
                 .get().addOnSuccessListener(OnSuccessListener<DocumentSnapshot> { documentSnapshot ->
             val mealPlate = documentSnapshot.toObject(MealPlate::class.java!!)
-            var fetchedRes = MealPlateResponse()
-            fetchedRes.mealPlate = mealPlate
-            var resource = Resource<MealPlateResponse>(Status.SUCCESS, fetchedRes, "Data Loading Success", DataSource.REMOTE)
+            if(mealPlate != null) {
+                var fetchedRes = MealPlateResponse()
+                fetchedRes.mealPlate = mealPlate
+                var resource = Resource<MealPlateResponse>(Status.SUCCESS, fetchedRes, "Loading Success- MealPlate:"+meal?.mealPlateId, DataSource.REMOTE)
+                live.value = resource
+            } else {
+                var resource = Resource<MealPlateResponse>(Status.ERROR, null, "Loading Failed- MealPlate:"+meal?.mealPlateId, DataSource.REMOTE)
+                live.value = resource
+            }
+
+        }).addOnFailureListener { e -> Timber.e("Error fetching meal plate:" + meal?.mealPlateId, e)
+            var resource = Resource<MealPlateResponse>(Status.ERROR, null, "Couldn't load - MealPlate:"+meal?.mealPlateId, DataSource.REMOTE)
             live.value = resource
-        }).addOnFailureListener { e -> Timber.e("Error fetching meal plate:" + triggerMealPlateID, e) }
+        }
 
     return live
     }

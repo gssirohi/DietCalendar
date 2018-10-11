@@ -55,7 +55,7 @@ class DietChartPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        // Show 3 total pages.
+        // Show 7 total pages.
         return 7
     }
 }

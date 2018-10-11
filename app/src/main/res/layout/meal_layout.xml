@@ -1,48 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="8dp">
+    android:orientation="vertical"
+    >
+
 <android.support.v7.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/AppCardView"
-    app:cardBackgroundColor="@color/butter_cup_light"
+    android:layout_marginTop="20dp"
+    app:cardElevation="6dp"
+    android:layout_marginBottom="12dp"
+    android:layout_gravity="center"
     >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/tv_meal_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is meal card"/>
-    <TextView
-        android:id="@+id/tv_meal_plate_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is meal card"/>
-
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Circle"
+        style="@style/SpinKitView.Small.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:SpinKit_Color="@color/colorAccent" />
-
+    <include layout="@layout/meal_plate_desc_layout"></include>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"></View>
     <TextView
-        android:id="@+id/tv_meal_plate_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meal Plate Name"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        style="@style/Text.Dark.Large.Bold"
+        android:text="Recipes"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recipeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="120dp"
+        tools:listitem="@layout/meal_recipe_layout">
+
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="4dp"
+        style="@style/Text.Dark.Large.Bold"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Foods"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/foodRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="120dp"
+        tools:listitem="@layout/meal_food_layout">
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
 </android.support.v7.widget.CardView>
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        style="@style/AppCardView"
+        app:cardCornerRadius="12dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="8dp"
+        android:layout_gravity="center|top"
+        app:cardBackgroundColor="@color/colorPrimary"
+        >
+        <TextView
+            android:id="@+id/tv_meal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            style="@style/Text.Light.Large.Bold"
+            android:textColor="@color/white"
+            android:text="Breakfast"/>
+    </android.support.v7.widget.CardView>
+</FrameLayout>
