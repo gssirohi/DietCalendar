@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
     >
 
@@ -11,29 +12,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/AppCardView"
+    app:contentPadding="0dp"
     android:layout_marginTop="20dp"
     app:cardElevation="6dp"
     android:layout_marginBottom="12dp"
     android:layout_gravity="center"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+    <com.techticz.app.ui.customView.AppImageView
+        android:id="@+id/aiv_meal_plate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_night"
+        android:scaleType="fitXY"/>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/meal_plate_desc_layout"></include>
+    </RelativeLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="150dp"
     android:padding="8dp"
     android:orientation="vertical">
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Small.Circle"
+        style="@style/SpinKitView.Small.Wave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:SpinKit_Color="@color/colorAccent" />
-    <include layout="@layout/meal_plate_desc_layout"></include>
-    <View
+
+    <!--<View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimary"></View>
+        android:background="@color/colorPrimary"></View>-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

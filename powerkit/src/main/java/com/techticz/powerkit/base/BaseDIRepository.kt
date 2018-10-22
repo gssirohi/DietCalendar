@@ -2,6 +2,7 @@ package com.techticz.powerkit.base;
 
 import android.content.Context
 import com.afollestad.materialdialogs.MaterialDialog
+import com.techticz.networking.model.AppExecutors
 import com.techticz.networking.util.RateLimiter
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -12,8 +13,8 @@ import javax.inject.Inject;
  */
 
 open class BaseDIRepository  {
-    @Inject
-    lateinit var appExecutors: com.techticz.networking.model.AppExecutors
+
+    var appExecutors: AppExecutors = AppExecutors()
 
     var hostActivityContext: Context? = null
 

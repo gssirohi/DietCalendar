@@ -2,6 +2,7 @@ package com.techticz.dietcalendar.ui
 
 import android.app.Activity
 import android.app.Application
+import com.techticz.dietcalendar.di.AppComponent
 import com.techticz.dietcalendar.di.DaggerInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -21,10 +22,17 @@ class DietCalendarApplication : Application(), HasActivityInjector {
             Timber.plant(Timber.DebugTree())
         }
         Timber.d("Diet Calendar Application Injected ...")
-        DaggerInjector.injectAll(this)
+        component = DaggerInjector.injectAll(this)
     }
 
     override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
         return dispatchingAndroidInjector
+    }
+
+
+    companion object {
+        private lateinit var component: AppComponent
+
+        fun getAppComponent() : AppComponent = component
     }
 }

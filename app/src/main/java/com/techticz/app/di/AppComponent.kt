@@ -4,6 +4,8 @@ package com.techticz.dietcalendar.di
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 
+import com.techticz.app.repo.ImageRepository
+import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import javax.inject.Singleton
 
@@ -27,4 +29,6 @@ interface AppComponent {
     }
 
     fun inject(app: DietCalendarApplication)
+
+    fun inject(imageViewModel: ImageViewModel)
 }

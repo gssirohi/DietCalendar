@@ -41,6 +41,30 @@
         {
           "id": "A002",
           "qty": 2
+        },
+        {
+          "id": "A003",
+          "qty": 2
+        },
+        {
+          "id": "A004",
+          "qty": 2
+        },
+        {
+          "id": "A005",
+          "qty": 2
+        },
+        {
+          "id": "A006",
+          "qty": 2
+        },
+        {
+          "id": "A007",
+          "qty": 2
+        },
+        {
+          "id": "A008",
+          "qty": 2
         }
       ],
       "steps": [
@@ -71,7 +95,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "slice"
+      "servingType": "bowl"
     },
     "basicProperty": {
       "availability": 1,
@@ -121,7 +145,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "bowl"
+      "servingType": "teaspoon"
     },
     "basicProperty": {
       "availability": 1,
@@ -172,7 +196,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "piece"
+      "servingType": "tablespoon"
     },
     "basicProperty": {
       "availability": 1,
@@ -222,7 +246,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "slice"
+      "servingType": "glass"
     },
     "basicProperty": {
       "availability": 1,
@@ -273,7 +297,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "bowl"
+      "servingType": "cup"
     },
     "basicProperty": {
       "availability": 1,
@@ -323,7 +347,7 @@
     },
     "standardServing": {
       "qty": 1,
-      "servingType": "piece"
+      "servingType": "plate"
     },
     "basicProperty": {
       "availability": 1,

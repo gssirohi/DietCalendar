@@ -12,23 +12,16 @@ import com.techticz.networking.util.RateLimiter
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import android.support.annotation.NonNull
 import android.util.Log
-import android.util.Xml
-import com.google.android.gms.common.util.IOUtils
 import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.techticz.app.model.User
 
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.techticz.app.model.food.*
 
 import com.techticz.powerkit.utils.JSONUtils
-import java.lang.reflect.Type
 
 
 /**

@@ -2,28 +2,16 @@ package com.techticz.app.repo
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.content.Context
 import android.util.Log
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.WriteBatch
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.BrowseMealPlanResponse
-import com.techticz.app.model.User
 import com.techticz.app.model.dietplan.DietPlan
-import com.techticz.app.model.food.*
-import com.techticz.dietcalendar.model.LauncherResponse
-import com.techticz.networking.model.AppExecutors
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.networking.util.RateLimiter
 import com.techticz.powerkit.base.BaseDIRepository
-import com.techticz.powerkit.utils.JSONUtils
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**

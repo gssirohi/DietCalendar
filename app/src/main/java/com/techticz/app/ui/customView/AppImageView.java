@@ -1,4 +1,4 @@
-package com.techticz.powerkit.customview;
+package com.techticz.app.ui.customView;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,14 +9,21 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.techticz.app.model.ImageResponse;
+import com.techticz.app.repo.ImageRepository;
+import com.techticz.app.viewmodel.ImageViewModel;
+import com.techticz.networking.model.Resource;
+import com.techticz.networking.model.Status;
 import com.techticz.powerkit.R;
+import com.techticz.powerkit.base.BaseDIActivity;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.Observer;
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 26/8/17.
@@ -24,27 +31,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AppImageView extends android.support.v7.widget.AppCompatImageView {
     private String url;
-    private Bitmap imageBitmap;
+    private ImageViewModel viewModel;
 
     public AppImageView(Context context) {
         super(context);
+
     }
 
     public AppImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
     }
 
     public AppImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public void setUrl(String url){
-        this.url = url;
-        new ImageDownloaderTask(this, url, getContext()).execute(url);
+    public void setImageViewModel(@Nullable ImageViewModel viewModel) {
+        this.viewModel = viewModel;
+        viewModel.getLiveImageResponse().observe((BaseDIActivity)getContext(), res->{
+            onImageLoaded(res);
+        });
     }
 
-    public Bitmap getBitmap() {
-        return imageBitmap;
+    private void onImageLoaded(Resource<ImageResponse> res) {
+        if(res != null) {
+            res.isFresh = false;
+            if (res.status == Status.SUCCESS) {
+                setImageBitmap(viewModel.getLiveImageResponse().getValue().data.getBitmap());
+            }
+        }
     }
 
     public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
@@ -77,7 +93,6 @@ public class AppImageView extends android.support.v7.widget.AppCompatImageView {
                 if (imageView != null) {
                     if (bitmap != null) {
                         // BrandCatogiriesItem.saveLocalBrandOrCatogiries(context, brandCatogiriesItem);
-                        imageBitmap = bitmap;
                         imageView.setImageBitmap(bitmap);
                     } else {
                         Drawable placeholder = imageView.getContext().getResources().getDrawable(R.drawable.select_image_placeholder);

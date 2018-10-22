@@ -4,14 +4,11 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import com.google.firebase.firestore.FirebaseFirestore
-import com.techticz.app.model.FoodResponse
+import com.techticz.app.model.ImageResponse
 import com.techticz.app.model.food.Nutrients
-import com.techticz.app.model.food.Nutrition
-import com.techticz.app.model.food.PrinciplesAndDietaryFibers
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.RecipeResponse
-import com.techticz.app.repo.FoodRepository
+import com.techticz.app.repo.ImageRepository
 import com.techticz.app.repo.RecipeRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.DataSource
@@ -26,10 +23,12 @@ import javax.inject.Inject
  */
 
 class RecipeViewModel @Inject
-constructor(mealPlateRepository: RecipeRepository) : BaseViewModel() {
+constructor(recipeRepository: RecipeRepository) : BaseViewModel() {
     val triggerRecipeItem = MutableLiveData<RecipeItem>()
     val liveRecipeResponse: LiveData<Resource<RecipeResponse>>
     var liveFoodViewModelList: MediatorLiveData<Resource<List<FoodViewModel>>>? = MediatorLiveData<Resource<List<FoodViewModel>>>()
+    var liveImage: MediatorLiveData<Resource<ImageViewModel>>? = MediatorLiveData<Resource<ImageViewModel>>()
+
     init {
         Timber.d("Injecting:" + this)
         liveRecipeResponse = Transformations.switchMap(triggerRecipeItem) { triggerLaunch ->
@@ -38,7 +37,12 @@ constructor(mealPlateRepository: RecipeRepository) : BaseViewModel() {
                 return@switchMap AbsentLiveData.create<Resource<RecipeResponse>>()
             } else {
                 Timber.d("Recipe Trigger detected for:"+triggerLaunch?.id)
-                return@switchMap mealPlateRepository.fetchRecipeResponse(triggerRecipeItem.value)
+                var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.EMPTY, null, "Empty Recipe foods..", DataSource.LOCAL)
+                liveFoodViewModelList?.value = foodViewModelListResource
+
+                var liveImageResource = Resource<ImageViewModel>(Status.EMPTY, null, "Empty image recipe..", DataSource.LOCAL)
+                liveImage?.value = liveImageResource
+                return@switchMap recipeRepository.fetchRecipeResponse(triggerRecipeItem.value)
             }
         }
     }
@@ -59,5 +63,19 @@ constructor(mealPlateRepository: RecipeRepository) : BaseViewModel() {
         return nutrients
     }
 
+    fun isVeg(): Boolean {
+        var isVeg = true
+
+        var foodViewModelList = liveFoodViewModelList?.value?.data
+        if(foodViewModelList != null) {
+            for (foodViewModel in foodViewModelList!!) {
+                if(foodViewModel.liveFoodResponse.value?.data != null) {
+                    var isVeg = foodViewModel.isVeg()
+                    if(!isVeg) return false;
+                }
+            }
+        }
+        return isVeg
+    }
 
 }

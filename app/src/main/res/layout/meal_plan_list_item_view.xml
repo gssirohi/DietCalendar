@@ -40,8 +40,8 @@
         style="@style/Text.Dark.Small"
         />
 
-    <com.techticz.powerkit.customview.AppImageView
-        android:id="@+id/plan_image"
+    <com.techticz.app.ui.customView.AppImageView
+        android:id="@+id/aiv_plan_image"
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:src="@drawable/bg_afternoon"

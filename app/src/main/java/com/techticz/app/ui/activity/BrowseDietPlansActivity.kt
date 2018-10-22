@@ -69,7 +69,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
                 (scroller.adapter as MealPlanPagerAdapter).data.clear()
                 (scroller.adapter as MealPlanPagerAdapter).data.addAll(resource?.data?.plans!!)
                 (scroller.adapter as MealPlanPagerAdapter).notifyDataSetChanged()
-
+              //  scroller.getRecycledViewPool().setMaxRecycledViews(1,0);
 
             }
             Status.ERROR->

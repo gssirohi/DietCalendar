@@ -24,6 +24,19 @@ class DayMealsAdapter constructor(val section:Int?, var dayMeals:List<MealPlateV
         }
     }
 
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder?) {
+        if (holder is MealViewHolder) {
+            holder!!.setIsRecyclable(false)
+        }
+        super.onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder?) {
+        if (holder is MealViewHolder) {
+            holder!!.setIsRecyclable(true)
+        }
+        super.onViewDetachedFromWindow(holder)
+    }
     override fun getItemCount(): Int {
         return dayMeals?.size
         //return 1

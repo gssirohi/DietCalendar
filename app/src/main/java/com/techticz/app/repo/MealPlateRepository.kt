@@ -2,11 +2,8 @@ package com.techticz.app.repo
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.AppCollections
-import com.techticz.app.model.BrowseMealPlanResponse
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.model.mealplate.MealPlate

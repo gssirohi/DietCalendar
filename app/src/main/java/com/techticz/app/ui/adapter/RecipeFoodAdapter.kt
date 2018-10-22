@@ -23,7 +23,7 @@ class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var call
              callBack?.onFoodItemClicked(foodViewModel)
             })
             if(position == itemCount -1){
-                (holder as RecipeFoodViewHolder).recipeFoodView.divider.visibility = View.GONE
+               // (holder as RecipeFoodViewHolder).recipeFoodView.divider.visibility = View.GONE
             }
         }
     }

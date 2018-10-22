@@ -25,10 +25,11 @@ import timber.log.Timber
 
 object DaggerInjector {
 
-    fun injectAll(application: DietCalendarApplication) {
+    fun injectAll(application: DietCalendarApplication): AppComponent {
         Timber.d("...All DI Started...")
-        DaggerAppComponent.builder().application(application)
-                .build().inject(application)
+        var component:AppComponent = DaggerAppComponent.builder().application(application)
+                .build()
+                component.inject(application)
         application
                 .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
@@ -59,6 +60,7 @@ object DaggerInjector {
 
                     }
                 })
+        return component;
     }
 
     private fun handleActivity(activity: Activity) {

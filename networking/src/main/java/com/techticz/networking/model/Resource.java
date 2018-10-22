@@ -37,27 +37,37 @@ public class Resource<T> {
     @Nullable
     public final T data;
 
+    @Nullable
+    public Boolean isFresh;
+
+    public Resource(@NonNull Status status, @Nullable T data, @Nullable String message, @Nullable DataSource dataSource, @Nullable Boolean isFresh) {
+        this.status = status;
+        this.data = data;
+        this.message = message;
+        this.dataSource = dataSource;
+        this.isFresh = isFresh;
+    }
     public Resource(@NonNull Status status, @Nullable T data, @Nullable String message, @Nullable DataSource dataSource) {
         this.status = status;
         this.data = data;
         this.message = message;
         this.dataSource = dataSource;
+        this.isFresh = true;
     }
-
     public static <T> Resource<T> success(@Nullable T data, @Nullable DataSource dataSource) {
-        return new Resource<>(Status.SUCCESS, data, null, dataSource);
+        return new Resource<>(Status.SUCCESS, data, null, dataSource, true);
     }
 
     public static <T> Resource<T> success(String msg,@Nullable T data, @Nullable DataSource dataSource) {
-        return new Resource<>(Status.SUCCESS, data, msg, dataSource);
+        return new Resource<>(Status.SUCCESS, data, msg, dataSource, true);
     }
 
     public static <T> Resource<T> error(String msg, @Nullable T data, @Nullable DataSource dataSource) {
-        return new Resource<>(Status.ERROR, data, msg, dataSource);
+        return new Resource<>(Status.ERROR, data, msg, dataSource, true);
     }
 
     public static <T> Resource<T> loading(@Nullable T data, @Nullable DataSource dataSource) {
-        return new Resource<>(Status.LOADING, data, null, dataSource);
+        return new Resource<>(Status.LOADING, data, null, dataSource, true);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import com.google.firebase.firestore.FirebaseFirestore
+import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.FoodResponse
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.mealplate.FoodItem
@@ -40,6 +41,18 @@ constructor(foodRepository: FoodRepository) : BaseViewModel() {
     fun getNutrients(): Nutrients? {
         var nutrients = liveFoodResponse?.value?.data?.food?.nutrition?.nutrients
         return nutrients
+    }
+
+    fun isVeg(): Boolean {
+        if(liveFoodResponse?.value?.status == Status.SUCCESS) {
+            var cat = liveFoodResponse?.value?.data?.food?.basicInfo?.category
+            if (cat.equals(FoodCategories.EGG.id, true)
+                    || cat.equals(FoodCategories.MEAT.id, true)) {
+                return false;
+            }
+            return true;
+        }
+        return true;
     }
 
 

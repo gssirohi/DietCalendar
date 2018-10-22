@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.techticz.powerkit.customview.AppImageView
+            <com.techticz.app.ui.customView.AppImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/app_icon"/>
@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/spin_kit"
-                style="@style/SpinKitView.Small.Circle"
+                style="@style/SpinKitView.Small.Wave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -36,64 +36,59 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:padding="8dp"
             android:orientation="vertical">
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/tv_food_id"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Text.Dark.Small"
-                android:text="Food ID"/>
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/tv_food_name"
-                android:layout_width="wrap_content"
-                style="@style/Text.Dark.Small"
-                android:layout_height="wrap_content"
-                android:text="Food Name"
-                android:visibility="invisible"
-                tools:visibility="visible"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_food_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    style="@style/Text.Dark.Large"
+                    android:text="\u25D9"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:visibility="visible"
+                    tools:visibility="visible"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_food_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/Text.Dark"
+                    android:text="This is food Name"
+                    android:visibility="invisible"
+                    tools:visibility="visible"/>
+            </LinearLayout>
             <TextView
                 android:layout_weight="1"
                 android:id="@+id/tv_food_qty"
                 android:layout_width="wrap_content"
-                style="@style/Text.Dark.Small"
                 android:layout_height="wrap_content"
-                android:text="Qty"/>
+                style="@style/Text.Dark.Small"
+                tools:text="2 peices"/>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="8dp"
+
+        <TextView
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:id="@+id/tv_food_calory"
+            android:layout_gravity="center|right"
+            style="@style/Text.Dark.Small"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1150\ncal/serve"/>
 
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/tv_food_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Text.Dark.Small"
-                android:layout_gravity="right"
-                android:gravity="right"
-                android:text="Veg"
-                android:visibility="invisible"
-                tools:visibility="visible"/>
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/tv_food_calory"
-                android:layout_gravity="right"
-                android:gravity="right"
-                style="@style/Text.Dark.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="80 Kcal"/>
-
-        </LinearLayout>
 
     </LinearLayout>
     <View

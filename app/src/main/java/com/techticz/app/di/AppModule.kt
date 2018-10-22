@@ -1,13 +1,18 @@
 package com.techticz.dietcalendar.di
 
+import android.app.Activity
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
+import com.techticz.app.repo.ImageRepository
 import com.techticz.app.ui.Navigator
 import com.techticz.dietcalendar.ui.DietCalendarApplication
+import com.techticz.networking.model.AppExecutors
+import com.techticz.powerkit.base.BaseDIActivity
 
 import dagger.Module
 import dagger.Provides
 import timber.log.Timber
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -39,9 +44,26 @@ class AppModule{
 
     @Singleton
     @Provides
-    internal fun provideContext(app: DietCalendarApplication): Context {
+    internal fun provideImageRepo(context:Context): ImageRepository {
+        Timber.d("Providing :" + "Image Repository")
+        val repo = ImageRepository(context)
+
+        return repo
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideAppContext(app: DietCalendarApplication): Context {
         Timber.d("Providing :" + "App Context")
         return app.baseContext
+    }
+
+
+    @Singleton
+    @Provides
+    internal fun provideExecutors(): AppExecutors {
+        Timber.d("Providing :" + "App Executors")
+        return AppExecutors()
     }
 
 }

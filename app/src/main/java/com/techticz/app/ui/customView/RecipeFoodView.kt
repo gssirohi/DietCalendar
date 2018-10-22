@@ -1,6 +1,7 @@
 package com.techticz.app.ui.customView
 
 import android.arch.lifecycle.Observer
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +33,11 @@ class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : Frame
         addView(itemView)
     }
 
+    private var foodViewModel: FoodViewModel? = null
+
     fun fillDetails(foodViewModel: FoodViewModel?){
-        tv_food_id.setText(foodViewModel?.triggerFoodItem?.value?.id)
+        this.foodViewModel = foodViewModel
+        tv_food_name.setText(foodViewModel?.triggerFoodItem?.value?.id)
         tv_food_qty.setText(""+ foodViewModel?.triggerFoodItem?.value?.qty)
         foodViewModel?.liveFoodResponse?.observe(context as BaseDIActivity, Observer {
             resource ->
@@ -45,14 +49,17 @@ class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : Frame
 
     private fun onViewModelDataLoaded(resource: Resource<FoodResponse>?) {
         Timber.d("foodViewModel?.liveFoodResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
+        if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
+            var resOld = recipeView.recipeViewModel?.liveFoodViewModelList?.value
+            var resNew = resOld?.createCopy(resource?.status)
+            recipeView.recipeViewModel?.liveFoodViewModelList?.value = resNew
+        }
         onFoodLoaded(resource)
-        var resOld = recipeView.recipeViewModel?.liveFoodViewModelList?.value
-        var resNew = resOld?.createCopy(resource?.status)
-        recipeView.recipeViewModel?.liveFoodViewModelList?.value = resNew
     }
 
     private fun onFoodLoaded(resource: Resource<FoodResponse>?) {
         //launcherBinding?.viewModel1 = launcherViewModel
+        resource?.isFresh = false
         when(resource?.status){
             Status.LOADING ->{
                 spin_kit.visibility = View.VISIBLE
@@ -61,8 +68,17 @@ class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : Frame
             {
                 spin_kit.visibility = View.INVISIBLE
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
-                tv_food_calory.text = ""+resource.data?.food?.nutrition?.nutrients?.principlesAndDietaryFibers?.energy
+                tv_food_qty.setText(""+
+                        foodViewModel?.triggerFoodItem?.value?.qty+"\n"+
+                        resource.data?.food?.standardServing?.servingType)
+                tv_food_calory.text = ""+resource.data?.food?.nutrition?.nutrients?.principlesAndDietaryFibers?.energy+
+                        "\ncal/"+resource.data?.food?.standardServing?.servingType
                 tv_food_name.visibility = View.VISIBLE
+
+                when(foodViewModel?.isVeg()){
+                    true->tv_food_type.setTextColor(Color.parseColor("#ff669900"))
+                    else->tv_food_type.setTextColor(Color.parseColor("#ffcc0000"))
+                }
             }
             Status.ERROR ->
             {

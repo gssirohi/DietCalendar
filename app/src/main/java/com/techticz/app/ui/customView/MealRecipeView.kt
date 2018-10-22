@@ -2,6 +2,7 @@ package com.techticz.app.ui.customView
 
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.Observer
+import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.techticz.app.model.recipe.RecipeResponse
 import com.techticz.app.repo.FoodRepository
 import com.techticz.app.ui.adapter.RecipeFoodAdapter
 import com.techticz.app.viewmodel.FoodViewModel
+import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.RecipeViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.DataSource
@@ -47,8 +49,8 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
 
     fun fillDetails(recipeViewModel: RecipeViewModel?) {
         this.recipeViewModel = recipeViewModel
-        tv_recipe_id.setText(recipeViewModel?.triggerRecipeItem?.value?.id)
-        tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+        tv_recipe_name.setText(recipeViewModel?.triggerRecipeItem?.value?.id)
+        tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty+"\nserving")
 
         recipeViewModel?.liveRecipeResponse?.observe(context as BaseDIActivity, Observer { resource ->
             onViewModelDataLoaded(resource)
@@ -70,7 +72,7 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
     }
 
     private fun onRecipeLoaded(resource: Resource<RecipeResponse>?) {
-        //launcherBinding?.viewModel1 = launcherViewModel
+        resource?.isFresh = false
         when (resource?.status) {
             Status.LOADING -> {
                 spin_kit.visibility = View.VISIBLE
@@ -79,10 +81,22 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
                 spin_kit.visibility = View.INVISIBLE
                 tv_recipe_name.text = resource.data?.recipe?.basicInfo?.name?.english
                 tv_recipe_name.visibility = View.VISIBLE
+                tv_recipe_qty.text = "" + recipeViewModel?.triggerRecipeItem?.value?.qty+
+                        " "+resource.data?.recipe?.standardServing?.servingType
 
                 loadChildViewModels(resource)
                 recipeFoodRecyclerView.layoutManager = LinearLayoutManager(context)
                 recipeFoodRecyclerView.adapter = RecipeFoodAdapter(this, null)
+
+                tv_show_more_less.setOnClickListener({
+                    if(recipeFoodRecyclerView.visibility == View.GONE){
+                        recipeFoodRecyclerView.visibility = View.VISIBLE
+                        tv_show_more_less.text = "show less"
+                    } else {
+                        recipeFoodRecyclerView.visibility = View.GONE
+                        tv_show_more_less.text = "show more"
+                    }
+                })
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE
@@ -94,30 +108,51 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
     }
 
     private fun loadChildViewModels(resource: Resource<RecipeResponse>) {
-
-        var foods = resource?.data?.recipe?.formula?.ingredients
-
-        var foodViewModelList = ArrayList<FoodViewModel>()
-
-        if (foods != null) {
-            for (food in foods) {
-                var foodViewModel = FoodViewModel(FoodRepository(FirebaseFirestore.getInstance()))
-                foodViewModel.triggerFoodItem.value = food
-                foodViewModelList.add(foodViewModel)
-            }
-        }
-        var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Recipe foods..", DataSource.LOCAL)
-        this.recipeViewModel?.liveFoodViewModelList?.value = foodViewModelListResource
         this.recipeViewModel?.liveFoodViewModelList?.observe(context as BaseDIActivity, Observer { resource ->
-            onChildViewModelsDataChanged(resource)
+
             //ring parent bell
-            var resOld = mealView.mealPlateViewModel?.liveRecipeViewModelList?.value
-            var resNew = resOld?.createCopy(resource?.status)
-            mealView.mealPlateViewModel?.liveRecipeViewModelList?.value = resNew
+            if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
+                var resOld = mealView.mealPlateViewModel?.liveRecipeViewModelList?.value
+                var resNew = resOld?.createCopy(resource?.status)
+                mealView.mealPlateViewModel?.liveRecipeViewModelList?.value = resNew
+            }
+            onChildViewModelsDataChanged(resource)
+        })
+
+        this.recipeViewModel?.liveImage?.observe(context as BaseDIActivity, Observer {
+            resource->
+            onImageModelLoaded(resource)
         })
     }
 
+    private fun onImageModelLoaded(resource: Resource<ImageViewModel>?) {
+        Timber.d("this.recipeViewModel?.liveImage? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
+        resource?.isFresh = false
+        when(resource?.status) {
+            Status.LOADING -> {
+                //spin_kit.visibility = View.VISIBLE
+
+            }
+            Status.SUCCESS -> {
+                spin_kit.visibility = View.INVISIBLE
+                aiv_recipe.setImageViewModel(resource?.data)
+            }
+            Status.EMPTY -> {
+                var imageViewModel = ImageViewModel(context)
+                imageViewModel.triggerImageUrl.value = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.basicInfo?.image
+                var imageRes = Resource<ImageViewModel>(Status.SUCCESS,imageViewModel,"Loading recipe image model success..",DataSource.REMOTE)
+                this.recipeViewModel?.liveImage?.value = imageRes
+            }
+            Status.ERROR -> {
+                spin_kit.visibility = View.INVISIBLE
+                tv_recipe_calory.text = resource?.message
+                tv_recipe_calory.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun onChildViewModelsDataChanged(resource: Resource<List<FoodViewModel>>?) {
+        resource?.isFresh = false
         Timber.d("this.recipeViewModel?.liveFoodViewModelList? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
 
         when (resource?.status) {
@@ -126,8 +161,29 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
             }
             Status.SUCCESS -> {
                 spin_kit.visibility = View.INVISIBLE
-                tv_recipe_calory.text = "" + recipeViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy
+                tv_recipe_calory.text = "" + recipeViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+
+                        "\nCals/"+recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
+                when(recipeViewModel?.isVeg()){
+                    true->tv_recipe_type.setTextColor(Color.parseColor("#ff669900"))
+                    else->tv_recipe_type.setTextColor(Color.parseColor("#ffcc0000"))
+                }
 
+            }
+            Status.EMPTY->{
+
+                var foods = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.formula?.ingredients
+
+                var foodViewModelList = ArrayList<FoodViewModel>()
+
+                if (foods != null) {
+                    for (food in foods) {
+                        var foodViewModel = FoodViewModel(FoodRepository(FirebaseFirestore.getInstance()))
+                        foodViewModel.triggerFoodItem.value = food
+                        foodViewModelList.add(foodViewModel)
+                    }
+                }
+                var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Recipe foods..", DataSource.LOCAL)
+                this.recipeViewModel?.liveFoodViewModelList?.value = foodViewModelListResource
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE
