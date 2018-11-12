@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hookedonplay.decoviewlib.DecoView;
@@ -38,6 +39,7 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
 
     public CircleGraphView(@NonNull Context context) {
         super(context);
+        initView();
     }
 
     public CircleGraphView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -65,12 +67,12 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
                 .setDelay(100)
                 .build());
         setOnClickListener(this);
-        mColor = getResources().getColor(R.color.colorAccent);
+        mColor = getResources().getColor(R.color.primaryColor);
     }
 
     public void start(String label,float max,float value,int color){
         if(color == 0){
-            mColor = getResources().getColor(R.color.colorAccent);
+            mColor = getResources().getColor(R.color.primaryColor);
         }else{
             mColor = color;
         }
@@ -120,7 +122,7 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
     }
 
     private void createBackSeries() {
-        SeriesItem seriesItem = new SeriesItem.Builder(Color.parseColor("#FFE2E2E2"))
+        SeriesItem seriesItem = new SeriesItem.Builder(getResources().getColor(R.color.secondaryColor))
                 .setRange(0, mDataSeriesMax, 0)
                 .setInitialVisibility(true)
                 .build();
@@ -155,7 +157,7 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
     }
 
     private void createCompletedSeries() {
-        final SeriesItem seriesItem = new SeriesItem.Builder(mColor)
+        final SeriesItem seriesItem = new SeriesItem.Builder(getResources().getColor(R.color.primaryLightColor))
                 .setRange(0, mDataSeriesMax, 0)
                 .setInitialVisibility(false)
                 .build();
@@ -192,5 +194,11 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
                 .setDelay(100)
                 .build());
         replay();
+    }
+
+    public void setImageRes(int green_veggies) {
+        ((ImageView)findViewById(R.id.image)).setImageResource(green_veggies);
+        ((ImageView)findViewById(R.id.image)).setVisibility(View.VISIBLE);
+        findViewById(R.id.ll).setVisibility(View.GONE);
     }
 }

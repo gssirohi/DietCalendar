@@ -1,0 +1,466 @@
+---- AspectJ Properties ---
+AspectJ Compiler 1.8.5 built on Thursday Jan 29, 2015 at 01:03:58 GMT
+---- Dump Properties ---
+Dump file: ajcore.20181102.115930.115.txt
+Dump reason: java.lang.IllegalStateException
+Dump on exception: true
+Dump at exit condition: abort
+---- Exception Information ---
+java.lang.IllegalStateException: Expecting .,<, or ;, but found authapi while unpacking <R::Lcom/google/android/gms/common/api/Result;>Lcom/google/android/gms/common/api/internal/BaseImplementation$ApiMethodImpl<TR;Lcom/google/android/gms/internal/auth-api/zzr;>;
+	at org.aspectj.util.GenericSignatureParser.parseClassTypeSignature(GenericSignatureParser.java:221)
+	at org.aspectj.util.GenericSignatureParser.parseFieldTypeSignature(GenericSignatureParser.java:155)
+	at org.aspectj.util.GenericSignatureParser.parseTypeArgument(GenericSignatureParser.java:251)
+	at org.aspectj.util.GenericSignatureParser.maybeParseTypeArguments(GenericSignatureParser.java:259)
+	at org.aspectj.util.GenericSignatureParser.parseClassTypeSignature(GenericSignatureParser.java:204)
+	at org.aspectj.util.GenericSignatureParser.parseAsClassSignature(GenericSignatureParser.java:56)
+	at org.aspectj.weaver.UnresolvedType.forGenericTypeSignature(UnresolvedType.java:274)
+	at org.aspectj.weaver.bcel.BcelWorld.addSourceObjectType(BcelWorld.java:482)
+	at org.aspectj.weaver.bcel.BcelWorld.addSourceObjectType(BcelWorld.java:456)
+	at org.aspectj.weaver.bcel.BcelWeaver.addAspectsFromJarFile(BcelWeaver.java:263)
+	at org.aspectj.weaver.bcel.BcelWeaver.addLibraryJarFile(BcelWeaver.java:236)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.initBcelWorld(AjBuildManager.java:874)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:249)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:185)
+	at org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:112)
+	at org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:60)
+	at org.aspectj.tools.ajc.Main.run(Main.java:371)
+	at org.aspectj.tools.ajc.Main$run.call(Unknown Source)
+	at hugo.weaving.plugin.HugoPlugin$_apply_closure2_closure3.doCall(HugoPlugin.groovy:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+	at groovy.lang.Closure.call(Closure.java:414)
+	at groovy.lang.Closure.call(Closure.java:430)
+	at org.gradle.api.internal.AbstractTask$ClosureTaskAction.execute(AbstractTask.java:681)
+	at org.gradle.api.internal.AbstractTask$ClosureTaskAction.execute(AbstractTask.java:656)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$1.run(ExecuteActionsTaskExecuter.java:122)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:197)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:107)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeAction(ExecuteActionsTaskExecuter.java:111)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:92)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:70)
+	at org.gradle.api.internal.tasks.execution.SkipUpToDateTaskExecuter.execute(SkipUpToDateTaskExecuter.java:63)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskOutputCachingStateExecuter.execute(ResolveTaskOutputCachingStateExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ValidatingTaskExecuter.execute(ValidatingTaskExecuter.java:58)
+	at org.gradle.api.internal.tasks.execution.SkipEmptySourceFilesTaskExecuter.execute(SkipEmptySourceFilesTaskExecuter.java:88)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskArtifactStateTaskExecuter.execute(ResolveTaskArtifactStateTaskExecuter.java:52)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:52)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ExecuteAtMostOnceTaskExecuter.execute(ExecuteAtMostOnceTaskExecuter.java:43)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker$1.run(DefaultTaskGraphExecuter.java:248)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:197)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:107)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:241)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:230)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.processTask(DefaultTaskPlanExecutor.java:124)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.access$200(DefaultTaskPlanExecutor.java:80)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:105)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:99)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.execute(DefaultTaskExecutionPlan.java:625)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.executeWithTask(DefaultTaskExecutionPlan.java:580)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.run(DefaultTaskPlanExecutor.java:99)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
+	at java.lang.Thread.run(Thread.java:745)
+---- System Properties ---
+java.vendor=JetBrains s.r.o
+sun.java.launcher=SUN_STANDARD
+sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+idea.paths.selector=AndroidStudio3.0
+jnidispatch.path=/home/gyanendra.sirohi/.AndroidStudio3.0/system/tmp/jna7691930483663934079.tmp
+os.name=Linux
+sun.boot.class.path=/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/resources.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/rt.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/sunrsasign.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/jsse.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/jce.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/charsets.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/jfr.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/classes
+sun.desktop=gnome
+java.vm.specification.vendor=Oracle Corporation
+java.runtime.version=1.8.0_152-release-915-b01
+jb.vmOptionsFile=./studio64.vmoptions
+jna.loaded=true
+io.netty.serviceThreadPrefix=Netty 
+user.name=YATRAONLINE\gyanendra.sirohi
+java.rmi.server.disableHttp=true
+user.language=en
+sun.boot.library.path=/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/amd64
+jna.nosys=true
+idea.fatal.error.notification=disabled
+swing.bufferPerWindow=true
+java.version=1.8.0_152-release
+java.net.preferIPv4Stack=true
+user.timezone=Asia/Kolkata
+sun.arch.data.model=64
+java.util.concurrent.ForkJoinPool.common.threadFactory=com.intellij.concurrency.IdeaForkJoinWorkerThreadFactory
+jna.tmpdir=/home/gyanendra.sirohi/.AndroidStudio3.0/system/tmp
+java.endorsed.dirs=/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/endorsed
+sun.cpu.isalist=
+sun.jnu.encoding=UTF-8
+file.encoding.pkg=sun.io
+file.separator=/
+java.specification.name=Java Platform API Specification
+java.class.version=52.0
+user.country=IN
+jna.boot.library.path=
+java.home=/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre
+java.util.concurrent.ForkJoinPool.common.parallelism=4
+java.vm.info=mixed mode
+os.version=4.15.0-36-generic
+path.separator=:
+java.vm.version=25.152-b01
+idea.no.launcher=false
+user.variant=
+idea.max.content.load.filesize=20000
+java.awt.printerjob=sun.print.PSPrinterJob
+sun.io.unicode.encoding=UnicodeLittle
+idea.cycle.buffer.size=1024
+awt.toolkit=sun.awt.X11.XToolkit
+ide.new.welcome.screen.force=true
+log4j.defaultInitOverride=true
+io.netty.processId=47848
+idea.platform.prefix=AndroidStudio
+idea.dynamic.classpath=false
+user.home=/home/gyanendra.sirohi
+__idea.mac.env.lock=unlocked
+java.specification.vendor=Oracle Corporation
+library.jansi.path=/home/gyanendra.sirohi/.gradle/native/jansi/1.14/linux64
+java.library.path=.::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+java.vendor.url=https://www.jetbrains.com/
+java.vm.vendor=JetBrains s.r.o
+kotlin.environment.keepalive=true
+external.system.remote.process.idle.ttl.ms=-1
+java.runtime.name=OpenJDK Runtime Environment
+sun.java.command=org.gradle.launcher.daemon.bootstrap.GradleDaemon 4.1
+java.class.path=/home/gyanendra.sirohi/.gradle/wrapper/dists/gradle-4.1-all/bzyivzo6n839fup2jbap0tjew/gradle-4.1/lib/gradle-launcher-4.1.jar
+io.netty.machineId=28:f0:76:ff:fe:16:65:0e
+java.vm.specification.name=Java Virtual Machine Specification
+idea.xdebug.key=-Xdebug
+java.vm.specification.version=1.8
+idea.popup.weight=heavy
+sun.cpu.endian=little
+sun.os.patch.level=unknown
+java.awt.headless=true
+java.io.tmpdir=/tmp
+java.vendor.url.bug=https://youtrack.jetbrains.com
+java.rmi.server.hostname=localhost
+jna.platform.library.path=/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/lib64:/usr/lib:/lib:/usr/lib32:/lib/i386-linux-gnu:/lib32:/usr/lib/i386-linux-gnu:/usr/lib/x86_64-linux-gnu/libfakeroot:/usr/lib/x86_64-linux-gnu/mesa:/usr/lib/x86_64-linux-gnu/mesa-egl
+os.arch=amd64
+java.awt.graphicsenv=sun.awt.X11GraphicsEnvironment
+idea.max.intellisense.filesize=2500
+java.ext.dirs=/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext:/usr/java/packages/lib/ext
+idea.jre.check=true
+user.dir=/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar
+line.separator=
+
+java.vm.name=OpenJDK 64-Bit Server VM
+java.util.Arrays.useLegacyMergeSort=true
+file.encoding=UTF-8
+studio.record.file=/home/gyanendra.sirohi/.AndroidStudio3.0/system/tmp/AndroidStudio.2a293c70-2008-4bc5-9d2d-0adfc46c7009
+java.specification.version=1.8
+---- Command Line ---
+-showWeaveInfo
+-1.5
+-inpath
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/intermediates/classes/debug
+-aspectpath
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-android-1.12.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-core-1.12.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/auth/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/powerkit/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/5732e48590735127bc29b244a9da2526/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/d84d5e7f5ccd50cb2f57206373e4eca7/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.0.0/223fbb31236b0714328c415c1475fc8f55a4416e/baseLibrary-3.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/hugo-runtime-1.2.1.aar/c321239138f179a28a74226eaa028592/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.jakewharton.hugo/hugo-annotations/1.2.1/b01150795c5cdca1eb7e501bf00f105ff0e31501/hugo-annotations-1.2.1.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/networking/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.5/39a8ff2d1f79267907f5573c090b342b040b9682/aspectjrt-1.8.5.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.9.0.aar/580e1150d254c5e9b0cd32901187e7ee/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/c9e979358a127eb39790272bc274e102/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/core-0.9.4.7.aar/4a5cbcb49a9e4c166025cd5a544be5f2/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.2.0.aar/45976af6362e3f4c1d16d7eb2b7a23b3/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.10/ea1aafdd031ba2604b06cb89a97da397b7aff520/kotlin-stdlib-jre7-1.2.10.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.1.0.aar/1e8e3268df38ab427a04766524d0bdd3/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.parceler/parceler-api/1.1.11/4736cd96e10d0b41b58c923c7f2b45f8df259a26/parceler-api-1.1.11.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-support-2.11.aar/aea749b1f97f63ff094cbfd0ab9bac08/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/android-DecoView-charting-v0.9.3.aar/21fd27508109847029254637c443b2d9/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.2.1.aar/9cf94d575f4d7d09550616b80571425b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/ef69122a4671d846c2464790bd4bbef7/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.4.2.aar/e7045908d4c0fd5f1c6e6310cdc24494/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/7345268a9027ba7d1089ccff69087074/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/f4860b7d625cce06df3b83260e437983/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.1.aar/c9ca6d36c499d44bc786125c1fceed37/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v13-26.0.1.aar/af2a023df7c32cefcb27495f7f6cb023/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/9c3f31f20be854d36e19797204f3cc39/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/38627f181aebf32dc3f515e957ed5582/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56e5b3510f0956dace5df01fecae6129/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/e2380caff4fadfb7e41bb87753928e57/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/a9e0abad883ebcbac96c99796546f705/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/074d30fa48f5b2abe463e1b9b5ea4ed4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/690448fb026a1bbda5688be4407a175b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/728610a5cb8971f016b813af4060f464/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/a90309da16694e6839d1f3e979c1ec3d/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/0e8f9f1ecb363bde8045d30cd34b8ab9/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/616a89f3db7fd803143994ef011a60fb/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/0f7f167d6d77864fdafced20722b851a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/887dacaeb83ec9057f9f00bda997cf6b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/a782c9591fde2786aaf9813388694e92/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/be34cf3561c08146eaa9e382236c3ac5/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.3.aar/17a0ed2a57adeb1b3d8e7cd6f94d91e4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/02d081e8e6dbe60e8a60c94cf6f7c707/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/c91f1b5334b0718f37f90ed3f0573f59/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/129591c82f07b944253034d28eb99050/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/f529273d57d4e876de4d8c8844f1e841/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/f68886d8ed39c3c0ec1dddc5a22db59e/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/634b9b04b36d5d3f6fc4f58f90bfe254/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/905d6137fb65326a16fba79f6281ad51/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/d78c41c43768463fab0cd5fc6e62887b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.3.0/f436637f9500ab5b8bc32afe556373180894b4a5/adapter-rxjava2-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.3.0/9e09011e9767bb76b5e27c9b8223476b93b14631/converter-gson-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.8.1/feab46062803513d6a8307c74b0084265855de1a/logging-interceptor-3.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-okhttp/1.12.0/3fdb2c85587702865b464b2f6faabf7e2e294a3d/grpc-okhttp-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.12.0/f5bebfbd5e93b8bbb58888a5cfaa9f490fb7b455/grpc-protobuf-lite-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.12.0/fbd2bafe09a89442ab3d7a8d8b3e8bafbd59b4e0/grpc-stub-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.12.0/541a5c68ce85c03190e29bc9e0ec611d2b75ff24/grpc-core-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/timber-4.5.1.aar/e45ec08ed283145560478b825333f0fc/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/e387b94836c78fac16c0481dae378e98/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/customtabs-27.1.1.aar/49de579016d434a465717f56b5d3fc24/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91ebd2e1ed4a96b31df9a27906a310f8/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/9bfac6900a3ab406dc12dccb4f70c48a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/9895ad705ff4ec7ec041940416c0d78f/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/38ca0cb09e45039c26032b6641f0f43d/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/b77490e833f62270778877b5e8cdf1f4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/aef99424344a31c281a002bd28e4053a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/65c41089516b1cac92fbae6476143492/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/710436dc418ddd77ae463def26983526/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/bd3617b81d82640186d25feaccf15fff/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2af5bab409134c0b82e92f37f8682f45/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/dd215d7da6298b97fd748cd4700df5cf/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-2.11.aar/6f1da35f741b2305195e010f0a92d96b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.11/95037eaee68aa48021511972e9db9ba29916e1c9/dagger-2.11.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/circleimageview-2.1.0.aar/139c524d1f42525c9f3e800123abdcac/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0/1cbd3ddc566125293b13af5c0a65bc015476e83c/common-1.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-framework-1.0.0.aar/398558ae3d0e3013beb5e1140b83d382/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-1.0.0.aar/1df7876050dc9dd6ca9da9b49e1bc41a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/df946999edbc62afe9da567212000fbe/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/153860cab565ced8d0f835916968a61b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e6a839fd0e82587c48484e4a0ec9e165/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.1/e55b70d1f5620db124b3e85a7f4bdc7bd48d9f95/common-1.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.1/207a6efae6a3555e326de41f76bdadd9a239cbce/common-1.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/fbc71740b560c1d8f5767bc3a75f2dce/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.1.1/39ded76b5e1ce1c5b2688e1d25cdc20ecee32007/support-annotations-27.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.10/b9bf650516989595a5390e5a54181e16347208ac/kotlin-stdlib-1.2.10.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support.constraint/constraint-layout-solver/1.1.3/bde0667d7414c16ed62d3cfe993cff7f9d732373/constraint-layout-solver-1.1.3.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.0/5151c737c01616c372c3d00ab145868ede10e826/rxjava-2.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.1/f7be08ec23c21485b9b5a1cf1654c2ec8c58168d/jsr305-3.0.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/ce118f802298880253d83e24a2edf577/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.2/20f6463eb19ac61960c5d91a094c2f4f0727dc2e/okhttp-2.7.2.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-applinks/1.3.0/bc535105332645408ef5f1380215cc954b842178/bolts-applinks-1.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.3.0/8a62fd16fcc1c06f284fc98e6cbded2a5af1dd4c/bolts-tasks-1.3.0.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/d6fda211603c8071cfcdb0713b097390/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-lite/3.0.1/59b5b9c6e1a3054696d23492f888c1f8b583f5fc/protobuf-lite-3.0.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.12.0/5b63a170b786051a42cce08118d5ea3c8f60f749/grpc-context-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.11.0/d57b877f1a28a613452d45e35c7faae5af585258/opencensus-contrib-grpc-metrics-0.11.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.11.0/c1ff1f0d737a689d900a3e2113ddc29847188c64/opencensus-api-0.11.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kotlin-classes/debug:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kapt3/classes/debug:/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar
+-d
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/intermediates/classes/debug
+-classpath
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-android-1.12.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-core-1.12.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/auth/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/powerkit/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/5732e48590735127bc29b244a9da2526/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/d84d5e7f5ccd50cb2f57206373e4eca7/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.0.0/223fbb31236b0714328c415c1475fc8f55a4416e/baseLibrary-3.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/hugo-runtime-1.2.1.aar/c321239138f179a28a74226eaa028592/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.jakewharton.hugo/hugo-annotations/1.2.1/b01150795c5cdca1eb7e501bf00f105ff0e31501/hugo-annotations-1.2.1.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/networking/build/intermediates/intermediate-jars/debug/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.5/39a8ff2d1f79267907f5573c090b342b040b9682/aspectjrt-1.8.5.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/facebook-android-sdk-4.9.0.aar/580e1150d254c5e9b0cd32901187e7ee/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/c9e979358a127eb39790272bc274e102/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/core-0.9.4.7.aar/4a5cbcb49a9e4c166025cd5a544be5f2/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.2.0.aar/45976af6362e3f4c1d16d7eb2b7a23b3/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.10/ea1aafdd031ba2604b06cb89a97da397b7aff520/kotlin-stdlib-jre7-1.2.10.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.1.0.aar/1e8e3268df38ab427a04766524d0bdd3/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.parceler/parceler-api/1.1.11/4736cd96e10d0b41b58c923c7f2b45f8df259a26/parceler-api-1.1.11.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-support-2.11.aar/aea749b1f97f63ff094cbfd0ab9bac08/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/android-DecoView-charting-v0.9.3.aar/21fd27508109847029254637c443b2d9/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-4.2.1.aar/9cf94d575f4d7d09550616b80571425b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/ef69122a4671d846c2464790bd4bbef7/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.4.2.aar/e7045908d4c0fd5f1c6e6310cdc24494/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/7345268a9027ba7d1089ccff69087074/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/f4860b7d625cce06df3b83260e437983/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.1.aar/c9ca6d36c499d44bc786125c1fceed37/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v13-26.0.1.aar/af2a023df7c32cefcb27495f7f6cb023/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/9c3f31f20be854d36e19797204f3cc39/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/38627f181aebf32dc3f515e957ed5582/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56e5b3510f0956dace5df01fecae6129/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/e2380caff4fadfb7e41bb87753928e57/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/a9e0abad883ebcbac96c99796546f705/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/074d30fa48f5b2abe463e1b9b5ea4ed4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/690448fb026a1bbda5688be4407a175b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/728610a5cb8971f016b813af4060f464/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/a90309da16694e6839d1f3e979c1ec3d/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/0e8f9f1ecb363bde8045d30cd34b8ab9/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/616a89f3db7fd803143994ef011a60fb/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/0f7f167d6d77864fdafced20722b851a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/887dacaeb83ec9057f9f00bda997cf6b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/a782c9591fde2786aaf9813388694e92/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/be34cf3561c08146eaa9e382236c3ac5/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.3.aar/17a0ed2a57adeb1b3d8e7cd6f94d91e4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/02d081e8e6dbe60e8a60c94cf6f7c707/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/c91f1b5334b0718f37f90ed3f0573f59/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/129591c82f07b944253034d28eb99050/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/f529273d57d4e876de4d8c8844f1e841/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/f68886d8ed39c3c0ec1dddc5a22db59e/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/634b9b04b36d5d3f6fc4f58f90bfe254/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v4-27.1.1.aar/905d6137fb65326a16fba79f6281ad51/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/d78c41c43768463fab0cd5fc6e62887b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.3.0/f436637f9500ab5b8bc32afe556373180894b4a5/adapter-rxjava2-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.3.0/9e09011e9767bb76b5e27c9b8223476b93b14631/converter-gson-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.8.1/feab46062803513d6a8307c74b0084265855de1a/logging-interceptor-3.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-okhttp/1.12.0/3fdb2c85587702865b464b2f6faabf7e2e294a3d/grpc-okhttp-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.12.0/f5bebfbd5e93b8bbb58888a5cfaa9f490fb7b455/grpc-protobuf-lite-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.12.0/fbd2bafe09a89442ab3d7a8d8b3e8bafbd59b4e0/grpc-stub-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.12.0/541a5c68ce85c03190e29bc9e0ec611d2b75ff24/grpc-core-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/timber-4.5.1.aar/e45ec08ed283145560478b825333f0fc/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/e387b94836c78fac16c0481dae378e98/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/customtabs-27.1.1.aar/49de579016d434a465717f56b5d3fc24/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91ebd2e1ed4a96b31df9a27906a310f8/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.1.1.aar/9bfac6900a3ab406dc12dccb4f70c48a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/9895ad705ff4ec7ec041940416c0d78f/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/38ca0cb09e45039c26032b6641f0f43d/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/b77490e833f62270778877b5e8cdf1f4/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/aef99424344a31c281a002bd28e4053a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/transition-27.1.1.aar/65c41089516b1cac92fbae6476143492/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/710436dc418ddd77ae463def26983526/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/bd3617b81d82640186d25feaccf15fff/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/2af5bab409134c0b82e92f37f8682f45/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/dd215d7da6298b97fd748cd4700df5cf/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-2.11.aar/6f1da35f741b2305195e010f0a92d96b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.11/95037eaee68aa48021511972e9db9ba29916e1c9/dagger-2.11.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/circleimageview-2.1.0.aar/139c524d1f42525c9f3e800123abdcac/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0/1cbd3ddc566125293b13af5c0a65bc015476e83c/common-1.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-framework-1.0.0.aar/398558ae3d0e3013beb5e1140b83d382/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-1.0.0.aar/1df7876050dc9dd6ca9da9b49e1bc41a/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/df946999edbc62afe9da567212000fbe/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/153860cab565ced8d0f835916968a61b/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e6a839fd0e82587c48484e4a0ec9e165/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.1/e55b70d1f5620db124b3e85a7f4bdc7bd48d9f95/common-1.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.1/207a6efae6a3555e326de41f76bdadd9a239cbce/common-1.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/fbc71740b560c1d8f5767bc3a75f2dce/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.1.1/39ded76b5e1ce1c5b2688e1d25cdc20ecee32007/support-annotations-27.1.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.10/b9bf650516989595a5390e5a54181e16347208ac/kotlin-stdlib-1.2.10.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support.constraint/constraint-layout-solver/1.1.3/bde0667d7414c16ed62d3cfe993cff7f9d732373/constraint-layout-solver-1.1.3.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.0/5151c737c01616c372c3d00ab145868ede10e826/rxjava-2.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.1/f7be08ec23c21485b9b5a1cf1654c2ec8c58168d/jsr305-3.0.1.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/ce118f802298880253d83e24a2edf577/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.2/20f6463eb19ac61960c5d91a094c2f4f0727dc2e/okhttp-2.7.2.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-applinks/1.3.0/bc535105332645408ef5f1380215cc954b842178/bolts-applinks-1.3.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.3.0/8a62fd16fcc1c06f284fc98e6cbded2a5af1dd4c/bolts-tasks-1.3.0.jar:/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar:/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/d6fda211603c8071cfcdb0713b097390/jars/classes.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-lite/3.0.1/59b5b9c6e1a3054696d23492f888c1f8b583f5fc/protobuf-lite-3.0.1.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.12.0/5b63a170b786051a42cce08118d5ea3c8f60f749/grpc-context-1.12.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.11.0/d57b877f1a28a613452d45e35c7faae5af585258/opencensus-contrib-grpc-metrics-0.11.0.jar:/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.11.0/c1ff1f0d737a689d900a3e2113ddc29847188c64/opencensus-api-0.11.0.jar:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kotlin-classes/debug:/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kapt3/classes/debug:/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar
+-bootclasspath
+/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar
+---- Full Classpath ---
+/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar(46784255 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/intermediates/classes/debug(8 entries)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-android-1.12.0.jar(11780 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-core-1.12.0.jar(120514 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/powerkit/build/intermediates/intermediate-jars/debug/classes.jar(32385 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/5732e48590735127bc29b244a9da2526/jars/classes.jar(74103 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/d84d5e7f5ccd50cb2f57206373e4eca7/jars/classes.jar(57430 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.0.0/223fbb31236b0714328c415c1475fc8f55a4416e/baseLibrary-3.0.0.jar(16122 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/hugo-runtime-1.2.1.aar/c321239138f179a28a74226eaa028592/jars/classes.jar(6682 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.jakewharton.hugo/hugo-annotations/1.2.1/b01150795c5cdca1eb7e501bf00f105ff0e31501/hugo-annotations-1.2.1.jar(843 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/networking/build/intermediates/intermediate-jars/debug/classes.jar(30078 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.5/39a8ff2d1f79267907f5573c090b342b040b9682/aspectjrt-1.8.5.jar(117529 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/c9e979358a127eb39790272bc274e102/jars/classes.jar(22415 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/core-0.9.4.7.aar/4a5cbcb49a9e4c166025cd5a544be5f2/jars/classes.jar(84095 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.2.0.aar/45976af6362e3f4c1d16d7eb2b7a23b3/jars/classes.jar(43565 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.10/ea1aafdd031ba2604b06cb89a97da397b7aff520/kotlin-stdlib-jre7-1.2.10.jar(2860 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.1.0.aar/1e8e3268df38ab427a04766524d0bdd3/jars/classes.jar(62442 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.parceler/parceler-api/1.1.11/4736cd96e10d0b41b58c923c7f2b45f8df259a26/parceler-api-1.1.11.jar(115688 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/design-27.0.1.aar/b9952d30204bb4767ff14706dfe5e33f/jars/classes.jar(336519 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-support-2.11.aar/aea749b1f97f63ff094cbfd0ab9bac08/jars/classes.jar(10086 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/android-DecoView-charting-v0.9.3.aar/21fd27508109847029254637c443b2d9/jars/classes.jar(65725 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.4.1.aar/fc4e9f19bd3a3a0db734050ee73aab8c/jars/classes.jar(50715 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.1.aar/372eb557e19696f8acd0157bf90eb46b/jars/classes.jar(696584 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.1.aar/7b105c6c7227e97ab6f804e6cf2fddde/jars/classes.jar(22431 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.1.aar/c9ca6d36c499d44bc786125c1fceed37/jars/classes.jar(23780 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v13-26.0.1.aar/af2a023df7c32cefcb27495f7f6cb023/jars/classes.jar(45031 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/9c3f31f20be854d36e19797204f3cc39/jars/classes.jar(1162401 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/38627f181aebf32dc3f515e957ed5582/jars/classes.jar(1544272 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56e5b3510f0956dace5df01fecae6129/jars/classes.jar(473 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/e2380caff4fadfb7e41bb87753928e57/jars/classes.jar(33266 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/a9e0abad883ebcbac96c99796546f705/jars/classes.jar(397923 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/074d30fa48f5b2abe463e1b9b5ea4ed4/jars/classes.jar(1959 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/690448fb026a1bbda5688be4407a175b/jars/classes.jar(42941 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/616a89f3db7fd803143994ef011a60fb/jars/classes.jar(14909 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/0f7f167d6d77864fdafced20722b851a/jars/classes.jar(501550 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/887dacaeb83ec9057f9f00bda997cf6b/jars/classes.jar(157094 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/a782c9591fde2786aaf9813388694e92/jars/classes.jar(943 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/be34cf3561c08146eaa9e382236c3ac5/jars/classes.jar(998152 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.3.aar/17a0ed2a57adeb1b3d8e7cd6f94d91e4/jars/classes.jar(108710 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/02d081e8e6dbe60e8a60c94cf6f7c707/jars/classes.jar(78807 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/c91f1b5334b0718f37f90ed3f0573f59/jars/classes.jar(62676 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/129591c82f07b944253034d28eb99050/jars/classes.jar(13413 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/f529273d57d4e876de4d8c8844f1e841/jars/classes.jar(5624 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/f68886d8ed39c3c0ec1dddc5a22db59e/jars/classes.jar(23207 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/634b9b04b36d5d3f6fc4f58f90bfe254/jars/classes.jar(522462 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.1.aar/4608b6b861f2e9df12b741d5c2e427b9/jars/classes.jar(792 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/ae8ff6afd3ad917df243b00baf4ae5d4/jars/classes.jar(35566 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.3.0/f436637f9500ab5b8bc32afe556373180894b4a5/adapter-rxjava2-2.3.0.jar(15564 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.3.0/9e09011e9767bb76b5e27c9b8223476b93b14631/converter-gson-2.3.0.jar(5852 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar(90692 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.8.1/feab46062803513d6a8307c74b0084265855de1a/logging-interceptor-3.8.1.jar(8268 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-okhttp/1.12.0/3fdb2c85587702865b464b2f6faabf7e2e294a3d/grpc-okhttp-1.12.0.jar(156699 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.12.0/f5bebfbd5e93b8bbb58888a5cfaa9f490fb7b455/grpc-protobuf-lite-1.12.0.jar(8187 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.12.0/fbd2bafe09a89442ab3d7a8d8b3e8bafbd59b4e0/grpc-stub-1.12.0.jar(38673 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.12.0/541a5c68ce85c03190e29bc9e0ec611d2b75ff24/grpc-core-1.12.0.jar(670781 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar(232620 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/timber-4.5.1.aar/e45ec08ed283145560478b825333f0fc/jars/classes.jar(8533 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0.aar/3b9e8ebcf3441888b516bf93b7b83104/jars/classes.jar(48057 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/transition-27.0.1.aar/89db087eabb47180d1e02a328a88ee11/jars/classes.jar(198856 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.0.1.aar/2f7423bd4681d38f14d8896475b96c17/jars/classes.jar(35372 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.0.1.aar/691e9024f48b88bce4978cacbeae1205/jars/classes.jar(31456 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.0.1.aar/6e5f1067f122a0e870c1e43cec24d513/jars/classes.jar(369658 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91ebd2e1ed4a96b31df9a27906a310f8/jars/classes.jar(52008 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.1.aar/29b6ddbc3b55d6f03e19638ca650da61/jars/classes.jar(179835 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.1.aar/8dec2232eb58698820d8330703ee845a/jars/classes.jar(105779 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.1.aar/cee171ffa5228233bad8c8953f276043/jars/classes.jar(253097 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.1.aar/6e9b8743eba952416d21d7bd6d012029/jars/classes.jar(341573 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.1.aar/4b2e93bff2902497660dbfb10f452c60/jars/classes.jar(551773 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/cb724f762ff9bb81f058f609d993c307/jars/classes.jar(9693 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-2.11.aar/6f1da35f741b2305195e010f0a92d96b/jars/classes.jar(26930 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.11/95037eaee68aa48021511972e9db9ba29916e1c9/dagger-2.11.jar(34779 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/circleimageview-2.1.0.aar/139c524d1f42525c9f3e800123abdcac/jars/classes.jar(5968 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/87089369e3bd6f3a44f85e125ef67851/jars/classes.jar(5610 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar(11156 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0/1cbd3ddc566125293b13af5c0a65bc015476e83c/common-1.0.0.jar(12667 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-framework-1.0.0.aar/398558ae3d0e3013beb5e1140b83d382/jars/classes.jar(12972 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-1.0.0.aar/1df7876050dc9dd6ca9da9b49e1bc41a/jars/classes.jar(12361 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.3/7d7f60c4783872861222166f6164215f8951c7b1/common-1.0.3.jar(20599 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.0.1/287742f1c6cea6d9126670e9f031890b0462362a/support-annotations-27.0.1.jar(25175 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.10/b9bf650516989595a5390e5a54181e16347208ac/kotlin-stdlib-1.2.10.jar(930809 bytes)
+/home/gyanendra.sirohi/Android/Sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar(95560 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar(398122 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.0/5151c737c01616c372c3d00ab145868ede10e826/rxjava-2.0.0.jar(1926817 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar(2497 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.1/f7be08ec23c21485b9b5a1cf1654c2ec8c58168d/jsr305-3.0.1.jar(19943 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/ce118f802298880253d83e24a2edf577/jars/classes.jar(2827326 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar(2199 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.2/20f6463eb19ac61960c5d91a094c2f4f0727dc2e/okhttp-2.7.2.jar(323388 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar(110747 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar(17536 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar(2042 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/d6fda211603c8071cfcdb0713b097390/jars/classes.jar(491394 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-lite/3.0.1/59b5b9c6e1a3054696d23492f888c1f8b583f5fc/protobuf-lite-3.0.1.jar(246499 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar(81811 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar(2442625 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.12.0/5b63a170b786051a42cce08118d5ea3c8f60f749/grpc-context-1.12.0.jar(27715 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar(12142 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.11.0/d57b877f1a28a613452d45e35c7faae5af585258/opencensus-contrib-grpc-metrics-0.11.0.jar(10709 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.11.0/c1ff1f0d737a689d900a3e2113ddc29847188c64/opencensus-api-0.11.0.jar(216453 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kotlin-classes/debug(1 entries)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kapt3/classes/debug(0 entries)
+/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar(46784255 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/jaccess.jar(44516 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/dnsns.jar(8286 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/sunec.jar(38260 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/cldrdata.jar(3860502 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/sunjce_provider.jar(261554 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/localedata.jar(1179101 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/nashorn.jar(2033194 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/sunpkcs11.jar(239017 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/jre/jre/lib/ext/zipfs.jar(68932 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-android-1.12.0.jar(11780 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/libs/cloudinary-core-1.12.0.jar(120514 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/powerkit/build/intermediates/intermediate-jars/debug/classes.jar(32385 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/adapters-1.3.1.aar/5732e48590735127bc29b244a9da2526/jars/classes.jar(74103 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.3.1.aar/d84d5e7f5ccd50cb2f57206373e4eca7/jars/classes.jar(57430 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/3.0.0/223fbb31236b0714328c415c1475fc8f55a4416e/baseLibrary-3.0.0.jar(16122 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/hugo-runtime-1.2.1.aar/c321239138f179a28a74226eaa028592/jars/classes.jar(6682 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.jakewharton.hugo/hugo-annotations/1.2.1/b01150795c5cdca1eb7e501bf00f105ff0e31501/hugo-annotations-1.2.1.jar(843 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/networking/build/intermediates/intermediate-jars/debug/classes.jar(30078 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.5/39a8ff2d1f79267907f5573c090b342b040b9682/aspectjrt-1.8.5.jar(117529 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/c9e979358a127eb39790272bc274e102/jars/classes.jar(22415 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/core-0.9.4.7.aar/4a5cbcb49a9e4c166025cd5a544be5f2/jars/classes.jar(84095 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/discrete-scrollview-1.2.0.aar/45976af6362e3f4c1d16d7eb2b7a23b3/jars/classes.jar(43565 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.10/ea1aafdd031ba2604b06cb89a97da397b7aff520/kotlin-stdlib-jre7-1.2.10.jar(2860 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/Android-SpinKit-1.1.0.aar/1e8e3268df38ab427a04766524d0bdd3/jars/classes.jar(62442 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.parceler/parceler-api/1.1.11/4736cd96e10d0b41b58c923c7f2b45f8df259a26/parceler-api-1.1.11.jar(115688 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/design-27.0.1.aar/b9952d30204bb4767ff14706dfe5e33f/jars/classes.jar(336519 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-support-2.11.aar/aea749b1f97f63ff094cbfd0ab9bac08/jars/classes.jar(10086 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/android-DecoView-charting-v0.9.3.aar/21fd27508109847029254637c443b2d9/jars/classes.jar(65725 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/library-1.4.1.aar/fc4e9f19bd3a3a0db734050ee73aab8c/jars/classes.jar(50715 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.1.aar/372eb557e19696f8acd0157bf90eb46b/jars/classes.jar(696584 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.0.1.aar/7b105c6c7227e97ab6f804e6cf2fddde/jars/classes.jar(22431 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/palette-v7-27.0.1.aar/c9ca6d36c499d44bc786125c1fceed37/jars/classes.jar(23780 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v13-26.0.1.aar/af2a023df7c32cefcb27495f7f6cb023/jars/classes.jar(45031 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-firestore-17.1.2.aar/9c3f31f20be854d36e19797204f3cc39/jars/classes.jar(1162401 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/38627f181aebf32dc3f515e957ed5582/jars/classes.jar(1544272 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.4.aar/56e5b3510f0956dace5df01fecae6129/jars/classes.jar(473 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.2.aar/e2380caff4fadfb7e41bb87753928e57/jars/classes.jar(33266 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.4.aar/a9e0abad883ebcbac96c99796546f705/jars/classes.jar(397923 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/074d30fa48f5b2abe463e1b9b5ea4ed4/jars/classes.jar(1959 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/690448fb026a1bbda5688be4407a175b/jars/classes.jar(42941 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.2.aar/616a89f3db7fd803143994ef011a60fb/jars/classes.jar(14909 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.2.aar/0f7f167d6d77864fdafced20722b851a/jars/classes.jar(501550 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/887dacaeb83ec9057f9f00bda997cf6b/jars/classes.jar(157094 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-iid-interop-16.0.1.aar/a782c9591fde2786aaf9813388694e92/jars/classes.jar(943 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/be34cf3561c08146eaa9e382236c3ac5/jars/classes.jar(998152 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-common-16.0.3.aar/17a0ed2a57adeb1b3d8e7cd6f94d91e4/jars/classes.jar(108710 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/02d081e8e6dbe60e8a60c94cf6f7c707/jars/classes.jar(78807 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.0.aar/c91f1b5334b0718f37f90ed3f0573f59/jars/classes.jar(62676 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-stats-16.0.1.aar/129591c82f07b944253034d28eb99050/jars/classes.jar(13413 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-17.0.1.aar/f529273d57d4e876de4d8c8844f1e841/jars/classes.jar(5624 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-ads-identifier-16.0.0.aar/f68886d8ed39c3c0ec1dddc5a22db59e/jars/classes.jar(23207 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.1.0.aar/634b9b04b36d5d3f6fc4f58f90bfe254/jars/classes.jar(522462 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-v4-27.0.1.aar/4608b6b861f2e9df12b741d5c2e427b9/jars/classes.jar(792 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/ae8ff6afd3ad917df243b00baf4ae5d4/jars/classes.jar(35566 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava2/2.3.0/f436637f9500ab5b8bc32afe556373180894b4a5/adapter-rxjava2-2.3.0.jar(15564 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.3.0/9e09011e9767bb76b5e27c9b8223476b93b14631/converter-gson-2.3.0.jar(5852 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/bcacde6a8ccedcc56c127403d26b76072fe6214d/retrofit-2.3.0.jar(90692 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.8.1/feab46062803513d6a8307c74b0084265855de1a/logging-interceptor-3.8.1.jar(8268 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-okhttp/1.12.0/3fdb2c85587702865b464b2f6faabf7e2e294a3d/grpc-okhttp-1.12.0.jar(156699 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/1.12.0/f5bebfbd5e93b8bbb58888a5cfaa9f490fb7b455/grpc-protobuf-lite-1.12.0.jar(8187 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/1.12.0/fbd2bafe09a89442ab3d7a8d8b3e8bafbd59b4e0/grpc-stub-1.12.0.jar(38673 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.12.0/541a5c68ce85c03190e29bc9e0ec611d2b75ff24/grpc-core-1.12.0.jar(670781 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar(232620 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/timber-4.5.1.aar/e45ec08ed283145560478b825333f0fc/jars/classes.jar(8533 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/extensions-1.0.0.aar/3b9e8ebcf3441888b516bf93b7b83104/jars/classes.jar(48057 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/transition-27.0.1.aar/89db087eabb47180d1e02a328a88ee11/jars/classes.jar(198856 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.0.1.aar/2f7423bd4681d38f14d8896475b96c17/jars/classes.jar(35372 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.0.1.aar/691e9024f48b88bce4978cacbeae1205/jars/classes.jar(31456 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-27.0.1.aar/6e5f1067f122a0e870c1e43cec24d513/jars/classes.jar(369658 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/91ebd2e1ed4a96b31df9a27906a310f8/jars/classes.jar(52008 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.1.aar/29b6ddbc3b55d6f03e19638ca650da61/jars/classes.jar(179835 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.0.1.aar/8dec2232eb58698820d8330703ee845a/jars/classes.jar(105779 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.0.1.aar/cee171ffa5228233bad8c8953f276043/jars/classes.jar(253097 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.0.1.aar/6e9b8743eba952416d21d7bd6d012029/jars/classes.jar(341573 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.1.aar/4b2e93bff2902497660dbfb10f452c60/jars/classes.jar(551773 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.3.aar/cb724f762ff9bb81f058f609d993c307/jars/classes.jar(9693 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/dagger-android-2.11.aar/6f1da35f741b2305195e010f0a92d96b/jars/classes.jar(26930 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.11/95037eaee68aa48021511972e9db9ba29916e1c9/dagger-2.11.jar(34779 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/circleimageview-2.1.0.aar/139c524d1f42525c9f3e800123abdcac/jars/classes.jar(5968 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/87089369e3bd6f3a44f85e125ef67851/jars/classes.jar(5610 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.0.0/a2d487452376193fc8c103dd2b9bd5f2b1b44563/common-1.0.0.jar(11156 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.persistence.room/common/1.0.0/1cbd3ddc566125293b13af5c0a65bc015476e83c/common-1.0.0.jar(12667 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-framework-1.0.0.aar/398558ae3d0e3013beb5e1140b83d382/jars/classes.jar(12972 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/db-1.0.0.aar/1df7876050dc9dd6ca9da9b49e1bc41a/jars/classes.jar(12361 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.0.3/7d7f60c4783872861222166f6164215f8951c7b1/common-1.0.3.jar(20599 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.0.1/287742f1c6cea6d9126670e9f031890b0462362a/support-annotations-27.0.1.jar(25175 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.10/b9bf650516989595a5390e5a54181e16347208ac/kotlin-stdlib-1.2.10.jar(930809 bytes)
+/home/gyanendra.sirohi/Android/Sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar(95560 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar(398122 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.0/5151c737c01616c372c3d00ab145868ede10e826/rxjava-2.0.0.jar(1926817 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar(2497 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.1/f7be08ec23c21485b9b5a1cf1654c2ec8c58168d/jsr305-3.0.1.jar(19943 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/protolite-well-known-types-16.0.0.aar/ce118f802298880253d83e24a2edf577/jars/classes.jar(2827326 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar(2199 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.7.2/20f6463eb19ac61960c5d91a094c2f4f0727dc2e/okhttp-2.7.2.jar(323388 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar(110747 bytes)
+/home/gyanendra.sirohi/Drive/Software/Studio3.0/android-studio/gradle/m2repository/org/jetbrains/annotations/13.0/annotations-13.0.jar(17536 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar(2042 bytes)
+/home/gyanendra.sirohi/.gradle/caches/transforms-1/files-1.1/play-services-measurement-base-16.0.3.aar/d6fda211603c8071cfcdb0713b097390/jars/classes.jar(491394 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-lite/3.0.1/59b5b9c6e1a3054696d23492f888c1f8b583f5fc/protobuf-lite-3.0.1.jar(246499 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar(81811 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/20.0/89507701249388e1ed5ddcf8c41f4ce1be7831ef/guava-20.0.jar(2442625 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-context/1.12.0/5b63a170b786051a42cce08118d5ea3c8f60f749/grpc-context-1.12.0.jar(27715 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.2/6dcc08f90f678ac33e5ef78c3c752b6f59e63e0c/error_prone_annotations-2.1.2.jar(12142 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-contrib-grpc-metrics/0.11.0/d57b877f1a28a613452d45e35c7faae5af585258/opencensus-contrib-grpc-metrics-0.11.0.jar(10709 bytes)
+/home/gyanendra.sirohi/.gradle/caches/modules-2/files-2.1/io.opencensus/opencensus-api/0.11.0/c1ff1f0d737a689d900a3e2113ddc29847188c64/opencensus-api-0.11.0.jar(216453 bytes)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kotlin-classes/debug(1 entries)
+/home/gyanendra.sirohi/AndroidStudioProjects/DietCalendar1/DietCalendar/app/build/tmp/kapt3/classes/debug(0 entries)
+/home/gyanendra.sirohi/Android/Sdk/platforms/android-28/android.jar(46784255 bytes)
+---- Compiler Messages ---
+abort ABORT -- (IllegalStateException) Expecting .,<, or ;, but found authapi while unpacking <R::Lcom/google/android/gms/common/api/Result;>Lcom/google/android/gms/common/api/internal/BaseImplementation$ApiMethodImpl<TR;Lcom/google/android/gms/internal/auth-api/zzr;>;
+Expecting .,<, or ;, but found authapi while unpacking <R::Lcom/google/android/gms/common/api/Result;>Lcom/google/android/gms/common/api/internal/BaseImplementation$ApiMethodImpl<TR;Lcom/google/android/gms/internal/auth-api/zzr;>;
+java.lang.IllegalStateException: Expecting .,<, or ;, but found authapi while unpacking <R::Lcom/google/android/gms/common/api/Result;>Lcom/google/android/gms/common/api/internal/BaseImplementation$ApiMethodImpl<TR;Lcom/google/android/gms/internal/auth-api/zzr;>;
+	at org.aspectj.util.GenericSignatureParser.parseClassTypeSignature(GenericSignatureParser.java:221)
+	at org.aspectj.util.GenericSignatureParser.parseFieldTypeSignature(GenericSignatureParser.java:155)
+	at org.aspectj.util.GenericSignatureParser.parseTypeArgument(GenericSignatureParser.java:251)
+	at org.aspectj.util.GenericSignatureParser.maybeParseTypeArguments(GenericSignatureParser.java:259)
+	at org.aspectj.util.GenericSignatureParser.parseClassTypeSignature(GenericSignatureParser.java:204)
+	at org.aspectj.util.GenericSignatureParser.parseAsClassSignature(GenericSignatureParser.java:56)
+	at org.aspectj.weaver.UnresolvedType.forGenericTypeSignature(UnresolvedType.java:274)
+	at org.aspectj.weaver.bcel.BcelWorld.addSourceObjectType(BcelWorld.java:482)
+	at org.aspectj.weaver.bcel.BcelWorld.addSourceObjectType(BcelWorld.java:456)
+	at org.aspectj.weaver.bcel.BcelWeaver.addAspectsFromJarFile(BcelWeaver.java:263)
+	at org.aspectj.weaver.bcel.BcelWeaver.addLibraryJarFile(BcelWeaver.java:236)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.initBcelWorld(AjBuildManager.java:874)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:249)
+	at org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:185)
+	at org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:112)
+	at org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:60)
+	at org.aspectj.tools.ajc.Main.run(Main.java:371)
+	at org.aspectj.tools.ajc.Main$run.call(Unknown Source)
+	at hugo.weaving.plugin.HugoPlugin$_apply_closure2_closure3.doCall(HugoPlugin.groovy:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:294)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+	at groovy.lang.Closure.call(Closure.java:414)
+	at groovy.lang.Closure.call(Closure.java:430)
+	at org.gradle.api.internal.AbstractTask$ClosureTaskAction.execute(AbstractTask.java:681)
+	at org.gradle.api.internal.AbstractTask$ClosureTaskAction.execute(AbstractTask.java:656)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$1.run(ExecuteActionsTaskExecuter.java:122)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:197)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:107)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeAction(ExecuteActionsTaskExecuter.java:111)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:92)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:70)
+	at org.gradle.api.internal.tasks.execution.SkipUpToDateTaskExecuter.execute(SkipUpToDateTaskExecuter.java:63)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskOutputCachingStateExecuter.execute(ResolveTaskOutputCachingStateExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ValidatingTaskExecuter.execute(ValidatingTaskExecuter.java:58)
+	at org.gradle.api.internal.tasks.execution.SkipEmptySourceFilesTaskExecuter.execute(SkipEmptySourceFilesTaskExecuter.java:88)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskArtifactStateTaskExecuter.execute(ResolveTaskArtifactStateTaskExecuter.java:52)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:52)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:54)
+	at org.gradle.api.internal.tasks.execution.ExecuteAtMostOnceTaskExecuter.execute(ExecuteAtMostOnceTaskExecuter.java:43)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:34)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker$1.run(DefaultTaskGraphExecuter.java:248)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:197)
+	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:107)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:241)
+	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:230)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.processTask(DefaultTaskPlanExecutor.java:124)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.access$200(DefaultTaskPlanExecutor.java:80)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:105)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:99)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.execute(DefaultTaskExecutionPlan.java:625)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.executeWithTask(DefaultTaskExecutionPlan.java:580)
+	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.run(DefaultTaskPlanExecutor.java:99)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
+	at java.lang.Thread.run(Thread.java:745)
+

@@ -1,28 +1,31 @@
 package com.techticz.dietcalendar.ui.activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
-import com.techticz.app.ui.Navigator
+import com.google.firebase.auth.FirebaseAuth
+import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
 import com.techticz.dietcalendar.databinding.ActivityLauncherBinding
 import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIActivity
-import dagger.android.DispatchingAndroidInjector
-import kotlinx.android.synthetic.main.activity_launcher.*
+import com.techticz.app.base.BaseDIActivity
 import timber.log.Timber
 import javax.inject.Inject
+import com.techticz.app.model.UserResponse
+import com.techticz.dietcalendar.ui.DietCalendarApplication
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -32,8 +35,6 @@ class LauncherActivity : BaseDIActivity() {
 
     @Inject
     lateinit var welcomeMessage: String
-    @Inject
-    lateinit var  navigator:Navigator
 
     private var launcherViewModel: LauncherViewModel? = null
     private var launcherBinding: ActivityLauncherBinding? = null
@@ -80,18 +81,61 @@ class LauncherActivity : BaseDIActivity() {
         //launcherViewModel?.triggerFetchingMealPlans?.value = true
     }
 
+    private fun onUserLoaded(res: Resource<UserResponse>?) {
+        when(res?.status){
+            Status.SUCCESS->{
+                if(res?.data?.user != null){
+                    //user is registered
+                    if(TextUtils.isEmpty(res?.data?.user?.activePlan)){
+                        Log.d("LOGIN", "Starting Browse Plan..")
+                        launcherBinding?.tvBottom?.text = "Starting Browse Plan.."
+                        navigator.startBrowsePlanScreen()
+                    } else {
+                        Log.d("LOGIN", "Starting Dashboard..")
+                        launcherBinding?.tvBottom?.text = "Starting Dashboard.."
+                        navigator.startDashBoard()
+                    }
+                    finish()
+                }
+            }
+
+            Status.EMPTY->{
+                Log.d("LOGIN","Registering User..")
+                launcherBinding?.tvBottom?.text = "Registering User.."
+                showError(res?.message.toString())
+                navigator.startUserProfileScreen()
+                finish()
+
+            }
+        }
+
+    }
+
 
     private fun onDataLoaded(resource: Resource<LauncherResponse>?) {
         Timber.d("Launcher Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         when(resource?.status){
             Status.LOADING->{
-                launcherBinding?.tvTop?.text = "Loading.."
+                launcherBinding?.tvBottom?.text = "Loading.."
             }
             Status.SUCCESS->
             {
+
                 launcherBinding?.tvCenter?.text = resource.data?.launchMessage
                 Toast.makeText(this, resource.data?.launchMessage, Toast.LENGTH_SHORT).show()
-                navigator.startDashBoard()
+                if(TextUtils.isEmpty(LoginUtils.getFirbaseUserId(this)) || FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    launcherBinding?.tvBottom?.text = "starting login.."
+                    navigator.navigateToLoginActivity(this);
+                } else {
+                    //check if registered
+                    Log.d("LOGIN","Checking profile..")
+                    launcherBinding?.tvBottom?.text = "checking profile.."
+                   // baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
+
+                    baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
+
+                }
+
             }
             Status.ERROR->
             {
@@ -101,6 +145,18 @@ class LauncherActivity : BaseDIActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 11 && resultCode == Activity.RESULT_OK) {
+            if (!TextUtils.isEmpty(LoginUtils.getFirbaseUserId(this))) {
+                //check if user is already registered
+                Log.d("LOGIN","Checking profile..")
+                baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
+
+                baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
+            }
+        }
+    }
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
     }

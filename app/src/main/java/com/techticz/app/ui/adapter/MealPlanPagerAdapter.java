@@ -4,10 +4,12 @@ package com.techticz.app.ui.adapter;
  * Created by gssirohi on 18/7/16.
  */
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -19,7 +21,7 @@ import com.techticz.dietcalendar.R;
 import com.techticz.app.ui.customView.AppImageView;
 import com.techticz.networking.model.Resource;
 import com.techticz.networking.model.Status;
-import com.techticz.powerkit.base.BaseDIActivity;
+import com.techticz.app.base.BaseDIActivity;
 
 import java.util.List;
 import java.util.Observer;
@@ -70,11 +72,11 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
        // holder.planImage.setUrl(data.get(position).getBlobServingUrl());
         holder.planName.setText(data.get(position).getBasicInfo().getName());
         holder.planDesc.setText(data.get(position).getBasicInfo().getName());
-        holder.planCalory.setText("Daily Calories : "+data.get(position).getBasicInfo().getDailyCalories());
+       // holder.planCalory.setText("Daily Calories : "+data.get(position).getBasicInfo().getDailyCalories());
         ImageViewModel imageViewModel = new ImageViewModel(holder.planImage.getContext());
         imageViewModel.getTriggerImageUrl().setValue(data.get(position).getBasicInfo().getImage());
-        holder.planImage.setImageViewModel(imageViewModel);
-        holder.planImage.setOnClickListener(new View.OnClickListener() {
+        holder.planImage.setImageViewModel(imageViewModel,(LifecycleOwner) holder.planImage.getContext());
+        holder.bExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callBack.onMealPlanItemClicked(data.get(position));
@@ -90,6 +92,7 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
 
     class MealPlanViewHolder extends RecyclerView.ViewHolder {
 
+        private Button bExplore;
         private AppImageView planImage;
         private TextView planName;
         private TextView planDesc;
@@ -100,7 +103,7 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
             planImage = (AppImageView) itemView.findViewById(R.id.aiv_plan_image);
             planName = (TextView)itemView.findViewById(R.id.plan_name);
             planDesc = (TextView)itemView.findViewById(R.id.plan_desc);
-            planCalory = (TextView)itemView.findViewById(R.id.plan_calory);
+            bExplore = (Button)itemView.findViewById(R.id.b_explore);
         }
     }
 

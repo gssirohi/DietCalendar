@@ -7,7 +7,7 @@ import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.dietcalendar.repo.AppRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
-import com.techticz.powerkit.base.BaseViewModel
+import com.techticz.app.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +27,6 @@ constructor(baseRepository: AppRepository) : BaseViewModel() {
 
 
     init {
-        Timber.d("Injecting:" + this)
         launcherResponse = Transformations.switchMap(triggerLaunch) { triggerLaunch ->
             Timber.d("Launch Trigger received.")
             if (triggerLaunch == null) {

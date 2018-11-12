@@ -6,7 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.techticz.app.ui.activity.DeveloperActivity"
     tools:showIn="@layout/activity_developer"
-    android:background="@color/colorAccent"
+    android:background="@color/secondaryColor"
     android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"

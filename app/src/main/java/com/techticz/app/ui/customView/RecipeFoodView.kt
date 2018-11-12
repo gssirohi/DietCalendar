@@ -11,7 +11,7 @@ import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
 import kotlinx.android.synthetic.main.recipe_food_layout.view.*
 import timber.log.Timber
 
@@ -49,11 +49,11 @@ class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : Frame
 
     private fun onViewModelDataLoaded(resource: Resource<FoodResponse>?) {
         Timber.d("foodViewModel?.liveFoodResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
-        if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
+        /*if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
             var resOld = recipeView.recipeViewModel?.liveFoodViewModelList?.value
             var resNew = resOld?.createCopy(resource?.status)
             recipeView.recipeViewModel?.liveFoodViewModelList?.value = resNew
-        }
+        }*/
         onFoodLoaded(resource)
     }
 

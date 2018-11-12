@@ -1,5 +1,6 @@
 package com.techticz.app.ui.customView
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.Observer
 import android.graphics.Color
@@ -20,7 +21,7 @@ import com.techticz.dietcalendar.R
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
 import kotlinx.android.synthetic.main.meal_recipe_layout.view.*
 import kotlinx.android.synthetic.main.meal_recipe_layout.view.spin_kit
 import timber.log.Timber
@@ -84,9 +85,11 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
                 tv_recipe_qty.text = "" + recipeViewModel?.triggerRecipeItem?.value?.qty+
                         " "+resource.data?.recipe?.standardServing?.servingType
 
-                loadChildViewModels(resource)
+                observeChildViewModels(resource)
                 recipeFoodRecyclerView.layoutManager = LinearLayoutManager(context)
                 recipeFoodRecyclerView.adapter = RecipeFoodAdapter(this, null)
+                recipeFoodRecyclerView.visibility = View.GONE
+                tv_show_more_less.text = "show more"
 
                 tv_show_more_less.setOnClickListener({
                     if(recipeFoodRecyclerView.visibility == View.GONE){
@@ -107,15 +110,9 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
 
     }
 
-    private fun loadChildViewModels(resource: Resource<RecipeResponse>) {
+    private fun observeChildViewModels(resource: Resource<RecipeResponse>) {
         this.recipeViewModel?.liveFoodViewModelList?.observe(context as BaseDIActivity, Observer { resource ->
 
-            //ring parent bell
-            if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
-                var resOld = mealView.mealPlateViewModel?.liveRecipeViewModelList?.value
-                var resNew = resOld?.createCopy(resource?.status)
-                mealView.mealPlateViewModel?.liveRecipeViewModelList?.value = resNew
-            }
             onChildViewModelsDataChanged(resource)
         })
 
@@ -130,18 +127,19 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
         resource?.isFresh = false
         when(resource?.status) {
             Status.LOADING -> {
-                //spin_kit.visibility = View.VISIBLE
+                spin_kit.visibility = View.INVISIBLE
+                aiv_recipe.setImageViewModel(resource?.data, context as LifecycleOwner)
 
             }
             Status.SUCCESS -> {
                 spin_kit.visibility = View.INVISIBLE
-                aiv_recipe.setImageViewModel(resource?.data)
+                aiv_recipe.setImageViewModel(resource?.data, context as LifecycleOwner)
             }
             Status.EMPTY -> {
-                var imageViewModel = ImageViewModel(context)
+               /* var imageViewModel = ImageViewModel(context)
                 imageViewModel.triggerImageUrl.value = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.basicInfo?.image
                 var imageRes = Resource<ImageViewModel>(Status.SUCCESS,imageViewModel,"Loading recipe image model success..",DataSource.REMOTE)
-                this.recipeViewModel?.liveImage?.value = imageRes
+                this.recipeViewModel?.liveImage?.value = imageRes*/
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE
@@ -159,7 +157,7 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
             Status.LOADING -> {
                 spin_kit.visibility = View.VISIBLE
             }
-            Status.SUCCESS -> {
+            Status.COMPLETE -> {
                 spin_kit.visibility = View.INVISIBLE
                 tv_recipe_calory.text = "" + recipeViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+
                         "\nCals/"+recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
@@ -171,7 +169,7 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
             }
             Status.EMPTY->{
 
-                var foods = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.formula?.ingredients
+               /* var foods = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.formula?.ingredients
 
                 var foodViewModelList = ArrayList<FoodViewModel>()
 
@@ -183,7 +181,7 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
                     }
                 }
                 var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Recipe foods..", DataSource.LOCAL)
-                this.recipeViewModel?.liveFoodViewModelList?.value = foodViewModelListResource
+                this.recipeViewModel?.liveFoodViewModelList?.value = foodViewModelListResource*/
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE

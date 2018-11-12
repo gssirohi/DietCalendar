@@ -12,7 +12,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import com.techticz.dietcalendar.ui.DietCalendarApplication
-import com.techticz.powerkit.base.Injectable
+import com.techticz.app.base.Injectable
 
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection

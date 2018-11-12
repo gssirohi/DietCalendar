@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id">265310580755-p68tsguu0bf2uu5khq2vk9apj5o73lkb.apps.googleusercontent.com</string>
+    <!--
+        Your Facebook App ID. See README.
+    -->
+    <!--  TODO(developer): REPLACE -->
+    <string name="facebook_app_id">1450289065066055</string>
+
+    <!--
+      Your Twitter Key and Secret, see README.
+    -->
+    <!-- TODO(developer): REPLACE -->
+    <string name="twitter_consumer_key">REPLACE_ME</string>
+    <string name="twitter_consumer_secret">REPLACE_ME</string>
+</resources>

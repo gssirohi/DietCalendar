@@ -58,6 +58,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.techticz.app.ui.activity.DashboardActivity" />
         </activity>
+        <activity
+            android:name="com.techticz.app.ui.activity.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.techticz.app.base.DietPlanActivity"
+            android:label="@string/title_activity_diet_plan"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

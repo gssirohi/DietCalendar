@@ -23,6 +23,7 @@ package com.techticz.networking.model;
  * {@code LiveData<Resource<T>>} to pass back the latest data to the UI with its fetch status.
  */
 public enum Status {
+    COMPLETE,
     SUCCESS,
     ERROR,
     LOADING,

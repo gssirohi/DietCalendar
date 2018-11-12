@@ -3,16 +3,16 @@
 
     <style name="Text">
         <item name="android:textSize">@dimen/text_size_normal</item>
-        <item name="android:typeface">normal</item>
-        <item name="android:textColorHint">@color/text_color_hint</item>
-        <item name="android:textColorSecondary">@color/text_color_hint</item>
-        <item name="colorControlNormal">@color/color_control_normal</item>
-        <item name="colorControlActivated">@color/color_control_activated</item>
-        <item name = "android:textColor">@color/text_color_dark</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textColorHint">@color/onPrimary</item>
+        <item name="android:textColorSecondary">@color/onPrimary</item>
+        <item name="colorControlNormal">@color/onPrimary</item>
+        <item name="colorControlActivated">@color/onPrimary</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
 
     <style name="Text.Dark" parent="Text">
-        <item name = "android:textColor">@color/text_color_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
 
     <style name="Text.Dark.Bold" parent="Text.Dark">
@@ -52,19 +52,19 @@
     </style>
     <style name="Text.Dark.Medium.Regular" parent="Text.Dark.Medium">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.Dark.Small.Regular" parent="Text.Dark.Small">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.Dark.VerySmall.Regular" parent="Text.Dark.VerySmall">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.Dark.Regular" parent="Text.Dark">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
 
 
@@ -77,7 +77,7 @@
 
 
     <style name="Text.Light" parent="Text">
-        <item name = "android:textColor">@color/text_color_light</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
 
     <style name="Text.Light.Bold" parent="Text.Light">
@@ -109,7 +109,7 @@
 
 
     <style name="Text.VeryLight" parent="Text">
-        <item name = "android:textColor">@color/text_color_very_light</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.VeryLight.Bold" parent="Text.VeryLight">
         <item name = "android:textStyle">bold</item>
@@ -120,11 +120,11 @@
     </style>
     <style name="Text.VeryLight.Small.Regular" parent="Text.VeryLight.Small">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.VeryLight.VerySmall.Regular" parent="Text.VeryLight.VerySmall">
         <item name = "android:textStyle">normal</item>
-        <item name = "android:textColor">@color/text_color_very_dark</item>
+        <item name = "android:textColor">@color/onPrimary</item>
     </style>
     <style name="Text.VeryLight.Small.Bold" parent="Text.VeryLight.Small">
         <item name = "android:textStyle">bold</item>
@@ -195,7 +195,7 @@
 
 
     <style name="TextAction" parent="Text.VeryLight.Bold">
-        <item name = "android:textColor">@color/text_action_color</item>
+        <item name = "android:textColor">@color/onPrimary</item>
         <item name = "android:clickable">true</item>
         <item name = "android:textAllCaps">true</item>
         <item name="android:drawableRight">@drawable/ic_keyboard_arrow_right</item>
@@ -207,22 +207,16 @@
     </style>
 
 
-
-
-<!--    <color name="text_color_very_dark">#000000</color>
-    <color name="text_color_dark">#212121</color>
-    <color name="text_color_light">#515151</color>
-    <color name="text_color_very_light">#757575</color>-->
-    <color name="text_color_very_dark">#FFFFFF</color>
-    <color name="text_color_dark">#161616</color>
-    <color name="text_color_light">#CCCCCC</color>
-    <color name="text_color_very_light">#AAAAAA</color>
-
-    <color name="text_color_status_green">#00CD6F</color>
-    <color name="text_color_status_orange">#FF9800</color>
-    <color name="text_color_status_red">#F44336</color>
-    <color name="text_action_color">@color/colorAccent</color>
-    <color name="text_color_hint">@color/colorAccentLight</color>
-    <color name="color_control_normal">@color/colorAccent</color>
-    <color name="color_control_activated">@color/colorAccentLight</color>
+    <style name="HeadLine1" parent="Text.Dark.VeryLarge"></style>
+    <style name="HeadLine2" parent="Text.Dark.Large"></style>
+    <style name="OverLine" parent="Text.Dark"></style>
+    <style name="Title" parent="Text.Light.Medium"></style>
+    <style name="SubTitle" parent="Text.Light"></style>
+    <style name="Body1" parent="Text.Dark.Small"></style>
+    <style name="Body2" parent="Text.Dark.VerySmall"></style>
+    <style name="Body3" parent="Text.Light.Smallest"></style>
+    <style name="Note" parent="Text.Light.Small">
+        <item name="android:textStyle">italic</item>
+    </style>
+    <style name="Action" parent="TextAction"></style>
 </resources>

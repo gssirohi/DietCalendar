@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:SpinKit_Color="@color/colorAccent" />
+            app:SpinKit_Color="@color/secondaryColor" />
     </LinearLayout>
 <LinearLayout
     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:maxLines="1"
-            style="@style/Text.Dark.Large"
+            style="@style/SubTitle"
             android:text="\u25D9"
             android:textColor="@android:color/holo_green_dark"
             android:visibility="visible"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="@style/Text.Dark"
+        style="@style/SubTitle"
         android:text="This is Recipe Name"
         android:visibility="invisible"
         tools:visibility="visible"/>
@@ -74,7 +74,7 @@
         android:id="@+id/tv_recipe_qty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Text.Dark.Small"
+        style="@style/Body1"
         tools:text="2 peices"/>
 
 </LinearLayout>
@@ -84,7 +84,7 @@
             android:layout_weight="1"
             android:id="@+id/tv_recipe_calory"
             android:layout_gravity="center|right"
-            style="@style/Text.Dark.Small"
+            style="@style/Body1"
             android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,5 +115,5 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/colorPrimary"></View>
+        android:background="@color/primaryColor"></View>
 </LinearLayout>

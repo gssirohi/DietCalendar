@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.meal_food_layout.view.*
  */
 class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var callBack:RecipItemCallBacks?): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RecipeFoodViewHolder) {
             // holder.mItem = mValues.get(position);
             var foodViewModel = mealRecipeView?.recipeViewModel?.liveFoodViewModelList?.value?.data?.get(position)
@@ -34,7 +34,7 @@ class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var call
         return mealRecipeView?.recipeViewModel?.liveFoodViewModelList?.value?.data?.size!!
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view = RecipeFoodView(parent, mealRecipeView)
             var holder =  RecipeFoodViewHolder(view)
                 return holder

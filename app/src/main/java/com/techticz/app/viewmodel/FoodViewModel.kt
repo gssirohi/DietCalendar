@@ -1,10 +1,7 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import com.google.firebase.firestore.FirebaseFirestore
+import android.arch.lifecycle.*
+import android.content.Context
 import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.FoodResponse
 import com.techticz.app.model.food.Nutrients
@@ -14,7 +11,9 @@ import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseViewModel
+import com.techticz.app.base.BaseViewModel
+import com.techticz.app.repo.MealPlateRepository
+import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,17 +22,23 @@ import javax.inject.Inject
  */
 
 class FoodViewModel @Inject
-constructor(foodRepository: FoodRepository) : BaseViewModel() {
+constructor() : BaseViewModel() {
+    @Inject
+    lateinit var injectedRepo: FoodRepository
+
     val triggerFoodItem = MutableLiveData<FoodItem>()
     val liveFoodResponse: LiveData<Resource<FoodResponse>>
+    var liveImage: MediatorLiveData<Resource<ImageViewModel>>? = MediatorLiveData<Resource<ImageViewModel>>()
     init {
-        Timber.d("Injecting:" + this)
+        DietCalendarApplication.getAppComponent().inject(this)
         liveFoodResponse = Transformations.switchMap(triggerFoodItem) { triggerLaunch ->
             if (triggerLaunch == null) {
                 return@switchMap AbsentLiveData.create<Resource<FoodResponse>>()
             } else {
                 Timber.d("Food Trigger detected for:"+triggerLaunch?.id)
-                return@switchMap foodRepository.fetchFoodResponse(triggerFoodItem.value)
+                var liveImageResource = Resource<ImageViewModel>(Status.EMPTY, null, "Empty image food..", DataSource.LOCAL)
+                liveImage?.value = liveImageResource
+                return@switchMap injectedRepo.fetchFoodResponse(triggerFoodItem.value)
             }
         }
     }
@@ -53,6 +58,30 @@ constructor(foodRepository: FoodRepository) : BaseViewModel() {
             return true;
         }
         return true;
+    }
+
+    fun autoLoadChildren(lifecycleOwner: LifecycleOwner) {
+        liveFoodResponse?.observe(lifecycleOwner, Observer { resource->
+            when(resource?.status){
+                Status.SUCCESS->{
+                    //load children view model here
+                    observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner)
+                }
+            }
+        })
+    }
+
+    private fun observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner: LifecycleOwner) {
+        liveImage?.observe(lifecycleOwner, Observer { resource->
+            when(resource?.status){ Status.EMPTY->loadImageViewModel(lifecycleOwner)}
+        })
+    }
+
+    private fun loadImageViewModel(lifecycleOwner: LifecycleOwner) {
+        var imageViewModel = ImageViewModel(lifecycleOwner as Context)
+        imageViewModel.triggerImageUrl.value = liveFoodResponse?.value?.data?.food?.basicInfo?.image
+        var imageRes = Resource<ImageViewModel>(Status.SUCCESS,imageViewModel,"Loading food image model success..",DataSource.REMOTE)
+        liveImage?.value = imageRes
     }
 
 

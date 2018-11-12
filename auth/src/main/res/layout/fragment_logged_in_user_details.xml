@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    android:background="@color/primaryLightColor"
+    tools:context="com.techticz.auth.LoginActivity">
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="4dp"
+        card_view:cardBackgroundColor="@color/primaryColor"
+        card_view:cardUseCompatPadding="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:text="USER DETAILS"
+            android:gravity="start|center_vertical"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+            android:textColor="@color/primaryLightColor"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_marginTop="48dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="visible"
+                android:gravity="center_horizontal"
+                android:id="@+id/ll_phone_number"
+                android:background="@color/translucent">
+                <com.techticz.powerkit.customview.RoundImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/iv_user"
+                    android:src="@drawable/app_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="User Name not available"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="Gyanendra Singh"
+                    style="@style/HeadLine1"
+                    android:textColor="@color/secondaryColor"
+                    android:id="@+id/tv_user_name"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Email not available"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    style="@style/Body1"
+                    android:textColor="@color/secondaryColor"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_user_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone number not available"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    style="@style/Body1"
+                    android:textColor="@color/secondaryColor"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_firebase_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Firebase Id not available"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    style="@style/Body1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <Button
+                android:id="@+id/b_logout"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="LOGOUT"
+                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                <Button
+                    android:id="@+id/b_proceed"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Proceed"
+                    android:theme="@style/ThemeOverlay.MyDarkButton" />
+            </LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="24dp"
+    android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Authenticated using"
+        android:padding="8dp"
+        android:gravity="center"
+        android:textColor="@color/primaryLightColor"/>
+    <ImageView
+        android:id="@+id/iv_provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:src="@drawable/googleg_standard_color_18"/>
+</LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

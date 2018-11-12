@@ -10,9 +10,8 @@
             android:orientation="vertical">
             <stroke
                 android:width="0.5dp"
-                android:color="@color/primary_dark" />
-
-            <solid android:color="@color/primary_light" />
+                android:color="@color/primaryDarkColor" />
+            <solid android:color="@color/primaryLightColor" />
 
 
         </shape>

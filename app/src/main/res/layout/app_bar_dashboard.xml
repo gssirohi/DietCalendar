@@ -13,15 +13,32 @@
         android:id="@+id/app_bar"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:titleEnabled="false"
-            app:contentScrim="?attr/colorPrimary"
+            app:titleEnabled="true"
+            app:expandedTitleTextAppearance="@style/Title"
+            app:expandedTitleMarginBottom="80dp"
+            app:expandedTitleGravity="center_horizontal|bottom"
+            app:contentScrim="@color/secondaryColor"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
+            <com.techticz.app.ui.customView.AppImageView
+                android:id="@+id/aiv_plan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_night"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primaryColor"
+                android:alpha="50">
+
+            </View>
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -43,13 +60,26 @@
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <include layout="@layout/content_dashboard" />
-    <com.techticz.powerkit.customview.CircleGraphView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+    <TextView
+        android:id="@+id/tv_day"
+        android:layout_gravity="left|top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginLeft="8dp"
+        style="@style/Title"
+        tools:text="MONDAY"/>
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:id="@+id/nutri_scroller"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="148dp"
+        app:dsv_orientation="horizontal"
+        android:background="@color/sheetColor"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="48dp"
-
-        android:layout_gravity="center|top"></com.techticz.powerkit.customview.CircleGraphView>
+        android:layout_gravity="center|top"
+        tools:listitem="@layout/circle_graph_view"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

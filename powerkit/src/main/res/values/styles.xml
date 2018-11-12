@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppCardView" parent="CardView">
-        <item name="cardBackgroundColor"> @android:color/white</item>
-        <item name="cardCornerRadius"> @dimen/cardview_default_radius</item>
-        <item name="cardElevation"> @dimen/cardview_default_elevation</item>
-        <item name="cardPreventCornerOverlap"> true</item>
-        <item name="cardUseCompatPadding"> true</item>
-        <item name="contentPadding"> 8dp</item>
-    </style>
+
 </resources>

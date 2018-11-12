@@ -1,5 +1,6 @@
 package com.techticz.app.ui.customView
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -11,7 +12,8 @@ import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.viewmodel.ImageViewModel
 import kotlinx.android.synthetic.main.meal_food_layout.view.*
 import timber.log.Timber
 
@@ -50,11 +52,11 @@ class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(par
     private fun onViewModelDataLoaded(resource: Resource<FoodResponse>?) {
         Timber.d("foodViewModel?.liveFoodResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         //ring parent bells
-        if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
+        /*if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
             var resOld = mealView.mealPlateViewModel?.liveFoodViewModelList?.value
             var resNew = resOld?.createCopy(resource?.status)
             mealView.mealPlateViewModel?.liveFoodViewModelList?.value = resNew
-        }
+        }*/
         onFoodLoaded(resource)
     }
 
@@ -73,6 +75,9 @@ class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(par
                         "\n cals/"+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
                 tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty+
                         " "+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+
+                observeChildViewModels(resource)
+
                 when(foodViewModel?.isVeg()){
                     true->tv_food_type.setTextColor(Color.parseColor("#ff669900"))
                     else->tv_food_type.setTextColor(Color.parseColor("#ffcc0000"))
@@ -90,6 +95,39 @@ class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(par
 
     }
 
+    private fun observeChildViewModels(resource: Resource<FoodResponse>) {
 
+
+        this.foodViewModel?.liveImage?.observe(context as BaseDIActivity, Observer {
+            resource->
+            onImageModelLoaded(resource)
+        })
+    }
+    private fun onImageModelLoaded(resource: Resource<ImageViewModel>?) {
+        Timber.d("this.foodViewModel?.liveImage? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
+        resource?.isFresh = false
+        when(resource?.status) {
+            Status.LOADING -> {
+                spin_kit.visibility = View.INVISIBLE
+                aiv_food.setImageViewModel(resource?.data, context as LifecycleOwner)
+
+            }
+            Status.SUCCESS -> {
+                spin_kit.visibility = View.INVISIBLE
+                aiv_food.setImageViewModel(resource?.data, context as LifecycleOwner)
+            }
+            Status.EMPTY -> {
+                /* var imageViewModel = ImageViewModel(context)
+                 imageViewModel.triggerImageUrl.value = recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.basicInfo?.image
+                 var imageRes = Resource<ImageViewModel>(Status.SUCCESS,imageViewModel,"Loading recipe image model success..",DataSource.REMOTE)
+                 this.recipeViewModel?.liveImage?.value = imageRes*/
+            }
+            Status.ERROR -> {
+                spin_kit.visibility = View.INVISIBLE
+                tv_food_calory.text = resource?.message
+                tv_food_calory.visibility = View.VISIBLE
+            }
+        }
+    }
 
 }

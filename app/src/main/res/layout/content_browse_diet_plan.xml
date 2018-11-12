@@ -16,15 +16,14 @@
     <LinearLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_late_night1"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            style="@style/Text.Dark.Large.Bold"
+            style="@style/HeadLine1"
             android:text="Your Diet Plans"/>
 
         <com.yarolegovich.discretescrollview.DiscreteScrollView

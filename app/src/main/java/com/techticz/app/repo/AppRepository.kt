@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import android.util.Log
 import com.google.android.gms.tasks.OnFailureListener
-import com.techticz.app.model.User
 
 import com.google.firebase.firestore.*
 import com.google.gson.Gson
@@ -58,74 +57,9 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
         return live
     }
 
-    private fun addFoods(){
-        var jsonString : String = JSONUtils.readJsonFromFile(context,"food.json")
-        var listType = object : TypeToken<List<Food>>(){}.type
-        var gson:Gson = Gson()
-        var cats:List<Food> = gson.fromJson(jsonString,listType)
-        var batch:WriteBatch = db.batch()
-        for(cat in  cats){
-            var ref:DocumentReference = db.collection("foods").document(cat.id)
-            batch.set(ref,cat)
-        }
-        batch.commit().addOnSuccessListener { task->Log.d("Repo","Food insertion success") }
-                .addOnFailureListener(OnFailureListener {task->Log.e("Repo","Food insertion failed")  })
-
-    }
-
-
-
-    private fun addFood() {
-        var food:Food = Food()
-        food.id = "Z0001"
-        food.basicInfo = BasicInfo()
-        food.basicProperty = BasicProperty()
-        food.cost = Cost()
-        food.additionalInfo = AdditionalInfo()
-        food.nutrition = Nutrition()
-
-        db.collection("foods")
-                .document(food.id)
-                .set(food)
-                .addOnSuccessListener { documentReference -> Log.d("appRepo", "Food added with ID: " ) }
-                .addOnFailureListener { e -> Log.w("appRepo", "Error adding food", e) }
-    }
-
-    private fun getUsers(){
-        db.collection("users")
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        for (document in task.result) {
-                            Log.d("Repo", document.id + " => " + document.data)
-                        }
-                    } else {
-                        Log.w("Repo", "Error getting documents.", task.exception)
-                    }
-                }
-    }
-
-    private fun addNewUser(){
-        // Create a new user with a first and last name
-        val user = User("Tony","Stark","ironman@marvel.com")
-
-// Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference -> Timber.d("appRepo", "DocumentSnapshot added with ID: " + documentReference.id) }
-                .addOnFailureListener { e -> Timber.w("appRepo", "Error adding document", e) }
-
-        user.userMiddleName = "Iron Man"
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference -> Log.d("Repo", "DocumentSnapshot added with ID: " + documentReference.id) }
-                .addOnFailureListener { e -> Log.w("Repo", "Error adding document", e) }
-
-    }
 
     init {
-        Timber.d("Injecting:" + this)
+
     }
 
 

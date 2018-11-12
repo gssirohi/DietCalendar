@@ -1,8 +1,11 @@
 package com.techticz.app.ui.customView
 
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +24,7 @@ import com.techticz.dietcalendar.R
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
 import kotlinx.android.synthetic.main.meal_layout.view.*
 import kotlinx.android.synthetic.main.meal_plate_desc_layout.view.*
 import timber.log.Timber
@@ -29,7 +32,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context) {
+class MealView(daySection:Int?, parent:Context?) : FrameLayout(parent) {
     var mealPlateViewModel: MealPlateViewModel? = null
 
     init {
@@ -39,11 +42,15 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
         init(parent)
     }
 
-    private fun init(parent: ViewGroup?) {
-        val itemView = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.meal_layout, parent, false) as ViewGroup
+    private fun init(parent: Context?) {
+        val itemView = LayoutInflater.from(context)
+                .inflate(R.layout.meal_layout, null, false) as ViewGroup
         addView(itemView)
+        b_add_plate.setOnClickListener({addMealPlate()})
+    }
 
+    private fun addMealPlate() {
+        (context as BaseDIActivity).showError("Add plate for meal:"+mealPlateViewModel?.triggerMealPlateID?.value?.mealType?.mealName)
     }
 
     private fun onViewModelDataLoaded(resource: Resource<MealPlateResponse>?) {
@@ -54,12 +61,29 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
     fun fillDetails(mealViewModel: MealPlateViewModel) {
         this.mealPlateViewModel = mealViewModel
         tv_meal_name.setText(mealViewModel.triggerMealPlateID.value?.mealType?.mealName)
-        tv_meal_plate_name.setText(mealViewModel.triggerMealPlateID.value?.mealPlateId)
 
-        mealViewModel?.liveMealPlateResponse?.observe(context as BaseDIActivity, Observer { resource ->
-            onViewModelDataLoaded(resource)
+        if(TextUtils.isEmpty(mealViewModel.triggerMealPlateID.value?.mealPlateId)){
+            // meal plate is empty
+            ll_meal_plate_desc.visibility = View.GONE
+            ll_meal_content.visibility = View.GONE
+            b_add_plate.visibility = View.VISIBLE
+            aiv_meal_plate.setImageResource(R.drawable.bg_night)
 
-        })
+
+        } else {
+            ll_meal_plate_desc.visibility = View.VISIBLE
+            ll_meal_content.visibility = View.VISIBLE
+            b_add_plate.visibility = View.GONE
+
+
+ //           tv_meal_plate_name.setText(mealViewModel.triggerMealPlateID.value?.mealPlateId)
+
+            mealViewModel?.liveMealPlateResponse?.observe(context as BaseDIActivity, Observer { resource ->
+                onViewModelDataLoaded(resource)
+
+            })
+        }
+
     }
 
     private fun onMealPlateLoaded(resource: Resource<MealPlateResponse>?) {
@@ -73,8 +97,8 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
                 tv_meal_plate_name.text = resource.data?.mealPlate?.basicInfo?.name?.english
                 tv_meal_plate_name.visibility = View.VISIBLE
 
+                observeChildViewModels(resource)
 
-                loadChildViewModels(resource)
                 recipeRecyclerView.layoutManager = (LinearLayoutManager(context))
                 recipeRecyclerView.adapter = MealRecipesAdapter(this, null)
 
@@ -91,8 +115,8 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
 
     }
 
-    private fun loadChildViewModels(resource: Resource<MealPlateResponse>) {
-        this.mealPlateViewModel?.liveImage?.observe(context as BaseDIActivity, Observer {
+    private fun observeChildViewModels(resource: Resource<MealPlateResponse>) {
+        mealPlateViewModel?.liveImage?.observe(context as BaseDIActivity, Observer {
             resource->
             onImageModelLoaded(resource)
         })
@@ -106,7 +130,45 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
             Timber.d("mealPlateViewModel?.liveFoodViewModelList? Data Changed : Status=" + resource?.status + " : Source=" + resource?.dataSource)
             onChildFoodViewModelsDataChanged(resource)
         })
+    }
+    private fun onChildRecipeViewModelsDataChanged(resource: Resource<List<RecipeViewModel>>?) {
+        resource?.isFresh = false
+        when (resource?.status) {
+            Status.LOADING -> {
+                spin_kit.visibility = View.VISIBLE
+            }
+            Status.COMPLETE -> {
+                spin_kit.visibility = View.INVISIBLE
+                tv_meal_plate_calories.text = "" + mealPlateViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+" Cals"
+                tv_meal_plate_calories.visibility = View.VISIBLE
+                when(mealPlateViewModel?.isVeg()){
+                    true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
+                    else->tv_meal_plate_type.setTextColor(Color.parseColor("#ffcc0000"))
+                }
+            }
 
+            Status.EMPTY-> {
+                /*var recipes = mealPlateViewModel?.liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
+
+                var recipeViewModelList = ArrayList<RecipeViewModel>()
+
+                if (recipes != null) {
+                    for (recipe in recipes) {
+                        var recipeViewModel = RecipeViewModel(RecipeRepository(FirebaseFirestore.getInstance()))
+                        recipeViewModel.triggerRecipeItem.value = recipe
+                        recipeViewModelList.add(recipeViewModel)
+                    }
+                }
+                var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.LOADING, recipeViewModelList, "Loading Meal recipes..", DataSource.LOCAL)
+                mealPlateViewModel?.liveRecipeViewModelList?.value = recipeViewModelListResource*/
+
+            }
+            Status.ERROR -> {
+                spin_kit.visibility = View.INVISIBLE
+                tv_meal_plate_calories.text = resource?.message
+                tv_meal_plate_calories.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun onImageModelLoaded(resource: Resource<ImageViewModel>?) {
@@ -114,18 +176,17 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
         resource?.isFresh = false
         when(resource?.status) {
             Status.LOADING -> {
-                //spin_kit.visibility = View.VISIBLE
-
+                spin_kit.visibility = View.INVISIBLE
+                aiv_meal_plate.setImageViewModel(resource?.data,context as LifecycleOwner)
             }
             Status.SUCCESS -> {
-                spin_kit.visibility = View.INVISIBLE
-                aiv_meal_plate.setImageViewModel(resource?.data)
+
             }
             Status.EMPTY -> {
-                var imageViewModel = ImageViewModel(context)
+                /*var imageViewModel = ImageViewModel(context)
                 imageViewModel.triggerImageUrl.value = mealPlateViewModel?.liveMealPlateResponse?.value?.data?.mealPlate?.basicInfo?.image
                 var imageRes = Resource<ImageViewModel>(Status.SUCCESS,imageViewModel,"Loading meal image model success..",DataSource.REMOTE)
-                this.mealPlateViewModel?.liveImage?.value = imageRes
+                this.mealPlateViewModel?.liveImage?.value = imageRes*/
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE
@@ -140,7 +201,7 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
             Status.LOADING -> {
                 spin_kit.visibility = View.VISIBLE
             }
-            Status.SUCCESS -> {
+            Status.COMPLETE -> {
                 spin_kit.visibility = View.INVISIBLE
                 tv_meal_plate_calories.text = "" + mealPlateViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+" Cals"
                 when(mealPlateViewModel?.isVeg()){
@@ -150,7 +211,7 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
 
             }
             Status.EMPTY->{
-                var foods = mealPlateViewModel?.liveMealPlateResponse?.value?.data?.mealPlate?.items?.foods
+              /*  var foods = mealPlateViewModel?.liveMealPlateResponse?.value?.data?.mealPlate?.items?.foods
 
                 var foodViewModelList = ArrayList<FoodViewModel>()
 
@@ -162,7 +223,7 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
                     }
                 }
                 var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Meal foods..", DataSource.LOCAL)
-                mealPlateViewModel?.liveFoodViewModelList?.value = foodViewModelListResource
+                mealPlateViewModel?.liveFoodViewModelList?.value = foodViewModelListResource*/
             }
             Status.ERROR -> {
                 spin_kit.visibility = View.INVISIBLE
@@ -171,42 +232,5 @@ class MealView(daySection:Int?, parent:ViewGroup?) : FrameLayout(parent?.context
             }
         }
     }
-    private fun onChildRecipeViewModelsDataChanged(resource: Resource<List<RecipeViewModel>>?) {
-        resource?.isFresh = false
-        when (resource?.status) {
-            Status.LOADING -> {
-                spin_kit.visibility = View.VISIBLE
-            }
-            Status.SUCCESS -> {
-                spin_kit.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = "" + mealPlateViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+" Cals"
-                tv_meal_plate_calories.visibility = View.VISIBLE
-                when(mealPlateViewModel?.isVeg()){
-                    true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
-                    else->tv_meal_plate_type.setTextColor(Color.parseColor("#ffcc0000"))
-                }
-            }
-            Status.EMPTY-> {
-                var recipes = mealPlateViewModel?.liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
 
-                var recipeViewModelList = ArrayList<RecipeViewModel>()
-
-                if (recipes != null) {
-                    for (recipe in recipes) {
-                        var recipeViewModel = RecipeViewModel(RecipeRepository(FirebaseFirestore.getInstance()))
-                        recipeViewModel.triggerRecipeItem.value = recipe
-                        recipeViewModelList.add(recipeViewModel)
-                    }
-                }
-                var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.LOADING, recipeViewModelList, "Loading Meal recipes..", DataSource.LOCAL)
-                mealPlateViewModel?.liveRecipeViewModelList?.value = recipeViewModelListResource
-
-            }
-            Status.ERROR -> {
-                spin_kit.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = resource?.message
-                tv_meal_plate_calories.visibility = View.VISIBLE
-            }
-        }
-    }
 }

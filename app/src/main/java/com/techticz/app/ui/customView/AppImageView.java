@@ -1,5 +1,6 @@
 package com.techticz.app.ui.customView;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +16,7 @@ import com.techticz.app.viewmodel.ImageViewModel;
 import com.techticz.networking.model.Resource;
 import com.techticz.networking.model.Status;
 import com.techticz.powerkit.R;
-import com.techticz.powerkit.base.BaseDIActivity;
+import com.techticz.app.base.BaseDIActivity;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -47,9 +48,9 @@ public class AppImageView extends android.support.v7.widget.AppCompatImageView {
         super(context, attrs, defStyle);
     }
 
-    public void setImageViewModel(@Nullable ImageViewModel viewModel) {
+    public void setImageViewModel(@Nullable ImageViewModel viewModel,LifecycleOwner owner) {
         this.viewModel = viewModel;
-        viewModel.getLiveImageResponse().observe((BaseDIActivity)getContext(), res->{
+        viewModel.getLiveImageResponse().observe(owner, res->{
             onImageLoaded(res);
         });
     }

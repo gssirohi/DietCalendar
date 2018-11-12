@@ -7,7 +7,7 @@ import android.content.Context
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIRepository
+import com.techticz.app.base.BaseDIRepository
 import timber.log.Timber
 import javax.inject.Inject
 import android.graphics.Bitmap
@@ -24,7 +24,7 @@ import com.techticz.app.util.ImageFetcher
 import com.techticz.app.util.RecyclingBitmapDrawable
 import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.R
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -149,13 +149,14 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
 fun fetchImageFromNetwork(servingUrl:String?):Bitmap?{
     Log.d("IMAGE","Fetching image from network:"+servingUrl)
     val imageURL: URL
-    if (!TextUtils.isEmpty(servingUrl)) {
-        imageURL = URL(servingUrl)
-    } else {
-        imageURL = URL("https://diet-chart-app.appspot.com/blob/serve")
-    }
+    try {
+        if (!TextUtils.isEmpty(servingUrl)) {
+            imageURL = URL(servingUrl)
+        } else {
+            imageURL = URL("https://www.google.co.in/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiarLvBocreAhXGT30KHYKoD9oQjRx6BAgBEAU&url=http%3A%2F%2Fchittagongit.com%2Ficon%2Ficon-for-food-20.html&psig=AOvVaw3-5kk1QtqHPqofO83xRTA6&ust=1541953942815942")
+        }
 
-    var connection: HttpURLConnection? = null
+        var connection: HttpURLConnection? = null
         connection = imageURL.openConnection() as HttpURLConnection
         connection!!.setRequestProperty("serving-url", servingUrl)
         connection!!.doInput = true
@@ -165,8 +166,12 @@ fun fetchImageFromNetwork(servingUrl:String?):Bitmap?{
         val bitmap = BitmapFactory.decodeStream(bis)
         bis.close()
         inputStream.close()
-    Log.d("IMAGE","Fetching network image Successful:"+servingUrl)
         return bitmap
+    } catch(e:Exception){
+        e.printStackTrace()
+    }
+    Log.d("IMAGE","Fetching network image Successful:"+servingUrl)
+        return null
     }
 
 fun uploadImage(bitmap: Bitmap, imageName: String):String?{

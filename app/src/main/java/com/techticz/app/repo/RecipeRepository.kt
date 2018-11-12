@@ -2,6 +2,7 @@ package com.techticz.app.repo
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,24 +14,25 @@ import com.techticz.app.model.recipe.RecipeResponse
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIRepository
+import com.techticz.app.base.BaseDIRepository
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
-
+@Singleton
 class RecipeRepository @Inject constructor(private val db: FirebaseFirestore) : BaseDIRepository() {
 
-    fun fetchRecipeResponse(recipeItem: RecipeItem?): LiveData<Resource<RecipeResponse>> {
+    fun fetchRecipeResponse(recipeItem: RecipeItem?): MediatorLiveData<Resource<RecipeResponse>> {
 
         var dummyRes = RecipeResponse()
         var resource = Resource<RecipeResponse>(Status.LOADING, dummyRes, "Loading Recipe:"+recipeItem?.id, DataSource.LOCAL)
         var live : MediatorLiveData<Resource<RecipeResponse>> = MediatorLiveData<Resource<RecipeResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
-        //  var resourceS = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+        //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
 
          db.collection(AppCollections.RECIPES.collectionName).document(recipeItem?.id!!)
                     .get().addOnSuccessListener(OnSuccessListener<DocumentSnapshot> { documentSnapshot ->
@@ -59,7 +61,7 @@ class RecipeRepository @Inject constructor(private val db: FirebaseFirestore) : 
         var live : MediatorLiveData<Resource<RecipeListResponse>> = MediatorLiveData<Resource<RecipeListResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
-      //  var resourceS = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+      //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
 
         for (recipeId in recipeItems!!) {
             db.collection(AppCollections.RECIPES.collectionName).document(recipeId.id!!)

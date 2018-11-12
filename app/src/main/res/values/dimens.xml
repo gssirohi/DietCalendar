@@ -9,4 +9,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="image_thumbnail_size">48dp</dimen>
+    <dimen name="glass_size">48dp</dimen>
 </resources>

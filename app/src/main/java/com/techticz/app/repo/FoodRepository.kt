@@ -10,16 +10,17 @@ import com.techticz.app.model.FoodResponse
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseDIRepository
+import com.techticz.app.base.BaseDIRepository
 import timber.log.Timber
 import javax.inject.Inject
 import com.techticz.app.model.food.Food
 import com.techticz.app.model.mealplate.FoodItem
+import javax.inject.Singleton
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
-
+@Singleton
 class FoodRepository @Inject constructor(private val db: FirebaseFirestore) : BaseDIRepository() {
 
 
@@ -30,7 +31,7 @@ class FoodRepository @Inject constructor(private val db: FirebaseFirestore) : Ba
         var live : MediatorLiveData<Resource<FoodResponse>> = MediatorLiveData<Resource<FoodResponse>>()
         live.value = resource
         //Thread.sleep(4*1000)
-      //  var resourceS = Resource<BrowseMealPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+      //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
 
 
         db.collection(AppCollections.FOODS.collectionName).document(foodItem?.id!!)

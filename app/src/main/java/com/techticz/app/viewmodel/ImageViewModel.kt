@@ -12,7 +12,7 @@ import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
-import com.techticz.powerkit.base.BaseViewModel
+import com.techticz.app.base.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -22,13 +22,14 @@ import javax.inject.Inject
 
 class ImageViewModel @Inject
 constructor(context: Context) : BaseViewModel() {
-    val triggerImageUrl = MutableLiveData<String>()
-    val liveImageResponse: LiveData<Resource<ImageResponse>>
     @Inject
     lateinit var injectedRepo:ImageRepository
+
+    val triggerImageUrl = MutableLiveData<String>()
+    val liveImageResponse: LiveData<Resource<ImageResponse>>
+
     init {
         DietCalendarApplication.getAppComponent().inject(this)
-        Timber.d("Injecting:" + this)
         liveImageResponse = Transformations.switchMap(triggerImageUrl) { triggerLaunch ->
             if (triggerLaunch == null) {
                 return@switchMap AbsentLiveData.create<Resource<ImageResponse>>()
@@ -36,7 +37,7 @@ constructor(context: Context) : BaseViewModel() {
                 Timber.d("Image Trigger detected for:" + triggerLaunch)
                // injectedRepo.hostActivityContext = context
                 //injectedRepo.initImageCache()
-                return@switchMap injectedRepo.fetchImageResponse(triggerImageUrl.value)
+                return@switchMap injectedRepo?.fetchImageResponse(triggerImageUrl.value)
                 //return@switchMap imageRepository.fetchImageResponse(triggerImageUrl.value)
             }
         }

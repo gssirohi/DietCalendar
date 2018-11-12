@@ -46,6 +46,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     api project(':powerkit')
+    api project(':auth')
     implementation REQUIRE.UI.DIALOG
     implementation REQUIRE.UI.SCROLLER
     implementation REQUIRE.KOTLIN.JRE
@@ -86,6 +87,7 @@ dependencies {
 
     implementation REQUIRE.FIREBASE.CORE
     implementation REQUIRE.FIREBASE.FIRESTORE
+    implementation REQUIRE.FIREBASE.AUTH
 
     testImplementation REQUIRE.TEST.JUNIT
     androidTestImplementation REQUIRE.TEST.RUNNER

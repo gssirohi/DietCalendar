@@ -1,6 +1,6 @@
 package com.techticz.dietcalendar.di
 
-import com.techticz.app.ui.frag.DietChartFragment
+import com.techticz.app.ui.frag.DayPlansFragment
 import com.techticz.dietcalendar.ui.frag.LauncherFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,5 +14,5 @@ abstract class AppFragmentModule {
     @ContributesAndroidInjector
     abstract fun contributeLauncherFragment(): LauncherFragment
     @ContributesAndroidInjector
-    abstract fun contributeDietChartFragmentFragment(): DietChartFragment
+    abstract fun contributeDietChartFragmentFragment(): DayPlansFragment
 }

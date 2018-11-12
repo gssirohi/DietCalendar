@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.techticz.dietcalendar.R
-import com.techticz.powerkit.base.BaseDIFragment
-import com.techticz.powerkit.base.Injectable
+import com.techticz.app.base.BaseDIFragment
+import com.techticz.app.base.Injectable
 
 /**
  * A simple [Fragment] subclass.

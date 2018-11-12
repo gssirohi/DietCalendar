@@ -7,7 +7,9 @@ import com.techticz.app.repo.ImageRepository
 import com.techticz.app.ui.Navigator
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.model.AppExecutors
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.di.ContextModule
+import com.techticz.app.di.RepoModule
 
 import dagger.Module
 import dagger.Provides
@@ -19,12 +21,12 @@ import javax.inject.Singleton
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 @Module(includes = [
-(ViewModelModule::class)
+(ContextModule::class),(ViewModelModule::class),(RepoModule::class)
 ])
 class AppModule{
     @Provides
     internal fun providesWelcomeMessage(): String {
-        return "Welcome to Dagger 2. You have successfully injected dependency!"
+        return "Welcome to Diet Calendar!"
     }
 
     @Provides
@@ -42,27 +44,23 @@ class AppModule{
         return db
     }
 
-    @Singleton
+   /* @Singleton
     @Provides
     internal fun provideImageRepo(context:Context): ImageRepository {
         Timber.d("Providing :" + "Image Repository")
         val repo = ImageRepository(context)
 
         return repo
-    }
+    }*/
 
-    @Singleton
-    @Provides
-    internal fun provideAppContext(app: DietCalendarApplication): Context {
-        Timber.d("Providing :" + "App Context")
-        return app.baseContext
-    }
+
+
 
 
     @Singleton
     @Provides
     internal fun provideExecutors(): AppExecutors {
-        Timber.d("Providing :" + "App Executors")
+        Timber.d("Providing :" + "AppExecutors")
         return AppExecutors()
     }
 

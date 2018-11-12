@@ -5,7 +5,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import com.techticz.app.repo.DeveloperRepository
 import com.techticz.dietcalendar.R
-import com.techticz.powerkit.base.BaseDIActivity
+import com.techticz.app.base.BaseDIActivity
 
 import kotlinx.android.synthetic.main.activity_developer.*
 import kotlinx.android.synthetic.main.content_developer.*

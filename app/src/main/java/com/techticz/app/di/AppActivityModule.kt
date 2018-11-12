@@ -1,5 +1,6 @@
 package com.techticz.dietcalendar.di
 
+import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.ui.activity.*
 import com.techticz.dietcalendar.ui.activity.LauncherActivity
 import dagger.Module
@@ -21,5 +22,9 @@ abstract class AppActivityModule {
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeBrowseDietPlanActivity(): BrowseDietPlansActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
-    abstract fun contributeDietChartActivityActivity(): DietChartActivity
+    abstract fun contributeDietChartActivity(): DietChartActivity
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeUserProfileActivity(): UserProfileActivity
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeBaseDIActivity(): BaseDIActivity
 }

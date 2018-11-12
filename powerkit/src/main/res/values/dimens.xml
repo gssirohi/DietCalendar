@@ -10,7 +10,7 @@
     <dimen name="header_view_start_text_size">24sp</dimen>
 
 
-    <dimen name="text_size_very_large">18sp</dimen>
+    <dimen name="text_size_very_large">24sp</dimen>
     <dimen name="text_size_largee">16sp</dimen>
     <dimen name="trip_text_size_medium">14sp</dimen>
     <dimen name="text_size_normal">12sp</dimen>

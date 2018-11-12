@@ -8,13 +8,12 @@ import com.google.firebase.firestore.WriteBatch
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.techticz.app.constants.AppCollections
-import com.techticz.app.model.User
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.model.food.*
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.recipe.Recipe
-import com.techticz.powerkit.base.BaseDIActivity
-import com.techticz.powerkit.base.BaseDIRepository
+import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.base.BaseDIRepository
 import com.techticz.powerkit.utils.JSONUtils
 import timber.log.Timber
 import java.lang.reflect.Type
@@ -115,7 +114,7 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        for (document in task.result) {
+                        for (document in task.result!!) {
                             Log.d("Repo", document.id + " => " + document.data)
                         }
                     } else {
@@ -124,15 +123,6 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                 }
     }
 
-    private fun addNewUser() {
-        // Create a new user with a first and last name
-        val user = User("Tony", "Stark", "ironman@marvel.com")
-
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener { documentReference -> Timber.d("appRepo", "DocumentSnapshot added with ID: " + documentReference.id) }
-                .addOnFailureListener { e -> Timber.w("appRepo", "Error adding document", e) }
-    }
 
     init {
         Timber.d("Injecting:" + this)
