@@ -9,12 +9,13 @@
     android:background="@color/onPrimary"
     tools:context="com.techticz.app.ui.activity.DietChartActivity$PlaceholderFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/meal_layout"
+        tools:layout_height="match_parent"
         >
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

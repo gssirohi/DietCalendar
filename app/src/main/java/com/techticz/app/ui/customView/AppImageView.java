@@ -1,6 +1,6 @@
 package com.techticz.app.ui.customView;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,12 +11,10 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.techticz.app.model.ImageResponse;
-import com.techticz.app.repo.ImageRepository;
 import com.techticz.app.viewmodel.ImageViewModel;
 import com.techticz.networking.model.Resource;
 import com.techticz.networking.model.Status;
 import com.techticz.powerkit.R;
-import com.techticz.app.base.BaseDIActivity;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -24,13 +22,12 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Observer;
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 26/8/17.
  */
 
-public class AppImageView extends android.support.v7.widget.AppCompatImageView {
+public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
     private String url;
     private ImageViewModel viewModel;
 

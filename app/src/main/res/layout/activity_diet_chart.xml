@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -7,79 +7,97 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.techticz.app.ui.activity.DietChartActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
+        android:id="@+id/app_bar"
+        android:fitsSystemWindows="true"
+        android:elevation="0dp"
+        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:titleEnabled="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+            <com.techticz.app.ui.customView.AppImageView
+                android:id="@+id/aiv_plan"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_night"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.design.widget.TabLayout
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            app:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:background="@color/primaryColor"
             app:tabMode="scrollable">
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_monday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Monday" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_tuesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tuesday" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_wednesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wednesday" />
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_thursday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thursday" />
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_friday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Friday" />
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_saturday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Saturday" />
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_sunday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sunday" />
-        </android.support.design.widget.TabLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/fragment_day_plans"
+        tools:layout_height="match_parent"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,4 +105,4 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

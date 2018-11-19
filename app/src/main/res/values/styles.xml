@@ -1,15 +1,17 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
-
+        <item name="textAppearanceButton">@style/Action</item>
         <item name="colorError">@color/errorColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
 
         <item name="android:buttonStyle">@style/ButtonStyle</item>
         <item name="colorButtonNormal">@color/secondaryColor</item>
+        <item name="android:windowContentOverlay">@null</item>
 
     </style>
     <!-- Base application theme. -->
@@ -46,7 +48,7 @@
 
     </style>
 
-    <style name="AppCardView" parent="CardView">
+    <style name="AppCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/surfaceColor</item>
         <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
         <item name="cardElevation">@dimen/cardview_default_elevation</item>

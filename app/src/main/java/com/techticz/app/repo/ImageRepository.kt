@@ -1,8 +1,8 @@
 package com.techticz.app.repo
 
 import android.app.Activity
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import android.content.Context
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
@@ -13,7 +13,7 @@ import javax.inject.Inject
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import android.text.TextUtils
 import android.util.Log
 import com.cloudinary.Cloudinary

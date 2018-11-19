@@ -6,7 +6,7 @@
     android:padding="32dp"
     android:background="@color/primaryLightColor"
     tools:context="com.techticz.auth.LoginActivity">
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,13 +40,13 @@
                 android:visibility="visible"
                 android:id="@+id/ll_phone_number"
                 android:background="@color/translucent">
-                    <android.support.design.widget.TextInputLayout             android:theme="@style/SubTitle"
+                    <com.google.android.material.textfield.TextInputLayout             android:theme="@style/SubTitle"
                 android:id="@+id/tiv_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="48dp"
                 android:textColorHint="@color/primaryColor">
-    <android.support.design.widget.TextInputEditText
+    <com.google.android.material.textfield.TextInputEditText
     style="@style/SubTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:textColor="@color/primaryColor"
                     android:textColorHint="@color/primaryColor"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/b_login"
@@ -75,13 +75,13 @@
                 android:id="@+id/ll_otp"
                 android:visibility="gone"
                 android:background="@color/translucent">
-                        <android.support.design.widget.TextInputLayout             android:theme="@style/SubTitle"
+                        <com.google.android.material.textfield.TextInputLayout             android:theme="@style/SubTitle"
                     android:id="@+id/tiv_otp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:textColorHint="@color/primaryColor">
-        <android.support.design.widget.TextInputEditText
+        <com.google.android.material.textfield.TextInputEditText
     style="@style/SubTitle"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                         android:textColor="@color/primaryColor"
                         android:textColorHint="@color/primaryColor"
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tv_resend"
@@ -129,5 +129,5 @@
                 android:layout_centerInParent="true" />
 
         </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 </LinearLayout>

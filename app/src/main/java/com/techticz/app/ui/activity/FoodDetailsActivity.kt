@@ -1,8 +1,8 @@
 package com.techticz.app.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import com.techticz.dietcalendar.R
 import com.techticz.app.base.BaseDIActivity
 import kotlinx.android.synthetic.main.activity_food_details.*

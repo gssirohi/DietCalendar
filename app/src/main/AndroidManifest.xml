@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.techticz.dietcalendar">
 
     <application
@@ -36,35 +37,35 @@
             android:name="com.techticz.app.ui.activity.DeveloperActivity"
             android:label="@string/title_activity_developer"
             android:parentActivityName="com.techticz.app.ui.activity.DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.techticz.app.ui.activity.DashboardActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.techticz.app.ui.activity.BrowseDietPlansActivity"
             android:parentActivityName="com.techticz.app.ui.activity.DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.techticz.app.ui.activity.DashboardActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.techticz.app.ui.activity.DietChartActivity"
             android:label="@string/title_activity_diet_chart"
             android:parentActivityName="com.techticz.app.ui.activity.DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.techticz.app.ui.activity.DashboardActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.techticz.app.ui.activity.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.techticz.app.base.DietPlanActivity"
+            android:name="com.techticz.app.ui.activity.DietPlanActivity"
             android:label="@string/title_activity_diet_plan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.techticz.app.ui.activity.BrowsePlateActivity"
+            android:label="@string/title_activity_browse_plate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.techticz.app.ui.activity.MealPlateActivity"
+            android:label="@string/title_activity_meal_plate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.techticz.app.ui.activity.BrowseRecipeActivity"
+            android:label="@string/title_activity_browse_recipe"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

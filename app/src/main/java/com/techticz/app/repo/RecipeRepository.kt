@@ -1,10 +1,11 @@
 package com.techticz.app.repo
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.RecipeListResponse
@@ -15,6 +16,7 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIRepository
+import com.techticz.app.model.BrowseRecipeResponse
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -76,6 +78,37 @@ class RecipeRepository @Inject constructor(private val db: FirebaseFirestore) : 
                 live.value = resource}
         }
     return live
+    }
+
+    fun fetchRecipesWithText(triggerBrowse: String?): LiveData<Resource<BrowseRecipeResponse>>? {
+        var resp = BrowseRecipeResponse()
+        var resource = Resource<BrowseRecipeResponse>(Status.LOADING, resp, "Loading recipes..", DataSource.LOCAL)
+        var live :MediatorLiveData<Resource<BrowseRecipeResponse>> =  MediatorLiveData<Resource<BrowseRecipeResponse>>()
+        live.value = resource
+        //Thread.sleep(4*1000)
+        //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+
+
+        db.collection(AppCollections.RECIPES.collectionName)
+                // .whereArrayContains(FieldPath.of("basicInfo","name","searchArray"),triggerBrowse!!)
+                .orderBy(FieldPath.of("basicInfo","name","english"))
+                .limit(10)
+                .startAt(triggerBrowse)
+                .endAt(triggerBrowse + '\uf8ff')
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var recipes :List<Recipe> = task.result!!.toObjects(Recipe::class.java)
+                        //callback.onPlansFetched(plans)
+                        var resp = BrowseRecipeResponse()
+                        resp.recipes = recipes
+                        var resource = Resource<BrowseRecipeResponse>(Status.SUCCESS, resp, "Loading Success- recipes", DataSource.LOCAL)
+                        live.value = resource
+                    } else {
+                        Log.e("Repo", "Loading Failed- recipes", task.exception)
+                    }
+                }
+        return live
     }
 
     init {

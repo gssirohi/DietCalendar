@@ -1,7 +1,7 @@
 package com.techticz.app.ui.customView
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(parent?.context) {
+class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(parent?.context) {
 
     init {
         val params = LayoutParams(LayoutParams.MATCH_PARENT,
@@ -46,6 +46,12 @@ class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(par
             onViewModelDataLoaded(resource)
 
         })
+        if(plateView.mode == PlateView.MODE_COLLAPSED){
+            //tv_show_more_less.visibility = View.GONE
+        } else {
+           // tv_show_more_less.visibility = View.VISIBLE
+        }
+
         //foodViewModel?.triggerFoodItem?.value = foodViewModel?.triggerFoodItem?.value
     }
 
@@ -53,9 +59,9 @@ class MealFoodView(parent: ViewGroup?, val mealView: MealView) : FrameLayout(par
         Timber.d("foodViewModel?.liveFoodResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         //ring parent bells
         /*if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
-            var resOld = mealView.mealPlateViewModel?.liveFoodViewModelList?.value
+            var resOld = plateView.mealPlateViewModel?.liveFoodViewModelList?.value
             var resNew = resOld?.createCopy(resource?.status)
-            mealView.mealPlateViewModel?.liveFoodViewModelList?.value = resNew
+            plateView.mealPlateViewModel?.liveFoodViewModelList?.value = resNew
         }*/
         onFoodLoaded(resource)
     }

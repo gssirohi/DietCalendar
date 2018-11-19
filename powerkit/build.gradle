@@ -7,9 +7,14 @@ android {
     compileSdkVersion CONST.BUILD.compileSdkVersion
     buildToolsVersion CONST.BUILD.buildToolsVersion
     defaultConfig {
+
         minSdkVersion CONST.BUILD.minSdkVersion
         targetSdkVersion CONST.BUILD.targetSdkVersion
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode CONST.APP.versionCode
+        versionName CONST.APP.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -36,14 +41,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation REQUIRE.KOTLIN.JRE
-    kapt REQUIRE.KOTLIN.COMPILER
+   // kapt REQUIRE.KOTLIN.COMPILER
 
-    implementation REQUIRE.SUPPORT.V7
-    implementation REQUIRE.SUPPORT.DESIGN
-    implementation REQUIRE.SUPPORT.CARDVIEW
-    implementation REQUIRE.SUPPORT.PALETTE
-    implementation REQUIRE.SUPPORT.V4
-    implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
+    api project(path: ':networking')
+
+    implementation REQUIRE.MATERIAL.DESIGN
+    // implementation REQUIRE.SUPPORT.V7
+    //implementation REQUIRE.SUPPORT.DESIGN
+    //implementation REQUIRE.SUPPORT.CARDVIEW
+    //implementation REQUIRE.SUPPORT.PALETTE
+    //implementation REQUIRE.SUPPORT.V4
+    //implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
 
     implementation REQUIRE.UI.DIALOG
     //implementation REQUIRE.UI.PROGRESS
@@ -73,9 +81,9 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
     api 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
+    api 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
 
-    compile project(path: ':networking')
+
 }
 
 apply plugin: 'kotlin-android-extensions'

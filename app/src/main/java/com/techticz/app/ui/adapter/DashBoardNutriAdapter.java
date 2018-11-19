@@ -4,14 +4,12 @@ package com.techticz.app.ui.adapter;
  * Created by gssirohi on 18/7/16.
  */
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.techticz.app.model.NutriPair;
 import com.techticz.app.model.dietplan.DietPlan;
-import com.techticz.app.viewmodel.ImageViewModel;
 import com.techticz.dietcalendar.R;
 import com.techticz.powerkit.customview.CircleGraphView;
 

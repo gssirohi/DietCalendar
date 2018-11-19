@@ -13,6 +13,14 @@ public class RecipeItem {
     @Expose
     private Integer qty;
 
+    public RecipeItem() {
+    }
+
+    public RecipeItem(String id, Integer qty) {
+        this.id = id;
+        this.qty = qty;
+    }
+
     public String getId() {
         return id;
     }

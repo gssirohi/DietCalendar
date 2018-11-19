@@ -1,4 +1,4 @@
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
@@ -13,7 +13,7 @@
     android:orientation="vertical"
     tools:context="com.techticz.app.ui.activity.UserProfileActivity$PlaceholderFragment">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -38,20 +38,20 @@
                     android:src="@drawable/ic_person_white"
                     android:tint="@color/secondaryColor"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:hint="Height(cm)">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="171"
                         android:inputType="numberDecimal"
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -68,20 +68,20 @@
                     android:src="@drawable/ic_person_white"
                     android:tint="@color/secondaryColor"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:hint="Weight(Kg)">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="65.5"
                         android:inputType="numberDecimal"
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -98,20 +98,20 @@
                     android:src="@drawable/ic_person_white"
                     android:tint="@color/secondaryColor"/>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_target_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:hint="Target Weight(Kg)">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="75"
                         android:inputType="numberDecimal"
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -153,9 +153,9 @@
         </LinearLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -171,7 +171,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:text="Do you drink twice a week, or more?"/>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
@@ -181,4 +181,4 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin" />
 </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

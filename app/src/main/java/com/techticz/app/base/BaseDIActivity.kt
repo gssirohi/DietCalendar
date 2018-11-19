@@ -1,26 +1,27 @@
 package com.techticz.app.base
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.view.View
 import com.techticz.app.ui.Navigator
 import com.techticz.app.viewmodel.UserViewModel
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
+import kotlinx.android.synthetic.main.activity_diet_chart.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.view.*
 
 
@@ -34,7 +35,7 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var  navigator: Navigator
 
     @Inject
-    lateinit var  dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var  dispatchingAndroidInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -53,13 +54,17 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 
 
-    var activityCoordinatorLayout: CoordinatorLayout? = null
+    var activityCoordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         baseuserViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(UserViewModel::class.java)
         baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
         baseuserViewModel.autoLoadChildren(this)
+    }
+
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
     }
     override fun onResume() {
         super.onResume()
@@ -70,33 +75,33 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
             e.printStackTrace()
         }
     }
-    fun addFragment(id: Int, fragment: Fragment) {
+    fun addFragment(id: Int, fragment: androidx.fragment.app.Fragment) {
         supportFragmentManager.beginTransaction()
                 .add(id, fragment)
                 .commit()
     }
 
-    fun addFragmentAndHoldInBackStack(id: Int, fragment: Fragment, tag: String) {
+    fun addFragmentAndHoldInBackStack(id: Int, fragment: androidx.fragment.app.Fragment, tag: String) {
         supportFragmentManager.beginTransaction()
                 .add(id, fragment)
                 .addToBackStack(tag)
                 .commit()
     }
 
-    fun replaceFragment(id: Int, fragment: Fragment) {
+    fun replaceFragment(id: Int, fragment: androidx.fragment.app.Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(id, fragment)
                 .commit()
     }
 
-    fun removeFragment(fragment: Fragment) {
+    fun removeFragment(fragment: androidx.fragment.app.Fragment) {
         supportFragmentManager.beginTransaction()
                 .remove(fragment)
                 .commit()
     }
 
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> {
         return dispatchingAndroidInjector
     }
 

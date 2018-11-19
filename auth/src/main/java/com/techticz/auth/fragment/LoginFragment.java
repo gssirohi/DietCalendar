@@ -2,12 +2,11 @@ package com.techticz.auth.fragment;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +16,10 @@ import android.widget.TextView;
 import com.techticz.auth.LoginActivity;
 import com.techticz.auth.R;
 import com.techticz.auth.constant.AuthProviders;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**

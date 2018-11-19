@@ -1,10 +1,13 @@
 package com.techticz.networking.model;
 
-import android.arch.persistence.room.Ignore;
+
+
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import androidx.room.Ignore;
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 13/12/17.

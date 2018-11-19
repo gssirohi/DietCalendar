@@ -1,8 +1,8 @@
 package com.techticz.app.ui.frag
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +24,7 @@ import timber.log.Timber
  */
 class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
 
+
     private var sectionNumber: Int? = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,7 @@ class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         (activity as DietChartActivity).dietChartViewModel.getDayMealViewModels(sectionNumber!!)?.observe(activity as DietChartActivity, Observer {
             res->
             onDayMealsViewModelLoaded(res)
@@ -54,8 +55,13 @@ class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
 
     override fun onMealCardClicked(section:Int, mealViewModel: MealPlateViewModel){
         showSuccess("Meal Clicked:"+ mealViewModel?.triggerMealPlateID?.value?.mealType?.mealName+" with plate:"+ mealViewModel?.triggerMealPlateID?.value?.mealPlateId)
+        (activity as DietChartActivity).navigator.startExplorePlateScreen(mealViewModel?.triggerMealPlateID?.value?.mealPlateId);
     }
 
+    override fun onCreateCopyClicked() {
+        (activity as DietChartActivity).navigator.startCreatePlanActivity(activity as DietChartActivity,(activity as DietChartActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
+        (activity as DietChartActivity).finish()
+    }
 
     companion object {
         /**

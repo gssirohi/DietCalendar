@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:layout_anchor="@id/app_bar"
-    app:layout_anchorGravity="bottom|end"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:behavior_overlapTop ="100dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.techticz.app.ui.activity.BrowseDietPlansActivity"
     tools:showIn="@layout/activity_browse_diet_plans"
@@ -23,11 +20,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            style="@style/HeadLine1"
-            android:text="Your Diet Plans"/>
+            style="@style/HeadLine2"
+            android:text="Featured Diet Plans"/>
 
         <com.yarolegovich.discretescrollview.DiscreteScrollView
-            android:id="@+id/scroller"
+            android:id="@+id/scroller_featured_plans"
+            android:visibility="visible"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsv_orientation="horizontal"
+            tools:listitem="@layout/meal_plan_list_item_view"/>
+
+        <TextView
+            android:id="@+id/tv_my_plans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            style="@style/HeadLine2"
+            android:text="My Diet Plans"/>
+
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/scroller_my_plans"
             android:visibility="visible"
 
             android:layout_width="match_parent"
@@ -35,4 +49,4 @@
             app:dsv_orientation="horizontal"
             tools:listitem="@layout/meal_plan_list_item_view"/>
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_meal_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_green_light"
+    android:padding="8dp"
+    android:orientation="vertical">
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Small.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/secondaryColor" />
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primaryColor"></View>-->
+    <TextView
+        android:id="@+id/tv_recipes_header"
+        tools:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        style="@style/HeadLine1"
+        android:visibility="gone"
+        android:text="Recipes"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="120dp"
+        tools:listitem="@layout/meal_recipe_layout">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_add_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:text="Add Recipe"/>
+    <TextView
+        android:id="@+id/tv_foods_header"
+        tools:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="4dp"
+        style="@style/HeadLine1"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="Foods"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_height="140dp"
+        tools:listitem="@layout/meal_food_layout">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_add_food"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:text="Add Food"/>
+</LinearLayout>

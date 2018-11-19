@@ -1,8 +1,8 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.techticz.app.model.BrowseDietPlanResponse
 import com.techticz.app.repo.DietPlanRepository
 import com.techticz.networking.livedata.AbsentLiveData
@@ -20,16 +20,26 @@ constructor() : BaseViewModel() {
     @Inject
     lateinit var injectedRepo: DietPlanRepository
 
-    val triggerFetchingMealPlans = MutableLiveData<Boolean>()
-    val dietPlansResponse: LiveData<Resource<BrowseDietPlanResponse>>
-
+    val triggerFeaturedMealPlans = MutableLiveData<Boolean>()
+    val triggerMyMealPlans = MutableLiveData<Boolean>()
+    val featuredDietPlansResponse: LiveData<Resource<BrowseDietPlanResponse>>
+    val myDietPlansResponse: LiveData<Resource<BrowseDietPlanResponse>>
     init {
-         dietPlansResponse = Transformations.switchMap(triggerFetchingMealPlans) { triggerBrowse ->
+         featuredDietPlansResponse = Transformations.switchMap(triggerFeaturedMealPlans) { triggerBrowse ->
             Timber.d("BrowseMealPlan Trigger received.")
             if (triggerBrowse == null) {
                 return@switchMap AbsentLiveData.create<Resource<BrowseDietPlanResponse>>()
             } else {
-                return@switchMap injectedRepo?.browseDietPlansResponseData
+                return@switchMap injectedRepo?.browsePublishedDietPlansResponseData
+            }
+        }
+
+        myDietPlansResponse = Transformations.switchMap(triggerMyMealPlans) { triggerBrowse ->
+            Timber.d("Browse MY MealPlan Trigger received.")
+            if (triggerBrowse == null) {
+                return@switchMap AbsentLiveData.create<Resource<BrowseDietPlanResponse>>()
+            } else {
+                return@switchMap injectedRepo?.browseMyDietPlansResponseData
             }
         }
     }

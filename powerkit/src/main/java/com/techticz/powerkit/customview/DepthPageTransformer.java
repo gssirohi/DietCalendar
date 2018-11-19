@@ -4,7 +4,7 @@ package com.techticz.powerkit.customview;
  * Created by gssirohi on 12/7/17.
  */
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 

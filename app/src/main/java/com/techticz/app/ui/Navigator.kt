@@ -9,6 +9,7 @@ import javax.inject.Inject
 import org.parceler.Parcels
 import com.techticz.auth.LoginActivity
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.ui.activity.DietPlanActivity
 
 
 /**
@@ -45,6 +46,18 @@ fun startDashBoard(){
         activity.startActivityForResult(intent,1)
     }
 
+    fun startCreatePlanActivity() {
+        var intent = Intent(context, DietPlanActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    fun startCreatePlanActivity(activity: Activity, plan: DietPlan?) {
+        var intent = Intent(context, DietPlanActivity::class.java)
+        intent.putExtra("plan", Parcels.wrap<DietPlan>(plan))
+        intent.putExtra("mode", DietPlanActivity.MODE_COPY_FROM_PLAN)
+        activity.startActivityForResult(intent,1)
+    }
+
     fun navigateToLoginActivity(activity:BaseDIActivity) {
         activity.startActivityForResult(Intent(activity, LoginActivity::class.java), 11)
     }
@@ -53,4 +66,33 @@ fun startDashBoard(){
         var intent = Intent(context, UserProfileActivity::class.java)
         context.startActivity(intent)
     }
+
+    fun startCreatePlateScreen() {
+        var intent = Intent(context, MealPlateActivity::class.java)
+        intent.putExtra("mode",MealPlateActivity.MODE_NEW)
+        context.startActivity(intent)
+    }
+
+    fun startBrowseRecipeScreen(activity: Activity) {
+        var intent = Intent(context, BrowseRecipeActivity::class.java)
+        activity.startActivityForResult(intent,1)
+    }
+
+    fun startBrowsePlateScreen(activity: Activity, planId: String,daySection:Int,mealType:String) {
+        var intent = Intent(context, BrowsePlateActivity::class.java)
+        intent.putExtra("planId",planId)
+        intent.putExtra("daySection",daySection)
+        intent.putExtra("mealType",mealType)
+        activity.startActivityForResult(intent,1)
+    }
+
+    fun startExplorePlateScreen(mealPlateId: String?) {
+        var intent = Intent(context, MealPlateActivity::class.java)
+        intent.putExtra("plateId", mealPlateId)
+        intent.putExtra("mode", MealPlateActivity.MODE_EXPLORE)
+        context.startActivity(intent)
+    }
+
+
+
 }

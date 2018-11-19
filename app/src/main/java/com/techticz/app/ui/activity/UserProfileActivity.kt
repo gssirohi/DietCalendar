@@ -1,13 +1,13 @@
 package com.techticz.app.ui.activity
 
-import android.arch.lifecycle.Observer
-import android.support.design.widget.Snackbar
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.Menu
@@ -136,7 +136,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         (fab_backward.parent as View).visibility = View.GONE
         container.offscreenPageLimit = 3
 
-        container?.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+        container?.addOnPageChangeListener(object: androidx.viewpager.widget.ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -245,13 +245,13 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class SectionsPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
         var basicDetailsFrag: BasicDetailsFragment? = null
         var healthDetailsFrag: HealthDetailsFragment? = null
         var mealPrefsFrag: MealPrefFragment? = null
 
-        override fun getItem(position: Int): Fragment {
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
             when(position+1){
                 1-> {
                     if (basicDetailsFrag == null) {
@@ -282,7 +282,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         }
     }
 
-    class BasicDetailsFragment : Fragment() {
+    class BasicDetailsFragment : androidx.fragment.app.Fragment() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
@@ -375,7 +375,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
 
 
 
-    class HealthDetailsFragment : Fragment() {
+    class HealthDetailsFragment : androidx.fragment.app.Fragment() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
@@ -490,7 +490,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         }
     }
 
-    class MealPrefFragment : Fragment() {
+    class MealPrefFragment : androidx.fragment.app.Fragment() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {

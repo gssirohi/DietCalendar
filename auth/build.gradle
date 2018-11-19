@@ -1,20 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-
-
-
+    compileSdkVersion CONST.BUILD.compileSdkVersion
+    buildToolsVersion CONST.BUILD.buildToolsVersion
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion CONST.BUILD.minSdkVersion
+        targetSdkVersion CONST.BUILD.targetSdkVersion
+        versionCode CONST.APP.versionCode
+        versionName CONST.APP.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -28,13 +26,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':powerkit')
 
-    implementation REQUIRE.SUPPORT.V7
-    implementation REQUIRE.SUPPORT.DESIGN
-    implementation REQUIRE.SUPPORT.CARDVIEW
-    implementation REQUIRE.SUPPORT.PALETTE
-    implementation REQUIRE.SUPPORT.V4
-    implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
-//    implementation REQUIRE.SUPPORT.CUSTOM_TABS
+    implementation REQUIRE.MATERIAL.DESIGN
+    // implementation REQUIRE.SUPPORT.V7
+    //implementation REQUIRE.SUPPORT.DESIGN
+    //implementation REQUIRE.SUPPORT.CARDVIEW
+    //implementation REQUIRE.SUPPORT.PALETTE
+    //implementation REQUIRE.SUPPORT.V4
+    //implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
 
     implementation REQUIRE.FIREBASE.CORE
     implementation REQUIRE.FIREBASE.FIRESTORE

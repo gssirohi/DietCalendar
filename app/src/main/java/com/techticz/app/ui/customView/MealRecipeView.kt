@@ -1,10 +1,10 @@
 package com.techticz.app.ui.customView
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +29,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(parent?.context) {
+class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(parent?.context) {
     var liveRecipeNutrition: MediatorLiveData<Resource<Nutrition>> = MediatorLiveData<Resource<Nutrition>>()
 
     init {
@@ -51,12 +51,19 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
     fun fillDetails(recipeViewModel: RecipeViewModel?) {
         this.recipeViewModel = recipeViewModel
         tv_recipe_name.setText(recipeViewModel?.triggerRecipeItem?.value?.id)
-        tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty+"\nserving")
+        et_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+        tv_recipe_qty_unit.setText(" serving")
 
         recipeViewModel?.liveRecipeResponse?.observe(context as BaseDIActivity, Observer { resource ->
             onViewModelDataLoaded(resource)
 
         })
+
+        if(plateView.mode == PlateView.MODE_COLLAPSED){
+            tv_show_more_less.visibility = View.GONE
+        } else {
+            tv_show_more_less.visibility = View.VISIBLE
+        }
 
        /* Timber.i("sending signal for recipe:"+recipeViewModel?.triggerRecipeItem?.value?.id)
         var trigger = recipeViewModel?.triggerRecipeItem?.value
@@ -82,11 +89,12 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
                 spin_kit.visibility = View.INVISIBLE
                 tv_recipe_name.text = resource.data?.recipe?.basicInfo?.name?.english
                 tv_recipe_name.visibility = View.VISIBLE
-                tv_recipe_qty.text = "" + recipeViewModel?.triggerRecipeItem?.value?.qty+
-                        " "+resource.data?.recipe?.standardServing?.servingType
+
+                et_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+                tv_recipe_qty_unit.setText(" "+resource.data?.recipe?.standardServing?.servingType)
 
                 observeChildViewModels(resource)
-                recipeFoodRecyclerView.layoutManager = LinearLayoutManager(context)
+                recipeFoodRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
                 recipeFoodRecyclerView.adapter = RecipeFoodAdapter(this, null)
                 recipeFoodRecyclerView.visibility = View.GONE
                 tv_show_more_less.text = "show more"
@@ -262,9 +270,9 @@ class MealRecipeView(val mealView:MealView,parent: ViewGroup?) : FrameLayout(par
         var factorAppliedNutrients:Nutrients? = nutritions?.nutrients?.applyFactor(finalQtyFactor)
 
 
-        mealView.liveMealNutrition.value?.data?.nutrients?.addUpNutrients(factorAppliedNutrients)
-        var res = Resource<Nutrition>(Status.SUCCESS, mealView.liveMealNutrition.value?.data, "Partialy Loaded..", DataSource.REMOTE)
-        mealView.liveMealNutrition.value = res
+        plateView.liveMealNutrition.value?.data?.nutrients?.addUpNutrients(factorAppliedNutrients)
+        var res = Resource<Nutrition>(Status.SUCCESS, plateView.liveMealNutrition.value?.data, "Partialy Loaded..", DataSource.REMOTE)
+        plateView.liveMealNutrition.value = res
     }*/
 
     }

@@ -1,6 +1,6 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.content.Context
 import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.FoodResponse

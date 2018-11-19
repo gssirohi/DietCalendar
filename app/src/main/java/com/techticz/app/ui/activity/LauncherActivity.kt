@@ -1,10 +1,9 @@
 package com.techticz.dietcalendar.ui.activity
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
@@ -15,7 +14,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
-import com.techticz.dietcalendar.databinding.ActivityLauncherBinding
 import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import com.techticz.networking.model.Resource
@@ -24,7 +22,7 @@ import com.techticz.app.base.BaseDIActivity
 import timber.log.Timber
 import javax.inject.Inject
 import com.techticz.app.model.UserResponse
-import com.techticz.dietcalendar.ui.DietCalendarApplication
+import kotlinx.android.synthetic.main.activity_launch.*
 
 
 /**
@@ -37,7 +35,6 @@ class LauncherActivity : BaseDIActivity() {
     lateinit var welcomeMessage: String
 
     private var launcherViewModel: LauncherViewModel? = null
-    private var launcherBinding: ActivityLauncherBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +60,7 @@ class LauncherActivity : BaseDIActivity() {
         getWindow()
                 .setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         //setContentView(R.layout.activity_launcher)
-        launcherBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher)
+        setContentView(R.layout.activity_launch)
         Timber.d(welcomeMessage)
         launcherViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(LauncherViewModel::class.java)
         launcherViewModel?.launcherResponse?.observe(this, Observer {
@@ -73,12 +70,10 @@ class LauncherActivity : BaseDIActivity() {
         })
         showToast(welcomeMessage);
 
-        launcherBinding?.viewModel1 = launcherViewModel
-
         var handler :Handler = Handler()
         handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },1*1000)
 
-        //launcherViewModel?.triggerFetchingMealPlans?.value = true
+        //launcherViewModel?.triggerFeaturedMealPlans?.value = true
     }
 
     private fun onUserLoaded(res: Resource<UserResponse>?) {
@@ -88,11 +83,11 @@ class LauncherActivity : BaseDIActivity() {
                     //user is registered
                     if(TextUtils.isEmpty(res?.data?.user?.activePlan)){
                         Log.d("LOGIN", "Starting Browse Plan..")
-                        launcherBinding?.tvBottom?.text = "Starting Browse Plan.."
+                        tv_bottom?.text = "Starting Browse Plan.."
                         navigator.startBrowsePlanScreen()
                     } else {
                         Log.d("LOGIN", "Starting Dashboard..")
-                        launcherBinding?.tvBottom?.text = "Starting Dashboard.."
+                        tv_bottom?.text = "Starting Dashboard.."
                         navigator.startDashBoard()
                     }
                     finish()
@@ -101,7 +96,7 @@ class LauncherActivity : BaseDIActivity() {
 
             Status.EMPTY->{
                 Log.d("LOGIN","Registering User..")
-                launcherBinding?.tvBottom?.text = "Registering User.."
+                tv_bottom?.text = "Registering User.."
                 showError(res?.message.toString())
                 navigator.startUserProfileScreen()
                 finish()
@@ -116,20 +111,20 @@ class LauncherActivity : BaseDIActivity() {
         Timber.d("Launcher Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         when(resource?.status){
             Status.LOADING->{
-                launcherBinding?.tvBottom?.text = "Loading.."
+                tv_bottom?.text = "Loading.."
             }
             Status.SUCCESS->
             {
 
-                launcherBinding?.tvCenter?.text = resource.data?.launchMessage
+                tv_center?.text = resource.data?.launchMessage
                 Toast.makeText(this, resource.data?.launchMessage, Toast.LENGTH_SHORT).show()
                 if(TextUtils.isEmpty(LoginUtils.getFirbaseUserId(this)) || FirebaseAuth.getInstance().getCurrentUser() == null) {
-                    launcherBinding?.tvBottom?.text = "starting login.."
+                    tv_bottom?.text = "starting login.."
                     navigator.navigateToLoginActivity(this);
                 } else {
                     //check if registered
                     Log.d("LOGIN","Checking profile..")
-                    launcherBinding?.tvBottom?.text = "checking profile.."
+                    tv_bottom?.text = "checking profile.."
                    // baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
 
                     baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
@@ -139,7 +134,7 @@ class LauncherActivity : BaseDIActivity() {
             }
             Status.ERROR->
             {
-                launcherBinding?.tvCenter?.text = resource.message
+                tv_center?.text = resource.message
             }
         }
 

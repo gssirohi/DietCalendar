@@ -1,6 +1,6 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.model.food.Nutrients

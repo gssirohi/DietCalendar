@@ -4,8 +4,8 @@ package com.techticz.app.base;
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Map;
 

@@ -2,7 +2,7 @@
 <resources>
     <color name="translucent">#BBFFFFFF</color>
     <color name="errorColor">#FF0000</color>
-    <color name="backgroundColor">#fff9c4</color>
+    <color name="backgroundColor">@color/primaryColor</color>
     <color name="surfaceColor">@color/primaryLightColor</color>
     <color name="sheetColor">@color/primaryColor</color>
 </resources>

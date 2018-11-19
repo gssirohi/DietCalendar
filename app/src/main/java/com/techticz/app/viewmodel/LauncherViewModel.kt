@@ -1,8 +1,8 @@
 package com.techticz.dietcalendar.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.techticz.dietcalendar.model.LauncherResponse
 import com.techticz.dietcalendar.repo.AppRepository
 import com.techticz.networking.livedata.AbsentLiveData

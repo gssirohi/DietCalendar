@@ -10,6 +10,13 @@ import org.parceler.Parcel;
 public class Calendar {
 
     public Calendar() {
+        monday = new DayPlan();
+        tuesday = new DayPlan();
+        wednesday = new DayPlan();
+        thursday = new DayPlan();
+        friday = new DayPlan();
+        saturday = new DayPlan();
+        sunday = new DayPlan();
     }
 
     @SerializedName("monday")

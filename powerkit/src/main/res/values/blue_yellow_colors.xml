@@ -1,11 +1,11 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="primaryColor">#1875d1</color>
+<!--  <color name="primaryColor">#1875d1</color>
   <color name="primaryLightColor">#63a3ff</color>
   <color name="primaryDarkColor">#004a9f</color>
   <color name="secondaryColor">#ffea00</color>
   <color name="secondaryLightColor">#ffff56</color>
   <color name="secondaryDarkColor">#c7b800</color>
   <color name="onPrimary">#ffffff</color>
-  <color name="onSecondary">#000000</color>
+  <color name="onSecondary">#000000</color>-->
 </resources>

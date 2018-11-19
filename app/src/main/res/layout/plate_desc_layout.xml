@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/holo_red_light"
+
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+    <com.techticz.app.ui.customView.AppImageView
+        android:id="@+id/aiv_meal_plate"
+        android:layout_width="match_parent"
+        android:layout_height="148dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_night"
+        tools:visibility="visible" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_plate_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_meal_plate_calories"
+            android:layout_gravity="left|top"
+            android:layout_margin = "8dp"
+            android:hint="Plate Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="My PLate"
+                tools:visibility="visible" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_plate_desc"
+            android:layout_weight="4"
+            android:layout_below="@+id/til_plate_name"
+            android:layout_width="match_parent"
+            android:gravity="left"
+            android:layout_gravity="left|bottom"
+            android:layout_margin = "8dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:hint="Plate Description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_meal_plate_desc"
+                tools:visibility="visible"
+                tools:text="My PLate Description"
+                style="@style/Body1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:id="@+id/ll_plate_header"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/translucent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_meal_plate_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center"
+            android:gravity="center|left"
+            android:maxLines="1"
+            style="@style/HeadLine1"
+            android:text="\u25D9"
+            android:textColor="@android:color/holo_green_dark"
+            android:visibility="visible"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_meal_plate_calories"
+            android:layout_width="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="right|center"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            style="@style/Title"
+            tools:text="1207364 Cals"
+            android:visibility="invisible"
+            tools:visibility="visible"/>
+</LinearLayout>
+
+</LinearLayout>

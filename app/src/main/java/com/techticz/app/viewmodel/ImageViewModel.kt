@@ -1,9 +1,9 @@
 package com.techticz.app.viewmodel
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import android.content.Context
 import android.graphics.Bitmap
 import com.techticz.app.model.ImageResponse

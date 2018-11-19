@@ -16,8 +16,8 @@
 
 package com.techticz.networking.model;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * A generic class that holds a value with its loading status.

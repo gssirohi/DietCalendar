@@ -1,7 +1,7 @@
 package com.techticz.app.repo
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore

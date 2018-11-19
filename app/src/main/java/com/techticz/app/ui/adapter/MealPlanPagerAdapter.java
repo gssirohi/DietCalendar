@@ -4,8 +4,8 @@ package com.techticz.app.ui.adapter;
  * Created by gssirohi on 18/7/16.
  */
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.support.v7.widget.RecyclerView;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.techticz.app.model.ImageResponse;
 import com.techticz.app.model.dietplan.DietPlan;
-import com.techticz.app.repo.ImageRepository;
 import com.techticz.app.viewmodel.ImageViewModel;
 import com.techticz.dietcalendar.R;
 import com.techticz.app.ui.customView.AppImageView;
-import com.techticz.networking.model.Resource;
-import com.techticz.networking.model.Status;
-import com.techticz.app.base.BaseDIActivity;
 
 import java.util.List;
-import java.util.Observer;
-
-import javax.inject.Inject;
 
 
 public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdapter.MealPlanViewHolder> {

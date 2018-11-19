@@ -1,6 +1,6 @@
 package com.techticz.app.ui.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.techticz.app.ui.customView.MealFoodView
@@ -12,9 +12,9 @@ import kotlinx.android.synthetic.main.meal_food_layout.view.*
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 7/10/18.
  */
-class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var callBack:RecipItemCallBacks?): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var callBack:RecipItemCallBacks?): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is RecipeFoodViewHolder) {
             // holder.mItem = mValues.get(position);
             var foodViewModel = mealRecipeView?.recipeViewModel?.liveFoodViewModelList?.value?.data?.get(position)
@@ -34,13 +34,13 @@ class RecipeFoodAdapter constructor(var mealRecipeView: MealRecipeView, var call
         return mealRecipeView?.recipeViewModel?.liveFoodViewModelList?.value?.data?.size!!
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
             val view = RecipeFoodView(parent, mealRecipeView)
             var holder =  RecipeFoodViewHolder(view)
                 return holder
     }
 
-    class RecipeFoodViewHolder(val recipeFoodView: RecipeFoodView) : RecyclerView.ViewHolder(recipeFoodView) {}
+    class RecipeFoodViewHolder(val recipeFoodView: RecipeFoodView) : androidx.recyclerview.widget.RecyclerView.ViewHolder(recipeFoodView) {}
     interface RecipItemCallBacks{
         fun onFoodItemClicked(item: FoodViewModel?)
     }

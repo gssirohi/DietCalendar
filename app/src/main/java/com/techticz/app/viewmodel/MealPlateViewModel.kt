@@ -1,20 +1,18 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.content.Context
 import android.text.TextUtils
-import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.meal.Meal
-import com.techticz.app.repo.FoodRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
 import com.techticz.app.base.BaseViewModel
+import com.techticz.app.model.mealplate.RecipeItem
 import timber.log.Timber
 import javax.inject.Inject
 import com.techticz.app.repo.MealPlateRepository
-import com.techticz.app.repo.RecipeRepository
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Status
@@ -126,7 +124,12 @@ constructor() : BaseViewModel() {
 
     private fun observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner: LifecycleOwner) {
         liveRecipeViewModelList?.observe(lifecycleOwner, Observer { resource->
-            when(resource?.status){ Status.EMPTY->loadRecipeViewModels(lifecycleOwner)}
+            when(resource?.status){
+                Status.EMPTY->{
+                    var recipes = liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
+                    loadRecipeViewModels(lifecycleOwner, recipes!!)
+                }
+            }
         })
         liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->
             when(resource?.status){ Status.EMPTY->loadFoodViewModels(lifecycleOwner)}
@@ -164,8 +167,7 @@ constructor() : BaseViewModel() {
 
     }
 
-    private fun loadRecipeViewModels(lifecycleOwner: LifecycleOwner) {
-        var recipes = liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
+    fun loadRecipeViewModels(lifecycleOwner: LifecycleOwner, recipes: MutableList<RecipeItem>) {
 
         var recipeViewModelList = ArrayList<RecipeViewModel>()
 

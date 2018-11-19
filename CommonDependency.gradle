@@ -11,26 +11,27 @@ ext {
                     versionName  : "Version A",
             ],
             KOTLIN     : [
-                    version          : '1.2.10',
+                    version          : '1.3.0',
                     correctErrorTypes: true,
             ],
 
             DATABINDING: [
                     enabled        : true,
-                    compilerVersion: "3.0.0"
+                    compilerVersion: "3.1.0-alpha06"
             ],
 
             BUILD      : [
                     compileSdkVersion  : 28,
-                    buildToolsVersion  : "26.0.2",
+                    buildToolsVersion  : "28.0.3",
                     minSdkVersion      : 19,
                     targetSdkVersion   : 28,
-                    gradlePluginVersion: "3.0.0",
+                    gradlePluginVersion: "3.1.0-alpha06",
             ],
             ANDROID    : [
                     LIBS: [
-                            supportLibraryVersion: "27.0.1", //"26.1.0"
+                            supportLibraryVersion: "28.0.0", //"26.1.0"
                             playServiceVersion   : "11.6.0",
+                            materialVersion : "1.0.0-rc01"
                     ],
                     ARCH: [
                             lifeCycleVersion: "1.0.0",
@@ -40,7 +41,7 @@ ext {
                             parcelerVersion         : '1.1.11',
                             scrollerVersion         : '1.2.0',
                             constraintLayoutVersion : '1.0.2',
-                            customTabsVersion       : '26.0.0',
+                            customTabsVersion       : '28.0.0',
                             materialProgressVersion : '1.0.0',
                             materialDialogVersion   : "0.9.4.7",
                             scaleImageViewVersion   : "3.6.0",
@@ -73,7 +74,7 @@ ext {
             ],
             OTHER      : [
                     timberVersion: "4.5.1",
-                    daggerVersion: "2.11"
+                    daggerVersion: "2.16"
             ]
     ]
 
@@ -85,8 +86,12 @@ ext {
               AUTH:'com.google.firebase:firebase-auth:'+ CONST.FIREBASE.authVersion
             ],
             KOTLIN    : [
-                    JRE     : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:' + CONST.KOTLIN.version,
+                    JRE     : 'org.jetbrains.kotlin:kotlin-stdlib:' + CONST.KOTLIN.version,
                     COMPILER: 'com.android.databinding:compiler:' + CONST.DATABINDING.compilerVersion
+            ],
+            MATERIAL   :[
+                    DESIGN: 'com.google.android.material:material:'+CONST.ANDROID.LIBS.materialVersion
+
             ],
 
             SUPPORT   : [
@@ -113,13 +118,13 @@ ext {
 
             ARCH      : [
                     LIFECYCLE: [
-                            RUNTIME  : 'android.arch.lifecycle:runtime:' + CONST.ANDROID.ARCH.lifeCycleVersion,
-                            EXTENSION: 'android.arch.lifecycle:extensions:' + CONST.ANDROID.ARCH.lifeCycleVersion,
-                            COMPILER : 'android.arch.lifecycle:compiler:' + CONST.ANDROID.ARCH.lifeCycleVersion
+                            RUNTIME  : 'androidx.lifecycle:lifecycle-runtime:2.0.0-rc01', //'android.arch.lifecycle:runtime:' + CONST.ANDROID.ARCH.lifeCycleVersion,
+                            EXTENSION: 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01',//'android.arch.lifecycle:extensions:' + CONST.ANDROID.ARCH.lifeCycleVersion,
+                            COMPILER : 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'//'android.arch.lifecycle:compiler:' + CONST.ANDROID.ARCH.lifeCycleVersion
                     ],
                     ROOM     : [
-                            RUNTIME : 'android.arch.persistence.room:runtime:' + CONST.ANDROID.ARCH.roomVersion,
-                            COMPILER: 'android.arch.persistence.room:compiler:' + CONST.ANDROID.ARCH.roomVersion
+                            RUNTIME : 'androidx.room:room-runtime:2.0.0-rc01',//'android.arch.persistence.room:runtime:' + CONST.ANDROID.ARCH.roomVersion,
+                            COMPILER: 'androidx.room:room-compiler:2.0.0-rc01'//'android.arch.persistence.room:compiler:' + CONST.ANDROID.ARCH.roomVersion
                     ]
             ],
 

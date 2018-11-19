@@ -1,6 +1,5 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-<!--
   <color name="primaryColor">#ad1457</color>
   <color name="primaryLightColor">#e35183</color>
   <color name="primaryDarkColor">#78002e</color>
@@ -11,7 +10,6 @@
   <color name="onPrimary">#ffffff</color>
   <color name="onSecondary">#000000</color>
 
--->
 
 
 </resources>

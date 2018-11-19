@@ -1,6 +1,6 @@
 package com.techticz.app.base
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
 

@@ -195,7 +195,7 @@
 
 
     <style name="TextAction" parent="Text.VeryLight.Bold">
-        <item name = "android:textColor">@color/onPrimary</item>
+        <item name = "android:textColor">@color/onSecondary</item>
         <item name = "android:clickable">true</item>
         <item name = "android:textAllCaps">true</item>
         <item name="android:drawableRight">@drawable/ic_keyboard_arrow_right</item>

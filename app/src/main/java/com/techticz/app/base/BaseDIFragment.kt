@@ -1,12 +1,12 @@
 package com.techticz.app.base
 
-import android.arch.lifecycle.ViewModelProvider
-import android.support.v4.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
-open class BaseDIFragment : Fragment(), Injectable {
+open class BaseDIFragment : androidx.fragment.app.Fragment(), Injectable {
 
     val viewModelFactory: ViewModelProvider.Factory?
         @Throws(Exception::class)
@@ -21,7 +21,7 @@ open class BaseDIFragment : Fragment(), Injectable {
             return null
         }
 
-    val toolbar: android.support.v7.widget.Toolbar?
+    val toolbar: androidx.appcompat.widget.Toolbar?
         get() = if (activity is BaseDIActivity) {
             (activity as BaseDIActivity).activityToolbar
         } else {

@@ -1,6 +1,6 @@
 package com.techticz.app.viewmodel
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.Meals
@@ -248,5 +248,32 @@ constructor() : BaseViewModel() {
     fun isMyPlan(): Boolean {
         var creator = liveDietPlanResponse?.value?.data?.dietPlan?.adminInfo?.createdBy
         return LoginUtils.getUserCredential().equals(creator,true)
+    }
+
+    fun addMealInDietPlan(daySection: Int?, mealType: String?, plateId: String?, listner: DietPlanRepository.DietPlanCallBack) {
+        var dietPlan = liveDietPlanResponse?.value?.data?.dietPlan
+
+        var dayPlan = dietPlan?.calendar?.monday
+        when(daySection){
+            1-> dayPlan = dietPlan?.calendar?.monday
+            2->dayPlan = dietPlan?.calendar?.tuesday
+            3->dayPlan = dietPlan?.calendar?.wednesday
+            4->dayPlan = dietPlan?.calendar?.thursday
+            5->dayPlan = dietPlan?.calendar?.friday
+            6->dayPlan = dietPlan?.calendar?.saturday
+            7->dayPlan = dietPlan?.calendar?.sunday
+        }
+
+        when(mealType){
+            Meals.EARLY_MORNING.id-> dayPlan?.earlyMorning = plateId
+            Meals.BREAKFAST.id-> dayPlan?.breakfast = plateId
+            Meals.LUNCH.id-> dayPlan?.lunch = plateId
+            Meals.BRUNCH.id-> dayPlan?.brunch = plateId
+            Meals.DINNER.id-> dayPlan?.dinner = plateId
+            Meals.BED_TIME.id-> dayPlan?.bedTime = plateId
+        }
+
+        injectedRepo.updatePlan(dietPlan,listner)
+
     }
 }

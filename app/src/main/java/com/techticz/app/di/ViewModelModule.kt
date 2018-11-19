@@ -1,14 +1,11 @@
 package com.techticz.dietcalendar.di
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import com.techticz.app.viewmodel.BrowseDietPlanViewModel
-import com.techticz.app.viewmodel.DietChartViewModel
-import com.techticz.app.viewmodel.MealPlateViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.techticz.dietcalendar.viewmodel.LauncherViewModel
 import com.techticz.app.base.BaseViewModelFactory
 import com.techticz.app.base.ViewModelKey
-import com.techticz.app.viewmodel.UserViewModel
+import com.techticz.app.viewmodel.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -30,6 +27,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BrowseDietPlanViewModel::class)
     internal abstract fun bindBrowseDietPlanViewModel(browserPlanViewModel: BrowseDietPlanViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BrowsePlateViewModel::class)
+    internal abstract fun bindBrowsePlateViewModel(browserPlateViewModel: BrowsePlateViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BrowseRecipeViewModel::class)
+    internal abstract fun bindBrowseRecipeViewModel(browserRecipeViewModel: BrowseRecipeViewModel): ViewModel
 
     @Binds
     @IntoMap

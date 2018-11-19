@@ -17,8 +17,8 @@ android {
         targetSdkVersion CONST.BUILD.targetSdkVersion
         versionCode CONST.APP.versionCode
         versionName CONST.APP.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
 
     }
@@ -43,7 +43,7 @@ android {
 
 dependencies {
 
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
 
     api project(':powerkit')
     api project(':auth')
@@ -54,16 +54,17 @@ dependencies {
     implementation REQUIRE.UI.SPINKIT
 
     implementation REQUIRE.UI.PARCELER
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     kapt REQUIRE.UI.PARCELER_PROCESSOR
 
-    kapt REQUIRE.KOTLIN.COMPILER
-
-    implementation REQUIRE.SUPPORT.V7
-    implementation REQUIRE.SUPPORT.DESIGN
-    implementation REQUIRE.SUPPORT.CARDVIEW
-    implementation REQUIRE.SUPPORT.PALETTE
-    implementation REQUIRE.SUPPORT.V4
-    implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
+    //kapt REQUIRE.KOTLIN.COMPILER
+    implementation REQUIRE.MATERIAL.DESIGN
+    // implementation REQUIRE.SUPPORT.V7
+    //implementation REQUIRE.SUPPORT.DESIGN
+    //implementation REQUIRE.SUPPORT.CARDVIEW
+    //implementation REQUIRE.SUPPORT.PALETTE
+    //implementation REQUIRE.SUPPORT.V4
+    //implementation REQUIRE.SUPPORT.CONSTRAINT_LAYOUT
 
     implementation REQUIRE.NETWORKING.RETROFIT
     implementation REQUIRE.NETWORKING.RETROFIT_ADAPTER_RXJAVA
@@ -93,7 +94,12 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
-    compile project(path: ':networking')
+    api project(path: ':networking')
 }
-
+/*afterEvaluate {
+    android.applicationVariants.all {
+        def name = it.name.capitalize()
+        tasks["kapt${name}Kotlin"].dependsOn("transformDataBindingWithDataBindingMergeArtifactsFor${name}")
+    }
+}*/
 apply plugin: 'com.google.gms.google-services'

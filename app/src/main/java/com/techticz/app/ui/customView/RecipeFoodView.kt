@@ -1,6 +1,6 @@
 package com.techticz.app.ui.customView
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View

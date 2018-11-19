@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:background="@android:color/holo_green_light"
+    android:layout_height="wrap_content">
+<com.techticz.app.ui.customView.AppImageView
+    android:id="@+id/aiv_recipe"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:src="@drawable/app_icon"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_recipe_cal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/OverLine"
+            tools:text = "430 cal"/>
+        <TextView
+            android:id="@+id/tv_recipe_name"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/HeadLine2"
+            tools:text = "Recipe Name"/>
+        <TextView
+            android:id="@+id/tv_recipe_desc"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Body2"
+            tools:text = "Recipe Desc sjfhjh djfhj dfh jdfhjdfh jdh fd fh djhf jd fhjf"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,6 +1,6 @@
 package com.techticz.networking.livedata;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import com.techticz.networking.model.ApiResponse;
 

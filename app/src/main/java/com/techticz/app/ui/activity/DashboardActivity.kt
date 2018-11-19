@@ -1,13 +1,13 @@
 package com.techticz.app.ui.activity
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.navigation.NavigationView
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.text.format.DateUtils
 import android.view.Menu
@@ -177,8 +177,8 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
                 nutriList.add(NutriPair("Iron",dayNutrients?.mineralsAndTraceElements?.iron,20f))
                 nutriList.add(NutriPair("Calcium",dayNutrients?.mineralsAndTraceElements?.calcium,20f))
 
-                nutri_scroller.adapter.notifyDataSetChanged()
-                nutri_scroller.layoutManager.scrollToPosition(2)
+                nutri_scroller.adapter?.notifyDataSetChanged()
+                nutri_scroller.layoutManager?.scrollToPosition(2)
 
                 var mealView = MealView(day,this)
                 mealView.fillDetails(dietChartViewModel.getDayMealViewModels(day)?.value?.data?.get(0)!!)

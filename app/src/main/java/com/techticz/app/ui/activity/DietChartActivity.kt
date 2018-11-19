@@ -1,10 +1,12 @@
 package com.techticz.app.ui.activity
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.support.design.widget.TabLayout
-import android.support.design.widget.Snackbar
+import android.content.Context
+import android.content.Intent
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.snackbar.Snackbar
 
 import android.os.Bundle
 import android.view.Menu
@@ -16,9 +18,12 @@ import com.techticz.app.ui.adapter.DietChartPagerAdapter
 import com.techticz.dietcalendar.R
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.UserResponse
+import com.techticz.app.model.meal.Meal
+import com.techticz.app.repo.DietPlanRepository
 import kotlinx.android.synthetic.main.activity_diet_chart.*
 import org.parceler.Parcels
 import com.techticz.app.repo.UserRepository
+import com.techticz.app.ui.customView.MealView
 import com.techticz.app.viewmodel.DietChartViewModel
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
@@ -28,14 +33,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback {
-    override fun onRegistered(userId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, DietPlanRepository.DietPlanCallBack {
 
-    override fun onRegistrationFailure() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     override fun onUpdated(id: String) {
         showError("Plan activated successfully..")
@@ -161,4 +160,49 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            var plateId = data?.getStringExtra("plateId")
+            var daySection = data?.getIntExtra("daySection",0)
+            var mealType = data?.getStringExtra("mealType")
+            //add this plate to this plan
+            requestingMealView?.mealPlateViewModel?.triggerMealPlateID?.value = Meal(requestingMealView?.mealPlateViewModel?.triggerMealPlateID?.value?.mealType!!,plateId)
+            requestingMealView?.fillDetails(requestingMealView?.mealPlateViewModel!!)
+            dietChartViewModel?.addMealInDietPlan(daySection,mealType,plateId,this)
+        }
+    }
+
+    override fun onPlanCreated(planId: DietPlan) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onCreatePlanFailure() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPlanUpdated(plan: DietPlan) {
+        showSuccess("Plan updated successfully..")
+
+    }
+
+    override fun onPlanUpdateFailure() {
+        showError("Plan could not be updated!")
+    }
+
+    override fun onRegistered(userId: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRegistrationFailure() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private lateinit var requestingMealView: MealView
+
+    fun startBrowsePlateScreen(mealView: MealView) {
+        requestingMealView = mealView
+        navigator.startBrowsePlateScreen(this,dietChartViewModel?.triggerFetchDietPlan?.value!!,mealView?.daySection!!,mealView?.mealPlateViewModel?.triggerMealPlateID?.value?.mealType?.id!!)
+    }
 }

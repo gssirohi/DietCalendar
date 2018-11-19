@@ -4,9 +4,9 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="250dp"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     card_view:contentPadding="0dp"
@@ -21,7 +21,7 @@
     <com.techticz.app.ui.customView.AppImageView
         android:id="@+id/aiv_plan_image"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="100dp"
         android:src="@drawable/bg_afternoon"
         android:scaleType="centerCrop"/>
 
@@ -81,15 +81,16 @@
             android:layout_weight="8"
             style="@style/HeadLine1"
             />
-        <android.support.v7.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/b_explore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Action"
             android:text = "Explore"
             android:layout_weight="1"
             android:layout_margin="5dp"
             />
     </LinearLayout>
 </LinearLayout>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
 </LinearLayout>
