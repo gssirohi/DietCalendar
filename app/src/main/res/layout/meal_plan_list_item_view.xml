@@ -1,21 +1,24 @@
-<LinearLayout android:layout_width="wrap_content"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.card.MaterialCardView
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="0dp"
     card_view:contentPadding="0dp"
-    style="@style/AppCardView">
+    android:theme="@style/Component.Dark"
+    style="?attr/materialCardViewStyle"
+    >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
 
     <com.techticz.app.ui.customView.AppImageView
@@ -30,12 +33,13 @@
         android:layout_height="wrap_content"
         android:text = "Plan Name"
         android:id="@+id/plan_name"
-        android:layout_margin="5dp"
-        style="@style/Title"
+        android:layout_margin="4dp"
+        style="?attr/textAppearanceSubtitle1"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/plan_type"
@@ -43,17 +47,16 @@
             android:layout_height="wrap_content"
             android:text = "\u25D9"
             android:gravity="center"
-            android:layout_margin="5dp"
-            style="@style/Body1"
+            style="?attr/textAppearanceBody2"
             />
         <TextView
             android:id="@+id/plan_verified"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text = "Includes Meat"
-            android:layout_margin="5dp"
-            style="@style/Note"
+            android:text = "Includes Cheese"
+            android:layout_marginLeft="4dp"
+            style="?attr/textAppearanceCaption"
             />
     </LinearLayout>
 
@@ -62,13 +65,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "This is plan description. Here we should describe all features of this plan"
-        android:layout_margin="5dp"
-        style="@style/Body2"
+        android:padding="4dp"
+        android:maxLines="2"
+        android:minLines="2"
+        style="?attr/textAppearanceBody2"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/plan_access"
@@ -77,20 +83,30 @@
             android:text = "Free"
             android:gravity="start|center_vertical"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
             android:layout_weight="8"
-            style="@style/HeadLine1"
+            style="?attr/textAppearanceHeadline5"
             />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/b_explore"
+        <TextView
+            android:id="@+id/tv_daily_cal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Action"
-            android:text = "Explore"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:text = "2500 Kcal Daily"
+            android:gravity="start|center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            style="?attr/textAppearanceCaption"
             />
     </LinearLayout>
 </LinearLayout>
-</androidx.cardview.widget.CardView>
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/b_explore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/aiv_plan_image"
+        app:fabCustomSize="28dp"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/ic_action_process_start"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

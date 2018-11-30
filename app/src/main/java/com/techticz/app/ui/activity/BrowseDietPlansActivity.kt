@@ -35,7 +35,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         fab.setOnClickListener { view ->
             onCreatePlanClicked()
         }
-        scroller_featured_plans.adapter = MealPlanPagerAdapter(featuredPlanList,this)
+        scroller_featured_plans.adapter = MealPlanPagerAdapter(this,featuredPlanList,this)
 
         scroller_featured_plans.setItemTransformer(ScaleTransformer.Builder()
                         .setMaxScale(1.05f)
@@ -44,7 +44,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
                         .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
                         .build());
 
-        scroller_my_plans.adapter = MealPlanPagerAdapter(myPlanList,this)
+        scroller_my_plans.adapter = MealPlanPagerAdapter(this,myPlanList,this)
 
         scroller_my_plans.setItemTransformer(ScaleTransformer.Builder()
                 .setMaxScale(1.05f)

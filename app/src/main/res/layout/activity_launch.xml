@@ -2,9 +2,9 @@
 <FrameLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/card_bg"
     android:padding="24dp"
     tools:context="com.techticz.dietcalendar.ui.activity.LauncherActivity"
+    android:background="?attr/colorPrimary"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -17,7 +17,7 @@
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/dummy_content"
-        style="@style/SubTitle" />
+        style="?attr/textAppearanceSubtitle2" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,15 +32,12 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:text="DIET CALENDAR"
-            style="@style/HeadLine1"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
+            style="?attr/textAppearanceHeadline5"
             />
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_today"
-            android:tint="#FFFFFF"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/app_icon"
             android:gravity="center"
             android:layout_gravity="center"/>
     <TextView
@@ -50,7 +47,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:text=""
-        style="@style/HeadLine1"
+        style="?attr/textAppearanceHeadline5"
         tools:text = "Main Display"
         />
     </LinearLayout>
@@ -62,6 +59,6 @@
         android:layout_gravity="bottom"
         android:keepScreenOn="true"
         android:text="wait.."
-        style="@style/SubTitle"
+        style="?attr/textAppearanceSubtitle2"
          />
 </FrameLayout>

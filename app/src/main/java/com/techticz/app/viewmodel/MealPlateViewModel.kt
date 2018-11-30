@@ -187,14 +187,49 @@ constructor() : BaseViewModel() {
 
     }
 
+    fun removeRecipeViewModel(lifecycleOwner: LifecycleOwner,recipeItem:RecipeItem){
+        var res = liveRecipeViewModelList?.value
+        var newList = ArrayList<RecipeViewModel>()
+        res?.data?.let {
+            for(recipe in it){
+                if(recipe.triggerRecipeItem?.value?.id!!.equals(recipeItem.id)){
+
+                } else {
+                    newList.add(recipe)
+                }
+            }
+        }
+
+        var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.COMPLETE, newList, "Remove recipe..", DataSource.LOCAL)
+        liveRecipeViewModelList?.value= recipeViewModelListResource
+    }
+
+    fun addRecipeViewModel(lifecycleOwner: LifecycleOwner,recipeItem:RecipeItem){
+        var res = liveRecipeViewModelList?.value
+        var newList = ArrayList<RecipeViewModel>()
+        res?.data?.let { newList.addAll(it) }
+        var vm = RecipeViewModel()
+        vm.autoLoadChildren(lifecycleOwner)
+        vm.triggerRecipeItem.value = recipeItem
+        vm.liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->when(resource?.status){
+            Status.COMPLETE-> registerChildCompletion();
+        } })
+        newList.add(vm)
+
+        var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.LOADING, newList, "Added recipe..", DataSource.LOCAL)
+        liveRecipeViewModelList?.value= recipeViewModelListResource
+    }
+
     private fun registerChildCompletion() {
         var isAllCompleted = true
-        for(child in this.liveFoodViewModelList?.value?.data!!){
-            if(child.liveFoodResponse?.value?.status == Status.SUCCESS ||
-                    child.liveFoodResponse?.value?.status == Status.ERROR){
-                //do nothing
-            } else {
-                isAllCompleted = false
+        this.liveFoodViewModelList?.value?.data?.let {
+            for (child in it) {
+                if (child.liveFoodResponse?.value?.status == Status.SUCCESS ||
+                        child.liveFoodResponse?.value?.status == Status.ERROR) {
+                    //do nothing
+                } else {
+                    isAllCompleted = false
+                }
             }
         }
 
@@ -205,11 +240,13 @@ constructor() : BaseViewModel() {
 
         isAllCompleted = true
 
-        for(child in this.liveRecipeViewModelList?.value?.data!!){
-            if(child.liveFoodViewModelList?.value?.status == Status.COMPLETE){
-                //do nothing
-            } else {
-                isAllCompleted = false
+        this.liveRecipeViewModelList?.value?.data?.let {
+            for (child in it) {
+                if (child.liveFoodViewModelList?.value?.status == Status.COMPLETE) {
+                    //do nothing
+                } else {
+                    isAllCompleted = false
+                }
             }
         }
 
@@ -217,5 +254,11 @@ constructor() : BaseViewModel() {
             var newRes = liveRecipeViewModelList?.value?.createCopy(Status.COMPLETE)
             liveRecipeViewModelList?.value = newRes
         }
+    }
+
+    fun hasItems(): Boolean {
+        liveRecipeViewModelList?.value?.data?.let { if(it.size > 1) return true }
+        liveFoodViewModelList?.value?.data?.let { if(it.size > 1) return true }
+        return false
     }
 }

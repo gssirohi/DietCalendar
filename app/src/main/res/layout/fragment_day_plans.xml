@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:padding="8dp"
     android:orientation="vertical"
-    android:background="@color/onPrimary"
     tools:context="com.techticz.app.ui.activity.DietChartActivity$PlaceholderFragment">
 
     <androidx.recyclerview.widget.RecyclerView

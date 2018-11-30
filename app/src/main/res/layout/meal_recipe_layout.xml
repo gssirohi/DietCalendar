@@ -55,7 +55,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:maxLines="1"
-            style="@style/SubTitle"
+            style="?attr/textAppearanceSubtitle2"
             android:text="\u25D9"
             android:textColor="@android:color/holo_green_dark"
             android:visibility="visible"
@@ -66,35 +66,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        style="@style/Title"
+        style="?attr/textAppearanceSubtitle2"
         android:text="This is Recipe Name"
         android:visibility="invisible"
         tools:visibility="visible"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
-            android:layout_weight="1"
-            android:layout_marginTop="4dp"
-            android:id="@+id/et_recipe_qty"
-            android:layout_width="30dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_remove"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="number"
+            android:layout_marginRight="8dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_clear"
+            app:fabCustomSize="24dp"
+            android:backgroundTint="@color/errorColor"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:layout_gravity="left" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_action_minus"
+            android:layout_margin="4dp"
+            app:fabCustomSize="24dp"
+            android:layout_gravity="left" />
+        <TextView
+            android:id="@+id/tv_recipe_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
             android:gravity="center"
-            style="@style/Body1"
+            android:layout_marginLeft="4dp"
+            style="?attr/textAppearanceHeadline6"
             tools:text="2"/>
         <TextView
             android:layout_weight="1"
-            android:layout_marginTop="4dp"
             android:id="@+id/tv_recipe_qty_unit"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            style="@style/Body1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="left|center_vertical"
+            style="?attr/textAppearanceBody2"
             tools:text="peices"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_action_add"
+            app:fabCustomSize="24dp"
+            android:layout_gravity="right" />
     </LinearLayout>
 
 
@@ -105,7 +134,7 @@
             android:layout_weight="1"
             android:id="@+id/tv_recipe_calory"
             android:layout_gravity="center|right"
-            style="@style/Body1"
+            style="?attr/textAppearanceBody2"
             android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

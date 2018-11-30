@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/holo_red_light"
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical">
@@ -15,19 +17,45 @@ android:orientation="vertical">
         android:src="@drawable/bg_night"
         tools:visibility="visible" />
 
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_weight="1"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_plate_desc"
+        style="@style/SpinKitView.Small.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:visibility="invisible"
+        app:SpinKit_Color="@color/secondaryColor" />
+    <TextView
+        android:id="@+id/tv_plate_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Plate Name"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        style="?attr/textAppearanceHeadline6"/>
+    <TextView
+        android:id="@+id/tv_plate_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Plate Description"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        style="?attr/textAppearanceBody2"/>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_plate_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tv_meal_plate_calories"
             android:layout_gravity="left|top"
-            android:layout_margin = "8dp"
+            android:layout_margin="8dp"
             android:hint="Plate Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Title"
+                style="?attr/textAppearanceSubtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="My PLate"
@@ -41,8 +69,8 @@ android:orientation="vertical">
             android:layout_below="@+id/til_plate_name"
             android:layout_width="match_parent"
             android:gravity="left"
+            android:layout_margin="8dp"
             android:layout_gravity="left|bottom"
-            android:layout_margin = "8dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:hint="Plate Description"
@@ -51,18 +79,27 @@ android:orientation="vertical">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_meal_plate_desc"
                 tools:visibility="visible"
                 tools:text="My PLate Description"
-                style="@style/Body1"
+                style="?attr/textAppearanceBody2"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_weight="1"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_plate_analysis"
+        style="@style/SpinKitView.Small.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:visibility="invisible"
+        app:SpinKit_Color="@color/secondaryColor" />
     <LinearLayout
         android:id="@+id/ll_plate_header"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/translucent"
+        android:background="@drawable/card_bg"
         android:orientation="horizontal">
 
         <TextView
@@ -75,7 +112,7 @@ android:orientation="vertical">
             android:layout_gravity="center"
             android:gravity="center|left"
             android:maxLines="1"
-            style="@style/HeadLine1"
+            style="?attr/textAppearanceHeadline5"
             android:text="\u25D9"
             android:textColor="@android:color/holo_green_dark"
             android:visibility="visible"
@@ -90,10 +127,21 @@ android:orientation="vertical">
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            style="@style/Title"
+            style="?attr/textAppearanceHeadline6"
             tools:text="1207364 Cals"
             android:visibility="invisible"
             tools:visibility="visible"/>
 </LinearLayout>
 
 </LinearLayout>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+android:id="@+id/fab_explore_plate"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_margin="@dimen/fab_margin"
+app:layout_anchor="@id/aiv_meal_plate"
+app:fabCustomSize="28dp"
+app:layout_anchorGravity="bottom|end"
+app:srcCompat="@drawable/ic_action_process_start"
+    />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

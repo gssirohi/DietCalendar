@@ -1,24 +1,21 @@
 package com.techticz.app.ui.customView
 
+import android.app.Activity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import android.graphics.Color
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.model.food.Nutrition
 import com.techticz.app.model.recipe.RecipeResponse
-import com.techticz.app.repo.FoodRepository
 import com.techticz.app.ui.adapter.RecipeFoodAdapter
 import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.RecipeViewModel
 import com.techticz.dietcalendar.R
-import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
@@ -29,7 +26,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(parent?.context) {
+class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(plateView?.context) {
     var liveRecipeNutrition: MediatorLiveData<Resource<Nutrition>> = MediatorLiveData<Resource<Nutrition>>()
 
     init {
@@ -51,18 +48,22 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
     fun fillDetails(recipeViewModel: RecipeViewModel?) {
         this.recipeViewModel = recipeViewModel
         tv_recipe_name.setText(recipeViewModel?.triggerRecipeItem?.value?.id)
-        et_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+        tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
         tv_recipe_qty_unit.setText(" serving")
 
+        fab_plus.setOnClickListener({onFabPlusClicked()})
+        fab_minus.setOnClickListener({onFabMinusClicked()})
+        fab_remove.setOnClickListener({onFabRemoveClicked()})
         recipeViewModel?.liveRecipeResponse?.observe(context as BaseDIActivity, Observer { resource ->
             onViewModelDataLoaded(resource)
 
         })
 
-        if(plateView.mode == PlateView.MODE_COLLAPSED){
-            tv_show_more_less.visibility = View.GONE
+        if(plateView.mode == PlateView.MODE_EXPLORE){
+            configureUIinEditMode(false)
+
         } else {
-            tv_show_more_less.visibility = View.VISIBLE
+            configureUIinEditMode(true)
         }
 
        /* Timber.i("sending signal for recipe:"+recipeViewModel?.triggerRecipeItem?.value?.id)
@@ -72,6 +73,65 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
         newTrigger.qty = trigger?.qty
         recipeViewModel?.triggerRecipeItem?.value = newTrigger*/
 
+    }
+
+    private fun onFabRemoveClicked(){
+        plateView?.removeRecipe(context as BaseDIActivity,recipeViewModel?.triggerRecipeItem?.value)
+    }
+
+    private fun onFabMinusClicked() {
+        if(recipeViewModel?.triggerRecipeItem?.value?.qty!! > 1) {
+            recipeViewModel?.triggerRecipeItem?.value?.qty = recipeViewModel?.triggerRecipeItem?.value?.qty!! - 1
+            tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+            var newRes = recipeViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
+            recipeViewModel?.liveFoodViewModelList?.value = newRes
+            if( recipeViewModel?.triggerRecipeItem?.value?.qty!! <= 1){
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            } else {
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun onFabPlusClicked() {
+        if(recipeViewModel?.triggerRecipeItem?.value?.qty!! < 15) {
+            recipeViewModel?.triggerRecipeItem?.value?.qty = recipeViewModel?.triggerRecipeItem?.value?.qty!! + 1
+            tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+            var newRes = recipeViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
+            recipeViewModel?.liveFoodViewModelList?.value = newRes
+            if( recipeViewModel?.triggerRecipeItem?.value?.qty!! > 1){
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            } else {
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            }
+        }
+
+    }
+
+    private fun configureUIinEditMode(yes: Boolean) {
+        if(yes){
+            fab_plus.visibility = View.VISIBLE
+
+            if( recipeViewModel?.triggerRecipeItem?.value?.qty!! > 1){
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            } else {
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            }
+
+            tv_show_more_less.visibility = View.GONE
+        } else {
+            fab_minus.visibility = View.GONE
+            fab_plus.visibility = View.GONE
+            fab_remove.visibility = View.GONE
+
+            tv_show_more_less.visibility = View.VISIBLE
+        }
     }
 
     private fun onViewModelDataLoaded(resource: Resource<RecipeResponse>?) {
@@ -90,7 +150,7 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
                 tv_recipe_name.text = resource.data?.recipe?.basicInfo?.name?.english
                 tv_recipe_name.visibility = View.VISIBLE
 
-                et_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
+                tv_recipe_qty.setText("" + recipeViewModel?.triggerRecipeItem?.value?.qty)
                 tv_recipe_qty_unit.setText(" "+resource.data?.recipe?.standardServing?.servingType)
 
                 observeChildViewModels(resource)

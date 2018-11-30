@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="Activity Level"
                 android:layout_margin="8dp"
-                style="@style/HeadLine2"/>
+                style="?attr/textAppearanceHeadline6"/>
             <RadioGroup
                 android:id="@+id/radio_group_activity_level"
                 android:padding="8dp"

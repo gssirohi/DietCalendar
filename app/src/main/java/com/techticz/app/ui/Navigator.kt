@@ -9,6 +9,7 @@ import javax.inject.Inject
 import org.parceler.Parcels
 import com.techticz.auth.LoginActivity
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.ui.activity.DietPlanActivity
 
 
@@ -51,7 +52,7 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
-    fun startCreatePlanActivity(activity: Activity, plan: DietPlan?) {
+    fun startCopyPlanActivity(activity: Activity, plan: DietPlan?) {
         var intent = Intent(context, DietPlanActivity::class.java)
         intent.putExtra("plan", Parcels.wrap<DietPlan>(plan))
         intent.putExtra("mode", DietPlanActivity.MODE_COPY_FROM_PLAN)
@@ -93,6 +94,12 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
+    fun startCopyPlateScreen(activity: Activity,mealPlate: MealPlate?) {
+        var intent = Intent(context, MealPlateActivity::class.java)
+        intent.putExtra("plate", Parcels.wrap<MealPlate>(mealPlate))
+        intent.putExtra("mode", MealPlateActivity.MODE_COPY_FROM_PLATE)
+        activity.startActivityForResult(intent,2)
+    }
 
 
 }

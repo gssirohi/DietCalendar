@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        style="@style/OverLine"
+        style="?attr/textAppearanceOverline"
         app:queryHint="type plate name"
         android:tooltipText="Search Meal Plate"
         android:background="@color/primaryLightColor">

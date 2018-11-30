@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Include meal plates"
-                style="@style/HeadLine2"/>
+                style="?attr/textAppearanceHeadline6"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
@@ -95,7 +95,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body1"
+                style="?attr/textAppearanceBody2"
                 android:enabled="false"
                 android:clickable="false"
                 android:focusable="true"
@@ -109,7 +109,7 @@
                 android:text="OR"
                 android:layout_margin="16dp"
                 android:layout_gravity="center_horizontal"
-                style="@style/OverLine"/>
+                style="?attr/textAppearanceOverline"/>
 
             <CheckBox
                 android:id="@+id/cb_random_plates"

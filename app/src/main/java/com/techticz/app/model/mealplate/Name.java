@@ -4,14 +4,19 @@ package com.techticz.app.model.mealplate;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Name {
+    public Name() {
+    }
 
     @SerializedName("english")
     @Expose
-    private String english;
+    String english;
     @SerializedName("hindi")
     @Expose
-    private String hindi;
+    String hindi;
 
     public String getEnglish() {
         return english;

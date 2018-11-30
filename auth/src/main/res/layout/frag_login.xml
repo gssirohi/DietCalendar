@@ -40,14 +40,14 @@
                 android:visibility="visible"
                 android:id="@+id/ll_phone_number"
                 android:background="@color/translucent">
-                    <com.google.android.material.textfield.TextInputLayout             android:theme="@style/SubTitle"
+                    <com.google.android.material.textfield.TextInputLayout             android:theme="?attr/textAppearanceSubtitle2"
                 android:id="@+id/tiv_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="48dp"
                 android:textColorHint="@color/primaryColor">
     <com.google.android.material.textfield.TextInputEditText
-    style="@style/SubTitle"
+    style="?attr/textAppearanceSubtitle2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number"
@@ -75,14 +75,14 @@
                 android:id="@+id/ll_otp"
                 android:visibility="gone"
                 android:background="@color/translucent">
-                        <com.google.android.material.textfield.TextInputLayout             android:theme="@style/SubTitle"
+                        <com.google.android.material.textfield.TextInputLayout             android:theme="?attr/textAppearanceSubtitle2"
                     android:id="@+id/tiv_otp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:textColorHint="@color/primaryColor">
         <com.google.android.material.textfield.TextInputEditText
-    style="@style/SubTitle"
+    style="?attr/textAppearanceSubtitle2"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:hint="Enter OTP"

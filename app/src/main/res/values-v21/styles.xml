@@ -1,5 +1,4 @@
 <resources>
-
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -11,13 +10,54 @@
         <item name="android:windowEnterTransition">@android:transition/slide_right</item>
         <item name="android:windowExitTransition">@android:transition/slide_left</item>
 
-        <item name="android:textColorPrimary">@color/onPrimary</item>
-        <item name="android:textColorSecondary">@color/onSecondary</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
 
     </style>
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">@color/secondaryColor</item>
-        <item name="android:textColor">@color/onSecondary</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
+<!--
+
+    <style name="AppTheme.Plan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor1</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor1</item>
+        <item name="colorSecondary">@color/secondaryColor1</item>
+        <item name="colorAccent">@color/secondaryColor1</item>
+        <item name="colorButtonNormal">@color/secondaryColor1</item>
+    </style>
+    <style name="AppTheme.Plate" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor2</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor2</item>
+        <item name="colorSecondary">@color/secondaryColor2</item>
+        <item name="colorAccent">@color/secondaryColor2</item>
+        <item name="colorButtonNormal">@color/secondaryColor2</item>
+    </style>
+    <style name="AppTheme.Recipe" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor3</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor3</item>
+        <item name="colorSecondary">@color/secondaryColor3</item>
+        <item name="colorAccent">@color/secondaryColor3</item>
+        <item name="colorButtonNormal">@color/secondaryColor3</item>
+    </style>
+    <style name="AppTheme.Food" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor4</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor4</item>
+        <item name="colorSecondary">@color/secondaryColor4</item>
+        <item name="colorAccent">@color/secondaryColor4</item>
+        <item name="colorButtonNormal">@color/secondaryColor4</item>
+    </style>
+<style name="AppTheme.Showcase" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor5</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor5</item>
+        <item name="colorSecondary">@color/secondaryColor5</item>
+        <item name="colorAccent">@color/secondaryColor5</item>
+        <item name="colorButtonNormal">@color/secondaryColor5</item>
+
+
+    </style>
+-->
+
 </resources>

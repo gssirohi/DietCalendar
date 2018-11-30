@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tv_graph_circle_value"
-                style="@style/Body1"
+                style="?attr/textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -64,7 +64,7 @@
 
             <TextView
                 android:id="@+id/tv_graph_circle_max"
-                style="@style/SubTitle"
+                style="?attr/textAppearanceSubtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/tv_circle_graph_bottom"
-            style="@style/Body1"
+            style="?attr/textAppearanceBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"

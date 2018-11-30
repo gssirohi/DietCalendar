@@ -18,7 +18,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : FrameLayout(parent?.context) {
+class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : FrameLayout(recipeView?.context) {
 
     init {
         val params = LayoutParams(LayoutParams.MATCH_PARENT,

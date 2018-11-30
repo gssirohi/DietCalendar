@@ -5,17 +5,18 @@
     android:id="@+id/ll_meal_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_green_light"
     android:padding="8dp"
     android:orientation="vertical">
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit"
+        android:id="@+id/spin_kit_plate_recipes"
         style="@style/SpinKitView.Small.Wave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:visibility="invisible"
         android:layout_gravity="center"
-        app:SpinKit_Color="@color/secondaryColor" />
+        app:SpinKit_Color="@color/secondaryColor"
+         />
 
     <!--<View
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_gravity="center"
-        style="@style/HeadLine1"
+        style="?attr/textAppearanceHeadline5"
         android:visibility="gone"
         android:text="Recipes"/>
     <androidx.recyclerview.widget.RecyclerView
@@ -46,12 +47,21 @@
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:text="Add Recipe"/>
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_plate_foods"
+        style="@style/SpinKitView.Small.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:visibility="invisible"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/secondaryColor" />
     <TextView
         android:id="@+id/tv_foods_header"
         tools:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_marginTop="4dp"
-        style="@style/HeadLine1"
+        style="?attr/textAppearanceHeadline5"
         android:layout_marginBottom="4dp"
         android:layout_gravity="center"
         android:visibility="gone"

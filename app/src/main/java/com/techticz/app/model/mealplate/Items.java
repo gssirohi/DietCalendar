@@ -5,14 +5,19 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Items {
+    public Items() {
+    }
 
     @SerializedName("recipies")
     @Expose
-    private List<RecipeItem> recipies = null;
+    List<RecipeItem> recipies = null;
     @SerializedName("foods")
     @Expose
-    private List<FoodItem> foods = null;
+    List<FoodItem> foods = null;
 
     public List<RecipeItem> getRecipies() {
         return recipies;

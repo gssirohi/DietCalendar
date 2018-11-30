@@ -4,26 +4,36 @@ package com.techticz.app.model.mealplate;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class MealPlate {
+    public MealPlate() {
+        basicInfo = new BasicInfo();
+        basicProperty = new BasicProperty();
+        additionalInfo = new AdditionalInfo();
+        items = new Items();
+        adminInfo = new AdminInfo();
+    }
 
     @SerializedName("id")
     @Expose
-    private String id;
+    String id;
     @SerializedName("basicInfo")
     @Expose
-    private BasicInfo basicInfo;
+    BasicInfo basicInfo;
     @SerializedName("basicProperty")
     @Expose
-    private BasicProperty basicProperty;
+    BasicProperty basicProperty;
     @SerializedName("additionalInfo")
     @Expose
-    private AdditionalInfo additionalInfo;
+    AdditionalInfo additionalInfo;
     @SerializedName("items")
     @Expose
-    private Items items;
+    Items items;
     @SerializedName("adminInfo")
     @Expose
-    private AdminInfo adminInfo;
+    AdminInfo adminInfo;
 
     public String getId() {
         return id;

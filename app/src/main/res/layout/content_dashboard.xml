@@ -19,10 +19,10 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:orientation="vertical">
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            style="@style/AppCardView"
+            android:layout_height="wrap_content"
+            android:theme="@style/Component.Dark"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,11 +32,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Water Glass"
-                    style="@style/Title"/>
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    style="?attr/textAppearanceSubtitle1"/>
+                <View
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorSecondary"></View>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:minHeight="100dp"
+                    android:layout_gravity="center"
                     android:orientation="horizontal">
                     <ImageView
                         android:layout_weight="1"
@@ -80,21 +90,29 @@
                         android:src="@drawable/empty_glass"/>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            style="@style/AppCardView"
+            android:theme="@style/Component.Dark"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fruits and Veggies in Today Meals"
-                style="@style/Title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fruits and Veggies Today"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    style="?attr/textAppearanceSubtitle1"/>
+                <View
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/colorSecondary"></View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,17 +134,35 @@
                 </com.techticz.powerkit.customview.CircleGraphView>
             </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            style="@style/AppCardView"
+            android:layout_height="150dp"
+            android:theme="@style/Component.Dark"
             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This is content of dashboard"
-                android:textColor="@color/onSecondary"/>
-        </androidx.cardview.widget.CardView>
+                android:text="Content Title"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                style="?attr/textAppearanceSubtitle1"/>
+            <View
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/colorSecondary"></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This is content "
+                    style="?attr/textAppearanceBody2"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

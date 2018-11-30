@@ -2,7 +2,6 @@ package com.techticz.app.ui.frag
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +58,7 @@ class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
     }
 
     override fun onCreateCopyClicked() {
-        (activity as DietChartActivity).navigator.startCreatePlanActivity(activity as DietChartActivity,(activity as DietChartActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
+        (activity as DietChartActivity).navigator.startCopyPlanActivity(activity as DietChartActivity,(activity as DietChartActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
         (activity as DietChartActivity).finish()
     }
 

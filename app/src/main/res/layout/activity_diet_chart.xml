@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="0dp"
-            android:background="@color/primaryColor"
+            android:background="?attr/colorPrimary"
             app:tabMode="scrollable">
 
             <com.google.android.material.tabs.TabItem

@@ -7,16 +7,17 @@
     android:animateLayoutChanges="true"
     android:orientation="vertical"
     >
-    <androidx.cardview.widget.CardView
-        android:layout_width="160dp"
-        android:layout_height="64dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         style="@style/AppCardView"
         app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true"
+        android:theme="@style/Component.Dark"
         app:cardElevation="8dp"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal|top"
-        app:cardBackgroundColor="@color/primaryDarkColor"
+        app:cardBackgroundColor="?attr/colorPrimary"
         >
         <TextView
             android:id="@+id/tv_meal_name"
@@ -24,45 +25,40 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            style="@style/Title"
-            android:textColor="@color/onPrimary"
-            android:text="Breakfast"/>
-    </androidx.cardview.widget.CardView>
-<androidx.cardview.widget.CardView
+            style="?attr/textAppearanceSubtitle1"
+            tools:text="Early Morning"/>
+    </com.google.android.material.card.MaterialCardView>
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/AppCardView"
+    android:theme="@style/Component.Dark"
+    app:cardBackgroundColor="@color/primaryDarkColor2"
     app:contentPadding="0dp"
     app:cardElevation="6dp"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="24dp"
 
     android:layout_gravity="center_horizontal|bottom"
     >
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/rl_plate_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="148dp"
     android:orientation="vertical">
     <!--<include layout="@layout/plate_layout"/>-->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_add_plate"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_plate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Add Plate"/>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_explore_plate"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="132dp"
-        android:layout_alignParentEnd="true"
-        android:text="Explore"/>
-</RelativeLayout>
+        android:layout_margin="@dimen/fab_margin"
+        app:fabCustomSize="28dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_action_add"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>

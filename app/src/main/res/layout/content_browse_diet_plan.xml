@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            style="@style/HeadLine2"
+            style="?attr/textAppearanceHeadline6"
             android:text="Featured Diet Plans"/>
 
         <com.yarolegovich.discretescrollview.DiscreteScrollView
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            style="@style/HeadLine2"
+            style="?attr/textAppearanceHeadline6"
             android:text="My Diet Plans"/>
 
         <com.yarolegovich.discretescrollview.DiscreteScrollView

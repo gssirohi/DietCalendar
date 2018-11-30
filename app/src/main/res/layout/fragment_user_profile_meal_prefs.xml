@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Include Below Content In My Food"
-                style="@style/HeadLine2"/>
+                style="?attr/textAppearanceHeadline6"/>
 
             <CheckBox
                 android:id="@+id/cb_milk"

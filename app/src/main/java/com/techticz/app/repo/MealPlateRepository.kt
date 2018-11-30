@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import android.text.TextUtils
 import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.MealPlateResponse
-import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
@@ -15,12 +13,10 @@ import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIRepository
 import timber.log.Timber
 import javax.inject.Inject
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.*
 import com.techticz.app.model.BrowsePlateResponse
 import com.techticz.app.model.meal.Meal
-import com.techticz.auth.utils.LoginUtils
 import javax.inject.Singleton
 
 
@@ -94,12 +90,60 @@ class MealPlateRepository @Inject constructor(private val db: FirebaseFirestore)
         return live
     }
 
+    fun updatePlate(plate: MealPlate, listner: PlateRepositoryCallback) {
+        Timber.d("update plate..:"+plate?.id)
+        var batch: WriteBatch = db.batch()
+        var ref: DocumentReference = db.collection(AppCollections.PLATES.collectionName).document(plate?.id!!)
+        batch.set(ref, plate!!)
+        batch.commit()
+                .addOnSuccessListener { task ->
+                    var message =  AppCollections.PLATES.collectionName.toString()+" update plate success"
+                    Timber.d(message)
+                    //hideProgress()
+                    //showSuccess(message!!)
+                    listner.onPlateUpdated(plate)
+                }
+                .addOnFailureListener { task ->
+                    var message =  AppCollections.PLATES.collectionName+" update plate failed"
+                    Timber.e(message)
+                    //hideProgress()
+                    //showError(message!!)
+                    listner.onPlateUpdateFailure(message)
+                }
+    }
+
+    fun createPlate(plate: MealPlate, listner: PlateRepositoryCallback) {
+        Timber.d("Creating plate..:"+plate.id)
+        var batch: WriteBatch = db.batch()
+        var ref: DocumentReference = db.collection(AppCollections.PLATES.collectionName).document(plate.id)
+        batch.set(ref, plate)
+        batch.commit()
+                .addOnSuccessListener { task ->
+                    var message =  AppCollections.PLATES.collectionName.toString()+" create plate success"
+                    Timber.d(message)
+                    //hideProgress()
+                    //showSuccess(message!!)
+                    listner.onPlateCreated(plate)
+                }
+                .addOnFailureListener { task ->
+                    var message =  AppCollections.PLATES.collectionName+" create plate failed"
+                    Timber.e(message)
+                    //hideProgress()
+                    //showError(message!!)
+                    listner.onCreatePlateFailure(message)
+                }
+    }
+
+
     init {
         Timber.d("Injecting:" + this)
     }
 
-    interface Callback {
-        fun onPlansFetched(plans:List<DietPlan>)
+    interface PlateRepositoryCallback {
+        fun onPlateUpdated(plate: MealPlate)
+        fun onPlateUpdateFailure(message: String)
+        fun onPlateCreated(plate: MealPlate)
+        fun onCreatePlateFailure(message: String)
     }
 
 

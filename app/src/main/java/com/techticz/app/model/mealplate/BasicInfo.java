@@ -4,29 +4,35 @@ package com.techticz.app.model.mealplate;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class BasicInfo {
+    public BasicInfo() {
+        name = new Name();
+    }
 
     @SerializedName("name")
     @Expose
-    private Name name;
+    Name name;
     @SerializedName("desc")
     @Expose
-    private String desc;
+    String desc;
     @SerializedName("image")
     @Expose
-    private String image;
+    String image;
     @SerializedName("category")
     @Expose
-    private String category;
+    String category;
     @SerializedName("subcategory")
     @Expose
-    private String subcategory;
+    String subcategory;
     @SerializedName("type")
     @Expose
-    private String type;
+    String type;
     @SerializedName("calories")
     @Expose
-    private Float calories;
+    Float calories;
 
     public Name getName() {
         return name;

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hookedonplay.decoviewlib.DecoView;
@@ -54,6 +55,8 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
 
     private void initView() {
         ViewGroup view = (ViewGroup) View.inflate(getContext(), R.layout.circle_graph_view,null);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(params);
         addView(view);
         mDecoView = (DecoView)findViewById(R.id.dynamicArcView);
         mTvValue = (TextView)findViewById(R.id.tv_graph_circle_value);

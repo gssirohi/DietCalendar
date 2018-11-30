@@ -27,11 +27,11 @@ class DayMealsAdapter (val section: Int?, var dayMeals: List<MealPlateViewModel>
                 pos = position
             }
             (holder as MealViewHolder).mealView.fillDetails(dayMeals.get(pos))
-            (holder as MealViewHolder).mealView.b_explore_plate.setOnClickListener(View.OnClickListener {
+            /*(holder as MealViewHolder).mealView.b_explore_plate.setOnClickListener(View.OnClickListener {
                 if (null != callBack) {
                     callBack.onMealCardClicked(section!!,dayMeals.get(pos))
                 }
-            })
+            })*/
         } else {
             (holder as CreateCopyHolder).view.b_create_copy.setOnClickListener(View.OnClickListener { button->
                 if (null != callBack) {

@@ -20,21 +20,21 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/OverLine"
+            style="?attr/textAppearanceOverline"
             tools:text = "430 cal"/>
         <TextView
             android:id="@+id/tv_plate_name"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/HeadLine2"
+            style="?attr/textAppearanceHeadline6"
             tools:text = "Plate Name"/>
         <TextView
             android:id="@+id/tv_plate_desc"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Body2"
+            style="?attr/textAppearanceBody2"
             tools:text = "Plate Desc sjfhjh djfhj dfh jdfhjdfh jdh fd fh djhf jd fhjf"/>
     </LinearLayout>
 </LinearLayout>

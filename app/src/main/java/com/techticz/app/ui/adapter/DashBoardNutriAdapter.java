@@ -48,7 +48,6 @@ public class DashBoardNutriAdapter extends RecyclerView.Adapter<DashBoardNutriAd
 
     @Override
     public CircleGraphViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CircleGraphView view = new CircleGraphView(parent.getContext());
 
         return new CircleGraphViewHolder(view);

@@ -26,13 +26,13 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Android Studio"
-        style="@style/Title" />
+        style="?attr/textAppearanceHeadline6" />
 
     <TextView
         android:id="@+id/tv_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="android.studio@android.com"
-        style="@style/SubTitle"/>
+        style="?attr/textAppearanceSubtitle2"/>
 
 </LinearLayout>

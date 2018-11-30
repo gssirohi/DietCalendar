@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingTop="4dp"
+    android:theme="?attr/theme"
     android:paddingBottom="4dp"
     android:orientation="vertical">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,7 +54,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:maxLines="1"
-                    style="@style/SubTitle"
+                    style="?attr/textAppearanceSubtitle2"
                     android:text="\u25D9"
                     android:textColor="@android:color/holo_green_dark"
                     android:visibility="visible"
@@ -64,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    style="@style/SubTitle"
+                    style="?attr/textAppearanceSubtitle2"
                     android:text="This is food Name"
                     android:visibility="invisible"
                     tools:visibility="visible"/>
@@ -74,7 +75,7 @@
                 android:id="@+id/tv_food_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Body1"
+                style="?attr/textAppearanceBody2"
                 tools:text="2 peices"/>
 
         </LinearLayout>
@@ -84,7 +85,7 @@
             android:layout_weight="1"
             android:id="@+id/tv_food_calory"
             android:layout_gravity="center|right"
-            style="@style/Body1"
+            style="?attr/textAppearanceBody2"
             android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

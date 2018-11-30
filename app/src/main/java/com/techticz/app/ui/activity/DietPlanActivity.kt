@@ -12,6 +12,7 @@ import com.techticz.app.model.dietplan.Calendar
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.repo.DietPlanRepository
 import com.techticz.app.repo.UserRepository
+import com.techticz.app.util.Utils
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
 import kotlinx.android.synthetic.main.activity_diet_plan.*
@@ -127,9 +128,9 @@ class DietPlanActivity : BaseDIActivity(), DietPlanRepository.DietPlanCallBack, 
         // define admin info
         plan.adminInfo = AdminInfo()
         plan.adminInfo.createdBy = LoginUtils.getUserCredential()
-        plan.adminInfo.createdOn  = SimpleDateFormat("dd-MM-yyyy-HH-mm-ss", Locale.getDefault()).format(Date());
+        plan.adminInfo.createdOn  = Utils.timeStamp()
 
-        plan.id = "PLN_"+LoginUtils.getUserName().substring(0,3)+"_"+plan.adminInfo.createdOn
+        plan.id = "PLN_"+LoginUtils.getUserName().substring(0,2)+"_"+plan.adminInfo.createdOn
 
         return plan
     }

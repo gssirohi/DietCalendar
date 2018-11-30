@@ -20,7 +20,7 @@ import timber.log.Timber
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
  */
-class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(parent?.context) {
+class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(plateView?.context) {
 
     init {
         val params = LayoutParams(LayoutParams.MATCH_PARENT,
@@ -46,7 +46,7 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
             onViewModelDataLoaded(resource)
 
         })
-        if(plateView.mode == PlateView.MODE_COLLAPSED){
+        if(plateView.mode == PlateView.MODE_EXPLORE){
             //tv_show_more_less.visibility = View.GONE
         } else {
            // tv_show_more_less.visibility = View.VISIBLE

@@ -5,18 +5,45 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
-        <item name="textAppearanceButton">@style/Action</item>
+
         <item name="colorError">@color/errorColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="materialCardViewStyle">@style/AppCardView</item>
 
-        <item name="android:buttonStyle">@style/ButtonStyle</item>
-        <item name="colorButtonNormal">@color/secondaryColor</item>
         <item name="android:windowContentOverlay">@null</item>
 
     </style>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="BaseAppTheme">
-
+    <style name="AppTheme" parent="BaseAppTheme"></style>
+    <style name="AppTheme.Plan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor1</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor1</item>
+        <item name="colorSecondary">@color/secondaryColor1</item>
+        <item name="colorAccent">@color/secondaryColor1</item>
+    </style>
+    <style name="AppTheme.Plate" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor2</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor2</item>
+        <item name="colorSecondary">@color/secondaryColor2</item>
+        <item name="colorAccent">@color/secondaryColor2</item>
+    </style>
+    <style name="AppTheme.Recipe" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor3</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor3</item>
+        <item name="colorSecondary">@color/secondaryColor3</item>
+        <item name="colorAccent">@color/secondaryColor3</item>
+    </style>
+    <style name="AppTheme.Food" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor4</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor4</item>
+        <item name="colorSecondary">@color/secondaryColor4</item>
+        <item name="colorAccent">@color/secondaryColor4</item>
+    </style>
+    <style name="AppTheme.Showcase" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor5</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor5</item>
+        <item name="colorSecondary">@color/secondaryColor5</item>
+        <item name="colorAccent">@color/secondaryColor5</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
@@ -48,17 +75,25 @@
 
     </style>
 
+    <style name="Component.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorBackgroundFloating">?attr/colorPrimaryDark</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+        <item name="android:colorBackground">?attr/colorError</item>
+    </style>
+
+    <style name="Component.Light" parent="ThemeOverlay.MaterialComponents.Light">
+    </style>
     <style name="AppCardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/surfaceColor</item>
         <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
         <item name="cardElevation">@dimen/cardview_default_elevation</item>
         <item name="cardPreventCornerOverlap">true</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="contentPadding">8dp</item>
     </style>
+    <attr format="reference" name="cardStyle"/>
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/secondaryColor</item>
-        <item name="android:textColor">@color/onSecondary</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
 </resources>

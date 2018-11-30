@@ -21,7 +21,11 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.StrictMode;
 
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Class containing some static utility methods.
@@ -77,5 +81,10 @@ public class Utils {
 
     public static boolean hasKitKat() {
         return Build.VERSION.SDK_INT >= VERSION_CODES.KITKAT;
+    }
+
+    @Nullable
+    public static String timeStamp() {
+        return new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss", Locale.getDefault()).format(new Date());
     }
 }

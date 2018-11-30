@@ -105,14 +105,22 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
         return dispatchingAndroidInjector
     }
 
-    fun showProgress() {
+    fun showProgress(title:String,message:String) {
         if (progressDialog == null) {
             progressDialog = MaterialDialog.Builder(this)
-                    .title("Loading..")
-                    .content("Hold on for a moment")
+                    .title(title)
+                    .content(message)
                     .progress(true, 0).build()
         }
         progressDialog!!.show()
+    }
+
+    fun showProgress(message:String) {
+        showProgress("Loading..",message)
+    }
+
+    fun showProgress() {
+        showProgress("Loading..","Hold on for a moment..")
     }
 
     fun hideProgress() {
