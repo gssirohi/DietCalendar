@@ -84,5 +84,17 @@ constructor() : BaseViewModel() {
         liveImage?.value = imageRes
     }
 
+    fun perServingCal(): Float? {
+        return getNutrientPerServe()?.principlesAndDietaryFibers?.energy!! * 0.239f
+    }
+    fun getNutrientPerServe(): Nutrients? {
+        var nutriFactPerQty = liveFoodResponse?.value?.data?.food?.nutrition?.perQty
+        var perServeQty = liveFoodResponse?.value?.data?.food?.standardServing?.perServeQty
+        if(nutriFactPerQty != null && perServeQty != null){
+            var servingFactor = perServeQty/nutriFactPerQty
+            return getNutrients()?.applyFactor(servingFactor)
+        }
+        return getNutrients()?.applyFactor(1f)
+    }
 
 }

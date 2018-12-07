@@ -37,11 +37,12 @@ open class BaseDIRepository  {
     }
     fun showProgress(title:String,message:String) {
 
-        progressDialog = MaterialDialog.Builder(hostActivityContext!!)
-                    .title(title)
-                    .content(message)
-                    .progress(true, 0).build()
+        if (progressDialog == null) {
+            progressDialog = MaterialDialog(hostActivityContext!!)
+                    .title(null,title)
+                    .message(null,message)
 
+        }
         progressDialog!!.show()
 
     }

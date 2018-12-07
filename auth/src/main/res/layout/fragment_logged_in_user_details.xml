@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="32dp"
-    android:background="@color/primaryLightColor"
+    android:background="?attr/colorSecondary"
     tools:context="com.techticz.auth.LoginActivity">
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -54,7 +54,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Gyanendra Singh"
                     style="?attr/textAppearanceHeadline5"
-                    android:textColor="@color/secondaryColor"
+                    android:textAllCaps="true"
                     android:id="@+id/tv_user_name"
                     />
 
@@ -87,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Firebase Id not available"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     style="?attr/textAppearanceBody2"
                     />
@@ -103,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
                 android:text="LOGOUT"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
                 <Button
@@ -110,8 +112,9 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Proceed"
+                    android:text="CONTINUE"
                     android:theme="@style/ThemeOverlay.MyDarkButton" />
             </LinearLayout>
 

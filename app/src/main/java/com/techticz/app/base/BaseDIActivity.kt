@@ -107,10 +107,10 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun showProgress(title:String,message:String) {
         if (progressDialog == null) {
-            progressDialog = MaterialDialog.Builder(this)
-                    .title(title)
-                    .content(message)
-                    .progress(true, 0).build()
+            progressDialog = MaterialDialog(this)
+                    .title(null,title)
+                    .message(null,message)
+                    
         }
         progressDialog!!.show()
     }

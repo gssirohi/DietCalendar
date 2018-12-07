@@ -9,6 +9,7 @@ import com.techticz.app.model.meal.Meal
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
 import com.techticz.app.base.BaseViewModel
+import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.RecipeItem
 import timber.log.Timber
 import javax.inject.Inject
@@ -52,16 +53,18 @@ constructor() : BaseViewModel() {
             }
         }
     }
-
-    fun getNutrients(): Nutrients? {
+    fun perPlateCal(): Float? {
+        return getNutrientsPerPlate()?.principlesAndDietaryFibers?.energy!! * 0.239f
+    }
+    fun getNutrientsPerPlate(): Nutrients? {
         var nutrientsFood = Nutrients()
 
         var foodViewModelList = liveFoodViewModelList?.value?.data
         if(foodViewModelList != null) {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrients()
-                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!)
+                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerServe()
+                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
                     nutrientsFood.addUpNutrients(factoredNutrients)
                 }
             }
@@ -73,8 +76,8 @@ constructor() : BaseViewModel() {
         if(recipeViewModelList != null) {
             for (recipeViewModel in recipeViewModelList!!) {
                 if(recipeViewModel.liveRecipeResponse.value?.data != null) {
-                    var recipeNutrients: Nutrients? = recipeViewModel.getNutrients()
-                    var factoredNutrients = recipeNutrients?.applyFactor(recipeViewModel.triggerRecipeItem?.value?.qty!!)
+                    var recipeNutrients: Nutrients? = recipeViewModel.getNutrientsPerServe()
+                    var factoredNutrients = recipeNutrients?.applyFactor(recipeViewModel.triggerRecipeItem?.value?.qty!!.toFloat())
                     nutrientsRecipe.addUpNutrients(factoredNutrients)
                 }
             }
@@ -204,6 +207,23 @@ constructor() : BaseViewModel() {
         liveRecipeViewModelList?.value= recipeViewModelListResource
     }
 
+    fun removeFoodViewModel(lifecycleOwner: LifecycleOwner,foodItem:FoodItem){
+        var res = liveFoodViewModelList?.value
+        var newList = ArrayList<FoodViewModel>()
+        res?.data?.let {
+            for(food in it){
+                if(food.triggerFoodItem?.value?.id!!.equals(foodItem.id)){
+
+                } else {
+                    newList.add(food)
+                }
+            }
+        }
+
+        var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.COMPLETE, newList, "Remove food..", DataSource.LOCAL)
+        liveFoodViewModelList?.value= foodViewModelListResource
+    }
+
     fun addRecipeViewModel(lifecycleOwner: LifecycleOwner,recipeItem:RecipeItem){
         var res = liveRecipeViewModelList?.value
         var newList = ArrayList<RecipeViewModel>()
@@ -220,7 +240,23 @@ constructor() : BaseViewModel() {
         liveRecipeViewModelList?.value= recipeViewModelListResource
     }
 
-    private fun registerChildCompletion() {
+    fun addFoodViewModel(lifecycleOwner: LifecycleOwner,foodItem: FoodItem){
+        var res = liveFoodViewModelList?.value
+        var newList = ArrayList<FoodViewModel>()
+        res?.data?.let { newList.addAll(it) }
+        var vm = FoodViewModel()
+        vm.autoLoadChildren(lifecycleOwner)
+        vm.triggerFoodItem.value = foodItem
+        vm.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
+            Status.SUCCESS-> registerChildCompletion();
+        } })
+        newList.add(vm)
+
+        var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, newList, "Added food..", DataSource.LOCAL)
+        liveFoodViewModelList?.value= foodViewModelListResource
+    }
+
+    fun registerChildCompletion() {
         var isAllCompleted = true
         this.liveFoodViewModelList?.value?.data?.let {
             for (child in it) {
@@ -257,8 +293,8 @@ constructor() : BaseViewModel() {
     }
 
     fun hasItems(): Boolean {
-        liveRecipeViewModelList?.value?.data?.let { if(it.size > 1) return true }
-        liveFoodViewModelList?.value?.data?.let { if(it.size > 1) return true }
+        liveRecipeViewModelList?.value?.data?.let { if(it.size >= 1) return true }
+        liveFoodViewModelList?.value?.data?.let { if(it.size >= 1) return true }
         return false
     }
 }

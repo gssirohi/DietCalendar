@@ -13,13 +13,13 @@
     android:orientation="vertical"
     tools:context="com.techticz.app.ui.activity.UserProfileActivity$PlaceholderFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal|top"
 
-        style="@style/AppCardView">
+        android:theme="@style/Component.Dark">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,16 +84,15 @@
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:visibility="gone"
         tools:visibility="visible"
         android:layout_gravity="center_horizontal|bottom"
-
-        style="@style/AppCardView">
+        android:theme="@style/Component.Dark">
 
         <CheckBox
             android:id="@+id/cb_terms_conditions"
@@ -101,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I Agree, Terms &amp; Conditions"/>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/section_label"

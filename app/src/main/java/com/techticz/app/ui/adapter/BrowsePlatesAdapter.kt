@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.meal_plate_list_item_view.view.*
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 7/10/18.
  */
-class PlatesAdapter ( var dayMeals: List<MealPlate>, var callBack: PlateViewCallBacks): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BrowsePlatesAdapter (var dayMeals: List<MealPlate>, var callBack: PlateViewCallBacks): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {

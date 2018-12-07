@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,11 +69,23 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
     public void onBindViewHolder(MealPlanViewHolder holder, final int position) {
        // holder.planImage.setUrl(data.get(position).getBlobServingUrl());
         holder.planName.setText(data.get(position).getBasicInfo().getName());
-        holder.planDesc.setText(data.get(position).getBasicInfo().getName());
+        holder.planDesc.setText(data.get(position).getBasicInfo().getDesc());
+        if(data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("veg")){
+            holder.planType.setTextColor(Color.parseColor("#ff669900"));
+        } else if(data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("non-veg")){
+            holder.planType.setTextColor(Color.parseColor("#ffcc0000"));
+        }
+        if(data.get(position).getBasicInfo().getDailyCalories() != null && data.get(position).getBasicInfo().getDailyCalories()>0) {
+            holder.planCalory.setText(data.get(position).getBasicInfo().getDailyCalories() + " DailyCalories");
+        } else {
+            holder.planCalory.setVisibility(View.GONE);
+        }
+        holder.planAuthor.setText(data.get(position).getAdminInfo().getCreatedBy());
        // holder.planCalory.setText("Daily Calories : "+data.get(position).getBasicInfo().getDailyCalories());
         ImageViewModel imageViewModel = new ImageViewModel(holder.planImage.getContext());
         imageViewModel.getTriggerImageUrl().setValue(data.get(position).getBasicInfo().getImage());
         holder.planImage.setImageViewModel(imageViewModel,(LifecycleOwner) context);
+
         holder.bExplore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,12 +107,17 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
         private TextView planName;
         private TextView planDesc;
         private TextView planCalory;
+        private TextView planAuthor;
+        private TextView planType;
 
         public MealPlanViewHolder(View itemView) {
             super(itemView);
             planImage = (AppImageView) itemView.findViewById(R.id.aiv_plan_image);
             planName = (TextView)itemView.findViewById(R.id.plan_name);
             planDesc = (TextView)itemView.findViewById(R.id.plan_desc);
+            planType = (TextView)itemView.findViewById(R.id.plan_type);
+            planCalory = (TextView)itemView.findViewById(R.id.tv_daily_cal);
+            planAuthor = (TextView)itemView.findViewById(R.id.tv_plan_author);
             bExplore = (FloatingActionButton)itemView.findViewById(R.id.b_explore);
         }
     }

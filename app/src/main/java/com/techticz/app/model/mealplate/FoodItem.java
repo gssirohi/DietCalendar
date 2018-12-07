@@ -11,6 +11,11 @@ public class FoodItem {
     public FoodItem() {
     }
 
+    public FoodItem(String id, Integer qty) {
+        this.id = id;
+        this.qty = qty;
+    }
+
     @SerializedName("id")
     @Expose
     String id;

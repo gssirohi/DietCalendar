@@ -3,22 +3,24 @@
     "id": "RP001",
     "basicInfo": {
       "name": {
-        "english": "My First Recipe",
-        "hindi": "Pahli Recipe"
+        "english": "Carrot Halwa",
+        "hindi": "Gazar halwa"
       },
-      "desc": "desc of Recipe",
-      "image": "img",
+      "desc": "Gajar Ka Halwa or carrot halwa is a traditional Indian sweet or dessert made with fresh red carrots, milk and sugar. It's a winter delicacy.",
+      "image": "https:\/\/res.cloudinary.com\/techticz\/image\/upload\/v1543901427\/recipe\/carrot_halwa.jpg",
       "category": "cat",
       "subCategory": "subcat",
-      "type": "typ",
-      "perServingCalories": 100
+      "type": "veg",
+      "perServingCalories": 345000
     },
     "standardServing": {
-      "qty": 1,
-      "servingType": "piece"
+      "qty": 2,
+      "servingType": "bowl"
     },
     "basicProperty": {
       "availability": 1,
+      "course": "dessert",
+      "cookTime": "1h 45m",
       "prefMeals": [
         "breakfast",
         "evening_snaks"
@@ -35,41 +37,29 @@
     "formula": {
       "ingredients": [
         {
-          "id": "A001",
-          "qty": 1
+          "id": "F003",
+          "qty": 500
         },
         {
-          "id": "A002",
+          "id": "L001",
           "qty": 2
         },
         {
-          "id": "A003",
+          "id": "T013",
           "qty": 2
         },
         {
-          "id": "A004",
-          "qty": 2
+          "id": "G020",
+          "qty": 6
         },
         {
-          "id": "A005",
-          "qty": 2
+          "id": "I003",
+          "qty": 6
         },
         {
-          "id": "A006",
-          "qty": 2
-        },
-        {
-          "id": "A007",
-          "qty": 2
-        },
-        {
-          "id": "A008",
-          "qty": 2
+          "id": "L004",
+          "qty": 5
         }
-      ],
-      "steps": [
-        "This is step 1 for this recipe",
-        "This is step 2 for this recipe"
       ]
     },
     "adminInfo": {
@@ -79,9 +69,7 @@
       "publishedOn": "10-Mar-2018",
       "publishedBy": "user",
       "verified": true,
-      "verifiedOn": "10-Mar-2018",
-      "verifiedBy": "user",
-      "lastModifiedOn": "10-Mar-2018"
+      "verifiedOn": "10-Mar-2018"
     }
   },
   {
@@ -99,6 +87,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "lunch",
         "dinner"
@@ -129,9 +119,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -149,6 +137,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "breakfast",
         "evening_snaks"
@@ -180,9 +170,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -200,6 +188,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "lunch",
         "dinner"
@@ -230,9 +220,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -250,6 +238,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "breakfast",
         "evening_snaks"
@@ -281,9 +271,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -301,6 +289,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "lunch",
         "dinner"
@@ -331,9 +321,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -351,6 +339,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "breakfast",
         "evening_snaks"
@@ -382,9 +372,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   },
   {
@@ -402,6 +390,8 @@
     },
     "basicProperty": {
       "availability": 1,
+      "course": "",
+      "cookTime": "",
       "prefMeals": [
         "lunch",
         "dinner"
@@ -432,9 +422,7 @@
     },
     "adminInfo": {
       "publishedBy": "",
-      "verifiedOn": "",
-      "verifiedBy": "",
-      "lastModifiedOn": ""
+      "verifiedOn": ""
     }
   }
 ]

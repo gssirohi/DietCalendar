@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.meal_recipe_list_item_view.view.*
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 7/10/18.
  */
-class RecipesAdapter (var dayMeals: List<Recipe>, var callBack: RecipeViewCallBacks): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BrowseRecipesAdapter (var dayMeals: List<Recipe>, var callBack: RecipeViewCallBacks): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {

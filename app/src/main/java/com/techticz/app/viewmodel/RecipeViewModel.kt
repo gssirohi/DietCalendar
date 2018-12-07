@@ -2,18 +2,16 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.RecipeResponse
-import com.techticz.app.repo.FoodRepository
 import com.techticz.app.repo.RecipeRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
-import com.techticz.app.repo.UserRepository
+import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
 import javax.inject.Inject
@@ -48,20 +46,27 @@ constructor() : BaseViewModel() {
             }
         }
     }
-
-    fun getNutrients(): Nutrients? {
+    fun perServingCal(): Float? {
+        return getNutrientsPerServe()?.principlesAndDietaryFibers?.energy!! * 0.239f
+    }
+    fun getNutrientsPerServe(): Nutrients? {
         var nutrients = Nutrients()
-
+        var totalNutrients = Nutrients()
         var foodViewModelList = liveFoodViewModelList?.value?.data
         if(foodViewModelList != null) {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrients()
-                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!)
-                    nutrients.addUpNutrients(factoredNutrients)
+
+                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerServe()
+                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
+                    totalNutrients.addUpNutrients(factoredNutrients)
                 }
             }
         }
+        var totalServings = liveRecipeResponse?.value?.data?.recipe?.standardServing?.qty
+        if(totalServings == null || totalServings == 0)totalServings = 1
+        var perServeFactor:Float = 1f/(totalServings!!)
+        nutrients = totalNutrients.applyFactor(perServeFactor)
         return nutrients
     }
 
@@ -128,7 +133,7 @@ constructor() : BaseViewModel() {
 
     }
 
-    private fun registerFoodChildCompletion() {
+    fun registerFoodChildCompletion() {
         var isAllCompleted = true
         for(child in this.liveFoodViewModelList?.value?.data!!){
             if(child.liveFoodResponse?.value?.status == Status.SUCCESS ||
@@ -144,5 +149,43 @@ constructor() : BaseViewModel() {
         }
     }
 
+
+    fun addFoodViewModel(lifecycleOwner: LifecycleOwner,foodItem: FoodItem){
+        var res = liveFoodViewModelList?.value
+        var newList = ArrayList<FoodViewModel>()
+        res?.data?.let { newList.addAll(it) }
+        var vm = FoodViewModel()
+        vm.autoLoadChildren(lifecycleOwner)
+        vm.triggerFoodItem.value = foodItem
+        vm.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
+            Status.SUCCESS-> registerFoodChildCompletion();
+        } })
+        newList.add(vm)
+
+        var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, newList, "Added food..", DataSource.LOCAL)
+        liveFoodViewModelList?.value= foodViewModelListResource
+    }
+
+    fun removeFoodViewModel(lifecycleOwner: LifecycleOwner,foodItem: FoodItem){
+        var res = liveFoodViewModelList?.value
+        var newList = ArrayList<FoodViewModel>()
+        res?.data?.let {
+            for(food in it){
+                if(food.triggerFoodItem?.value?.id!!.equals(foodItem.id)){
+
+                } else {
+                    newList.add(food)
+                }
+            }
+        }
+
+        var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.COMPLETE, newList, "Remove food..", DataSource.LOCAL)
+        liveFoodViewModelList?.value= foodViewModelListResource
+    }
+
+    fun hasItems(): Boolean {
+        liveFoodViewModelList?.value?.data?.let { if(it.size >= 1) return true }
+        return false
+    }
 
 }

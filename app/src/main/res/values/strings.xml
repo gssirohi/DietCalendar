@@ -186,4 +186,6 @@
     <string name="title_activity_browse_plate">Browse Meal Plates</string>
     <string name="title_activity_meal_plate">Plate Details</string>
     <string name="title_activity_browse_recipe">Browse Recipes</string>
+    <string name="title_activity_browse_food">Browse Foods</string>
+    <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
 </resources>

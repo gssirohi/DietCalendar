@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <com.techticz.app.ui.customView.AppImageView
+        <com.techticz.app.ui.customView.AppImageViewRound
             android:id="@+id/aiv_recipe"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -142,6 +142,9 @@
 
 
 </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_show_more_less"
         android:layout_width="wrap_content"
@@ -149,9 +152,21 @@
         android:gravity="right"
         android:text="show less"
         android:clickable="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="left"
         style="@style/TextAction"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_explore_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/ic_action_process_start"
+        android:layout_margin="4dp"
+        android:layout_alignParentEnd="true"
+        app:fabCustomSize="28dp"
+        android:layout_gravity="right" />
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipeFoodRecyclerView"
         android:layout_width="match_parent"

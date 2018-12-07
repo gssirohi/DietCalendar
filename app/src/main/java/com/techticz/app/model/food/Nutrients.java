@@ -88,7 +88,7 @@ public class Nutrients {
     }
 
     @NotNull
-    public Nutrients applyFactor(int finalQtyFactor) {
+    public Nutrients applyFactor(Float finalQtyFactor) {
         PrinciplesAndDietaryFibers principlesAndDietaryFibers = new PrinciplesAndDietaryFibers();
         if(this.principlesAndDietaryFibers.getEnergy() == null){
             principlesAndDietaryFibers.setEnergy(0f);

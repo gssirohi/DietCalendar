@@ -5,23 +5,23 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_plans"
+            android:icon="@drawable/ic_chrome_reader_mode"
+            android:title="Diet Plans" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_plates"
+            android:icon="@drawable/ic_room_service"
+            android:title="Plates" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_recipes"
+            android:icon="@drawable/ic_local_dining"
+            android:title="Reipes" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:id="@+id/nav_foods"
+            android:icon="@drawable/ic_action_grow"
+            android:title="Foods" />
 
+    </group>
     <item android:title="Communicate">
         <menu>
             <item
@@ -29,9 +29,27 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_rate_us"
+                android:icon="@drawable/ic_star_rate"
+                android:title="Rate Us" />
+
+        </menu>
+    </item>
+    <item android:title="General">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Tools" />
+            <item
+                android:id="@+id/nav_developer_options"
+                android:icon="@drawable/ic_developer_mode"
+                android:title="Developer Options" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_exit_to_app"
+                android:title="Logout" />
         </menu>
     </item>
 

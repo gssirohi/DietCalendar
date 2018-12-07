@@ -4,26 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context="com.techticz.app.ui.activity.BrowsePlateActivity">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/ic_action_add"
-        />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:fitsSystemWindows="true"
 
-        android:elevation="0dp"
-        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_night1"
+            android:fitsSystemWindows="true"
+            app:titleEnabled="true"
+            app:expandedTitleTextAppearance="?attr/textAppearanceHeadline6"
+            app:expandedTitleMarginBottom="80dp"
+            app:expandedTitleGravity="center_horizontal|bottom"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -31,12 +36,36 @@
             android:background="?attr/colorPrimary"
             />
 
+</com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="10dp"
 
+        style="?attr/textAppearanceCaption"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="center_horizontal|bottom"
+        app:queryHint="type plate name"
+        android:tooltipText="Search Meal Plate"
+        android:background="@drawable/card_bg">
 
-    <include layout="@layout/content_browse_plate" />
+    </androidx.appcompat.widget.SearchView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        app:fabCustomSize="42dp"
+        app:srcCompat="@drawable/ic_action_add"
+        />
+    <include layout="@layout/content_browse_plate"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

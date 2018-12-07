@@ -40,9 +40,18 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(BrowseFoodViewModel::class)
+    internal abstract fun bindBrowseFoodViewModel(browserRecipeViewModel: BrowseFoodViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(MealPlateViewModel::class)
     internal abstract fun bindMealPlateViewModel(mealPlateViewModel: MealPlateViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(RecipeViewModel::class)
+    internal abstract fun bindRecipeViewModel(recipeViewModel: RecipeViewModel): ViewModel
     @Binds
     @IntoMap
     @ViewModelKey(DietChartViewModel::class)

@@ -2,16 +2,13 @@ package com.techticz.app.ui.activity
 
 import android.os.Bundle
 import android.app.Activity
-import android.content.Intent
-import android.widget.SearchView
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.BrowseRecipeResponse
-import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.Recipe
-import com.techticz.app.ui.adapter.RecipesAdapter
+import com.techticz.app.ui.adapter.BrowseRecipesAdapter
 import com.techticz.app.viewmodel.BrowseRecipeViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
@@ -20,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_browse_recipe.*
 import kotlinx.android.synthetic.main.content_browse_recipe.*
 
 
-class BrowseRecipeActivity : BaseDIActivity(), RecipesAdapter.RecipeViewCallBacks {
+class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCallBacks {
     override fun onRecipeViewClicked(recipe: Recipe) {
         var data = intent
         data.putExtra("recipeId",recipe.id)
@@ -54,7 +51,7 @@ class BrowseRecipeActivity : BaseDIActivity(), RecipesAdapter.RecipeViewCallBack
         })
 
         recycler_recipes.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        recycler_recipes.adapter = RecipesAdapter(ArrayList(),this)
+        recycler_recipes.adapter = BrowseRecipesAdapter(ArrayList(),this)
 
         browseRecipesViewModel.liveBrowseRecipesResponse?.observe(this, Observer {
             res->
@@ -66,14 +63,14 @@ class BrowseRecipeActivity : BaseDIActivity(), RecipesAdapter.RecipeViewCallBack
     private fun onRecipesDataLoaded(res: Resource<BrowseRecipeResponse>?) {
         when(res?.status){
             Status.SUCCESS->{
-                (recycler_recipes.adapter as RecipesAdapter).dayMeals = res?.data?.recipes!!
-                (recycler_recipes.adapter as RecipesAdapter).notifyDataSetChanged()
+                (recycler_recipes.adapter as BrowseRecipesAdapter).dayMeals = res?.data?.recipes!!
+                (recycler_recipes.adapter as BrowseRecipesAdapter).notifyDataSetChanged()
             }
         }
     }
 
     private fun onCreateRecipeClicked() {
-       // navigator.startCreateRecipeScreen()
+       navigator.startCreateRecipeScreen()
     }
 
 }

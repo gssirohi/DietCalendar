@@ -1,6 +1,5 @@
 package com.techticz.app.ui.customView
 
-import android.app.Activity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.techticz.app.model.food.Nutrition
 import com.techticz.app.model.recipe.RecipeResponse
-import com.techticz.app.ui.adapter.RecipeFoodAdapter
+import com.techticz.app.ui.adapter.PlateRecipeFoodAdapter
 import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.RecipeViewModel
@@ -54,6 +53,7 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
         fab_plus.setOnClickListener({onFabPlusClicked()})
         fab_minus.setOnClickListener({onFabMinusClicked()})
         fab_remove.setOnClickListener({onFabRemoveClicked()})
+        fab_explore_recipe.setOnClickListener({exploreRecipe()})
         recipeViewModel?.liveRecipeResponse?.observe(context as BaseDIActivity, Observer { resource ->
             onViewModelDataLoaded(resource)
 
@@ -73,6 +73,12 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
         newTrigger.qty = trigger?.qty
         recipeViewModel?.triggerRecipeItem?.value = newTrigger*/
 
+    }
+
+    private fun exploreRecipe() {
+        if(context is BaseDIActivity){
+            (context as BaseDIActivity).navigator.startExploreRecipeScreen(recipeViewModel?.triggerRecipeItem?.value)
+        }
     }
 
     private fun onFabRemoveClicked(){
@@ -155,7 +161,7 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
 
                 observeChildViewModels(resource)
                 recipeFoodRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-                recipeFoodRecyclerView.adapter = RecipeFoodAdapter(this, null)
+                recipeFoodRecyclerView.adapter = PlateRecipeFoodAdapter(this, null)
                 recipeFoodRecyclerView.visibility = View.GONE
                 tv_show_more_less.text = "show more"
 
@@ -227,8 +233,8 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
             }
             Status.COMPLETE -> {
                 spin_kit.visibility = View.INVISIBLE
-                tv_recipe_calory.text = "" + recipeViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+
-                        "\nCals/"+recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
+                tv_recipe_calory.text = "" + recipeViewModel?.perServingCal()+
+                        "\nKcal/"+recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
                 when(recipeViewModel?.isVeg()){
                     true->tv_recipe_type.setTextColor(Color.parseColor("#ff669900"))
                     else->tv_recipe_type.setTextColor(Color.parseColor("#ffcc0000"))

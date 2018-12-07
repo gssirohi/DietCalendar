@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.meal_recipe_layout.view.*
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 7/10/18.
  */
-class MealRecipesAdapter constructor(var plateView: PlateView, var callBack:RecipItemCallBacks?): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class PlateRecipesAdapter constructor(var plateView: PlateView, var callBack:RecipItemCallBacks?): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is MealRecipeViewHolder) {

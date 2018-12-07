@@ -12,6 +12,7 @@ import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.meal.Meal
+import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.repo.MealPlateRepository
@@ -241,7 +242,9 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     fun startBrowsingRecipe() {
         navigator.startBrowseRecipeScreen(this)
     }
-
+    fun startBrowsingFood() {
+        navigator.startBrowseFoodScreen(this)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -253,6 +256,14 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
             plateView?.mealPlateViewModel?.addRecipeViewModel(this,recipeItem)
              //notify adapter
             plateView?.recipeRecyclerView?.adapter?.notifyDataSetChanged()
+        } else if(requestCode == 2 && resultCode == Activity.RESULT_OK){
+            var foodId = data?.getStringExtra("foodId")
+            var foodItem = FoodItem(foodId,1)
+
+            //add recipe to this plate
+            plateView?.mealPlateViewModel?.addFoodViewModel(this,foodItem)
+            //notify adapter
+            plateView?.foodRecyclerView?.adapter?.notifyDataSetChanged()
         }
     }
 

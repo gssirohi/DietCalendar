@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="32dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.techticz.app.ui.activity.BrowseRecipeActivity"
     tools:showIn="@layout/activity_browse_recipe">
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        style="?attr/textAppearanceOverline"
-        app:queryHint="type recipe name"
-        android:tooltipText="Search Meal Recipe"
-        android:background="@color/primaryLightColor">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </androidx.appcompat.widget.SearchView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="8dp"
-        android:id="@+id/recycler_recipes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/meal_recipe_list_item_view"
-        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="8dp"
+            android:id="@+id/recycler_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/meal_food_list_item_view"
+            >
 
-    </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

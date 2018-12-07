@@ -13,113 +13,76 @@
     android:orientation="vertical"
     tools:context="com.techticz.app.ui.activity.UserProfileActivity$PlaceholderFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal|top"
 
-        style="@style/AppCardView">
+        android:theme="@style/Component.Dark">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_person_white"
-                    android:tint="@color/secondaryColor"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
                     android:hint="Height(cm)">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_gesture"
+                        android:drawablePadding="8dp"
                         tools:text="171"
                         android:inputType="numberDecimal"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_person_white"
-                    android:tint="@color/secondaryColor"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
                     android:hint="Weight(Kg)">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_linear_scale"
+                        android:drawablePadding="8dp"
                         tools:text="65.5"
                         android:inputType="numberDecimal"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_person_white"
-                    android:tint="@color/secondaryColor"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_target_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
                     android:hint="Target Weight(Kg)">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="75"
+                        android:drawableLeft="@drawable/ic_linear_scale"
+                        android:drawablePadding="8dp"
                         android:inputType="numberDecimal"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Activity Level"
-                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_directions_walk"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
                 style="?attr/textAppearanceHeadline6"/>
             <RadioGroup
                 android:id="@+id/radio_group_activity_level"
@@ -153,16 +116,15 @@
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal|bottom"
-
-        style="@style/AppCardView">
+        android:theme="@style/Component.Dark">
 
         <CheckBox
             android:id="@+id/checkbox_drink"
@@ -171,7 +133,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:text="Do you drink twice a week, or more?"/>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"

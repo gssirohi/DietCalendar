@@ -2,20 +2,17 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.dietplan.DayPlan
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.meal.Meal
 import com.techticz.app.repo.DietPlanRepository
-import com.techticz.app.repo.MealPlateRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
-import com.techticz.app.repo.FoodRepository
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
@@ -201,8 +198,8 @@ constructor() : BaseViewModel() {
         if(mealModelList != null) {
             for (mealModel in mealModelList?.value?.data!!) {
                 if(mealModel.liveMealPlateResponse.value?.data != null) {
-                    var mealNutrients: Nutrients? = mealModel.getNutrients()
-                    var factoredNutrients = mealNutrients?.applyFactor(1)//as meal is one always
+                    var mealNutrients: Nutrients? = mealModel.getNutrientsPerPlate()
+                    var factoredNutrients = mealNutrients?.applyFactor(1f)//as meal is one always
                     nutrientsDayMeals.addUpNutrients(factoredNutrients)
                 }
             }

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:padding="8dp"
     android:layout_height="wrap_content">
-<com.techticz.app.ui.customView.AppImageView
+<com.techticz.app.ui.customView.AppImageViewRound
     android:id="@+id/aiv_plate"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
     android:src="@drawable/app_icon"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,14 +20,14 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceOverline"
+            style="?attr/textAppearanceCaption"
             tools:text = "430 cal"/>
         <TextView
             android:id="@+id/tv_plate_name"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?attr/textAppearanceHeadline6"
+            style="?attr/textAppearanceSubtitle1"
             tools:text = "Plate Name"/>
         <TextView
             android:id="@+id/tv_plate_desc"

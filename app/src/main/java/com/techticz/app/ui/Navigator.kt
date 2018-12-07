@@ -10,6 +10,8 @@ import org.parceler.Parcels
 import com.techticz.auth.LoginActivity
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.mealplate.MealPlate
+import com.techticz.app.model.mealplate.RecipeItem
+import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.ui.activity.DietPlanActivity
 
 
@@ -74,9 +76,20 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
+    fun startCreateRecipeScreen() {
+        var intent = Intent(context, RecipeDetailsActivity::class.java)
+        intent.putExtra("mode",RecipeDetailsActivity.MODE_NEW)
+        context.startActivity(intent)
+    }
+
     fun startBrowseRecipeScreen(activity: Activity) {
         var intent = Intent(context, BrowseRecipeActivity::class.java)
         activity.startActivityForResult(intent,1)
+    }
+
+    fun startBrowseFoodScreen(activity: Activity) {
+        var intent = Intent(context, BrowseFoodActivity::class.java)
+        activity.startActivityForResult(intent,2)
     }
 
     fun startBrowsePlateScreen(activity: Activity, planId: String,daySection:Int,mealType:String) {
@@ -94,12 +107,27 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
+    fun startExploreRecipeScreen(recipeItem: RecipeItem?) {
+        var intent = Intent(context, RecipeDetailsActivity::class.java)
+        intent.putExtra("recipeId", recipeItem?.id)
+        intent.putExtra("mode", RecipeDetailsActivity.MODE_EXPLORE)
+        context.startActivity(intent)
+    }
+
     fun startCopyPlateScreen(activity: Activity,mealPlate: MealPlate?) {
         var intent = Intent(context, MealPlateActivity::class.java)
         intent.putExtra("plate", Parcels.wrap<MealPlate>(mealPlate))
         intent.putExtra("mode", MealPlateActivity.MODE_COPY_FROM_PLATE)
         activity.startActivityForResult(intent,2)
     }
+
+    fun startCopyRecipeScreen(activity: Activity,recipe: Recipe?) {
+        var intent = Intent(context, RecipeDetailsActivity::class.java)
+        intent.putExtra("recipe", Parcels.wrap<Recipe>(recipe))
+        intent.putExtra("mode", RecipeDetailsActivity.MODE_COPY_FROM_RECIPE)
+        activity.startActivityForResult(intent,2)
+    }
+
 
 
 }

@@ -6,7 +6,7 @@
     android:padding="8dp"
     android:background="@android:color/holo_green_light"
     android:layout_height="wrap_content">
-<com.techticz.app.ui.customView.AppImageView
+<com.techticz.app.ui.customView.AppImageViewRound
     android:id="@+id/aiv_recipe"
     android:layout_width="48dp"
     android:layout_height="48dp"

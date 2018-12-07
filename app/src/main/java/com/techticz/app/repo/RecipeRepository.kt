@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FieldPath
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.RecipeListResponse
 import com.techticz.app.model.mealplate.RecipeItem
@@ -111,12 +109,58 @@ class RecipeRepository @Inject constructor(private val db: FirebaseFirestore) : 
         return live
     }
 
+    fun createRecipe(recipe: Recipe, listner: RecipeRepositoryCallback) {
+        Timber.d("Creating recipe..:"+recipe.id)
+        var batch: WriteBatch = db.batch()
+        var ref: DocumentReference = db.collection(AppCollections.RECIPES.collectionName).document(recipe.id)
+        batch.set(ref, recipe)
+        batch.commit()
+                .addOnSuccessListener { task ->
+                    var message =  AppCollections.RECIPES.collectionName.toString()+" create recipe success"
+                    Timber.d(message)
+                    //hideProgress()
+                    //showSuccess(message!!)
+                    listner.onRecipeCreated(recipe)
+                }
+                .addOnFailureListener { task ->
+                    var message =  AppCollections.RECIPES.collectionName+" create recipe failed"
+                    Timber.e(message)
+                    //hideProgress()
+                    //showError(message!!)
+                    listner.onCreateRecipeFailure(message)
+                }
+    }
+    fun updateRecipe(recipe: Recipe, listner: RecipeRepositoryCallback) {
+        Timber.d("update recipe..:"+recipe?.id)
+        var batch: WriteBatch = db.batch()
+        var ref: DocumentReference = db.collection(AppCollections.RECIPES.collectionName).document(recipe?.id!!)
+        batch.set(ref, recipe!!)
+        batch.commit()
+                .addOnSuccessListener { task ->
+                    var message =  AppCollections.RECIPES.collectionName.toString()+" update recipe success"
+                    Timber.d(message)
+                    //hideProgress()
+                    //showSuccess(message!!)
+                    listner.onRecipeUpdated(recipe)
+                }
+                .addOnFailureListener { task ->
+                    var message =  AppCollections.RECIPES.collectionName+" update recipe failed"
+                    Timber.e(message)
+                    //hideProgress()
+                    //showError(message!!)
+                    listner.onRecipeUpdateFailure(message)
+                }
+    }
+
     init {
         Timber.d("Injecting:" + this)
     }
 
-    interface Callback {
-        fun onRecipeFetched(recipe:Recipe)
+    interface RecipeRepositoryCallback {
+        fun onRecipeUpdated(recipe: Recipe)
+        fun onRecipeUpdateFailure(message: String)
+        fun onRecipeCreated(recipe: Recipe)
+        fun onCreateRecipeFailure(message: String)
     }
 
 

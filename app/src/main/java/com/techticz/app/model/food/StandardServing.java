@@ -12,7 +12,14 @@ public class StandardServing {
     @SerializedName("servingType")
     @Expose
     private String servingType;
+    @SerializedName("perServeQty")
+    @Expose
+    private Float perServeQty;
 
+    @SerializedName("perServeQtyUnit")
+    @Expose
+    private String perServeQtyUnit;
+    
     public Integer getQty() {
         return qty;
     }
@@ -29,4 +36,19 @@ public class StandardServing {
         this.servingType = servingType;
     }
 
+    public Float getPerServeQty() {
+        return perServeQty;
+    }
+
+    public void setPerServeQty(Float perServeQty) {
+        this.perServeQty = perServeQty;
+    }
+
+    public String getPerServeQtyUnit() {
+        return perServeQtyUnit;
+    }
+
+    public void setPerServeQtyUnit(String perServeQtyUnit) {
+        this.perServeQtyUnit = perServeQtyUnit;
+    }
 }

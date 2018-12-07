@@ -40,29 +40,88 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
     fun fillDetails(foodViewModel: FoodViewModel?){
         this.foodViewModel = foodViewModel
         tv_food_name.setText(foodViewModel?.triggerFoodItem?.value?.id)
-        tv_food_qty.setText(""+ foodViewModel?.triggerFoodItem?.value?.qty)
+
+        tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
+        tv_food_qty_unit.setText(" serving")
+
+        fab_plus.setOnClickListener({onFabPlusClicked()})
+        fab_minus.setOnClickListener({onFabMinusClicked()})
+        fab_remove.setOnClickListener({onFabRemoveClicked()})
         foodViewModel?.liveFoodResponse?.observe(context as BaseDIActivity, Observer {
             resource ->
             onViewModelDataLoaded(resource)
 
         })
         if(plateView.mode == PlateView.MODE_EXPLORE){
-            //tv_show_more_less.visibility = View.GONE
+            configureUIinEditMode(false)
+
         } else {
-           // tv_show_more_less.visibility = View.VISIBLE
+            configureUIinEditMode(true)
         }
 
         //foodViewModel?.triggerFoodItem?.value = foodViewModel?.triggerFoodItem?.value
     }
 
+    private fun onFabRemoveClicked(){
+        plateView?.removeFood(context as BaseDIActivity,foodViewModel?.triggerFoodItem?.value)
+    }
+
+    private fun onFabMinusClicked() {
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! > 1) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - 1
+            tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
+            plateView?.mealPlateViewModel?.registerChildCompletion()
+//            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
+//            foodViewModel?.liveFoodResponse?.value = newRes
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= 1){
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            } else {
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun onFabPlusClicked() {
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! < 15) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + 1
+            tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
+            plateView?.mealPlateViewModel?.registerChildCompletion()
+//            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
+//            foodViewModel?.liveFoodViewModelList?.value = newRes
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! > 1){
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            } else {
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            }
+        }
+
+    }
+
+    private fun configureUIinEditMode(yes: Boolean) {
+        if(yes){
+            fab_plus.visibility = View.VISIBLE
+
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! > 1){
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            } else {
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            }
+
+        } else {
+            fab_minus.visibility = View.GONE
+            fab_plus.visibility = View.GONE
+            fab_remove.visibility = View.GONE
+        }
+    }
+
     private fun onViewModelDataLoaded(resource: Resource<FoodResponse>?) {
         Timber.d("foodViewModel?.liveFoodResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
-        //ring parent bells
-        /*if(resource?.status == Status.SUCCESS && resource?.isFresh!!) {
-            var resOld = plateView.mealPlateViewModel?.liveFoodViewModelList?.value
-            var resNew = resOld?.createCopy(resource?.status)
-            plateView.mealPlateViewModel?.liveFoodViewModelList?.value = resNew
-        }*/
         onFoodLoaded(resource)
     }
 
@@ -77,10 +136,10 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
             {
                 spin_kit.visibility = View.INVISIBLE
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
-                tv_food_calory.text = ""+resource.data?.food?.nutrition?.nutrients?.principlesAndDietaryFibers?.energy+
-                        "\n cals/"+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
-                tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty+
-                        " "+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_calory.text = ""+foodViewModel?.perServingCal()+
+                        "\nKcal/"+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty
+                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
 
                 observeChildViewModels(resource)
 
@@ -102,8 +161,6 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
     }
 
     private fun observeChildViewModels(resource: Resource<FoodResponse>) {
-
-
         this.foodViewModel?.liveImage?.observe(context as BaseDIActivity, Observer {
             resource->
             onImageModelLoaded(resource)
@@ -114,7 +171,7 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
         resource?.isFresh = false
         when(resource?.status) {
             Status.LOADING -> {
-                spin_kit.visibility = View.INVISIBLE
+                spin_kit.visibility = View.VISIBLE
                 aiv_food.setImageViewModel(resource?.data, context as LifecycleOwner)
 
             }

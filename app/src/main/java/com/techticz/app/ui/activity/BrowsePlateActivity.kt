@@ -2,15 +2,13 @@ package com.techticz.app.ui.activity
 
 import android.os.Bundle
 import android.app.Activity
-import android.content.Intent
-import android.widget.SearchView
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.BrowsePlateResponse
 import com.techticz.app.model.mealplate.MealPlate
-import com.techticz.app.ui.adapter.PlatesAdapter
+import com.techticz.app.ui.adapter.BrowsePlatesAdapter
 import com.techticz.app.viewmodel.BrowsePlateViewModel
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
@@ -19,7 +17,7 @@ import com.techticz.networking.model.Status
 import kotlinx.android.synthetic.main.activity_browse_plate.*
 import kotlinx.android.synthetic.main.content_browse_plate.*
 
-class BrowsePlateActivity : BaseDIActivity(), PlatesAdapter.PlateViewCallBacks {
+class BrowsePlateActivity : BaseDIActivity(), BrowsePlatesAdapter.PlateViewCallBacks {
     override fun onPlateViewClicked(mealPlate: MealPlate) {
         var data = intent
         data.putExtra("plateId",mealPlate.id)
@@ -53,7 +51,7 @@ class BrowsePlateActivity : BaseDIActivity(), PlatesAdapter.PlateViewCallBacks {
         })
 
         recycler_plates.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        recycler_plates.adapter = PlatesAdapter(ArrayList(),this)
+        recycler_plates.adapter = BrowsePlatesAdapter(ArrayList(),this)
 
         browsePlatesViewModel.liveBrowsePlatesResponse?.observe(this, Observer {
             res->
@@ -65,8 +63,8 @@ class BrowsePlateActivity : BaseDIActivity(), PlatesAdapter.PlateViewCallBacks {
     private fun onPlatesDataLoaded(res: Resource<BrowsePlateResponse>?) {
         when(res?.status){
             Status.SUCCESS->{
-                (recycler_plates.adapter as PlatesAdapter).dayMeals = res?.data?.plates!!
-                (recycler_plates.adapter as PlatesAdapter).notifyDataSetChanged()
+                (recycler_plates.adapter as BrowsePlatesAdapter).dayMeals = res?.data?.plates!!
+                (recycler_plates.adapter as BrowsePlatesAdapter).notifyDataSetChanged()
             }
         }
     }

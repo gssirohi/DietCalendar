@@ -1,6 +1,8 @@
 package com.techticz.app.ui.customView;
 
 import androidx.lifecycle.LifecycleOwner;
+import timber.log.Timber;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,6 +58,7 @@ public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
         if(res != null) {
             res.isFresh = false;
             if (res.status == Status.SUCCESS) {
+                Timber.d("Image Bitmap Loaded:"+viewModel.getLiveImageResponse().getValue().data.getUrl());
                 setImageBitmap(viewModel.getLiveImageResponse().getValue().data.getBitmap());
             }
         }

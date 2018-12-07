@@ -19,6 +19,8 @@ abstract class AppActivityModule {
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeFoodDetailsActivity(): FoodDetailsActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeRecipeDetailsActivity(): RecipeDetailsActivity
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeDeveloperActivity(): DeveloperActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeBrowseDietPlanActivity(): BrowseDietPlansActivity
@@ -26,6 +28,8 @@ abstract class AppActivityModule {
     abstract fun contributeBrowsePlateActivity(): BrowsePlateActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeBrowseRecipeActivity(): BrowseRecipeActivity
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeBrowseFoodActivity(): BrowseFoodActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeDietChartActivity(): DietChartActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))

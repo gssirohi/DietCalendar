@@ -25,6 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RoundImageView extends CircleImageView {
     private String url;
+
     public RoundImageView(Context context) {
         super(context);
     }

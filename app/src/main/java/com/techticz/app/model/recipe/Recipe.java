@@ -4,29 +4,40 @@ package com.techticz.app.model.recipe;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Recipe {
+    public Recipe() {
+        basicInfo = new BasicInfo();
+        standardServing = new StandardServing();
+        basicProperty = new BasicProperty();
+        additionalInfo = new AdditionalInfo();
+        adminInfo = new AdminInfo();
+        formula = new Formula();
+    }
 
     @SerializedName("id")
     @Expose
-    private String id;
+    String id;
     @SerializedName("basicInfo")
     @Expose
-    private BasicInfo basicInfo;
+    BasicInfo basicInfo;
     @SerializedName("standardServing")
     @Expose
-    private StandardServing standardServing;
+    StandardServing standardServing;
     @SerializedName("basicProperty")
     @Expose
-    private BasicProperty basicProperty;
+    BasicProperty basicProperty;
     @SerializedName("additionalInfo")
     @Expose
-    private AdditionalInfo additionalInfo;
+    AdditionalInfo additionalInfo;
     @SerializedName("formula")
     @Expose
-    private Formula formula;
+    Formula formula;
     @SerializedName("adminInfo")
     @Expose
-    private AdminInfo adminInfo;
+    AdminInfo adminInfo;
 
     public String getId() {
         return id;

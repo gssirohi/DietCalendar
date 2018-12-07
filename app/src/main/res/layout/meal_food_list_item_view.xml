@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="4dp"
+    android:layout_height="wrap_content">
+<com.techticz.app.ui.customView.AppImageViewRound
+    android:id="@+id/aiv_food"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:src="@drawable/app_icon"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_food_cal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceCaption"
+            tools:text = "430 cal"/>
+        <TextView
+            android:id="@+id/tv_food_name"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceSubtitle1"
+            tools:text = "Food Name"/>
+        <TextView
+            android:id="@+id/tv_food_desc"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceBody2"
+            tools:text = "Food Desc sjfhjh djfhj dfh jdfhjdfh jdh fd fh djhf jd fhjf"/>
+    </LinearLayout>
+</LinearLayout>

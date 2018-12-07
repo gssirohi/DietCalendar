@@ -38,8 +38,8 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         scroller_featured_plans.adapter = MealPlanPagerAdapter(this,featuredPlanList,this)
 
         scroller_featured_plans.setItemTransformer(ScaleTransformer.Builder()
-                        .setMaxScale(1.05f)
-                        .setMinScale(0.8f)
+                        .setMaxScale(1.01f)
+                        .setMinScale(0.95f)
                         .setPivotX(Pivot.X.CENTER) // CENTER is a default one
                         .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
                         .build());
@@ -47,8 +47,8 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         scroller_my_plans.adapter = MealPlanPagerAdapter(this,myPlanList,this)
 
         scroller_my_plans.setItemTransformer(ScaleTransformer.Builder()
-                .setMaxScale(1.05f)
-                .setMinScale(0.8f)
+                .setMaxScale(1.01f)
+                .setMinScale(0.95f)
                 .setPivotX(Pivot.X.CENTER) // CENTER is a default one
                 .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
                 .build());

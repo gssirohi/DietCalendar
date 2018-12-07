@@ -25,7 +25,7 @@
             app:expandedTitleTextAppearance="?attr/textAppearanceHeadline4"
             app:expandedTitleMarginBottom="80dp"
             app:expandedTitleGravity="center_horizontal|bottom"
-            app:contentScrim="?attr/colorAccent"
+            app:contentScrim="?attr/colorPrimary"
             app:title="Diet Plans"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">

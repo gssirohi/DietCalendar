@@ -4,14 +4,19 @@ package com.techticz.app.model.recipe;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class StandardServing {
+    public StandardServing() {
+    }
 
     @SerializedName("qty")
     @Expose
-    private Integer qty;
+    Integer qty;
     @SerializedName("servingType")
     @Expose
-    private String servingType;
+    String servingType;
 
     public Integer getQty() {
         return qty;

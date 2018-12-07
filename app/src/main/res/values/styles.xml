@@ -6,6 +6,8 @@
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
 
+        <item name="android:textColorHint">@color/secondaryTextColor</item>
+
         <item name="colorError">@color/errorColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
         <item name="materialCardViewStyle">@style/AppCardView</item>
@@ -76,7 +78,7 @@
     </style>
 
     <style name="Component.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
-        <item name="colorBackgroundFloating">?attr/colorPrimaryDark</item>
+        <item name="colorBackgroundFloating">?attr/colorPrimary</item>
         <item name="android:windowBackground">?attr/colorPrimary</item>
         <item name="android:colorBackground">?attr/colorError</item>
     </style>

@@ -7,41 +7,30 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
-import android.text.format.DateUtils
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.NutriPair
-import com.techticz.app.ui.Navigator
 import com.techticz.app.ui.adapter.DashBoardNutriAdapter
 import com.techticz.app.ui.customView.MealView
 import com.techticz.app.viewmodel.DietChartViewModel
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.MealPlateViewModel
-import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.UserResponse
 import com.techticz.app.model.user.User
-import com.techticz.app.viewmodel.UserViewModel
-import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.yarolegovich.discretescrollview.transform.Pivot
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.*
 import kotlinx.android.synthetic.main.content_dashboard.*
-import kotlinx.android.synthetic.main.nav_header_dashboard.*
 import kotlinx.android.synthetic.main.nav_header_dashboard.view.*
 import timber.log.Timber
 import java.util.*
-import javax.inject.Inject
 
 class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -172,7 +161,7 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
 
                 nutriList.add(NutriPair("Fat",dayNutrients?.principlesAndDietaryFibers?.fat,500f))
                 nutriList.add(NutriPair("Carb",dayNutrients?.principlesAndDietaryFibers?.carbohydrate,130f))
-                nutriList.add(NutriPair("Calory",dayNutrients?.principlesAndDietaryFibers?.energy,800f))
+                nutriList.add(NutriPair("Calory",(dayNutrients?.principlesAndDietaryFibers?.energy!!*0.239).toFloat(),800f))
                 nutriList.add(NutriPair("Protine",dayNutrients?.principlesAndDietaryFibers?.protien,20f))
                 nutriList.add(NutriPair("Iron",dayNutrients?.mineralsAndTraceElements?.iron,20f))
                 nutriList.add(NutriPair("Calcium",dayNutrients?.mineralsAndTraceElements?.calcium,20f))
@@ -229,22 +218,22 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.nav_plans -> {
                 navigator.startBrowsePlanScreen()
             }
-            R.id.nav_gallery -> {
+            R.id.nav_recipes -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_foods -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_settings -> {
                 navigator.startSettingsScreen()
             }
-            R.id.nav_share -> {
+            R.id.nav_logout -> {
                 navigator.navigateToLoginActivity(this)
             }
-            R.id.nav_send -> {
+            R.id.nav_developer_options -> {
                 navigator.startDeveloperScreen()
             }
         }

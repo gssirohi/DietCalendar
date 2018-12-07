@@ -5,14 +5,13 @@ import androidx.lifecycle.Observer
 import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.techticz.app.model.MealPlateResponse
-import com.techticz.app.ui.adapter.MealFoodAdapter
-import com.techticz.app.ui.adapter.MealRecipesAdapter
+import com.techticz.app.ui.adapter.PlateFoodAdapter
+import com.techticz.app.ui.adapter.PlateRecipesAdapter
 import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.MealPlateViewModel
@@ -21,10 +20,10 @@ import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.Items
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
-import com.techticz.app.ui.activity.DietChartActivity
 import com.techticz.app.ui.activity.MealPlateActivity
 import com.techticz.app.util.Utils
 import com.techticz.auth.utils.LoginUtils
@@ -64,6 +63,11 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
     private fun onAddRecipeClicked() {
         if(context is MealPlateActivity){
             (context as MealPlateActivity).startBrowsingRecipe()
+        }
+    }
+    private fun onAddFoodClicked() {
+        if(context is MealPlateActivity){
+            (context as MealPlateActivity).startBrowsingFood()
         }
     }
 
@@ -106,6 +110,9 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
         b_add_recipe.setOnClickListener {
             onAddRecipeClicked()
         }
+        b_add_food.setOnClickListener {
+            onAddFoodClicked()
+        }
 
         if(context is MealPlateActivity){
             fab_explore_plate.visibility = View.GONE
@@ -115,8 +122,8 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
     }
 
     private fun explorePlate() {
-        if(context is DietChartActivity){
-            (context as DietChartActivity).navigator.startExplorePlateScreen(mealPlateViewModel?.triggerMealPlateID?.value?.mealPlateId)
+        if(context is BaseDIActivity){
+            (context as BaseDIActivity).navigator.startExplorePlateScreen(mealPlateViewModel?.triggerMealPlateID?.value?.mealPlateId)
         }
     }
 
@@ -156,10 +163,10 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
         observeChildViewModels()
 
         recipeRecyclerView.layoutManager = (androidx.recyclerview.widget.LinearLayoutManager(context))
-        recipeRecyclerView.adapter = MealRecipesAdapter(this, null)
+        recipeRecyclerView.adapter = PlateRecipesAdapter(this, null)
 
         foodRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        foodRecyclerView.adapter = MealFoodAdapter(this, null)
+        foodRecyclerView.adapter = PlateFoodAdapter(this, null)
     }
 
     private fun observeChildViewModels() {
@@ -186,7 +193,7 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
             }
             Status.COMPLETE -> {
                 spin_kit_plate_recipes.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = "" + mealPlateViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+" Cals"
+                tv_meal_plate_calories.text = "" + mealPlateViewModel?.perPlateCal()+" KCal"
                 tv_meal_plate_calories.visibility = View.VISIBLE
                 when(mealPlateViewModel?.isVeg()){
                     true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
@@ -250,7 +257,7 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
             }
             Status.COMPLETE -> {
                 spin_kit_plate_foods.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = "" + mealPlateViewModel?.getNutrients()?.principlesAndDietaryFibers?.energy+" Cals"
+                tv_meal_plate_calories.text = "" + mealPlateViewModel?.perPlateCal()+" KCal"
                 when(mealPlateViewModel?.isVeg()){
                     true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
                     else->tv_meal_plate_type.setTextColor(Color.parseColor("#ffcc0000"))
@@ -309,6 +316,13 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
         mealPlateViewModel?.removeRecipeViewModel(lifecycleOwner,recipe!!)
         //notify adapter
         recipeRecyclerView?.adapter?.notifyDataSetChanged()
+    }
+
+    fun removeFood(lifecycleOwner: LifecycleOwner,food: FoodItem?) {
+        //add recipe to this plate
+        mealPlateViewModel?.removeFoodViewModel(lifecycleOwner,food!!)
+        //notify adapter
+        foodRecyclerView?.adapter?.notifyDataSetChanged()
     }
 
     fun validateData(): String? {

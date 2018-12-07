@@ -15,7 +15,7 @@
     android:orientation="vertical"
     >
 
-    <com.techticz.app.ui.customView.AppImageView
+    <com.techticz.app.ui.customView.AppImageViewRound
         android:id="@+id/aiv_user"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -23,7 +23,8 @@
         android:layout_gravity="center_horizontal|top"
         android:elevation="10dp"
         />
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Component.Dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -35,30 +36,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:orientation="vertical">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_person_white"
-                    android:tint="@color/secondaryColor"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:hint="Name">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_person"
+                        android:drawablePadding="8dp"
                         tools:text="Developer"
                         android:enabled="false"
                         android:editable="false"
@@ -67,75 +58,50 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@android:drawable/ic_dialog_email"
-                    android:tint="@color/secondaryColor"/>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_credential"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:hint="Credential">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="90190901991"
+                        android:drawablePadding="8dp"
                         android:enabled="false"
                         android:editable="false"
                         android:inputType="number"
+                        android:drawableLeft="@drawable/ic_email"
                         android:focusable="false"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                xmlns:tools="http://schemas.android.com/tools">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@android:drawable/ic_menu_my_calendar"
-                    android:tint="@color/secondaryColor"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:hint="Date Of Birth">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="27-04-1990"
+                        android:drawablePadding="8dp"
+                        android:drawableLeft="@drawable/ic_event"
                         android:inputType="date"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gender"
                 android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="8dp"
                 style="?attr/textAppearanceHeadline6"/>
             <RadioGroup
                 android:id="@+id/radio_group_gender"
@@ -161,7 +127,7 @@
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
     <TextView

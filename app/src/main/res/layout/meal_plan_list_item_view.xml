@@ -47,14 +47,14 @@
             android:layout_height="wrap_content"
             android:text = "\u25D9"
             android:gravity="center"
-            style="?attr/textAppearanceBody2"
+            style="?attr/textAppearanceSubtitle2"
             />
         <TextView
-            android:id="@+id/plan_verified"
+            android:id="@+id/tv_daily_cal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text = "Includes Cheese"
+            android:text = "2500 Kcal Daily"
             android:layout_marginLeft="4dp"
             style="?attr/textAppearanceCaption"
             />
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
             android:id="@+id/plan_access"
             android:layout_width="wrap_content"
@@ -83,18 +83,17 @@
             android:text = "Free"
             android:gravity="start|center_vertical"
             android:layout_gravity="center_vertical"
-            android:layout_weight="8"
             style="?attr/textAppearanceHeadline5"
             />
         <TextView
-            android:id="@+id/tv_daily_cal"
+            android:id="@+id/tv_plan_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "2500 Kcal Daily"
-            android:gravity="start|center_vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="8"
+            android:text = "-by Author of this plan"
+            android:gravity="end|center_vertical"
+            android:layout_gravity="end"
             style="?attr/textAppearanceCaption"
+            android:textStyle="italic"
             />
     </LinearLayout>
 </LinearLayout>

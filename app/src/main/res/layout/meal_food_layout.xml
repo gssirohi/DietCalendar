@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.techticz.app.ui.customView.AppImageView
+            <com.techticz.app.ui.customView.AppImageViewRound
                 android:id="@+id/aiv_food"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -70,13 +70,59 @@
                     android:visibility="invisible"
                     tools:visibility="visible"/>
             </LinearLayout>
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/tv_food_qty"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                style="?attr/textAppearanceBody2"
-                tools:text="2 peices"/>
+                android:orientation="horizontal">
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_clear"
+                    app:fabCustomSize="24dp"
+                    android:backgroundTint="@color/errorColor"
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:layout_gravity="left" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_action_minus"
+                    android:layout_margin="4dp"
+                    app:fabCustomSize="24dp"
+                    android:layout_gravity="left" />
+                <TextView
+                    android:id="@+id/tv_food_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="4dp"
+                    style="?attr/textAppearanceHeadline6"
+                    tools:text="2"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/tv_food_qty_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="left|center_vertical"
+                    style="?attr/textAppearanceBody2"
+                    tools:text="peices"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_action_add"
+                    app:fabCustomSize="24dp"
+                    android:layout_gravity="right" />
+            </LinearLayout>
 
         </LinearLayout>
 

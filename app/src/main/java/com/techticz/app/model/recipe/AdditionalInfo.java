@@ -5,17 +5,22 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class AdditionalInfo {
+    public AdditionalInfo() {
+    }
 
     @SerializedName("alerts")
     @Expose
-    private List<String> alerts = null;
+    List<String> alerts = null;
     @SerializedName("region")
     @Expose
-    private String region;
+    String region;
     @SerializedName("subRegion")
     @Expose
-    private String subRegion;
+    String subRegion;
 
     public List<String> getAlerts() {
         return alerts;

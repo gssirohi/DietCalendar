@@ -1,9 +1,11 @@
 package com.techticz.app.repo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.FoodResponse
@@ -11,6 +13,7 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIRepository
+import com.techticz.app.model.BrowseFoodResponse
 import timber.log.Timber
 import javax.inject.Inject
 import com.techticz.app.model.food.Food
@@ -53,6 +56,35 @@ class FoodRepository @Inject constructor(private val db: FirebaseFirestore) : Ba
 
     return live
     }
+
+    fun fetchFoodsWithText(triggerBrowse: String?): LiveData<Resource<BrowseFoodResponse>>? {
+        var resp = BrowseFoodResponse()
+        var resource = Resource<BrowseFoodResponse>(Status.LOADING, resp, "Loading foods..", DataSource.LOCAL)
+        var live :MediatorLiveData<Resource<BrowseFoodResponse>> =  MediatorLiveData<Resource<BrowseFoodResponse>>()
+        live.value = resource
+
+        db.collection(AppCollections.FOODS.collectionName)
+                // .whereArrayContains(FieldPath.of("basicInfo","name","searchArray"),triggerBrowse!!)
+                .orderBy(FieldPath.of("basicInfo","name","english"))
+                .limit(10)
+                .startAt(triggerBrowse)
+                .endAt(triggerBrowse + '\uf8ff')
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var foods :List<Food> = task.result!!.toObjects(Food::class.java)
+                        //callback.onPlansFetched(plans)
+                        var resp = BrowseFoodResponse()
+                        resp.foods = foods
+                        var resource = Resource<BrowseFoodResponse>(Status.SUCCESS, resp, "Loading Success- foods", DataSource.LOCAL)
+                        live.value = resource
+                    } else {
+                        Log.e("Repo", "Loading Failed- foods", task.exception)
+                    }
+                }
+        return live
+    }
+
 
     init {
         Timber.d("Injecting:" + this)

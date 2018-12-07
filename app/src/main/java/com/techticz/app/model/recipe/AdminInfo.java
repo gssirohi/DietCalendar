@@ -4,35 +4,40 @@ package com.techticz.app.model.recipe;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class AdminInfo {
+    public AdminInfo() {
+    }
 
     @SerializedName("createdOn")
     @Expose
-    private String createdOn;
+    String createdOn;
     @SerializedName("createdBy")
     @Expose
-    private String createdBy;
+    String createdBy;
     @SerializedName("published")
     @Expose
-    private Boolean published;
+    Boolean published;
     @SerializedName("publishedOn")
     @Expose
-    private String publishedOn;
+    String publishedOn;
     @SerializedName("publishedBy")
     @Expose
-    private String publishedBy;
+    String publishedBy;
     @SerializedName("verified")
     @Expose
-    private Boolean verified;
+    Boolean verified;
     @SerializedName("verifiedOn")
     @Expose
-    private String verifiedOn;
+    String verifiedOn;
     @SerializedName("verifiedBy")
     @Expose
-    private String verifiedBy;
+    String verifiedBy;
     @SerializedName("lastModifiedOn")
     @Expose
-    private String lastModifiedOn;
+    String lastModifiedOn;
 
     public String getCreatedOn() {
         return createdOn;
