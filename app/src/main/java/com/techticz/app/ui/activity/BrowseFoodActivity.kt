@@ -2,6 +2,7 @@ package com.techticz.app.ui.activity
 
 import android.os.Bundle
 import android.app.Activity
+import android.view.View
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
@@ -21,6 +22,7 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
     override fun onFoodViewClicked(food: Food) {
         var data = intent
         data.putExtra("foodId",food.id)
+        data.putExtra("stdServing",food.standardServing.portion)
         setResult(Activity.RESULT_OK,data)
         finish()
     }
@@ -32,6 +34,7 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
         setContentView(R.layout.activity_browse_food)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
         fab.setOnClickListener { view ->
             onCreateFoodClicked()
         }
@@ -45,6 +48,7 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
             override fun onQueryTextSubmit(query: String): Boolean {
                 //Task HERE
                 browseFoodViewModel?.triggerFoodText.value  = query
+                spin_kit_browse_foods.visibility = View.VISIBLE
                 return false
             }
 
@@ -63,6 +67,7 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
     private fun onFoodsDataLoaded(res: Resource<BrowseFoodResponse>?) {
         when(res?.status){
             Status.SUCCESS->{
+                spin_kit_browse_foods.visibility = View.INVISIBLE
                 (recycler_foods.adapter as BrowseFoodsAdapter).dayMeals = res?.data?.foods!!
                 (recycler_foods.adapter as BrowseFoodsAdapter).notifyDataSetChanged()
             }

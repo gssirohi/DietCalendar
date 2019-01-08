@@ -1,5 +1,6 @@
 package com.techticz.app.base
 
+import android.app.ProgressDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import android.graphics.Color
@@ -23,6 +24,10 @@ import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
 import kotlinx.android.synthetic.main.activity_diet_chart.*
 import kotlinx.android.synthetic.main.app_bar_dashboard.view.*
+import android.graphics.Typeface
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.techticz.dietcalendar.ui.DietCalendarApplication
 
 
 /**
@@ -40,7 +45,7 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var baseuserViewModel: UserViewModel
-    private var progressDialog: MaterialDialog? = null
+    private var progressDialog: ProgressDialog? = null
 
     var activityToolbar: Toolbar? = null
         get() = field
@@ -55,12 +60,19 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
 
     var activityCoordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout? = null
+    var activityCollapsingToolbar: CollapsingToolbarLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        baseuserViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(UserViewModel::class.java)
-        baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
-        baseuserViewModel.autoLoadChildren(this)
+        //baseuserViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(UserViewModel::class.java)
+        baseuserViewModel = DietCalendarApplication.getAppUserViewModel()
+        if(baseuserViewModel.triggerUserId.value != null && baseuserViewModel.triggerUserId.value.equals(LoginUtils.getCurrentUserId())) {
+
+        } else {
+            baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
+            baseuserViewModel.autoLoadChildren(this)
+        }
+
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -69,6 +81,10 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onResume() {
         super.onResume()
         try {
+
+            val typeface = ResourcesCompat.getFont(this, R.font.dancing_script_bold)
+            activityCollapsingToolbar?.setCollapsedTitleTypeface(typeface)
+            activityCollapsingToolbar?.setExpandedTitleTypeface(typeface)
           //  activityCoordinatorLayout = findViewById(R.id.coordinatorLayout)
           //  activityToolbar = activityCoordinatorLayout?.findViewById(R.id.toolbar)
         } catch (e:Exception){
@@ -107,12 +123,12 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun showProgress(title:String,message:String) {
         if (progressDialog == null) {
-            progressDialog = MaterialDialog(this)
-                    .title(null,title)
-                    .message(null,message)
-                    
+            progressDialog = ProgressDialog(this)
+            progressDialog?.setMessage(getString(R.string.loading))
+            progressDialog?.setIndeterminate(true)
+
         }
-        progressDialog!!.show()
+        progressDialog?.show()
     }
 
     fun showProgress(message:String) {

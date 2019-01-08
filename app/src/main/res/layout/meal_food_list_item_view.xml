@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/textAppearanceCaption"
+            android:maxLines="1"
             tools:text = "430 cal"/>
         <TextView
             android:id="@+id/tv_food_name"
@@ -28,13 +29,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/textAppearanceSubtitle1"
+            android:maxLines="1"
             tools:text = "Food Name"/>
         <TextView
             android:id="@+id/tv_food_desc"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             style="?attr/textAppearanceBody2"
+            android:textSize="10sp"
+            android:maxLines="1"
             tools:text = "Food Desc sjfhjh djfhj dfh jdfhjdfh jdh fd fh djhf jd fhjf"/>
     </LinearLayout>
 </LinearLayout>

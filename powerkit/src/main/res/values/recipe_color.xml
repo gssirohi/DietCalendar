@@ -1,0 +1,11 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<resources>
+  <color name="primaryColor3">@color/primaryColor</color>
+  <color name="primaryLightColor3">@color/primaryLightColor</color>
+  <color name="primaryDarkColor3">@color/primaryDarkColor</color>
+  <color name="secondaryColor3">@color/secondaryColor</color>
+  <color name="secondaryLightColor3">@color/secondaryLightColor</color>
+  <color name="secondaryDarkColor3">@color/secondaryDarkColor</color>
+  <color name="primaryTextColor3">@color/primaryTextColor</color>
+  <color name="secondaryTextColor3">@color/secondaryTextColor</color>
+</resources>

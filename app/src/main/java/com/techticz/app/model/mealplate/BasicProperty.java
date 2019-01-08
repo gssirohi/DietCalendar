@@ -15,9 +15,9 @@ public class BasicProperty {
     @SerializedName("availability")
     @Expose
     Integer availability;
-    @SerializedName("prefmeals")
+    @SerializedName("prefMeals")
     @Expose
-    List<String> prefmeals = null;
+    List<String> prefMeals = null;
 
     public Integer getAvailability() {
         return availability;
@@ -27,12 +27,12 @@ public class BasicProperty {
         this.availability = availability;
     }
 
-    public List<String> getPrefmeals() {
-        return prefmeals;
+    public List<String> getPrefMeals() {
+        return prefMeals;
     }
 
-    public void setPrefmeals(List<String> prefmeals) {
-        this.prefmeals = prefmeals;
+    public void setPrefMeals(List<String> prefMeals) {
+        this.prefMeals = prefMeals;
     }
 
 }

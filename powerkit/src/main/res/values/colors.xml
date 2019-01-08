@@ -2,8 +2,9 @@
 <resources>
     <color name="translucent">#BBFFFFFF</color>
     <color name="errorColor">#FF0000</color>
+    <color name="black_overlay">#66000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundColor">@color/white</color>
-    <color name="surfaceColor">@color/white</color>
-    <color name="sheetColor">@color/white</color>
+    <color name="surfaceColor">#f3e5f5</color>
+    <color name="sheetColor">#f0f4c3</color>
 </resources>

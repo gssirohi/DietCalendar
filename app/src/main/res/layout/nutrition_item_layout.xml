@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/tv_nutrition_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/textAppearanceSubtitle2"
+        android:layout_alignParentLeft="true"
+        tools:text = "Energy"/>
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_nutrition_value1"
+            android:layout_width="wrap_content"
+            android:gravity="end"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceBody2"
+            tools:text = "2400 KCAL"/>
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_nutrition_value2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            style="?attr/textAppearanceBody2"
+            tools:text = "2200 KCAL"/>
+    </LinearLayout>
+
+</RelativeLayout>

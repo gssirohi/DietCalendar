@@ -18,13 +18,10 @@ public class HealthProfile {
     @SerializedName("activityLevel")
     @Expose
     private String activityLevel;
-    @SerializedName("targetWeight")
-    @Expose
-    private Float targetWeight;
 
     @SerializedName("drink")
     @Expose
-    private Boolean drink;
+    private String drink;
 
     @SerializedName("smoke")
     @Expose
@@ -62,19 +59,11 @@ public class HealthProfile {
         this.activityLevel = activityLevel;
     }
 
-    public Float getTargetWeight() {
-        return targetWeight;
-    }
-
-    public void setTargetWeight(Float targetWeight) {
-        this.targetWeight = targetWeight;
-    }
-
-    public Boolean getDrink() {
+    public String getDrink() {
         return drink;
     }
 
-    public void setDrink(Boolean drink) {
+    public void setDrink(String drink) {
         this.drink = drink;
     }
 

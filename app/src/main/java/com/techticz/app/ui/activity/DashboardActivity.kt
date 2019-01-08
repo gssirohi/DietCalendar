@@ -23,6 +23,7 @@ import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.UserResponse
 import com.techticz.app.model.user.User
+import com.techticz.app.util.Utils
 import com.yarolegovich.discretescrollview.transform.Pivot
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -43,16 +44,17 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
         setContentView(R.layout.activity_dashboard)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
 
         initData()
         initUI()
         nutriList = ArrayList<NutriPair>()
         nutri_scroller.adapter = DashBoardNutriAdapter(nutriList,null)
         nutri_scroller.setItemTransformer(ScaleTransformer.Builder()
-                .setMaxScale(1.05f)
+                .setMaxScale(1.1f)
                 .setMinScale(0.8f)
                 .setPivotX(Pivot.X.CENTER) // CENTER is a default one
-                .setPivotY(Pivot.Y.BOTTOM) // CENTER is a default one
+                .setPivotY(Pivot.Y.CENTER) // CENTER is a default one
                 .build());
 
         fab.setOnClickListener { view ->
@@ -161,7 +163,7 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
 
                 nutriList.add(NutriPair("Fat",dayNutrients?.principlesAndDietaryFibers?.fat,500f))
                 nutriList.add(NutriPair("Carb",dayNutrients?.principlesAndDietaryFibers?.carbohydrate,130f))
-                nutriList.add(NutriPair("Calory",(dayNutrients?.principlesAndDietaryFibers?.energy!!*0.239).toFloat(),800f))
+                nutriList.add(NutriPair("Calory",Utils.calories(dayNutrients?.principlesAndDietaryFibers?.energy),800f))
                 nutriList.add(NutriPair("Protine",dayNutrients?.principlesAndDietaryFibers?.protien,20f))
                 nutriList.add(NutriPair("Iron",dayNutrients?.mineralsAndTraceElements?.iron,20f))
                 nutriList.add(NutriPair("Calcium",dayNutrients?.mineralsAndTraceElements?.calcium,20f))

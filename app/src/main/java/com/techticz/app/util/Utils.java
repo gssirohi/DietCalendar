@@ -21,8 +21,12 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.StrictMode;
 
+import com.techticz.app.constants.Meals;
+
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.math.RoundingMode;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -86,5 +90,29 @@ public class Utils {
     @Nullable
     public static String timeStamp() {
         return new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss", Locale.getDefault()).format(new Date());
+    }
+
+    public static Float calories(@Nullable Float energy) {
+        if(energy != null){
+             Float cal =  (0.238f * energy);
+            return roundUpFloatToOneDecimal(cal);
+        }
+        return 0f;
+    }
+
+    public static Float roundUpFloatToOneDecimal(Float value) {
+        double rounded = (Math.round(value*10.0)/10.0);
+        return Float.parseFloat(""+rounded);
+    }
+
+    @NotNull
+    public static Meals getMealType(@Nullable String mealType) {
+        Meals[] values = Meals.values();
+        for(int i = 0; i<values.length;i++){
+            if(mealType.equalsIgnoreCase(values[i].getId())){
+                return values[i];
+            }
+        }
+        return null;
     }
 }

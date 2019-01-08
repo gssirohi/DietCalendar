@@ -24,6 +24,9 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/TitleStyle"
+            app:expandedTitleGravity="center"
+            app:title="Recipe Details"
             app:toolbarId="@+id/toolbar">
 
             <com.techticz.app.ui.customView.AppImageView
@@ -38,7 +41,10 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_app_bar"></FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,5 +59,15 @@
         app:fabCustomSize="42dp"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_mode_edit" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_nutri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabCustomSize="36dp"
+        android:backgroundTint="@color/sheetColor"
+        android:layout_gravity="bottom"
+        app:srcCompat="@drawable/ic_info_black_24dp"
+        android:tint="?colorPrimary"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

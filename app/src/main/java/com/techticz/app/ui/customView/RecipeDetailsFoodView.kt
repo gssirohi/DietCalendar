@@ -69,13 +69,16 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
     }
 
     private fun onFabMinusClicked() {
-        if(foodViewModel?.triggerFoodItem?.value?.qty!! > 1) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - 1
+        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
+        if(stdPortion == null) stdPortion = 100
+
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
 //            foodViewModel?.liveFoodResponse?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= 1){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= stdPortion){
                 fab_remove.visibility = View.VISIBLE
                 fab_minus.visibility = View.GONE
             } else {
@@ -86,13 +89,16 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
     }
 
     private fun onFabPlusClicked() {
-        if(foodViewModel?.triggerFoodItem?.value?.qty!! < 15) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + 1
+        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
+        if(stdPortion == null) stdPortion = 100
+
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! < 2000) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
 //            foodViewModel?.liveFoodViewModelList?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! > 1){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion){
                 fab_remove.visibility = View.GONE
                 fab_minus.visibility = View.VISIBLE
             } else {
@@ -138,10 +144,10 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
             {
                 spin_kit.visibility = View.INVISIBLE
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
-                tv_food_calory.text = ""+foodViewModel?.perServingCal()+
-                        "\nKcal/"+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_calory.text = foodViewModel?.perServingCalText()
+                tv_food_calory_per.text = foodViewModel?.perServingCalPerUnitText()
                 tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty
-                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
 
                 observeChildViewModels(resource)
 

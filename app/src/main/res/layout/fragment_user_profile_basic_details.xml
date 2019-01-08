@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    tools:context="com.techticz.app.ui.activity.UserProfileActivity$BasicDetailsFragment"
+
+    tools:context="com.techticz.app.ui.activity.UserProfileActivity"
     >
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,19 +24,21 @@
         android:layout_gravity="center_horizontal|top"
         android:elevation="10dp"
         />
-    <com.google.android.material.card.MaterialCardView
-        android:theme="@style/Component.Dark"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal|top"
-
-        style="@style/AppCardView">
-        <LinearLayout
+        android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:orientation="vertical">
+            android:theme="@style/Surface">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:orientation="vertical">
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -78,6 +81,22 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal|top"
+
+            android:theme="@style/Surface">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_dob"
                     android:layout_width="match_parent"
@@ -89,45 +108,234 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="27-04-1990"
-                        android:drawablePadding="8dp"
-                        android:drawableLeft="@drawable/ic_event"
+                        android:editable="false"
+                        android:focusable="false"
                         android:inputType="date"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:layout_margin="8dp"
-                android:drawableLeft="@drawable/ic_person"
-                android:drawablePadding="8dp"
-                style="?attr/textAppearanceHeadline6"/>
-            <RadioGroup
-                android:id="@+id/radio_group_gender"
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <RadioButton
-                    android:id="@+id/rb_male"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Male"/>
-                <RadioButton
-                    android:id="@+id/rb_female"
-                    android:layout_weight="1"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Female"/>
-            </RadioGroup>
+                    android:text="Gender"
+                    android:layout_margin="8dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold" />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/radio_group_gender"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    android:drawableTint="?attr/colorAccent"
+                    android:orientation="horizontal"
+                    >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_male"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp"
+                        android:checkable="true"
+                        app:chipBackgroundColor="?attr/colorAccent"
+                        android:layout_height="wrap_content"
+                        android:text="Male"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_female"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp"
+                        android:checkable="true"
+                        app:chipBackgroundColor="?attr/colorAccent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"/>
+                </com.google.android.material.chip.ChipGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HEIGHT"
+                    android:layout_margin="8dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold" />
+                <TextView
+                    android:id="@+id/tv_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="171 cm"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    style="?attr/textAppearanceHeadline5"
+                    android:textStyle = "bold" />
 
-        </LinearLayout>
+                <SeekBar
+                    android:id="@+id/sb_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="250"
+                    android:min="100"
+                    android:layout_margin="8dp"/>
 
 
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Weight"
+                    android:layout_margin="8dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold" />
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="65 kgs"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    style="?attr/textAppearanceHeadline5"
+                    android:textStyle = "bold" />
+
+                <SeekBar
+                    android:id="@+id/sb_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="120"
+                    android:min="20"
+                    android:layout_margin="8dp"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal|top"
+
+            android:theme="@style/Surface">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Activity Level"
+                    android:layout_marginTop="8dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold"/>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/radio_group_activity_level"
+                    android:layout_margin="8dp"
+                    android:paddingLeft="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:singleSelection="true"
+                    >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_low"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Low"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_moderate"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Moderate"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_high"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/rb_extreme"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Extreme"/>
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Drinking Habit"
+                    android:layout_marginTop="16dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold"/>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/radio_group_drinking_habit"
+                    android:layout_margin="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:singleSelection="true"
+                    >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/checkbox_no_drink"
+                        android:layout_margin="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:checkable="true"
+                        android:text="I don't drink"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/checkbox_moderate_drink"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:checkable="true"
+                    android:text="Ocassionally"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/checkbox_high_drink"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:checkable="true"
+                    android:text="Twice a week or more"/>
+                </com.google.android.material.chip.ChipGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Smoking Habit"
+                    android:layout_marginTop="16dp"
+                    style="?attr/textAppearanceSubtitle1"
+                    android:textAllCaps="true" android:textStyle = "bold"/>
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/radio_group_smoking_habit"
+                    android:layout_margin="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:singleSelection="true"
+                    >
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/checkbox_no_smoke"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:checkable="true"
+                    android:text="I don't smoke"/>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/checkbox_smoke"
+                        android:layout_margin="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:checkable="true"
+                        android:text="I smoke"/>
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
 
 
     <TextView

@@ -17,6 +17,9 @@ public class User {
     @SerializedName("healthProfile")
     @Expose
     private HealthProfile healthProfile;
+    @SerializedName("goal")
+    @Expose
+    private Goal goal;
     @SerializedName("mealPref")
     @Expose
     private MealPref mealPref;
@@ -118,5 +121,13 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Goal getGoal() {
+        return goal;
+    }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
     }
 }

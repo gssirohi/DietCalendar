@@ -22,7 +22,7 @@ class DeveloperActivity : BaseDIActivity(), View.OnClickListener {
         setContentView(R.layout.activity_developer)
         activityCoordinatorLayout = coordinatorLayout
         activityToolbar = toolbar
-
+        developerRepo.setHostContext(this)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -39,7 +39,7 @@ class DeveloperActivity : BaseDIActivity(), View.OnClickListener {
         bt_nutrient_units.setOnClickListener(this)
         bt_units.setOnClickListener(this)
 
-        developerRepo.setHostContext(this)
+
     }
 
     override fun onClick(view: View?) {

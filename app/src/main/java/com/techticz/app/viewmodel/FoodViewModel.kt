@@ -2,6 +2,7 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
+import android.text.Html
 import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.FoodResponse
 import com.techticz.app.model.food.Nutrients
@@ -12,7 +13,7 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
-import com.techticz.app.repo.MealPlateRepository
+import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
 import javax.inject.Inject
@@ -84,17 +85,28 @@ constructor() : BaseViewModel() {
         liveImage?.value = imageRes
     }
 
-    fun perServingCal(): Float? {
-        return getNutrientPerServe()?.principlesAndDietaryFibers?.energy!! * 0.239f
+    fun getCaloriesPerStdServing(): Float? {
+        return Utils.calories(getNutrientPerStdServing()?.principlesAndDietaryFibers?.energy!!)
     }
-    fun getNutrientPerServe(): Nutrients? {
-        var nutriFactPerQty = liveFoodResponse?.value?.data?.food?.nutrition?.perQty
-        var perServeQty = liveFoodResponse?.value?.data?.food?.standardServing?.perServeQty
-        if(nutriFactPerQty != null && perServeQty != null){
-            var servingFactor = perServeQty/nutriFactPerQty
-            return getNutrients()?.applyFactor(servingFactor)
-        }
-        return getNutrients()?.applyFactor(1f)
+
+    fun getNutrientPerStdServing(): Nutrients? {
+        var stdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.portion
+        return getNutrientPerPortion()?.applyFactor(stdPortion!!.toFloat())
+    }
+
+    fun getNutrientPerPortion(): Nutrients? {
+        var nutriFactPortion = liveFoodResponse?.value?.data?.food?.nutrition?.portion
+        if(nutriFactPortion == null) nutriFactPortion = 100
+        var perPortionFactor = (1/nutriFactPortion!!.toFloat())
+        return getNutrients()?.applyFactor(perPortionFactor)
+    }
+
+
+    fun perServingCalText(): CharSequence {
+        return ""+getCaloriesPerStdServing()+"\uD83D\uDD25"+" KCAL"
+    }
+    fun perServingCalPerUnitText(): CharSequence {
+        return "per "+liveFoodResponse?.value?.data?.food?.standardServing?.portion+" "+liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
     }
 
 }

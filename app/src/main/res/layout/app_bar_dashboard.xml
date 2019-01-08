@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.techticz.app.ui.activity.DashboardActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,10 +23,11 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:titleEnabled="true"
-            app:expandedTitleTextAppearance="?attr/textAppearanceHeadline4"
-            app:expandedTitleMarginBottom="80dp"
+            app:expandedTitleTextAppearance="@style/TitleStyle"
+            app:expandedTitleMarginBottom="68dp"
+            app:title="Dashboard"
             app:expandedTitleGravity="center_horizontal|bottom"
-            app:contentScrim="?attr/colorAccent"
+            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
             <com.techticz.app.ui.customView.AppImageView
@@ -33,22 +35,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_night"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/translucent"
-                android:alpha="50">
-
-            </View>
+                android:src="@drawable/bg_late_night1"/>
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
-            android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_app_bar"></FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,17 +66,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:layout_marginLeft="8dp"
-        style="?attr/textAppearanceCaption"
+        android:fontFamily="@font/lobster_two_italic"
+        android:textColor="?attr/colorSecondary"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:textAllCaps="true"
         tools:text="MONDAY"/>
     <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/nutri_scroller"
         android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="148dp"
+        android:layout_height="150dp"
         app:dsv_orientation="horizontal"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="54dp"
         android:layout_gravity="center|top"
         tools:listitem="@layout/circle_graph_view"/>
 

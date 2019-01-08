@@ -29,62 +29,66 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
 
 
     private fun uploadCollection(collection: AppCollections) {
-        var jsonString: String = JSONUtils.readJsonFromFile(hostActivityContext!!, collection.jsonName)
-        var sig = collection.className
+        try {
+            var jsonString: String = JSONUtils.readJsonFromFile(hostActivityContext!!, collection.jsonName)
+            var sig = collection.className
 
 
-        var gson: Gson = Gson()
-        var batch: WriteBatch = db.batch()
-        when(sig.canonicalName){
-            Food::class.java.canonicalName-> {
-                var listType = object : TypeToken<List<Food>>() {}.type
-                var items: List<Food> = gson.fromJson(jsonString, listType)
-                for (item in items) {
-                    var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
-                    batch.set(ref, item)
+            var gson: Gson = Gson()
+            var batch: WriteBatch = db.batch()
+            when (sig.canonicalName) {
+                Food::class.java.canonicalName -> {
+                    var listType = object : TypeToken<List<Food>>() {}.type
+                    var items: List<Food> = gson.fromJson(jsonString, listType)
+                    for (item in items) {
+                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                        batch.set(ref, item)
+                    }
                 }
+
+                Recipe::class.java.canonicalName -> {
+                    var listType = object : TypeToken<List<Recipe>>() {}.type
+                    var items: List<Recipe> = gson.fromJson(jsonString, listType)
+                    for (item in items) {
+                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                        batch.set(ref, item)
+                    }
+                }
+
+                MealPlate::class.java.canonicalName -> {
+                    var listType = object : TypeToken<List<MealPlate>>() {}.type
+                    var items: List<MealPlate> = gson.fromJson(jsonString, listType)
+                    for (item in items) {
+                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                        batch.set(ref, item)
+                    }
+                }
+
+                DietPlan::class.java.canonicalName -> {
+                    var listType = object : TypeToken<List<DietPlan>>() {}.type
+                    var items: List<DietPlan> = gson.fromJson(jsonString, listType)
+                    for (item in items) {
+                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                        batch.set(ref, item)
+                    }
+                }
+
             }
 
-            Recipe::class.java.canonicalName->{
-                var listType = object : TypeToken<List<Recipe>>() {}.type
-                var items: List<Recipe> = gson.fromJson(jsonString, listType)
-                for (item in items) {
-                    var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
-                    batch.set(ref, item)
-                }
-            }
-
-            MealPlate::class.java.canonicalName->{
-                var listType = object : TypeToken<List<MealPlate>>() {}.type
-                var items: List<MealPlate> = gson.fromJson(jsonString, listType)
-                for (item in items) {
-                    var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
-                    batch.set(ref, item)
-                }
-            }
-
-            DietPlan::class.java.canonicalName->{
-                var listType = object : TypeToken<List<DietPlan>>() {}.type
-                var items: List<DietPlan> = gson.fromJson(jsonString, listType)
-                for (item in items) {
-                    var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
-                    batch.set(ref, item)
-                }
-            }
-
+            batch.commit()
+                    .addOnSuccessListener { task ->
+                        var message = collection.collectionName + " upload success"
+                        hideProgress()
+                        showSuccess(message)
+                    }
+                    .addOnFailureListener(OnFailureListener { task ->
+                        var message = collection.collectionName + " upload failed"
+                        hideProgress()
+                        showError(message)
+                    })
+        } catch (e:Exception){
+            showError(e.toString())
         }
-
-        batch.commit()
-                .addOnSuccessListener { task ->
-                    var message =  collection.collectionName+" upload success"
-                    hideProgress()
-                    showSuccess(message)
-                }
-                .addOnFailureListener(OnFailureListener { task ->
-                    var message =  collection.collectionName+" upload failed"
-                    hideProgress()
-                    showError(message)
-                })
 
     }
 

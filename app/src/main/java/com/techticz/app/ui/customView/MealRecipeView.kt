@@ -233,8 +233,8 @@ class MealRecipeView(val plateView:PlateView, parent: ViewGroup?) : FrameLayout(
             }
             Status.COMPLETE -> {
                 spin_kit.visibility = View.INVISIBLE
-                tv_recipe_calory.text = "" + recipeViewModel?.perServingCal()+
-                        "\nKcal/"+recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
+                tv_recipe_calory.text = recipeViewModel?.perServingCalText()
+                tv_recipe_calory_per.text = recipeViewModel?.perServingCalPerUnitText()
                 when(recipeViewModel?.isVeg()){
                     true->tv_recipe_type.setTextColor(Color.parseColor("#ff669900"))
                     else->tv_recipe_type.setTextColor(Color.parseColor("#ffcc0000"))

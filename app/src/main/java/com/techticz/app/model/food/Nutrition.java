@@ -5,31 +5,23 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Nutrition {
+    public Nutrition() {
+        nutrients = new Nutrients();
+    }
 
-    @SerializedName("perQty")
+    @SerializedName("portion")
     @Expose
-    private Integer perQty;
-    @SerializedName("perQtyUnit")
-    @Expose
-    private String perQtyUnit;
+    private Integer portion;
     @SerializedName("nutrients")
     @Expose
     private Nutrients nutrients;
 
-    public Integer getPerQty() {
-        return perQty;
+    public Integer getPortion() {
+        return portion;
     }
 
-    public void setPerQty(Integer perQty) {
-        this.perQty = perQty;
-    }
-
-    public String getPerQtyUnit() {
-        return perQtyUnit;
-    }
-
-    public void setPerQtyUnit(String perQtyUnit) {
-        this.perQtyUnit = perQtyUnit;
+    public void setPortion(Integer portion) {
+        this.portion = portion;
     }
 
     public Nutrients getNutrients() {

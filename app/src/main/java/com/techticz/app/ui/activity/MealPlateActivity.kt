@@ -11,12 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.MealPlateResponse
+import com.techticz.app.model.food.Nutrition
 import com.techticz.app.model.meal.Meal
 import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.repo.MealPlateRepository
 import com.techticz.app.ui.customView.PlateView
+import com.techticz.app.ui.frag.NutritionDialogFragment
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.MealPlateViewModel
 import com.techticz.auth.utils.LoginUtils
@@ -32,7 +34,7 @@ import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
 
-class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryCallback {
+class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryCallback,NutritionDialogFragment.Listener {
 
 
     @Inject
@@ -53,6 +55,7 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
         setContentView(R.layout.activity_meal_plate)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
 
         initData()
         initUI()
@@ -103,6 +106,7 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
 
         plateView.fillDetails(plateViewModel)
         plateView.aiv_meal_plate.visibility = View.GONE
+        plateView.ll_meal_content.visibility = View.VISIBLE
         fl_plate_container.addView(plateView)
 
         plateViewModel?.liveImage?.observe(this, Observer {
@@ -114,6 +118,23 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
         fab.setOnClickListener { view ->
             onFabClicked()
         }
+        fab_nutri.setOnClickListener({
+            onNutriInfoClicked()
+        })
+    }
+    override fun getNutrition1(): Nutrition {
+        var nutrition = Nutrition()
+        nutrition.nutrients = plateViewModel?.getNutrientsPerPlate()
+        return nutrition
+    }
+
+    override fun getNutrition2(): Nutrition {
+        var nutrition = Nutrition()
+        nutrition.nutrients = plateViewModel?.getNutrientsPerPlate()
+        return nutrition
+    }
+    private fun onNutriInfoClicked() {
+        NutritionDialogFragment.newInstance("Plate Nutrients","Plate","RDA %").show(supportFragmentManager, "dialog")
     }
 
     private fun onFabClicked() {
@@ -203,7 +224,8 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     private fun onPlateLoaded(resource: Resource<MealPlateResponse>?) {
         when(resource?.status) {
             Status.SUCCESS -> {
-                activityToolbar?.title = resource?.data?.mealPlate?.basicInfo?.name?.english
+                supportActionBar?.title = resource?.data?.mealPlate?.basicInfo?.name?.english
+                activityCollapsingToolbar?.title = resource?.data?.mealPlate?.basicInfo?.name?.english
                 var creater = resource?.data?.mealPlate?.adminInfo?.createdBy
                 var user = LoginUtils.getUserCredential()
                 creater?.let { if(creater!!.equals(user,true)){
@@ -235,6 +257,9 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
             Status.LOADING -> {
                 aiv_meal_plate_app_bar.setImageViewModel(resource?.data,this)
             }
+            Status.SUCCESS -> {
+                aiv_meal_plate_app_bar.setImageViewModel(resource?.data,this)
+            }
 
         }
     }
@@ -258,7 +283,9 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
             plateView?.recipeRecyclerView?.adapter?.notifyDataSetChanged()
         } else if(requestCode == 2 && resultCode == Activity.RESULT_OK){
             var foodId = data?.getStringExtra("foodId")
-            var foodItem = FoodItem(foodId,1)
+            var foodStdServing = data?.getIntExtra("stdServing",100)
+            if(foodStdServing == null) foodStdServing = 100
+            var foodItem = FoodItem(foodId,foodStdServing)
 
             //add recipe to this plate
             plateView?.mealPlateViewModel?.addFoodViewModel(this,foodItem)

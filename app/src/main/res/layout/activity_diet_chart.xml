@@ -12,8 +12,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/app_bar"
         android:fitsSystemWindows="true"
-        android:elevation="0dp"
-        app:elevation="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -21,24 +19,30 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:titleEnabled="true"
+            app:title="Diet Plan"
+            app:expandedTitleTextAppearance="@style/TitleStyle"
+            app:expandedTitleGravity="center"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
             <com.techticz.app.ui.customView.AppImageView
                 android:id="@+id/aiv_plan"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="180dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_night"/>
+                android:src="@drawable/bg_late_night1"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_app_bar"></FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             app:elevation="0dp"
@@ -104,5 +108,14 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_nutri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabCustomSize="36dp"
+        android:backgroundTint="@color/sheetColor"
+        android:layout_gravity="bottom"
+        app:srcCompat="@drawable/ic_info_black_24dp"
+        android:tint="?colorPrimary"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

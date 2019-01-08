@@ -20,6 +20,9 @@ public class AdminInfo {
     @SerializedName("published")
     @Expose
     Boolean published;
+    @SerializedName("featured")
+    @Expose
+    Boolean featured;
     @SerializedName("publishedOn")
     @Expose
     String publishedOn;
@@ -111,4 +114,11 @@ public class AdminInfo {
         this.lastModifiedOn = lastModifiedOn;
     }
 
+    public Boolean getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
+    }
 }

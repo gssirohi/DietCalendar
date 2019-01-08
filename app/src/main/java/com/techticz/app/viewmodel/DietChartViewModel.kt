@@ -2,6 +2,7 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
+import android.text.TextUtils
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.dietplan.DayPlan
@@ -211,10 +212,12 @@ constructor() : BaseViewModel() {
         var isAllCompleted = true
         var liveModelList = getDayMealViewModels(section)
         for(child in liveModelList?.value?.data!!){
-            if(child.liveFoodViewModelList?.value?.status == Status.COMPLETE){
-                //do nothing
-            } else {
-                isAllCompleted = false
+            if(child.triggerMealPlateID.value != null && child.liveMealPlateResponse.value?.status == Status.SUCCESS) {
+                if (child.liveFoodViewModelList?.value?.status == Status.COMPLETE) {
+                    //do nothing
+                } else {
+                    isAllCompleted = false
+                }
             }
         }
 

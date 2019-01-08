@@ -14,6 +14,7 @@ import com.techticz.app.model.mealplate.RecipeItem
 import timber.log.Timber
 import javax.inject.Inject
 import com.techticz.app.repo.MealPlateRepository
+import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Status
@@ -54,7 +55,7 @@ constructor() : BaseViewModel() {
         }
     }
     fun perPlateCal(): Float? {
-        return getNutrientsPerPlate()?.principlesAndDietaryFibers?.energy!! * 0.239f
+        return Utils.calories(getNutrientsPerPlate()?.principlesAndDietaryFibers?.energy!!)
     }
     fun getNutrientsPerPlate(): Nutrients? {
         var nutrientsFood = Nutrients()
@@ -63,7 +64,7 @@ constructor() : BaseViewModel() {
         if(foodViewModelList != null) {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerServe()
+                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerPortion()
                     var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
                     nutrientsFood.addUpNutrients(factoredNutrients)
                 }
@@ -130,7 +131,7 @@ constructor() : BaseViewModel() {
             when(resource?.status){
                 Status.EMPTY->{
                     var recipes = liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
-                    loadRecipeViewModels(lifecycleOwner, recipes!!)
+                    recipes?.let { loadRecipeViewModels(lifecycleOwner, it)}
                 }
             }
         })

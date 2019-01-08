@@ -32,6 +32,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         setContentView(R.layout.activity_browse_diet_plans)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
         fab.setOnClickListener { view ->
             onCreatePlanClicked()
         }

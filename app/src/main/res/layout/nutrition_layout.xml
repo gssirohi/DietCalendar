@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:theme="@style/Sheet"
+    android:background="@color/sheetColor"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_nutrition_details_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/textAppearanceHeadline6"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        tools:text = "Recommonded Dietry Allowance \n(RDA)"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_bg"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_articles_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/textAppearanceSubtitle2"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_alignParentLeft="true"
+            tools:text = "Articles"/>
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_nutrition_item1_header"
+                android:layout_width="wrap_content"
+                android:gravity="end"
+                android:layout_height="wrap_content"
+                style="?attr/textAppearanceSubtitle2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                tools:text = "Item 2"/>
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/tv_nutrition_item2_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                style="?attr/textAppearanceSubtitle2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                tools:text = "Item 2"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nutriSegmentRecycler"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="match_parent"
+        tools:visibility="visible"
+        tools:listitem="@layout/nutri_segment_layout">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

@@ -67,13 +67,16 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
     }
 
     private fun onFabMinusClicked() {
-        if(foodViewModel?.triggerFoodItem?.value?.qty!! > 1) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - 1
+        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
+        if(stdPortion == null) stdPortion = 100
+
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             plateView?.mealPlateViewModel?.registerChildCompletion()
 //            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
 //            foodViewModel?.liveFoodResponse?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= 1){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= stdPortion){
                 fab_remove.visibility = View.VISIBLE
                 fab_minus.visibility = View.GONE
             } else {
@@ -84,13 +87,16 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
     }
 
     private fun onFabPlusClicked() {
-        if(foodViewModel?.triggerFoodItem?.value?.qty!! < 15) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + 1
+        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
+        if(stdPortion == null) stdPortion = 100
+
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! < 3000) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             plateView?.mealPlateViewModel?.registerChildCompletion()
 //            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
 //            foodViewModel?.liveFoodViewModelList?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! > 1){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion){
                 fab_remove.visibility = View.GONE
                 fab_minus.visibility = View.VISIBLE
             } else {
@@ -136,10 +142,10 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
             {
                 spin_kit.visibility = View.INVISIBLE
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
-                tv_food_calory.text = ""+foodViewModel?.perServingCal()+
-                        "\nKcal/"+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_calory.text = foodViewModel?.perServingCalText()
+                tv_food_calory_per.text = foodViewModel?.perServingCalPerUnitText()
                 tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty
-                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingType
+                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
 
                 observeChildViewModels(resource)
 

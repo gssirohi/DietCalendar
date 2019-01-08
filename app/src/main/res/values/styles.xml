@@ -5,9 +5,8 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorAccent">@color/secondaryColor</item>
-
+        <item name="colorBackgroundFloating">@color/sheetColor</item>
         <item name="android:textColorHint">@color/secondaryTextColor</item>
-
         <item name="colorError">@color/errorColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
         <item name="materialCardViewStyle">@style/AppCardView</item>
@@ -46,6 +45,7 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor5</item>
         <item name="colorSecondary">@color/secondaryColor5</item>
         <item name="colorAccent">@color/secondaryColor5</item>
+        <item name="colorBackgroundFloating">?attr/colorPrimary</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
@@ -82,11 +82,22 @@
         <item name="android:windowBackground">?attr/colorPrimary</item>
         <item name="android:colorBackground">?attr/colorError</item>
     </style>
-
     <style name="Component.Light" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorBackgroundFloating">@color/surfaceColor</item>
     </style>
+    <style name="Surface" parent="Component.Light"></style>
+    <style name="Surface.Pop" parent="Component.Dark"></style>
+
+    <style name="Sheet" parent="Component.Light">
+        <item name="colorBackgroundFloating">@color/sheetColor</item>
+    </style>
+
+    <style name="Sheet.Pop" parent="Component.Dark">
+        <item name="colorBackgroundFloating">@color/sheetColor</item>
+    </style>
+
     <style name="AppCardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardCornerRadius">8dp</item>
         <item name="cardElevation">@dimen/cardview_default_elevation</item>
         <item name="cardPreventCornerOverlap">true</item>
         <item name="cardUseCompatPadding">true</item>
@@ -97,5 +108,9 @@
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/secondaryColor</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:fontFamily">@font/dancing_script_family</item>
     </style>
 </resources>

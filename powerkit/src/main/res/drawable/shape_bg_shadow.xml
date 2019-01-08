@@ -2,16 +2,18 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:bottom=".5dp"
-        android:left="-2dp"
-        android:right="-2dp"
+        android:left=".5dp"
+        android:right=".5dp"
         android:top=".5dp">
 
         <shape android:shape="rectangle"
+            android:thickness="8dp"
+            android:innerRadius="5dp"
             android:orientation="vertical">
             <stroke
-                android:width="0.5dp"
-                android:color="@color/primaryDarkColor" />
-            <solid android:color="@color/primaryLightColor" />
+                android:width=".5dp"
+                android:color="?attr/colorPrimaryDark" />
+            <solid android:color="?attr/colorBackgroundFloating" />
 
 
         </shape>

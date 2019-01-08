@@ -12,6 +12,7 @@ import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
 import com.techticz.app.model.mealplate.FoodItem
+import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
 import javax.inject.Inject
@@ -47,7 +48,7 @@ constructor() : BaseViewModel() {
         }
     }
     fun perServingCal(): Float? {
-        return getNutrientsPerServe()?.principlesAndDietaryFibers?.energy!! * 0.239f
+        return Utils.calories(getNutrientsPerServe()?.principlesAndDietaryFibers?.energy!!)
     }
     fun getNutrientsPerServe(): Nutrients? {
         var nutrients = Nutrients()
@@ -57,7 +58,7 @@ constructor() : BaseViewModel() {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
 
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerServe()
+                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerPortion()
                     var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
                     totalNutrients.addUpNutrients(factoredNutrients)
                 }
@@ -67,7 +68,10 @@ constructor() : BaseViewModel() {
         if(totalServings == null || totalServings == 0)totalServings = 1
         var perServeFactor:Float = 1f/(totalServings!!)
         nutrients = totalNutrients.applyFactor(perServeFactor)
-        return nutrients
+
+        //apply cooking factor
+
+        return nutrients.applyFactor(0.90f)
     }
 
     fun isVeg(): Boolean {
@@ -186,6 +190,15 @@ constructor() : BaseViewModel() {
     fun hasItems(): Boolean {
         liveFoodViewModelList?.value?.data?.let { if(it.size >= 1) return true }
         return false
+    }
+
+    fun perServingCalText(): CharSequence? {
+        return "" + perServingCal()+"\uD83D\uDD25"+" KCAL"
+
+    }
+
+    fun perServingCalPerUnitText(): CharSequence? {
+        return "per "+liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
     }
 
 }

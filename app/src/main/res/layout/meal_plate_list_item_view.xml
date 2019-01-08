@@ -8,33 +8,37 @@
 <com.techticz.app.ui.customView.AppImageViewRound
     android:id="@+id/aiv_plate"
     android:layout_width="64dp"
+    android:layout_gravity="center_vertical"
     android:layout_height="64dp"
     android:src="@drawable/app_icon"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_plate_cal"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/textAppearanceCaption"
+            android:maxLines="1"
             tools:text = "430 cal"/>
         <TextView
             android:id="@+id/tv_plate_name"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/textAppearanceSubtitle1"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
             tools:text = "Plate Name"/>
         <TextView
             android:id="@+id/tv_plate_desc"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/textAppearanceBody2"
+            android:layout_marginTop="4dp"
+            android:textSize="10sp"
+            android:maxLines="1"
             tools:text = "Plate Desc sjfhjh djfhj dfh jdfhjdfh jdh fd fh djhf jd fhjf"/>
     </LinearLayout>
 </LinearLayout>

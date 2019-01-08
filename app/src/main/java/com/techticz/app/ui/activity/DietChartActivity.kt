@@ -1,7 +1,6 @@
 package com.techticz.app.ui.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.afollestad.materialdialogs.MaterialDialog
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.ui.adapter.DietChartPagerAdapter
@@ -18,22 +18,25 @@ import com.techticz.app.ui.adapter.DietChartPagerAdapter
 import com.techticz.dietcalendar.R
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.UserResponse
+import com.techticz.app.model.food.Nutrition
 import com.techticz.app.model.meal.Meal
 import com.techticz.app.repo.DietPlanRepository
 import kotlinx.android.synthetic.main.activity_diet_chart.*
 import org.parceler.Parcels
 import com.techticz.app.repo.UserRepository
 import com.techticz.app.ui.customView.MealView
+import com.techticz.app.ui.frag.NutritionDialogFragment
 import com.techticz.app.viewmodel.DietChartViewModel
+import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.auth.utils.LoginUtils
-import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
+import kotlinx.android.synthetic.main.create_plan_copy_layout.*
 import timber.log.Timber
 import javax.inject.Inject
 
 
-class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, DietPlanRepository.DietPlanCallBack {
+class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, DietPlanRepository.DietPlanCallBack,NutritionDialogFragment.Listener {
 
 
     override fun onUpdated(id: String) {
@@ -69,6 +72,7 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
 
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
 
         initData()
         // Create the adapter that will return a fragment for each of the three
@@ -80,6 +84,24 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
                     .setAction("Action", null).show()
         }
 
+        fab_nutri.setOnClickListener({
+            onNutriInfoClicked()
+        })
+    }
+    override fun getNutrition1(): Nutrition {
+        var nutrition = Nutrition()
+
+        nutrition.nutrients = dietChartViewModel?.getDayMealNutrients(container.currentItem+1)
+        return nutrition
+    }
+
+    override fun getNutrition2(): Nutrition {
+        var nutrition = Nutrition()
+        nutrition.nutrients = dietChartViewModel?.getDayMealNutrients(container.currentItem+1)
+        return nutrition
+    }
+    private fun onNutriInfoClicked() {
+        NutritionDialogFragment.newInstance("Day Nutrients","Day Meal","RDA %").show(supportFragmentManager, "dialog")
     }
 
     private fun initData() {
@@ -97,7 +119,11 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
             Status.LOADING->{}
             Status.SUCCESS->{
                 // Set up the ViewPager with the sections adapter.
+                supportActionBar?.title = dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.basicInfo?.name
+                activityCollapsingToolbar?.title = dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.basicInfo?.name
+
                 dietChartViewModel.autoLoadChildren(this, listOf(1,2,3,4,5,6,7))
+                dietChartViewModel.liveImage?.observe(this, Observer { res->onImageLoaded(res) })
                 container.adapter = mSectionsPagerAdapter
                 container.setOffscreenPageLimit(6);
                 container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
@@ -105,6 +131,13 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
 
             }
             Status.ERROR->{}
+        }
+    }
+
+    private fun onImageLoaded(res: Resource<ImageViewModel>?) {
+        when(res?.status){
+            Status.LOADING->{aiv_plan.setImageViewModel(res.data,this)}
+            Status.SUCCESS->{aiv_plan.setImageViewModel(res.data,this)}
         }
     }
 
@@ -118,7 +151,7 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
         var activePlanId = baseuserViewModel.liveUserResponse?.value?.data?.user?.activePlan
         var dietPlan = Parcels.unwrap<Any>(intent.getParcelableExtra("plan")) as DietPlan
         if(dietPlan.id != activePlanId){
-
+            menu.findItem(R.id.action_activate).setVisible(true)
         } else {
             menu.findItem(R.id.action_activate).setVisible(false)
         }
@@ -174,6 +207,19 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
         }
     }
 
+    fun removePlate(requestingMealView:MealView,daySection: Int?, mealType: String?) {
+        var user = LoginUtils.getUserCredential();
+        var creater = dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.adminInfo?.createdBy
+        if(user.equals(creater,true)) {
+            this.requestingMealView = requestingMealView
+            requestingMealView?.mealPlateViewModel?.triggerMealPlateID?.value = Meal(requestingMealView?.mealPlateViewModel?.triggerMealPlateID?.value?.mealType!!, null)
+            requestingMealView?.fillDetails(requestingMealView?.mealPlateViewModel!!)
+            dietChartViewModel?.addMealInDietPlan(daySection, mealType, null, this)
+        } else {
+           showRestrictionDialog()
+        }
+    }
+
     override fun onPlanCreated(planId: DietPlan) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -202,7 +248,31 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
     private lateinit var requestingMealView: MealView
 
     fun startBrowsePlateScreen(mealView: MealView) {
-        requestingMealView = mealView
-        navigator.startBrowsePlateScreen(this,dietChartViewModel?.triggerFetchDietPlan?.value!!,mealView?.daySection!!,mealView?.mealPlateViewModel?.triggerMealPlateID?.value?.mealType?.id!!)
+        var user = LoginUtils.getUserCredential();
+        var creater = dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.adminInfo?.createdBy
+        if(user.equals(creater,true)) {
+            requestingMealView = mealView
+            navigator.startBrowsePlateScreen(this, dietChartViewModel?.triggerFetchDietPlan?.value!!, mealView?.daySection!!, mealView?.mealPlateViewModel?.triggerMealPlateID?.value?.mealType?.id!!)
+        } else {
+            showRestrictionDialog()
+        }
+    }
+
+    private fun showRestrictionDialog() {
+        MaterialDialog(this).show {
+            title(text = "Access Restricted")
+            message(text = "You are not allowed to modify this plan. Instead make a personal copy to customize this plan.")
+            positiveButton(text = "Create Copy") { dialog ->
+                createPlanCopy()
+            }
+            negativeButton(text = "Cancel") { dialog ->
+                dialog.dismiss()
+            }
+        }
+    }
+
+    fun createPlanCopy() {
+        navigator.startCopyPlanActivity(this,dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
+        this.finish()
     }
 }

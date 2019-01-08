@@ -11,7 +11,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="0dp"
     card_view:contentPadding="0dp"
-    android:theme="@style/Component.Dark"
+    android:theme="@style/Surface"
     style="?attr/materialCardViewStyle"
     >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

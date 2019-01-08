@@ -130,15 +130,31 @@
 </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="right"
+        android:orientation="vertical">
         <TextView
-            android:layout_weight="1"
             android:id="@+id/tv_recipe_calory"
             android:layout_gravity="center|right"
             style="?attr/textAppearanceBody2"
+            android:textSize="12sp"
             android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="1150\ncal/serve"/>
+            tools:text="1150 KCAL"/>
+        <TextView
+            android:id="@+id/tv_recipe_calory_per"
+            android:layout_gravity="center|right"
+            style="?attr/textAppearanceBody2"
+            android:textSize="10sp"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="per 200 gram"/>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -13,15 +13,158 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_browse_plates"
+        style="@style/SpinKitView.Small.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        app:SpinKit_Color="?attr/colorAccent" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="8dp"
         android:id="@+id/recycler_plates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
+        tools:layout_height="250dp"
         tools:listitem="@layout/meal_plate_list_item_view"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:id="@+id/tv_search_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        style="?attr/errorTextAppearance"
+        android:textColor="?attr/colorError"
+        android:gravity="center"
+        android:background="@drawable/shape_bg_shadow"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:padding="16dp"
+        android:text="No Data Found"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        app:contentPadding="0dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FEAtured plates"
+        android:textStyle="bold"
+        android:gravity="left|center"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        android:textAllCaps="true"
+        style="?attr/textAppearanceSubtitle1"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit_featured_plates"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:SpinKit_Color="?attr/colorAccent" />
+    <TextView
+        android:id="@+id/tv_plate_meal_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="right|center"
+        android:layout_weight="1"
+        android:layout_margin="16dp"
+        android:textAllCaps="true"
+        style="?attr/textAppearanceOverline"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="8dp"
+        android:id="@+id/recycler_featured_plates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        tools:layout_height="250dp"
+        tools:layout_width="600dp"
+        tools:listitem="@layout/meal_plate_featured_list_item_view"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        app:contentPadding="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My Plates"
+                    android:textStyle="bold"
+                    android:gravity="left|center"
+                    android:layout_weight="1"
+                    android:layout_margin="16dp"
+                    android:textAllCaps="true"
+                    style="?attr/textAppearanceSubtitle1"/>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spin_kit_my_plates"
+                    style="@style/SpinKitView.Small.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:visibility="visible"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="?attr/colorAccent" />
+                <TextView
+                    android:id="@+id/tv_my_plate_meal_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:gravity="right|center"
+                    android:layout_weight="1"
+                    android:layout_margin="16dp"
+                    android:textAllCaps="true"
+                    style="?attr/textAppearanceOverline"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="8dp"
+                android:id="@+id/recycler_my_plates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                tools:layout_height="250dp"
+                tools:layout_width="600dp"
+                tools:listitem="@layout/meal_plate_featured_list_item_view"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

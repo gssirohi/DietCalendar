@@ -19,7 +19,227 @@
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal|top"
 
-        android:theme="@style/Component.Dark">
+        android:theme="@style/Surface">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calory Meal Distribution"
+            android:layout_margin="8dp"
+            style="?attr/textAppearanceSubtitle1"
+            android:textAllCaps="true" android:textStyle = "bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/translucent"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/tv_calory_dist_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="2400 KCAL"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline4"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Daily Calories to achieve target"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_early_morning"
+                android:text="Early Morning - 240 KCAL"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_early_morning_percent"
+                android:text="Recommonded 10% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_breakfast"
+                android:text="Breakfast - 800 KCAL"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_breakfast_percent"
+                android:text="Recommonded 30% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Lunch - 600 KCAL"
+                android:id="@+id/tv_calory_dist_lunch"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_lunch_percent"
+                android:text="Recommonded 20% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_snacks"
+                android:text="Evening Snaks - 350 KCAL"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_calory_dist_snacks_percent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Recommonded 15% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Dinner - 600 KCAL"
+                android:id="@+id/tv_calory_dist_dinner"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_dinner_percent"
+                android:text="Recommonded 20% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/black_overlay"
+            android:padding="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_bed_time"
+                android:text="Bed Time - 240 KCAL"
+                android:textStyle="bold"
+                style="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_calory_dist_bed_time_percent"
+                android:text="Recommonded 10% of your RDA"
+                style="?attr/textAppearanceCaption"/>
+        </LinearLayout>
+    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_nutri_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal|top"
+
+        android:theme="@style/Surface">
+
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal|top"
+
+        android:theme="@style/Surface">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +312,7 @@
         android:visibility="gone"
         tools:visibility="visible"
         android:layout_gravity="center_horizontal|bottom"
-        android:theme="@style/Component.Dark">
+        android:theme="@style/Surface">
 
         <CheckBox
             android:id="@+id/cb_terms_conditions"

@@ -36,14 +36,16 @@ open class BaseDIRepository  {
         showProgress("Hold On","work in progress..")
     }
     fun showProgress(title:String,message:String) {
+        hostActivityContext?.let {
+            if (progressDialog == null) {
+                progressDialog = MaterialDialog(it!!)
+                        .title(null, title)
+                        .message(null, message)
 
-        if (progressDialog == null) {
-            progressDialog = MaterialDialog(hostActivityContext!!)
-                    .title(null,title)
-                    .message(null,message)
+            }
 
+            progressDialog?.show()
         }
-        progressDialog!!.show()
 
     }
     fun showSuccess(s:String) {

@@ -21,9 +21,9 @@ public class BasicInfo {
     @SerializedName("subCategory")
     @Expose
     private String subCategory;
-    @SerializedName("perServingCalories")
+    @SerializedName("caloriesPerStdPortion")
     @Expose
-    private Integer perServingCalories;
+    private Float caloriesPerStdPortion;
 
     public Name getName() {
         return name;
@@ -65,12 +65,12 @@ public class BasicInfo {
         this.subCategory = subCategory;
     }
 
-    public Integer getPerServingCalories() {
-        return perServingCalories;
+    public Float getCaloriesPerStdPortion() {
+        return caloriesPerStdPortion;
     }
 
-    public void setPerServingCalories(Integer perServingCalories) {
-        this.perServingCalories = perServingCalories;
+    public void setCaloriesPerStdPortion(Float caloriesPerStdPortion) {
+        this.caloriesPerStdPortion = caloriesPerStdPortion;
     }
 
 }

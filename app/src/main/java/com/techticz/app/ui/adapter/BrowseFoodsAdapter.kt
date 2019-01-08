@@ -3,8 +3,6 @@ package com.techticz.app.ui.adapter
 import android.view.View
 import android.view.ViewGroup
 import com.techticz.app.model.food.Food
-import com.techticz.app.model.mealplate.FoodItem
-import com.techticz.app.ui.customView.MealView
 import com.techticz.dietcalendar.R
 import kotlinx.android.synthetic.main.meal_food_list_item_view.view.*
 
@@ -18,8 +16,14 @@ class BrowseFoodsAdapter (var dayMeals: List<Food>, var callBack: FoodViewCallBa
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is FoodViewHolder) {
             // holder.mItem = mValues.get(position);
-
-            (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+dayMeals.get(position)?.basicInfo?.perServingCalories
+            var calPerStdPortion = dayMeals.get(position)?.getCaloriesPerStdPortion()
+            if(calPerStdPortion != null){
+                (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+calPerStdPortion+"\uD83D\uDD25"+" KCAL/"+dayMeals.get(position)?.standardServing?.portion+" "+dayMeals.get(position)?.standardServing?.servingUnit
+                (holder as FoodViewHolder).foodView.tv_food_cal.visibility = View.VISIBLE
+            } else {
+                (holder as FoodViewHolder).foodView.tv_food_cal.visibility = View.GONE
+            }
+//            (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+dayMeals.get(position)?.basicInfo?.caloriesPerStdPortion
             (holder as FoodViewHolder).foodView.tv_food_name.text = ""+dayMeals.get(position)?.basicInfo?.name?.english
             (holder as FoodViewHolder).foodView.tv_food_desc.text = ""+dayMeals.get(position)?.basicInfo?.desc
             (holder as FoodViewHolder).foodView.setOnClickListener(View.OnClickListener {

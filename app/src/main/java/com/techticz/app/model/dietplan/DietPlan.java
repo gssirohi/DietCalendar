@@ -21,6 +21,10 @@ public class DietPlan {
     @SerializedName("calendar")
     @Expose
     Calendar calendar;
+    @SerializedName("caloryDistribution")
+    @Expose
+    CaloryDistribution caloryDistribution;
+
     @SerializedName("adminInfo")
     @Expose
     AdminInfo adminInfo;
@@ -57,4 +61,14 @@ public class DietPlan {
         this.adminInfo = adminInfo;
     }
 
+    public CaloryDistribution getCaloryDistribution() {
+        if(caloryDistribution == null){
+            caloryDistribution = new CaloryDistribution(10,20,30,10,20,10);
+        }
+        return caloryDistribution;
+    }
+
+    public void setCaloryDistribution(CaloryDistribution caloryDistribution) {
+        this.caloryDistribution = caloryDistribution;
+    }
 }

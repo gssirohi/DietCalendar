@@ -37,6 +37,7 @@ class DietPlanActivity : BaseDIActivity(), DietPlanRepository.DietPlanCallBack, 
         setContentView(R.layout.activity_diet_plan)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
         fab.setOnClickListener { view ->
             onCreatePlanClicked()
         }

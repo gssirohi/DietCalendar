@@ -3,8 +3,6 @@ package com.techticz.app.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.techticz.app.model.BrowseDietPlanResponse
-import com.techticz.app.repo.DietPlanRepository
 import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
 import com.techticz.app.base.BaseViewModel
@@ -22,16 +20,38 @@ constructor() : BaseViewModel() {
     @Inject
     lateinit var injectedRepo: MealPlateRepository
 
-    val triggerPlateText = MutableLiveData<String>()
+    val triggerSearchPlateText = MutableLiveData<String>()
+    val triggerFeaturedPlateMealType = MutableLiveData<String>()
+    val triggerMyPlates = MutableLiveData<String>()
     val liveBrowsePlatesResponse: LiveData<Resource<BrowsePlateResponse>>
+    val liveFeaturedPlatesResponse: LiveData<Resource<BrowsePlateResponse>>
+    val liveMyPlatesResponse: LiveData<Resource<BrowsePlateResponse>>
 
     init {
-        liveBrowsePlatesResponse = Transformations.switchMap(triggerPlateText) { triggerBrowse ->
+        liveBrowsePlatesResponse = Transformations.switchMap(triggerSearchPlateText) { triggerBrowse ->
             Timber.d("Browse Plates Trigger received.")
             if (triggerBrowse == null) {
                 return@switchMap AbsentLiveData.create<Resource<BrowsePlateResponse>>()
             } else {
                 return@switchMap injectedRepo?.fetchPlatesWithText(triggerBrowse)
+            }
+        }
+
+        liveFeaturedPlatesResponse = Transformations.switchMap(triggerFeaturedPlateMealType) { triggerMealType ->
+            Timber.d("Featured Plates Trigger received.")
+            if (triggerMealType == null) {
+                return@switchMap AbsentLiveData.create<Resource<BrowsePlateResponse>>()
+            } else {
+                return@switchMap injectedRepo?.fetchPlatesForMealType(triggerMealType)
+            }
+        }
+
+        liveMyPlatesResponse = Transformations.switchMap(triggerMyPlates) { trigger ->
+            Timber.d("My Plates Trigger received.")
+            if (trigger == null) {
+                return@switchMap AbsentLiveData.create<Resource<BrowsePlateResponse>>()
+            } else {
+                return@switchMap injectedRepo?.fetchPlatesForUser()
             }
         }
 

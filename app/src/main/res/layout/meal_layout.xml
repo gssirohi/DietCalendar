@@ -10,10 +10,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        style="@style/AppCardView"
         app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true"
-        android:theme="@style/Component.Dark"
+        android:theme="@style/Surface"
         app:cardElevation="8dp"
         android:elevation="10dp"
         android:layout_gravity="center_horizontal|top"
@@ -31,20 +30,28 @@
 <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/Component.Dark"
-    app:cardBackgroundColor="@color/primaryDarkColor2"
+    android:theme="@style/Surface"
     app:contentPadding="0dp"
     app:cardElevation="6dp"
     android:layout_marginTop="24dp"
 
     android:layout_gravity="center_horizontal|bottom"
     >
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:id="@+id/rl_plate_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="148dp"
+
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="172dp"
+        android:animateLayoutChanges="true"
+        android:paddingBottom="24dp"
+        android:id="@+id/rl_plate_container">
+
+    </RelativeLayout>
     <!--<include layout="@layout/plate_layout"/>-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_plate"
@@ -55,8 +62,55 @@
         android:layout_gravity="center"
         app:srcCompat="@drawable/ic_action_add"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_expand_collapse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        app:fabCustomSize="28dp"
+        app:layout_anchor="@id/ll_meal_bottom"
+        app:layout_anchorGravity="top|center"
+        android:backgroundTint="@color/primaryColor5"
+        android:layout_gravity="center"
+        android:elevation="10dp"
+        app:srcCompat="@drawable/ic_keyboard_arrow_down"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_meal_bottom"
+        android:background="@color/translucent"
+        android:divider="@color/black_overlay"
+        android:showDividers="middle"
+        app:layout_anchor="@id/rl_plate_container"
+        app:layout_anchorGravity="bottom">
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_recommonded_calory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            style="?attr/textAppearanceCaption"
+            android:text="RDA - 230 KCal"
+            android:layout_gravity="center"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/b_remove_plate"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableTint="?colorError"
+            android:textColor="?colorError"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:text="Remove"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
   </com.google.android.material.card.MaterialCardView>

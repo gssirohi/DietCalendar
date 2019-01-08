@@ -6,49 +6,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class StandardServing {
 
-    @SerializedName("qty")
+    @SerializedName("portion")
     @Expose
-    private Integer qty;
-    @SerializedName("servingType")
+    private Integer portion;
+    @SerializedName("servingUnit")
     @Expose
-    private String servingType;
-    @SerializedName("perServeQty")
-    @Expose
-    private Float perServeQty;
+    private String servingUnit;
 
-    @SerializedName("perServeQtyUnit")
-    @Expose
-    private String perServeQtyUnit;
     
-    public Integer getQty() {
-        return qty;
+    public Integer getPortion() {
+        return portion;
     }
 
-    public void setQty(Integer qty) {
-        this.qty = qty;
+    public void setPortion(Integer portion) {
+        this.portion = portion;
     }
 
-    public String getServingType() {
-        return servingType;
+    public String getServingUnit() {
+        return servingUnit;
     }
 
-    public void setServingType(String servingType) {
-        this.servingType = servingType;
+    public void setServingUnit(String servingUnit) {
+        this.servingUnit = servingUnit;
     }
 
-    public Float getPerServeQty() {
-        return perServeQty;
-    }
-
-    public void setPerServeQty(Float perServeQty) {
-        this.perServeQty = perServeQty;
-    }
-
-    public String getPerServeQtyUnit() {
-        return perServeQtyUnit;
-    }
-
-    public void setPerServeQtyUnit(String perServeQtyUnit) {
-        this.perServeQtyUnit = perServeQtyUnit;
-    }
 }

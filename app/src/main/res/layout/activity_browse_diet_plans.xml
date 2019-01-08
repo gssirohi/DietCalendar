@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:fitsSystemWindows="true"
         android:elevation="0dp"
         app:elevation="0dp"
@@ -21,9 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            android:background="@drawable/bg_late_night1"
             app:titleEnabled="true"
-            app:expandedTitleTextAppearance="?attr/textAppearanceHeadline4"
-            app:expandedTitleMarginBottom="80dp"
+            app:expandedTitleTextAppearance="@style/TitleStyle"
             app:expandedTitleGravity="center_horizontal|bottom"
             app:contentScrim="?attr/colorPrimary"
             app:title="Diet Plans"
@@ -35,9 +35,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_app_bar"></FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

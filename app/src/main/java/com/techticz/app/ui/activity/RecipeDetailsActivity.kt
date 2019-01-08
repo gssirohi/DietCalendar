@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.constants.RecipeServings
+import com.techticz.app.model.food.Nutrition
 import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.Recipe
@@ -21,6 +22,7 @@ import com.techticz.app.model.recipe.RecipeResponse
 import com.techticz.app.repo.RecipeRepository
 import com.techticz.app.ui.adapter.RecipeFoodAdapter
 import com.techticz.app.ui.adapter.RecipeStepsAdapter
+import com.techticz.app.ui.frag.NutritionDialogFragment
 import com.techticz.app.util.Utils
 import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.app.viewmodel.ImageViewModel
@@ -31,13 +33,15 @@ import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 
 import kotlinx.android.synthetic.main.activity_recipe_details.*
+import kotlinx.android.synthetic.main.content_desc_layout.*
 import kotlinx.android.synthetic.main.content_recipe_details.*
 import kotlinx.android.synthetic.main.create_recipe_copy_layout.view.*
 import org.parceler.Parcels
 import timber.log.Timber
 import javax.inject.Inject
 
-class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallBacks, RecipeRepository.RecipeRepositoryCallback {
+class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallBacks, RecipeRepository.RecipeRepositoryCallback,NutritionDialogFragment.Listener {
+
 
 
     @Inject
@@ -59,6 +63,7 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
         setContentView(R.layout.activity_recipe_details)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
 
         initData()
         initUI()
@@ -96,6 +101,9 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
         fab.setOnClickListener { view ->
             onFabClicked()
         }
+        fab_nutri.setOnClickListener({
+            onNutriInfoClicked()
+        })
         b_add_food.setOnClickListener {
             onAddFoodClicked()
         }
@@ -127,6 +135,21 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
 
     }
 
+    override fun getNutrition1(): Nutrition {
+        var nutrition = Nutrition()
+        nutrition.nutrients = recipeViewModel?.getNutrientsPerServe()
+        return nutrition
+    }
+
+    override fun getNutrition2(): Nutrition {
+        var nutrition = Nutrition()
+        nutrition.nutrients = recipeViewModel?.getNutrientsPerServe()
+        return nutrition
+    }
+    private fun onNutriInfoClicked() {
+        NutritionDialogFragment.newInstance("Recipe Nutrients","Recipe","RDA %").show(supportFragmentManager, "dialog")
+    }
+
     private fun onServingTypeClicked() {
         val servingTypes = listOf(RecipeServings.TABLESPOON.serving,RecipeServings.TEASPOON.serving,
                 RecipeServings.BOWL.serving,RecipeServings.GLASS.serving,RecipeServings.PLATE.serving)
@@ -145,7 +168,7 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
 
     private fun onAddStepClicked(){
         steps?.let{
-            if(it.size < 25) {
+            if(it.size < 35) {
                 it?.add("step")
                 stepsRecyclerView.adapter?.notifyItemInserted(it.size-1)
             } else {
@@ -301,7 +324,7 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
             Status.SUCCESS -> {
                 spin_kit_recipe_desc.visibility = View.INVISIBLE
 
-                activityToolbar?.title = resource?.data?.recipe?.basicInfo?.name?.english
+                activityCollapsingToolbar?.title = resource?.data?.recipe?.basicInfo?.name?.english
 
                 //UI binding
                 tv_recipe_name.text = resource.data?.recipe?.basicInfo?.name?.english
@@ -376,8 +399,8 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
             }
             Status.ERROR -> {
               //  spin_kit.visibility = View.INVISIBLE
-                tv_recipe_calories.text = resource?.message
-                tv_recipe_calories.visibility = View.VISIBLE
+                tv_content_calories.text = resource?.message
+                tv_content_calories.visibility = View.VISIBLE
             }
         }
     }
@@ -392,14 +415,14 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
             }
             Status.COMPLETE -> {
                 spin_kit_recipe_foods.visibility = View.INVISIBLE
-                spin_kit_recipe_analysis.visibility = View.INVISIBLE
+                spin_kit_content_analysis.visibility = View.INVISIBLE
 
-                tv_recipe_calories.text = "" + recipeViewModel?.perServingCal() +
-                        "\nKcal/" + recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
-                tv_recipe_calories.visibility = View.VISIBLE
+                tv_content_calories.text = "" + recipeViewModel?.perServingCal() +"\uD83D\uDD25"+
+                        " KCAL/" + recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
+                tv_content_calories.visibility = View.VISIBLE
                 when (recipeViewModel?.isVeg()) {
-                    true -> tv_recipe_type.setTextColor(Color.parseColor("#ff669900"))
-                    else -> tv_recipe_type.setTextColor(Color.parseColor("#ffcc0000"))
+                    true -> tv_veg_nonveg.setTextColor(Color.parseColor("#ff669900"))
+                    else -> tv_veg_nonveg.setTextColor(Color.parseColor("#ffcc0000"))
                 }
 
             }
@@ -408,8 +431,8 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
             }
             Status.ERROR -> {
                 spin_kit_recipe_foods.visibility = View.INVISIBLE
-                tv_recipe_calories.text = resource?.message
-                tv_recipe_calories.visibility = View.VISIBLE
+                tv_content_calories.text = resource?.message
+                tv_content_calories.visibility = View.VISIBLE
             }
         }
 
@@ -425,7 +448,9 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
 
         if(requestCode == 2 && resultCode == Activity.RESULT_OK){
             var foodId = data?.getStringExtra("foodId")
-            var foodItem = FoodItem(foodId,1)
+            var foodStdServing = data?.getIntExtra("stdServing",100)
+            if(foodStdServing == null) foodStdServing = 100
+            var foodItem = FoodItem(foodId,foodStdServing)
 
             //add recipe to this plate
             recipeViewModel?.addFoodViewModel(this,foodItem)

@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:contentPadding="8dp"
-        android:theme="@style/Component.Dark"
+        android:theme="@style/Surface"
         >
 
     <LinearLayout

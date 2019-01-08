@@ -22,7 +22,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Component.Dark"
+            android:theme="@style/Surface"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:theme="@style/Component.Dark"
+            android:theme="@style/Surface"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:theme="@style/Component.Dark"
+            android:theme="@style/Surface"
             >
             <LinearLayout
                 android:layout_width="match_parent"

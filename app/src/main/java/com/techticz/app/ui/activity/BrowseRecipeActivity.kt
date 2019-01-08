@@ -2,6 +2,7 @@ package com.techticz.app.ui.activity
 
 import android.os.Bundle
 import android.app.Activity
+import android.view.View
 import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
@@ -32,6 +33,7 @@ class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCa
         setContentView(R.layout.activity_browse_recipe)
         activityToolbar = toolbar
         activityCoordinatorLayout = coordinatorLayout
+        activityCollapsingToolbar = toolbar_layout
         fab.setOnClickListener { view ->
             onCreateRecipeClicked()
         }
@@ -45,6 +47,7 @@ class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCa
             override fun onQueryTextSubmit(query: String): Boolean {
                 //Task HERE
                 browseRecipesViewModel?.triggerRecipeText.value  = query
+                spin_kit_browse_recipes.visibility = View.VISIBLE
                 return false
             }
 
@@ -63,6 +66,7 @@ class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCa
     private fun onRecipesDataLoaded(res: Resource<BrowseRecipeResponse>?) {
         when(res?.status){
             Status.SUCCESS->{
+                spin_kit_browse_recipes.visibility = View.INVISIBLE
                 (recycler_recipes.adapter as BrowseRecipesAdapter).dayMeals = res?.data?.recipes!!
                 (recycler_recipes.adapter as BrowseRecipesAdapter).notifyDataSetChanged()
             }

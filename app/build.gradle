@@ -55,6 +55,9 @@ dependencies {
 
     implementation REQUIRE.UI.PARCELER
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.0.0-alpha1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha1'
     kapt REQUIRE.UI.PARCELER_PROCESSOR
 
     //kapt REQUIRE.KOTLIN.COMPILER

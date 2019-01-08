@@ -5,23 +5,15 @@
     android:id="@+id/ll_meal_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:visibility="gone"
+    tools:visibility="visible"
     android:padding="8dp"
     android:orientation="vertical">
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit_plate_recipes"
-        style="@style/SpinKitView.Small.Wave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:visibility="invisible"
-        android:layout_gravity="center"
-        app:SpinKit_Color="@color/secondaryColor"
-         />
-
-    <!--<View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/primaryColor"></View>-->
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
     <TextView
         android:id="@+id/tv_recipes_header"
         tools:visibility="visible"
@@ -29,10 +21,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:layout_gravity="center"
-        style="?attr/textAppearanceHeadline5"
-        android:visibility="gone"
+        android:layout_gravity="center|left"
+        style="?attr/textAppearanceSubtitle1"
+        android:textStyle="bold"
+        android:textAllCaps="true"
         android:text="Recipes"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit_plate_recipes"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="invisible"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/secondaryColor"
+            />
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipeRecyclerView"
         android:layout_width="match_parent"
@@ -47,26 +53,37 @@
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:text="Add Recipe"/>
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit_plate_foods"
-        style="@style/SpinKitView.Small.Wave"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:visibility="invisible"
-        android:layout_gravity="center"
-        app:SpinKit_Color="@color/secondaryColor" />
-    <TextView
-        android:id="@+id/tv_foods_header"
-        tools:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="4dp"
-        style="?attr/textAppearanceHeadline5"
-        android:layout_marginBottom="4dp"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:text="Foods"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_foods_header"
+            tools:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_gravity="center|left"
+            style="?attr/textAppearanceSubtitle1"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="Foods"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit_plate_foods"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="invisible"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/secondaryColor"
+            />
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foodRecyclerView"
         android:layout_width="match_parent"

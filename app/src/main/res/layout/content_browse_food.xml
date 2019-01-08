@@ -13,7 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit_browse_foods"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            app:SpinKit_Color="?attr/colorAccent" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="8dp"
             android:id="@+id/recycler_foods"

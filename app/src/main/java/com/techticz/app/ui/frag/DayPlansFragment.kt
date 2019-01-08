@@ -58,8 +58,7 @@ class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
     }
 
     override fun onCreateCopyClicked() {
-        (activity as DietChartActivity).navigator.startCopyPlanActivity(activity as DietChartActivity,(activity as DietChartActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
-        (activity as DietChartActivity).finish()
+        (activity as DietChartActivity).createPlanCopy()
     }
 
     companion object {

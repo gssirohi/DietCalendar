@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.*
 import com.techticz.app.model.BrowsePlateResponse
 import com.techticz.app.model.meal.Meal
+import com.techticz.auth.utils.LoginUtils
 import javax.inject.Singleton
 
 
@@ -87,6 +88,66 @@ class MealPlateRepository @Inject constructor(private val db: FirebaseFirestore)
                         Log.e("Repo", "Loading Failed- Plates", task.exception)
                     }
                 }
+        return live
+    }
+
+    fun fetchPlatesForMealType(mealType: String?): LiveData<Resource<BrowsePlateResponse>>? {
+        var resp = BrowsePlateResponse()
+        var resource = Resource<BrowsePlateResponse>(Status.LOADING, resp, "Loading plates..", DataSource.LOCAL)
+        var live :MediatorLiveData<Resource<BrowsePlateResponse>> =  MediatorLiveData<Resource<BrowsePlateResponse>>()
+        live.value = resource
+        //Thread.sleep(4*1000)
+        //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+
+
+        db.collection(AppCollections.PLATES.collectionName)
+                .whereArrayContains(FieldPath.of("basicProperty","prefMeals"),mealType!!)
+//                .orderBy(FieldPath.of("basicInfo","name","english"))
+                .limit(10)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var plates :List<MealPlate> = task.result!!.toObjects(MealPlate::class.java)
+                        //callback.onPlansFetched(plans)
+                        var resp = BrowsePlateResponse()
+                        resp.plates = plates
+                        var resource = Resource<BrowsePlateResponse>(Status.SUCCESS, resp, "Loading Success- Plates", DataSource.LOCAL)
+                        live.value = resource
+                    } else {
+                        Log.e("Repo", "Loading Failed- Featured Plates", task.exception)
+                    }
+                }
+        Log.i("Repo", "Loading featured plates for :"+ mealType)
+        return live
+    }
+
+    fun fetchPlatesForUser(): LiveData<Resource<BrowsePlateResponse>>? {
+        var resp = BrowsePlateResponse()
+        var resource = Resource<BrowsePlateResponse>(Status.LOADING, resp, "Loading plates..", DataSource.LOCAL)
+        var live :MediatorLiveData<Resource<BrowsePlateResponse>> =  MediatorLiveData<Resource<BrowsePlateResponse>>()
+        live.value = resource
+        //Thread.sleep(4*1000)
+        //  var resourceS = Resource<BrowseDietPlanResponse>(Status.SUCCESS, resp, "Data Loading Success", DataSource.LOCAL)
+
+
+        db.collection(AppCollections.PLATES.collectionName)
+                .whereEqualTo(FieldPath.of("adminInfo","createdBy"),LoginUtils.getUserCredential())
+//                .orderBy(FieldPath.of("basicInfo","name","english"))
+                .limit(10)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var plates :List<MealPlate> = task.result!!.toObjects(MealPlate::class.java)
+                        //callback.onPlansFetched(plans)
+                        var resp = BrowsePlateResponse()
+                        resp.plates = plates
+                        var resource = Resource<BrowsePlateResponse>(Status.SUCCESS, resp, "Loading Success- Plates", DataSource.LOCAL)
+                        live.value = resource
+                    } else {
+                        Log.e("Repo", "Loading Failed- Featured Plates", task.exception)
+                    }
+                }
+        Log.i("Repo", "Loading my plates for :"+ LoginUtils.getUserCredential())
         return live
     }
 

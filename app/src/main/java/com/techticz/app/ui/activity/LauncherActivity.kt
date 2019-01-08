@@ -71,7 +71,7 @@ class LauncherActivity : BaseDIActivity() {
         showToast(welcomeMessage);
 
         var handler :Handler = Handler()
-        handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },1*1000)
+        handler.postDelayed(Runnable { launcherViewModel?.triggerLaunch?.value = true },2*1000)
 
         //launcherViewModel?.triggerFeaturedMealPlans?.value = true
     }
@@ -126,7 +126,6 @@ class LauncherActivity : BaseDIActivity() {
                     Log.d("LOGIN","Checking profile..")
                     tv_bottom?.text = "checking profile.."
                    // baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
-
                     baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
 
                 }

@@ -27,6 +27,7 @@ import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.ui.activity.MealPlateActivity
 import com.techticz.app.util.Utils
 import com.techticz.auth.utils.LoginUtils
+import kotlinx.android.synthetic.main.content_desc_layout.view.*
 
 import kotlinx.android.synthetic.main.meal_plate_content_layout.view.*
 import kotlinx.android.synthetic.main.plate_desc_layout.view.*
@@ -193,11 +194,11 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
             }
             Status.COMPLETE -> {
                 spin_kit_plate_recipes.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = "" + mealPlateViewModel?.perPlateCal()+" KCal"
-                tv_meal_plate_calories.visibility = View.VISIBLE
+                tv_content_calories.text = "" + mealPlateViewModel?.perPlateCal()+"\uD83D\uDD25"+" KCAL"
+                tv_content_calories.visibility = View.VISIBLE
                 when(mealPlateViewModel?.isVeg()){
-                    true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
-                    else->tv_meal_plate_type.setTextColor(Color.parseColor("#ffcc0000"))
+                    true->tv_veg_nonveg.setTextColor(Color.parseColor("#ff669900"))
+                    else->tv_veg_nonveg.setTextColor(Color.parseColor("#ffcc0000"))
                 }
             }
 
@@ -230,7 +231,7 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
         resource?.isFresh = false
         when(resource?.status) {
             Status.LOADING -> {
-                spin_kit_plate_analysis.visibility = View.INVISIBLE
+                spin_kit_content_analysis.visibility = View.INVISIBLE
                 aiv_meal_plate.setImageViewModel(resource?.data,context as LifecycleOwner)
             }
             Status.SUCCESS -> {
@@ -243,9 +244,9 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
                 this.mealPlateViewModel?.liveImage?.value = imageRes*/
             }
             Status.ERROR -> {
-                spin_kit_plate_analysis.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = resource?.message
-                tv_meal_plate_calories.visibility = View.VISIBLE
+                spin_kit_content_analysis.visibility = View.INVISIBLE
+                tv_content_calories.text = resource?.message
+                tv_content_calories.visibility = View.VISIBLE
             }
         }
     }
@@ -257,10 +258,10 @@ class PlateView(val daySection:Int?, context:Context?,var mode:Int, var parent: 
             }
             Status.COMPLETE -> {
                 spin_kit_plate_foods.visibility = View.INVISIBLE
-                tv_meal_plate_calories.text = "" + mealPlateViewModel?.perPlateCal()+" KCal"
+                tv_content_calories.text = "" + mealPlateViewModel?.perPlateCal()+"\uD83D\uDD25"+" KCAL"
                 when(mealPlateViewModel?.isVeg()){
-                    true->tv_meal_plate_type.setTextColor(Color.parseColor("#ff669900"))
-                    else->tv_meal_plate_type.setTextColor(Color.parseColor("#ffcc0000"))
+                    true->tv_veg_nonveg.setTextColor(Color.parseColor("#ff669900"))
+                    else->tv_veg_nonveg.setTextColor(Color.parseColor("#ffcc0000"))
                 }
 
             }
