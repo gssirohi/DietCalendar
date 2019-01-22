@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "265310580755-pgkfdocimald1imj8psa0gdc3qc36205.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techticz.dietcalendar",
+            "certificate_hash": "5e70adead8567576dfa0c10d187d27fb61c54286"
+          }
+        },
+        {
           "client_id": "265310580755-7m73ndlbihahvt6eualc0cgufu33hf6p.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:visibility="gone"
         android:src="@drawable/bg_red_food"/>
     <TextView
         android:id="@+id/tv_top"
@@ -35,12 +36,11 @@
         android:layout_marginTop="100dp"
         android:elevation="10dp"
         android:keepScreenOn="true">
-        <com.techticz.powerkit.customview.RoundImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/launcher"
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo"
             android:elevation="10dp"
-            android:tint="@color/white"
             android:gravity="center"
             android:layout_gravity="center"/>
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="Diet Calendar"
+            android:text="Welcome"
             android:textSize="48sp"
             android:fontFamily="@font/dancing_script_bold"
             android:textColor="@color/white"
@@ -65,7 +65,7 @@
         android:text=""
         android:fontFamily="@font/lobster_two_italic"
         android:textColor="@color/white"
-        tools:text = "Main Display"
+        tools:text = "Diet plans for all"
         />
     </LinearLayout>
     <TextView
