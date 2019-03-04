@@ -163,7 +163,11 @@ class RecipeDetailsActivity : BaseDIActivity(), RecipeStepsAdapter.StepItemCallB
     }
 
     private fun onAddFoodClicked() {
-        navigator.startBrowseFoodScreen(this)
+        if(mode == MODE_NEW || mode == MODE_COPY_FROM_RECIPE) {
+            navigator.startBrowseFoodScreen(this,null,"new")
+        } else {
+            navigator.startBrowseFoodScreen(this,null,recipeId)
+        }
     }
 
     private fun onAddStepClicked(){

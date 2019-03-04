@@ -4,8 +4,11 @@ package com.techticz.app.model.recipe;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
 
 import org.parceler.Parcel;
+
+import androidx.room.TypeConverters;
 
 @Parcel
 public class BasicProperty {
@@ -17,6 +20,7 @@ public class BasicProperty {
     Integer availability;
     @SerializedName("prefMeals")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<String> prefMeals = null;
 
     public Integer getAvailability() {

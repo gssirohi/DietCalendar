@@ -4,6 +4,9 @@ package com.techticz.app.model.food;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
+
+import androidx.room.TypeConverters;
 
 public class BasicProperty {
 
@@ -21,6 +24,7 @@ public class BasicProperty {
     private String naturalForm;
     @SerializedName("prefMeals")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     private List<String> prefMeals = null;
 
     public Boolean getServable() {

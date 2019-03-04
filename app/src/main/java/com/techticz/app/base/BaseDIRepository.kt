@@ -2,6 +2,7 @@ package com.techticz.app.base;
 
 import android.content.Context
 import com.afollestad.materialdialogs.MaterialDialog
+import com.techticz.app.repo.PrefRepo
 import com.techticz.networking.model.AppExecutors
 import com.techticz.networking.util.RateLimiter
 import timber.log.Timber
@@ -20,7 +21,6 @@ open class BaseDIRepository  {
 
     // Fetch again if the data is older than 48 hours
     private val rateLimiter = RateLimiter<String>(48, TimeUnit.HOURS)
-
     private var progressDialog: MaterialDialog? = null
     init {
         Timber.d("Injecting:" + this)
@@ -64,4 +64,5 @@ open class BaseDIRepository  {
     fun execute(runnable:Runnable){
         appExecutors.networkIO().execute(runnable)
     }
+
 }

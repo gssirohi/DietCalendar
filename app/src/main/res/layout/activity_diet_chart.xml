@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_late_night1"/>
+                android:src="@drawable/banner_diet_plan"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -51,7 +51,11 @@
             android:elevation="0dp"
             android:background="?attr/colorPrimary"
             app:tabMode="scrollable">
-
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sunday" />
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_monday"
                 android:layout_width="wrap_content"
@@ -84,11 +88,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Saturday" />
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab_sunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sunday" />
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

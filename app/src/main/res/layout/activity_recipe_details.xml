@@ -33,7 +33,7 @@
                 android:id="@+id/aiv_recipe_app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/bg_night"
+                android:src="@drawable/banner_recipe"
                 android:scaleType="fitXY"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

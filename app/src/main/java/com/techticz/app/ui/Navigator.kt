@@ -3,6 +3,7 @@ package com.techticz.app.ui
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.ui.activity.*
 import javax.inject.Inject
@@ -13,12 +14,16 @@ import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.ui.activity.DietPlanActivity
+import javax.inject.Named
 
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 27/9/18.
  */
 class Navigator @Inject constructor(val context: Context)  {
+    init {
+        Log.d("DI","providing navigator")
+    }
 fun startDashBoard(){
     var intent = Intent(context,DashboardActivity::class.java)
     context.startActivity(intent)
@@ -70,6 +75,11 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
+    fun startOnboarding() {
+        var intent = Intent(context, OnboardingActivity::class.java)
+        context.startActivity(intent)
+    }
+
     fun startCreatePlateScreen() {
         var intent = Intent(context, MealPlateActivity::class.java)
         intent.putExtra("mode",MealPlateActivity.MODE_NEW)
@@ -82,13 +92,16 @@ fun startDashBoard(){
         context.startActivity(intent)
     }
 
-    fun startBrowseRecipeScreen(activity: Activity) {
+    fun startBrowseRecipeScreen(activity: Activity,plateId:String?) {
         var intent = Intent(context, BrowseRecipeActivity::class.java)
+        intent.putExtra("plateId",plateId)
         activity.startActivityForResult(intent,1)
     }
 
-    fun startBrowseFoodScreen(activity: Activity) {
+    fun startBrowseFoodScreen(activity: Activity,plateId:String?,recipeId:String?) {
         var intent = Intent(context, BrowseFoodActivity::class.java)
+        intent.putExtra("plateId",plateId)
+        intent.putExtra("recipeId",recipeId)
         activity.startActivityForResult(intent,2)
     }
 

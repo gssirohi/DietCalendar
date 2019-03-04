@@ -6,7 +6,13 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 @Parcel
+@Entity
 public class Recipe {
     public Recipe() {
         basicInfo = new BasicInfo();
@@ -17,26 +23,34 @@ public class Recipe {
         formula = new Formula();
     }
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
+@NonNull
     String id;
     @SerializedName("basicInfo")
     @Expose
+    @Embedded
     BasicInfo basicInfo;
     @SerializedName("standardServing")
     @Expose
+    @Embedded
     StandardServing standardServing;
     @SerializedName("basicProperty")
     @Expose
+    @Embedded
     BasicProperty basicProperty;
     @SerializedName("additionalInfo")
     @Expose
+    @Embedded
     AdditionalInfo additionalInfo;
     @SerializedName("formula")
     @Expose
+    @Embedded
     Formula formula;
     @SerializedName("adminInfo")
     @Expose
+    @Embedded
     AdminInfo adminInfo;
 
     public String getId() {

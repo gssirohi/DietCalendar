@@ -37,9 +37,12 @@ import kotlinx.android.synthetic.main.meal_plan_list_item_view.*
 import timber.log.Timber
 import android.R.attr.startYear
 import android.app.DatePickerDialog
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.format.DateUtils
 import android.widget.DatePicker
 import com.google.android.material.chip.Chip
+import com.google.gson.Gson
 import com.techticz.app.model.food.Nutrients
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -64,6 +67,14 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
 
     }
 
+    private var mUser: User? = null
+
+    private fun initData() {
+        var json = Gson().toJson(baseuserViewModel.liveUserResponse?.value?.data?.user)
+        mUser = Gson().fromJson(json,User::class.java)
+
+    }
+
     private fun validateSectionData(currentItem: Int): String? {
         when (currentItem + 1) {
             1 -> return ((container.adapter as SectionsPagerAdapter).basicDetailsFrag)?.validateData()
@@ -78,19 +89,13 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         Snackbar.make(view, "Proceed button clicked", Snackbar.LENGTH_LONG)
                 .setAction("OK", null).show()
         if (isEditModeOn) {
-            var newUser = User(LoginUtils.getCurrentUserId())
-            newUser.basicInfo = (container.adapter as SectionsPagerAdapter).basicDetailsFrag?.getBasicDetails()
-            newUser.healthProfile = (container.adapter as SectionsPagerAdapter).basicDetailsFrag?.getHealthProfile()
-            newUser.goal = (container.adapter as SectionsPagerAdapter).healthDetailsFrag?.getGoal()
-            newUser.mealPref = (container.adapter as SectionsPagerAdapter).mealPrefsFrag?.getMealPrefs()
-
             showProgress()
             if (isNewUser) {
-                baseuserViewModel.registerUser(newUser, this)
+                baseuserViewModel.registerUser(mUser!!, this)
             } else {
-                newUser.activePlan = baseuserViewModel.liveUserResponse?.value?.data?.user?.activePlan
-                newUser.access = baseuserViewModel.liveUserResponse?.value?.data?.user?.access
-                baseuserViewModel.updateUser(newUser, this)
+                mUser?.activePlan = baseuserViewModel.liveUserResponse?.value?.data?.user?.activePlan
+                mUser?.access = baseuserViewModel.liveUserResponse?.value?.data?.user?.access
+                baseuserViewModel.updateUser(mUser, this)
             }
         } else {
             finish()
@@ -111,6 +116,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                     isNewUser = false
                     isEditModeOn = false
                     fab_edit.visibility = View.VISIBLE
+                    initData()
                     Timber.d("Profile Loaded")
                     showSuccess("Profile Loaded..")
                     updateEditability()
@@ -125,10 +131,9 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 updateEditability()
 
                 (fab_forward.parent as View).visibility = View.VISIBLE
-                var newUser = User(LoginUtils.getCurrentUserId())
-                newUser.basicInfo.name = LoginUtils.getUserName()
-                newUser.basicInfo.credential = LoginUtils.getUserCredential()
-                res?.data?.user = newUser
+                mUser = User(LoginUtils.getCurrentUserId())
+                mUser?.basicInfo?.name = LoginUtils.getUserName()
+                mUser?.basicInfo?.credential = LoginUtils.getUserCredential()
                 updateUI()
             }
         }
@@ -315,12 +320,30 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
 
         fun initUI() {
             Timber.d("Updating basic profile UI")
-            var user = (activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
-            til_name.editText?.setText(user?.basicInfo?.name)
-            til_credential.editText?.setText(user?.basicInfo?.credential)
-            til_dob.editText?.setText(user?.basicInfo?.dob)
-            til_dob.editText?.setOnClickListener({ showDatePickerDialog()})
-            when (user?.basicInfo?.gender) {
+            til_name.editText?.setText(user()?.basicInfo?.name)
+            val watcher = object: TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    user()?.basicInfo?.name = s.toString()
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+            }
+            til_name.editText?.addTextChangedListener(watcher)
+            til_credential.editText?.setText(user()?.basicInfo?.credential)
+            til_dob.editText?.setText(user()?.basicInfo?.dob)
+            til_dob.editText?.setOnClickListener { showDatePickerDialog()}
+            radio_group_gender.setOnCheckedChangeListener{chipGroup, i -> {
+                when(i){
+                    R.id.rb_male->{user()?.basicInfo?.gender = "male"}
+                    R.id.rb_female->{user()?.basicInfo?.gender = "female"}
+                }
+            } }
+            when (user()?.basicInfo?.gender) {
                 "male" -> rb_male.setChecked(true)
                 "female" -> rb_female.setChecked(true)
             }
@@ -328,29 +351,49 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             Timber.d("Updating health profile UI")
             //var user =(activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
 
-            user?.healthProfile?.height?.let {
+            user()?.healthProfile?.height?.let {
                 tv_height?.text = "" + it + " CMs"
                 sb_height?.progress = it.toInt()
             }
-            user?.healthProfile?.weight?.let {
+            user()?.healthProfile?.weight?.let {
                 tv_weight?.text = "" + it + " KGs"
                 sb_weight?.progress = it.toInt()
             }
 
-            when (user?.healthProfile?.activityLevel) {
+            radio_group_activity_level.setOnCheckedChangeListener{chipGroup, i -> {
+                when(i){
+                    R.id.rb_low->{user()?.healthProfile?.activityLevel = "low"}
+                    R.id.rb_moderate->{user()?.healthProfile?.activityLevel = "moderate"}
+                    R.id.rb_high->{user()?.healthProfile?.activityLevel = "high"}
+                    R.id.rb_extreme->{user()?.healthProfile?.activityLevel = "extreme"}
+                }
+            } }
+            when (user()?.healthProfile?.activityLevel) {
                 "low" -> rb_low.setChecked(true)
                 "moderate" -> rb_moderate.setChecked(true)
                 "high" -> rb_high.setChecked(true)
                 "extreme" -> rb_extreme.setChecked(true)
             }
-            if (user?.healthProfile?.drink != null)
-                when (user?.healthProfile?.drink) {
+            radio_group_drinking_habit.setOnCheckedChangeListener{chipGroup, i -> {
+                when(i){
+                    R.id.checkbox_no_drink->{user()?.healthProfile?.drink = "low"}
+                    R.id.checkbox_moderate_drink->{user()?.healthProfile?.drink = "moderate"}
+                    R.id.checkbox_high_drink->{user()?.healthProfile?.drink = "high"}
+                }
+            } }
+            if (user()?.healthProfile?.drink != null)
+                when (user()?.healthProfile?.drink) {
                     "low" -> checkbox_no_drink.isChecked = true
                     "moderate" -> checkbox_moderate_drink.isChecked = true
                     "high" -> checkbox_high_drink.isChecked = true
                 }
-
-            user?.healthProfile?.smoke?.let {
+            radio_group_smoking_habit.setOnCheckedChangeListener{chipGroup, i -> {
+                when(i){
+                    R.id.checkbox_smoke->{user()?.healthProfile?.smoke = true}
+                    R.id.checkbox_no_smoke->{user()?.healthProfile?.smoke = false}
+                }
+            } }
+            user()?.healthProfile?.smoke?.let {
                 checkbox_smoke.isChecked = it
                 checkbox_no_smoke.isChecked = !it
             }
@@ -359,6 +402,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    user()?.healthProfile?.height = progress.toFloat()
                     tv_height?.text = "" + progress + " CMs"
                 }
             })
@@ -366,6 +410,7 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    user()?.healthProfile?.weight = progress.toFloat()
                     tv_weight?.text = "" + progress + " KGs"
                 }
             })
@@ -384,11 +429,13 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
 
             } catch (e:Exception){
                 calendar = Calendar.getInstance()
+                calendar.set(Calendar.YEAR,1990)
             }
             val datePickerDialog = DatePickerDialog(
                     context, object:DatePickerDialog.OnDateSetListener{
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                     til_dob.editText?.setText(""+dayOfMonth+"-"+(month+1)+"-"+year)
+                    user()?.basicInfo?.dob = ""+dayOfMonth+"-"+(month+1)+"-"+year
                 }
             }, calendar?.get(Calendar.DAY_OF_MONTH), calendar?.get(Calendar.MONTH), calendar?.get(Calendar.YEAR))
 
@@ -402,33 +449,36 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             }
         }
 
+        fun user():User?{
+            return (activity as UserProfileActivity).mUser
+        }
         fun validateData(): String? {
-            if (TextUtils.isEmpty(til_name.editText?.text)) {
+            if (TextUtils.isEmpty(user()?.basicInfo?.name)) {
                 return "Please enter valid Name!"
             }
-            if (TextUtils.isEmpty(til_dob.editText?.text)) {
+            if (TextUtils.isEmpty(user()?.basicInfo?.dob)) {
                 return "Please enter valid Date Of Birth!"
             }
-            if (!(rb_male.isChecked || rb_female.isChecked)) {
+            if (TextUtils.isEmpty(user()?.basicInfo?.gender)) {
                 return "Please select Gender!"
             }
 
-            if (TextUtils.isEmpty(tv_height?.text)) {
+            if (user()?.healthProfile?.height == null && user()?.healthProfile?.height!! <= 0f) {
                 return "Please enter valid Height!"
             }
-            if (TextUtils.isEmpty(tv_weight?.text)) {
+            if (user()?.healthProfile?.weight == null && user()?.healthProfile?.weight!! <= 0f) {
                 return "Please enter valid Weight!"
             }
 
-            if (!(rb_low.isChecked || rb_moderate.isChecked || rb_high.isChecked || rb_extreme.isChecked)) {
+            if (TextUtils.isEmpty(user()?.healthProfile?.activityLevel)) {
                 return "Please select Activity Level!"
             }
 
-            if (!(checkbox_no_drink.isChecked || checkbox_moderate_drink.isChecked || checkbox_high_drink.isChecked)) {
+            if (TextUtils.isEmpty(user()?.healthProfile?.drink)) {
                 return "Please mention drinking habit!"
             }
 
-            if (!(checkbox_no_smoke.isChecked || checkbox_smoke.isChecked)) {
+            if (user()?.healthProfile?.smoke == null) {
                 return "Please mention smoking habit"
             }
             return null;
@@ -443,47 +493,6 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 fragment.arguments = args
                 return fragment
             }
-        }
-
-        fun getBasicDetails(): BasicInfo? {
-            var basicInfo = BasicInfo()
-            basicInfo.image = LoginUtils.getUserImageUrl()
-            basicInfo.name = LoginUtils.getUserName()
-            basicInfo.credential = LoginUtils.getUserCredential()
-            if (rb_male.isChecked) {
-                basicInfo.gender = "male"
-            } else {
-                basicInfo.gender = "female"
-            }
-            basicInfo.dob = til_dob.editText?.text.toString()
-            return basicInfo
-        }
-
-        fun getHealthProfile(): HealthProfile? {
-            var health = HealthProfile()
-            health.height = sb_height?.progress?.toFloat()
-            health.weight = sb_weight?.progress?.toFloat()
-            if (rb_low.isChecked) {
-                health.activityLevel = "low"
-            } else if (rb_moderate.isChecked) {
-                health.activityLevel = "moderate"
-            } else if (rb_high.isChecked) {
-                health.activityLevel = "high"
-            } else if (rb_extreme.isChecked) {
-                health.activityLevel = "extreme"
-            }
-            if (checkbox_no_drink.isChecked) {
-                health.drink = "low"
-            } else if (checkbox_moderate_drink.isChecked) {
-                health.drink = "moderate"
-            } else if (checkbox_high_drink.isChecked) {
-                health.drink = "high"
-            }
-
-            health.smoke = !checkbox_no_smoke.isChecked
-
-            return health
-
         }
 
         fun updateEditability() {
@@ -547,7 +556,9 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             var rootView: View? = inflater.inflate(R.layout.fragment_user_profile_goal_details, container, false)
             return rootView
         }
-
+        fun user():User?{
+            return (activity as UserProfileActivity).mUser
+        }
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             initUI();
@@ -564,41 +575,48 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             }
         }
 
-        private var dailyRequiredCalory: Int? = 0
 
         fun initUI() {
 
             Timber.d("Updating health profile UI")
-            var user = (activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
-            // til_target_weight.editText?.setText(""+user?.goal?.targetWeight)
-
+            if(user()?.goal?.goalType == null){
+                user()?.goal?.goalType = "lose weight"
+            }
+            if(user()?.goal?.targetWeight == null){
+                user()?.goal?.targetWeight = user()?.healthProfile?.weight
+            }
+            if(user()?.goal?.durationInWeek == null){
+                user()?.goal?.durationInWeek = 24
+            }
             updateBMICard()
-            user?.goal?.targetWeight?.let {
+            user()?.goal?.targetWeight?.let {
                 tv_target_weight?.text = "" + it
                 sb_target_weight?.progress = it.toInt()
             }
-            user?.goal?.durationInWeek?.let {
+            user()?.goal?.durationInWeek?.let {
                 tv_duration?.text = "" + it
                 sb_duration?.progress = it.toInt()
             }
-            when(user?.goal?.goalType?.toLowerCase()){
+            when(user()?.goal?.goalType?.toLowerCase()){
                 "gain weight"->{radio_group_goal.check(R.id.rb_gain_weight)}
                 "lose weight"->{radio_group_goal.check(R.id.rb_lose_weight)}
                 "stay energetic"->{radio_group_goal.check(R.id.rb_energetic)}
             }
             radio_group_goal.setOnCheckedChangeListener(object:ChipGroup.OnCheckedChangeListener{
                 override fun onCheckedChanged(chipGroup: ChipGroup?, p1: Int) {
-                    var weightInKg = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.weight
                     when(chipGroup?.checkedChipId) {
                         null-> ll_target_container.visibility = View.VISIBLE
                         R.id.rb_gain_weight ->{
                             ll_target_container.visibility = View.VISIBLE
+                            user()?.goal?.goalType = "gain weight"
                         }
                         R.id.rb_lose_weight ->{
                             ll_target_container.visibility = View.VISIBLE
+                            user()?.goal?.goalType = "lose weight"
                         }
                         R.id.rb_energetic ->{
                             ll_target_container.visibility = View.VISIBLE
+                            user()?.goal?.goalType = "stay energetic"
                         }
                     }
 
@@ -610,8 +628,8 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                     tv_target_weight?.text = "" + progress + " KGs"
-                    dailyRequiredCalory = getDailyRequiredCalories(progress.toFloat(),sb_duration.progress)?.toInt()
-                    tv_daily_required_calories.text = ""+dailyRequiredCalory+"\uD83D\uDD25"+" KCAL"
+                    user()?.goal?.targetWeight = progress.toFloat()
+                    tv_daily_required_calories.text = ""+user()?.dailyRequiredCaloriesAsPerGoal+" KCAL"
                 }
             })
             sb_duration?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -619,8 +637,8 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                     tv_duration?.text = "" + progress + " Weeks"
-                    dailyRequiredCalory = getDailyRequiredCalories(sb_target_weight.progress.toFloat(),progress)?.toInt()
-                    tv_daily_required_calories.text = ""+dailyRequiredCalory+"\uD83D\uDD25"+" KCAL"
+                    user()?.goal?.durationInWeek = progress
+                    tv_daily_required_calories.text = ""+user()?.dailyRequiredCaloriesAsPerGoal+" KCAL"
 
                 }
             })
@@ -628,121 +646,33 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         }
 
         private fun updateBMICard() {
-            var bmi = getBMI()
-            var idealWeight = getIdealWeight()
+            var bmi = user()?.bmi
+            var idealWeight = user()?.idealWeight
             tv_bmi.text = ""+bmi
-            tv_weight_comment.text = getWeightComment(bmi)
+            tv_weight_comment.text = getBMIComment(bmi)
             tv_weight_recommendation.text = "Recommondation: your ideal weight should be "+idealWeight+" KGs"
 
-            var user = (activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
-
-            var targgetW:Float? = null
-            if(user?.goal == null || user?.goal?.targetWeight == null){
-                tv_target_weight.text = ""+idealWeight+" KGs"
-                sb_target_weight.progress = idealWeight!!.toInt()
-                targgetW = idealWeight
-            } else {
-                tv_target_weight.text = ""+user?.goal?.targetWeight+" KGs"
-                sb_target_weight.progress = user?.goal?.targetWeight!!.toInt()
-                targgetW = user?.goal?.targetWeight
+            user()?.goal?.targetWeight?.let {
+                tv_target_weight.text = "" + it + " KGs"
+                sb_target_weight.progress = it.toInt()
             }
 
-            var duration:Int? = null
-            if(user?.goal == null || user?.goal?.durationInWeek == null){
-                tv_duration.text = ""+24+" Weeks"
-                sb_duration.progress = 24
-                duration = 24
-            } else {
-                tv_duration.text = ""+user?.goal?.durationInWeek+" Weeks"
-                sb_duration.progress = user?.goal?.durationInWeek!!.toInt()
-                duration = user?.goal?.durationInWeek
-            }
-            dailyRequiredCalory = getDailyRequiredCalories(targgetW,duration)?.toInt()
-            tv_daily_required_calories.text = ""+dailyRequiredCalory+"\uD83D\uDD25"+" KCAL"
-        }
-
-        fun getDailyRequiredCalories(targgetW: Float?, duration: Int?): Float? {
-            var weightInKg = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.weight
-            var bmr = getBMR()
-            var activityFactor:Float? = null
-            var activityType = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.activityLevel
-            when(activityType?.toLowerCase()){
-                "low"->{activityFactor = 1.2f}
-                "moderate"->{ activityFactor = 1.55f}
-                "high"->{activityFactor = 1.725f}
-                "extreme"->{activityFactor = 1.9f}
-            }
-
-            var maintainCalory = bmr!! * activityFactor!!
-
-            tv_daily_maintain_calories.text = ""+maintainCalory.toInt()+"\uD83D\uDD25"+" KCAL"
-
-            var weightDiff:Float?
-            if(targgetW!! < weightInKg!!){
-                weightDiff = weightInKg - targgetW
-            } else {
-                weightDiff = targgetW- weightInKg
+            user()?.goal?.durationInWeek?.let {
+                tv_duration.text = ""+it+" Weeks"
+                sb_duration.progress = it.toInt()
             }
 
 
-            var perWeekWeightDiff = weightDiff/duration!!
-            // for loosing/gaining 1 kg weight in 1 week calory deficit 3500 * 2.2 Calories with no activity
-            var deficitCaloryPerKgPerWeek = (3500 * 2.2)/7
-
-            var extraRequiredCalories = perWeekWeightDiff * deficitCaloryPerKgPerWeek
-
-            var totalRequiredCalory:Float? = null
-
-            if(targgetW!! < weightInKg!!){
-                totalRequiredCalory = maintainCalory.toFloat() - extraRequiredCalories.toFloat()
-            } else {
-                totalRequiredCalory = maintainCalory.toFloat()+ extraRequiredCalories.toFloat()
+                tv_daily_required_calories.text = ""+user()?.dailyRequiredCaloriesAsPerGoal+" KCAL"
+                tv_daily_maintain_calories.text =""+user()?.dailyCaloriesToMaintainWeight +" KCAL"
             }
 
-            var user = (activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
-            if(user?.goal == null){
-                user?.goal = Goal()
-            }
-            user?.goal?.dailyRequiredCalories = totalRequiredCalory
-            return totalRequiredCalory
-
-        }
-
-        private fun getBMR(): Float? {
-            var gender = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getBasicDetails()?.gender
-            var weightInKg = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.weight
-            var heightInCm = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.height
-
-            var ageInYears = 30
-            var bmr:Double? = null
-            when(gender?.toLowerCase()){
-                "male"->{
-                   bmr =  66+(6.3 * 2.2* weightInKg!!) + (12.9 * 0.39 * heightInCm!!) - (6.8 * ageInYears)
-                }
-                "female"->{
-                    bmr =  655+(4.3 * 2.2* weightInKg!!) + (4.7 * 0.39 * heightInCm!!) - (4.7 * ageInYears)
-                }
-            }
-            return bmr?.toFloat()
-        }
-
-        private fun getIdealWeight(): Float? {
-            var heightInCm = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.height
-
-            heightInCm?.let {
-                var bmi = 21.5f
-                var weightInKg = (bmi * (heightInCm * heightInCm))/10000
-                return Utils.roundUpFloatToOneDecimal(weightInKg)
-            }
-            return 0f
-        }
-
-        private fun getWeightComment(bmi: Float?): String {
+         fun getBMIComment(bmi: Float?): String {
             bmi?.let {
                 if(it < 18.5f){
                     return "You are Underweight"
                 } else if(it >= 18.5 && it < 24.9) {
-                    return "You are Normal"
+                    return "Your BMI is Normal"
                 } else if(it >= 25 && it <=29.9) {
                     return "You are Overweight"
                 } else if(it >=  30){
@@ -751,17 +681,6 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             }
             return "";
 
-        }
-
-        private fun getBMI(): Float? {
-            var weightInKg = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.weight
-            var heightInCm = (activity as UserProfileActivity).mSectionsPagerAdapter?.basicDetailsFrag?.getHealthProfile()?.height
-
-            weightInKg?.let {
-                var bmi = (weightInKg / (heightInCm!! * heightInCm!!))*10000
-                return Utils.roundUpFloatToOneDecimal(bmi)
-            }
-            return 0f
         }
 
         fun updateEditability() {
@@ -795,17 +714,6 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             }
         }
 
-        fun getGoal(): Goal? {
-            var goal = Goal()
-
-            var id = radio_group_goal.checkedChipId
-            goal.goalType = radio_group_goal.findViewById<Chip>(id).text.toString()
-            goal.targetWeight = sb_target_weight.progress.toFloat()
-            goal.durationInWeek = sb_duration.progress
-            goal.dailyRequiredCalories = dailyRequiredCalory?.toFloat()
-            return goal
-
-        }
     }
 
     class MealPrefFragment : androidx.fragment.app.Fragment() {
@@ -816,7 +724,9 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
             var rootView: View? = inflater.inflate(R.layout.fragment_user_profile_meal_prefs, container, false)
             return rootView
         }
-
+        fun user():User?{
+            return (activity as UserProfileActivity).mUser
+        }
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
             initUI();
@@ -833,22 +743,23 @@ class UserProfileActivity : BaseDIActivity(), UserRepository.UserProfileCallback
         }
 
         private fun updateCaloryDistribution() {
-            var user = (activity as BaseDIActivity).baseuserViewModel.liveUserResponse?.value?.data?.user
 
-            var dailyRequiredCalory = user?.goal?.dailyRequiredCalories
-            tv_calory_dist_total.text = ""+(dailyRequiredCalory!!).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_early_morning.text = "Early Morning - "+(dailyRequiredCalory!! *0.10f).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_breakfast.text = "Breakfast - "+(dailyRequiredCalory!! *0.30f).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_lunch.text = "Lunch - "+(dailyRequiredCalory!! *0.20f).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_snacks.text = "Evening Snacks - "+(dailyRequiredCalory!! *0.10f).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_dinner.text = "Dinner - "+(dailyRequiredCalory!! *0.20f).toInt()+"\uD83D\uDD25"+" KCAL"
-            tv_calory_dist_bed_time.text = "Bed Time - "+(dailyRequiredCalory!! *0.10f).toInt()+"\uD83D\uDD25"+" KCAL"
+            var dailyRequiredCalory = user()?.dailyRequiredCaloriesAsPerGoal
+            dailyRequiredCalory?.let {
+                tv_calory_dist_total.text = "" + (it).toInt() +" KCAL"
+                tv_calory_dist_early_morning.text = "Early Morning - " + (it * 0.10f).toInt() + " KCAL"
+                tv_calory_dist_breakfast.text = "Breakfast - " + (it * 0.30f).toInt() + " KCAL"
+                tv_calory_dist_lunch.text = "Lunch - " + (it * 0.20f).toInt() + " KCAL"
+                tv_calory_dist_snacks.text = "Evening Snacks - " + (it * 0.10f).toInt()+ " KCAL"
+                tv_calory_dist_dinner.text = "Dinner - " + (it * 0.20f).toInt() + " KCAL"
+                tv_calory_dist_bed_time.text = "Bed Time - " + (it * 0.10f).toInt()+ " KCAL"
 
-            var nutritionRDA = Nutrition()
-            nutritionRDA.nutrients = Nutrients()
-            nutritionRDA.nutrients.principlesAndDietaryFibers?.energy = user?.goal?.dailyRequiredCalories!! * 4.18f
-            card_nutri_details.removeAllViews()
-            card_nutri_details.addView(NutritionDetailsView(view as ViewGroup, "Recommended Dietry Allowance", "Amount", "RDA", nutritionRDA, nutritionRDA, NutritionDetailsView.MODE_RDA))
+                var nutritionRDA = Nutrition()
+                nutritionRDA.nutrients = Nutrients()
+                nutritionRDA.nutrients.principlesAndDietaryFibers?.energy = it * 4.18f
+                card_nutri_details.removeAllViews()
+                card_nutri_details.addView(NutritionDetailsView(view as ViewGroup, "Recommended Dietry Allowance", "Amount", "RDA", nutritionRDA, nutritionRDA, NutritionDetailsView.MODE_RDA))
+            }
 
         }
 

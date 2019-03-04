@@ -57,7 +57,7 @@ public class DashBoardNutriAdapter extends RecyclerView.Adapter<DashBoardNutriAd
     public void onBindViewHolder(CircleGraphViewHolder holder, final int position) {
        // holder.planImage.setUrl(data.get(position).getBlobServingUrl());
         NutriPair pair = data.get(position);
-        holder.circleGraphView.start(pair.getName(),pair.getRda(),pair.getValue(),R.color.primaryColor);
+        holder.circleGraphView.start(pair.getName(),pair.getRda(),pair.getValue(),R.color.secondaryColor);
     }
 
 

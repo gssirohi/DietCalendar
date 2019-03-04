@@ -7,25 +7,33 @@ import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import androidx.room.Embedded;
+
 public class Nutrients {
 
     @SerializedName("principlesAndDietaryFibers")
     @Expose
+    @Embedded
     private PrinciplesAndDietaryFibers principlesAndDietaryFibers = new PrinciplesAndDietaryFibers();
     @SerializedName("waterSolubleVitamins")
     @Expose
+    @Embedded
     private WaterSolubleVitamins waterSolubleVitamins = new WaterSolubleVitamins();
     @SerializedName("mineralsAndTraceElements")
     @Expose
+    @Embedded
     private MineralsAndTraceElements mineralsAndTraceElements = new MineralsAndTraceElements();
     @SerializedName("starchAndSugars")
     @Expose
+    @Embedded
     private StarchAndSugars starchAndSugars = new StarchAndSugars();
     @SerializedName("fatyAcid")
     @Expose
+    @Embedded
     private FatyAcid fatyAcid = new FatyAcid();
     @SerializedName("organicAcids")
     @Expose
+    @Embedded
     private OrganicAcids organicAcids = new OrganicAcids();
     @SerializedName("totalCarotenids")
     @Expose
@@ -89,31 +97,26 @@ public class Nutrients {
 
     @NotNull
     public Nutrients applyFactor(Float finalQtyFactor) {
-        PrinciplesAndDietaryFibers principlesAndDietaryFibers = new PrinciplesAndDietaryFibers();
-        if(this.principlesAndDietaryFibers.getEnergy() == null){
-            principlesAndDietaryFibers.setEnergy(0f);
-        } else {
-            principlesAndDietaryFibers.setEnergy(finalQtyFactor * this.principlesAndDietaryFibers.getEnergy());
-        }
         Nutrients nutrients = new Nutrients();
-        nutrients.setPrinciplesAndDietaryFibers(principlesAndDietaryFibers);
+        nutrients.principlesAndDietaryFibers = this.principlesAndDietaryFibers == null? new PrinciplesAndDietaryFibers(): this.principlesAndDietaryFibers.applyFactor(finalQtyFactor);
+        nutrients.mineralsAndTraceElements = this.mineralsAndTraceElements == null? new MineralsAndTraceElements(): this.mineralsAndTraceElements.applyFactor(finalQtyFactor);
+        nutrients.waterSolubleVitamins = this.waterSolubleVitamins == null? new WaterSolubleVitamins(): this.waterSolubleVitamins.applyFactor(finalQtyFactor);
+        nutrients.fatyAcid = this.fatyAcid == null? new FatyAcid(): this.fatyAcid.applyFactor(finalQtyFactor);
+        nutrients.organicAcids = this.organicAcids == null? new OrganicAcids(): this.organicAcids.applyFactor(finalQtyFactor);
+        nutrients.starchAndSugars = this.starchAndSugars == null? new StarchAndSugars(): this.starchAndSugars.applyFactor(finalQtyFactor);
         return nutrients;
     }
 
     public void addUpNutrients(@Nullable Nutrients nutri) {
         if(nutri != null) {
-            if(nutri.principlesAndDietaryFibers != null) {
-                this.principlesAndDietaryFibers.setEnergy(addFloats(this.principlesAndDietaryFibers.getEnergy(), nutri.principlesAndDietaryFibers.getEnergy()));
-            }
+            this.principlesAndDietaryFibers.add(nutri.principlesAndDietaryFibers);
+            this.mineralsAndTraceElements.add(nutri.mineralsAndTraceElements);
+            this.waterSolubleVitamins.add(nutri.waterSolubleVitamins);
+            this.fatyAcid.add(nutri.fatyAcid);
+            this.organicAcids.add(nutri.organicAcids);
+            this.starchAndSugars.add(nutri.starchAndSugars);
         }
     }
 
-    private Float addFloats(Float output, Float input) {
-        if(output != null && input != null){
-            output = output+input;
-        } else if(input != null){
-            output = 0f+input;
-        }
-        return output;
-    }
+
 }

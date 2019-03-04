@@ -63,5 +63,10 @@ abstract class ViewModelModule {
     internal abstract fun bindUserViewModel(userViewModel: UserViewModel): ViewModel
 
     @Binds
+    @IntoMap
+    @ViewModelKey(KitchenViewModel::class)
+    internal abstract fun bindKitchenViewModel(kitchenViewModel: KitchenViewModel): ViewModel
+
+    @Binds
     internal abstract fun bindBaseViewModelFactory(factory: BaseViewModelFactory): ViewModelProvider.Factory
 }

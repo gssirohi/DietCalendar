@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.techticz.app.model.launch.Launching
 import com.techticz.networking.model.CommonResponse
 
 /**
@@ -11,12 +12,7 @@ import com.techticz.networking.model.CommonResponse
  */
 
 class LauncherResponse : CommonResponse() {
-    @SerializedName("uid")
+    @SerializedName("launching")
     @Expose
-    var uid: Int = 0
-        get() = field
-
-    @SerializedName("launchMessage")
-    @Expose
-    var launchMessage: String = ""
+    var launching: Launching? = null
 }

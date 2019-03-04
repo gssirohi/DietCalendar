@@ -4,10 +4,15 @@ package com.techticz.app.model.food;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import androidx.room.Embedded;
+import androidx.room.Entity;
+
+
 public class BasicInfo {
 
     @SerializedName("name")
     @Expose
+    @Embedded
     private Name name;
     @SerializedName("desc")
     @Expose

@@ -18,10 +18,6 @@ public class Goal {
     @Expose
     private Integer durationInWeek;
 
-    @SerializedName("dailyRequiredCalories")
-    @Expose
-    public Float dailyRequiredCalories;
-
     public Float getTargetWeight() {
         return targetWeight;
     }
@@ -46,11 +42,4 @@ public class Goal {
         this.durationInWeek = durationInWeek;
     }
 
-    public Float getDailyRequiredCalories() {
-        return dailyRequiredCalories;
-    }
-
-    public void setDailyRequiredCalories(Float dailyRequiredCalories) {
-        this.dailyRequiredCalories = dailyRequiredCalories;
-    }
 }

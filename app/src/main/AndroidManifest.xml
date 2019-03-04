@@ -62,6 +62,11 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name="com.techticz.app.ui.activity.OnboardingActivity"
+            android:label="@string/title_activity_onboarding"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name="com.techticz.app.ui.activity.DietPlanActivity"
             android:label="@string/title_activity_diet_plan"
             android:theme="@style/AppTheme.Plan"

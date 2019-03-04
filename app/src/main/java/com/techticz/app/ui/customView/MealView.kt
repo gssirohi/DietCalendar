@@ -106,21 +106,34 @@ class MealView(val daySection:Int?, parent:Context?) : FrameLayout(parent) {
     }
 
     private fun getRequiredMealCalory(): String {
-        var dailyCalories = (context as BaseDIActivity).baseuserViewModel?.liveUserResponse?.value?.data?.user?.goal?.dailyRequiredCalories
+        var dailyCalories = (context as BaseDIActivity).baseuserViewModel?.liveUserResponse?.value?.data?.user?.dailyRequiredCaloriesAsPerGoal
         var distribution:CaloryDistribution? = null
         if(context is DietChartActivity) {
             distribution = (context as DietChartActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.caloryDistribution
         } else if(context is DashboardActivity){
             distribution = (context as DashboardActivity).dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.caloryDistribution
         }
+        if(distribution == null){
+            distribution = CaloryDistribution().apply {
+                earlyMorning = 10
+                breakfast = 20
+                lunch = 30
+                eveningSnacks = 10
+                dinner = 20
+                bedTime = 10
+            }
+        }
+        if(dailyCalories == null){
+            dailyCalories = 2000f
+        }
         var meal = mealPlateViewModel?.triggerMealPlateID?.value?.mealType
         when(meal){
             Meals.EARLY_MORNING->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.earlyMorning * 0.01f))+" KCAL"}
-            Meals.BREAKFAST->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.breakfast * 0.01f))+" KCAL"}
-            Meals.LUNCH->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.lunch * 0.01f))+" KCAL"}
-            Meals.BRUNCH->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.eveningSnacks * 0.01f))+" KCAL"}
-            Meals.DINNER->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.dinner * 0.01f))+" KCAL"}
-            Meals.BED_TIME->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.bedTime * 0.01f))+" KCAL"}
+            Meals.BREAKFAST->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.breakfast* 0.01f))+" KCAL"}
+            Meals.LUNCH->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.lunch* 0.01f))+" KCAL"}
+            Meals.BRUNCH->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.eveningSnacks* 0.01f))+" KCAL"}
+            Meals.DINNER->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.dinner* 0.01f))+" KCAL"}
+            Meals.BED_TIME->{return "Recommonded - "+ Utils.roundUpFloatToOneDecimal(dailyCalories!! * (distribution!!.bedTime* 0.01f))+" KCAL"}
         }
         return ":-)";
     }

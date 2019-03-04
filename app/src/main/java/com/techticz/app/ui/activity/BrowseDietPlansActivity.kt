@@ -120,10 +120,13 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
             }
             Status.SUCCESS->
             {
-                showSuccess("My Diet Plan Fetched")
+                //showSuccess("My Diet Plan Fetched")
                 hideProgress()
                 (scroller_my_plans.adapter as MealPlanPagerAdapter).data.clear()
-                (scroller_my_plans.adapter as MealPlanPagerAdapter).data.addAll(resource?.data?.plans!!)
+                var plans:ArrayList<DietPlan> = ArrayList()
+                plans.addAll(resource?.data?.plans!!)
+                plans.add(DietPlan().apply { id = "add_new" })
+                (scroller_my_plans.adapter as MealPlanPagerAdapter).data.addAll(plans)
                 (scroller_my_plans.adapter as MealPlanPagerAdapter).notifyDataSetChanged()
                 //  scroller.getRecycledViewPool().setMaxRecycledViews(1,0);
 
@@ -139,6 +142,10 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
 
     override fun onMealPlanItemClicked(plan: DietPlan?) {
         navigator.startDietChartScreen(this,plan)
+    }
+
+    override fun onAddMealPlanClicked() {
+        onCreatePlanClicked()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

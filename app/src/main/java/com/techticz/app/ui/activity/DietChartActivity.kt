@@ -174,6 +174,7 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
     }
 
     private fun activatePlan() {
+        showProgress()
         var user  = baseuserViewModel.liveUserResponse.value?.data?.user
         user?.activePlan  = dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.id
         baseuserViewModel.updateUser(user,this)

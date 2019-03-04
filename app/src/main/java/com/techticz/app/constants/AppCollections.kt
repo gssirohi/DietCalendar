@@ -3,6 +3,7 @@ package com.techticz.app.constants
 
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.model.food.Food
+import com.techticz.app.model.launch.Launching
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.model.user.User
@@ -22,5 +23,6 @@ enum class AppCollections(val collectionName: String,val jsonName:String,val cla
     RECIPE_CATEGORIES("recipeCategories","recipeCategories.json",Recipe::class.java),
     SERVING_TYPES("servingTypes","servingTypes.json",Food::class.java),
     NUTRIENT_UNITS("nutrientUnits","nutrientUnits.json",Food::class.java),
-    UNITS("units","units.json",Food::class.java)
+    UNITS("units","units.json",Food::class.java),
+    LAUNCHINGS("launchings","launchings.json", Launching::class.java)
 }

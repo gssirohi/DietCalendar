@@ -23,6 +23,10 @@
             tools:replace="android:theme" />
         <activity android:name=".LoginActivity"></activity>
 
+        <provider android:authorities="com.facebook.app.FacebookContentProvider{1450289065066055}"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

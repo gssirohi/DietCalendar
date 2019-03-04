@@ -12,7 +12,6 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -25,7 +24,7 @@ import com.techticz.app.ui.customView.AppImageView;
 import java.util.List;
 
 
-public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdapter.MealPlanViewHolder> {
+public class MealPlanPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final CallBack callBack;
     private final Context context;
@@ -38,60 +37,80 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
     }
     @Override
     public int getItemViewType(int position) {
+        if(data.get(position).getId().equalsIgnoreCase("add_new")){
+            return 2;
+        }
         return 1;
     }
 
     @Override
-    public void onViewAttachedToWindow(MealPlanViewHolder holder) {
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         if (holder instanceof MealPlanViewHolder) {
             holder.setIsRecyclable(false);
         }
-        super.onViewAttachedToWindow((MealPlanViewHolder) holder);
+        super.onViewAttachedToWindow( holder);
     }
 
     @Override
-    public void onViewDetachedFromWindow(MealPlanViewHolder holder) {
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         if (holder instanceof MealPlanViewHolder){
             holder.setIsRecyclable(true);
         }
-        super.onViewDetachedFromWindow((MealPlanViewHolder) holder);
+        super.onViewDetachedFromWindow( holder);
     }
 
     @Override
-    public MealPlanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.meal_plan_list_item_view, parent, false);
+        View v;
+        if(viewType == 1) {
+            v = inflater.inflate(R.layout.meal_plan_list_item_view, parent, false);
+            return new MealPlanViewHolder(v);
+        } else {
+            v = inflater.inflate(R.layout.meal_plan_add_new_list_item_view, parent, false);
+            return new AddPlanViewHolder(v);
+        }
 
-        return new MealPlanViewHolder(v);
+
     }
 
     @Override
-    public void onBindViewHolder(MealPlanViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
        // holder.planImage.setUrl(data.get(position).getBlobServingUrl());
-        holder.planName.setText(data.get(position).getBasicInfo().getName());
-        holder.planDesc.setText(data.get(position).getBasicInfo().getDesc());
-        if(data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("veg")){
-            holder.planType.setTextColor(Color.parseColor("#ff669900"));
-        } else if(data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("non-veg")){
-            holder.planType.setTextColor(Color.parseColor("#ffcc0000"));
-        }
-        if(data.get(position).getBasicInfo().getDailyCalories() != null && data.get(position).getBasicInfo().getDailyCalories()>0) {
-            holder.planCalory.setText(data.get(position).getBasicInfo().getDailyCalories() + " DailyCalories");
-        } else {
-            holder.planCalory.setVisibility(View.GONE);
-        }
-        holder.planAuthor.setText(data.get(position).getAdminInfo().getCreatedBy());
-       // holder.planCalory.setText("Daily Calories : "+data.get(position).getBasicInfo().getDailyCalories());
-        ImageViewModel imageViewModel = new ImageViewModel(holder.planImage.getContext());
-        imageViewModel.getTriggerImageUrl().setValue(data.get(position).getBasicInfo().getImage());
-        holder.planImage.setImageViewModel(imageViewModel,(LifecycleOwner) context);
+        if(holder instanceof MealPlanViewHolder) {
 
-        holder.bExplore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callBack.onMealPlanItemClicked(data.get(position));
+            ((MealPlanViewHolder)holder).planName.setText(data.get(position).getBasicInfo().getName());
+            ((MealPlanViewHolder)holder).planDesc.setText(data.get(position).getBasicInfo().getDesc());
+            if (data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("veg")) {
+                ((MealPlanViewHolder)holder).planType.setTextColor(Color.parseColor("#ff669900"));
+            } else if (data.get(position).getBasicInfo().getType() != null && data.get(position).getBasicInfo().getType().equalsIgnoreCase("non-veg")) {
+                ((MealPlanViewHolder)holder).planType.setTextColor(Color.parseColor("#ffcc0000"));
             }
-        });
+            if (data.get(position).getBasicInfo().getDailyCalories() != null && data.get(position).getBasicInfo().getDailyCalories() > 0) {
+                ((MealPlanViewHolder)holder).planCalory.setText(data.get(position).getBasicInfo().getDailyCalories() + " DailyCalories");
+            } else {
+                ((MealPlanViewHolder)holder).planCalory.setVisibility(View.GONE);
+            }
+            ((MealPlanViewHolder)holder).planAuthor.setText(data.get(position).getAdminInfo().getCreatedBy());
+            // holder.planCalory.setText("Daily Calories : "+data.get(position).getBasicInfo().getDailyCalories());
+            ImageViewModel imageViewModel = new ImageViewModel(((MealPlanViewHolder)holder).planImage.getContext());
+            imageViewModel.getTriggerImageUrl().setValue(data.get(position).getBasicInfo().getImage());
+            ((MealPlanViewHolder)holder).planImage.setImageViewModel(imageViewModel, (LifecycleOwner) context);
+
+            ((MealPlanViewHolder)holder).bExplore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callBack.onMealPlanItemClicked(data.get(position));
+                }
+            });
+        } else {
+            ((AddPlanViewHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBack.onAddMealPlanClicked();
+                }
+            });
+        }
     }
 
 
@@ -100,6 +119,13 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
         return data.size();
     }
 
+    class AddPlanViewHolder extends RecyclerView.ViewHolder {
+        private View itemView;
+        public AddPlanViewHolder(View itemView) {
+            super(itemView);
+            this.itemView = itemView;
+        }
+    }
     class MealPlanViewHolder extends RecyclerView.ViewHolder {
 
         private FloatingActionButton bExplore;
@@ -125,6 +151,7 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<MealPlanPagerAdap
 
     public interface CallBack{
         void onMealPlanItemClicked(DietPlan plan);
+        void onAddMealPlanClicked();
     }
 
 }

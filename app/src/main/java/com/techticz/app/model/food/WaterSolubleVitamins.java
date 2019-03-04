@@ -3,6 +3,7 @@ package com.techticz.app.model.food;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.util.Utils;
 
 public class WaterSolubleVitamins {
 
@@ -95,4 +96,29 @@ public class WaterSolubleVitamins {
         this.totalAscorbicAcid = totalAscorbicAcid;
     }
 
+    public WaterSolubleVitamins applyFactor(Float finalQtyFactor) {
+        WaterSolubleVitamins waterSolubleVitamins = new WaterSolubleVitamins();
+        waterSolubleVitamins.bioinB7 = this.bioinB7 == null?0f: this.bioinB7 * finalQtyFactor;
+        waterSolubleVitamins.niacinB3 = this.niacinB3 == null?0f: this.niacinB3 * finalQtyFactor;
+        waterSolubleVitamins.pentothenicAcidB5 = this.pentothenicAcidB5 == null?0f: this.pentothenicAcidB5 * finalQtyFactor;
+        waterSolubleVitamins.riboflavinB2 = this.riboflavinB2 == null?0f: this.riboflavinB2 * finalQtyFactor;
+        waterSolubleVitamins.thiamineB1 = this.thiamineB1 == null?0f: this.thiamineB1 * finalQtyFactor;
+        waterSolubleVitamins.totalAscorbicAcid = this.totalAscorbicAcid == null?0f: this.totalAscorbicAcid * finalQtyFactor;
+        waterSolubleVitamins.totalB6 = this.totalB6 == null?0f: this.totalB6 * finalQtyFactor;
+        waterSolubleVitamins.totalFolatesB9 = this.totalFolatesB9 == null?0f: this.totalFolatesB9 * finalQtyFactor;
+
+        return waterSolubleVitamins;
+    }
+
+    public void add(WaterSolubleVitamins waterSolubleVitamins) {
+        if(waterSolubleVitamins == null) return;
+        this.bioinB7 = Utils.addFloats(this.bioinB7,waterSolubleVitamins.bioinB7);
+        this.niacinB3 = Utils.addFloats(this.niacinB3,waterSolubleVitamins.niacinB3);
+        this.pentothenicAcidB5 = Utils.addFloats(this.pentothenicAcidB5,waterSolubleVitamins.pentothenicAcidB5);
+        this.riboflavinB2 = Utils.addFloats(this.riboflavinB2,waterSolubleVitamins.riboflavinB2);
+        this.thiamineB1 = Utils.addFloats(this.thiamineB1,waterSolubleVitamins.thiamineB1);
+        this.totalAscorbicAcid = Utils.addFloats(this.totalAscorbicAcid,waterSolubleVitamins.totalAscorbicAcid);
+        this.totalB6 = Utils.addFloats(this.totalB6,waterSolubleVitamins.totalB6);
+        this.totalFolatesB9 = Utils.addFloats(this.totalFolatesB9,waterSolubleVitamins.totalFolatesB9);
+    }
 }

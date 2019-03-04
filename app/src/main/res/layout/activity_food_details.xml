@@ -24,7 +24,12 @@
             app:title="Food Details"
             app:expandedTitleTextAppearance="@style/TitleStyle"
             app:toolbarId="@+id/toolbar">
-
+            <com.techticz.app.ui.customView.AppImageView
+                android:id="@+id/aiv_meal_plate_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/banner_food"
+                android:scaleType="fitXY"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

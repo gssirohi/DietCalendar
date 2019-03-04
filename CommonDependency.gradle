@@ -35,7 +35,7 @@ ext {
                     ],
                     ARCH: [
                             lifeCycleVersion: "1.0.0",
-                            roomVersion     : "1.0.0"
+                            roomVersion     : " 2.1.0-alpha04"
                     ],
                     UI  : [
                             parcelerVersion         : '1.1.11',
@@ -123,8 +123,8 @@ ext {
                             COMPILER : 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'//'android.arch.lifecycle:compiler:' + CONST.ANDROID.ARCH.lifeCycleVersion
                     ],
                     ROOM     : [
-                            RUNTIME : 'androidx.room:room-runtime:2.0.0-rc01',//'android.arch.persistence.room:runtime:' + CONST.ANDROID.ARCH.roomVersion,
-                            COMPILER: 'androidx.room:room-compiler:2.0.0-rc01'//'android.arch.persistence.room:compiler:' + CONST.ANDROID.ARCH.roomVersion
+                            RUNTIME : 'androidx.room:room-runtime:2.1.0-alpha04',//'android.arch.persistence.room:runtime:' + CONST.ANDROID.ARCH.roomVersion,
+                            COMPILER: 'androidx.room:room-compiler:2.1.0-alpha04'//'android.arch.persistence.room:compiler:' + CONST.ANDROID.ARCH.roomVersion
                     ]
             ],
 

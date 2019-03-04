@@ -14,6 +14,7 @@ import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.base.BaseDIRepository
+import com.techticz.app.model.launch.Launching
 import com.techticz.powerkit.utils.JSONUtils
 import timber.log.Timber
 import java.lang.reflect.Type
@@ -41,8 +42,13 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                     var listType = object : TypeToken<List<Food>>() {}.type
                     var items: List<Food> = gson.fromJson(jsonString, listType)
                     for (item in items) {
-                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
-                        batch.set(ref, item)
+                        try {
+                            var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                            batch.set(ref, item)
+                        } catch (e:Exception){
+                            e.printStackTrace()
+                            Log.e("UPLOADING","Error uploading Food:"+item.id+" Name:"+item.basicInfo.name.english)
+                        }
                     }
                 }
 
@@ -67,6 +73,15 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                 DietPlan::class.java.canonicalName -> {
                     var listType = object : TypeToken<List<DietPlan>>() {}.type
                     var items: List<DietPlan> = gson.fromJson(jsonString, listType)
+                    for (item in items) {
+                        var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
+                        batch.set(ref, item)
+                    }
+                }
+
+                Launching::class.java.canonicalName -> {
+                    var listType = object : TypeToken<List<Launching>>() {}.type
+                    var items: List<Launching> = gson.fromJson(jsonString, listType)
                     for (item in items) {
                         var ref: DocumentReference = db.collection(collection.collectionName).document(item.id)
                         batch.set(ref, item)
@@ -168,6 +183,13 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
         showProgress("Uploading","Hold on, Uploading "+AppCollections.PLANS.collectionName+"...")
         execute(Runnable {
             uploadCollection(AppCollections.PLANS)
+        })
+    }
+
+    fun uploadLaunching() {
+        showProgress("Uploading","Hold on, Uploading "+AppCollections.LAUNCHINGS.collectionName+"...")
+        execute(Runnable {
+            uploadCollection(AppCollections.LAUNCHINGS)
         })
     }
 

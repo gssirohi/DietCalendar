@@ -182,6 +182,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="no_network_connection_toast">Check your network connection!!</string>
     <string name="title_activity_user_profile">User Profile</string>
+    <string name="title_activity_onboarding">Onboarding</string>
     <string name="title_activity_diet_plan">Create Plan</string>
     <string name="title_activity_browse_plate">Browse Meal Plates</string>
     <string name="title_activity_meal_plate">Plate Details</string>

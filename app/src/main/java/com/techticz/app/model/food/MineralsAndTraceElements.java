@@ -3,6 +3,7 @@ package com.techticz.app.model.food;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.util.Utils;
 
 public class MineralsAndTraceElements {
 
@@ -227,4 +228,54 @@ public class MineralsAndTraceElements {
         this.zinc = zinc;
     }
 
+    public MineralsAndTraceElements applyFactor(Float finalQtyFactor) {
+        MineralsAndTraceElements mineralsAndTraceElements = new MineralsAndTraceElements();
+
+        mineralsAndTraceElements.aluminium = this.aluminium == null?0f:this.aluminium * finalQtyFactor;
+        mineralsAndTraceElements.arsenic = this.arsenic == null?0f:this.arsenic * finalQtyFactor;
+        mineralsAndTraceElements.cadium = this.cadium == null?0f:this.cadium * finalQtyFactor;
+        mineralsAndTraceElements.calcium = this.calcium == null?0f:this.calcium * finalQtyFactor;
+        mineralsAndTraceElements.chromium = this.chromium == null?0f:this.chromium * finalQtyFactor;
+        mineralsAndTraceElements.cobalt = this.cobalt == null?0f:this.cobalt * finalQtyFactor;
+        mineralsAndTraceElements.copper = this.copper == null?0f:this.copper * finalQtyFactor;
+        mineralsAndTraceElements.iron = this.iron == null?0f:this.iron * finalQtyFactor;
+        mineralsAndTraceElements.led = this.led == null?0f:this.led * finalQtyFactor;
+        mineralsAndTraceElements.lithium = this.lithium == null?0f:this.lithium * finalQtyFactor;
+        mineralsAndTraceElements.magnesium = this.magnesium == null?0f:this.magnesium * finalQtyFactor;
+        mineralsAndTraceElements.manganees = this.manganees == null?0f:this.manganees * finalQtyFactor;
+        mineralsAndTraceElements.mercury = this.mercury == null?0f:this.mercury * finalQtyFactor;
+        mineralsAndTraceElements.molebdeum = this.molebdeum == null?0f:this.molebdeum * finalQtyFactor;
+        mineralsAndTraceElements.nickle = this.nickle == null?0f:this.nickle * finalQtyFactor;
+        mineralsAndTraceElements.phosphorus = this.phosphorus == null?0f:this.phosphorus * finalQtyFactor;
+        mineralsAndTraceElements.potassium = this.potassium == null?0f:this.potassium * finalQtyFactor;
+        mineralsAndTraceElements.selenium = this.selenium == null?0f:this.selenium * finalQtyFactor;
+        mineralsAndTraceElements.sodium = this.sodium == null?0f:this.sodium * finalQtyFactor;
+        mineralsAndTraceElements.zinc = this.zinc == null?0f:this.zinc * finalQtyFactor;
+
+        return mineralsAndTraceElements;
+
+    }
+
+    public void add(MineralsAndTraceElements mineralsAndTraceElements) {
+        this.aluminium = Utils.addFloats(this.aluminium,mineralsAndTraceElements.aluminium);
+        this.arsenic = Utils.addFloats(this.arsenic,mineralsAndTraceElements.arsenic);
+        this.cadium = Utils.addFloats(this.cadium,mineralsAndTraceElements.cadium);
+        this.calcium = Utils.addFloats(this.calcium,mineralsAndTraceElements.calcium);
+        this.chromium = Utils.addFloats(this.chromium,mineralsAndTraceElements.chromium);
+        this.cobalt = Utils.addFloats(this.cobalt,mineralsAndTraceElements.cobalt);
+        this.copper = Utils.addFloats(this.copper,mineralsAndTraceElements.copper);
+        this.iron = Utils.addFloats(this.iron,mineralsAndTraceElements.iron);
+        this.led = Utils.addFloats(this.led,mineralsAndTraceElements.led);
+        this.lithium = Utils.addFloats(this.lithium,mineralsAndTraceElements.lithium);
+        this.magnesium = Utils.addFloats(this.magnesium,mineralsAndTraceElements.magnesium);
+        this.manganees = Utils.addFloats(this.manganees,mineralsAndTraceElements.manganees);
+        this.mercury = Utils.addFloats(this.mercury,mineralsAndTraceElements.mercury);
+        this.molebdeum = Utils.addFloats(this.molebdeum,mineralsAndTraceElements.molebdeum);
+        this.nickle = Utils.addFloats(this.nickle,mineralsAndTraceElements.nickle);
+        this.phosphorus = Utils.addFloats(this.phosphorus,mineralsAndTraceElements.phosphorus);
+        this.potassium = Utils.addFloats(this.potassium,mineralsAndTraceElements.potassium);
+        this.selenium = Utils.addFloats(this.selenium,mineralsAndTraceElements.selenium);
+        this.sodium = Utils.addFloats(this.sodium,mineralsAndTraceElements.sodium);
+        this.zinc = Utils.addFloats(this.zinc,mineralsAndTraceElements.zinc);
+    }
 }

@@ -8,13 +8,13 @@ public class DietaryFiber {
 
     @SerializedName("total")
     @Expose
-    private Float total;
+    private Float total = 0f;
     @SerializedName("soluble")
     @Expose
-    private Float soluble;
+    private Float soluble = 0f;
     @SerializedName("inSoluble")
     @Expose
-    private Float inSoluble;
+    private Float inSoluble = 0f;
 
     public Float getTotal() {
         return total;
@@ -40,4 +40,20 @@ public class DietaryFiber {
         this.inSoluble = inSoluble;
     }
 
+    public DietaryFiber applyFactor(Float finalQtyFactor) {
+        DietaryFiber fiber = new DietaryFiber();
+        fiber.setSoluble(soluble == null?0f :finalQtyFactor * soluble);
+        fiber.setInSoluble(inSoluble == null?0f :finalQtyFactor * inSoluble);
+        fiber.setTotal(total == null?0f :finalQtyFactor * total);
+        return fiber;
+    }
+
+    public void add(DietaryFiber fiber){
+        if(fiber != null){
+            this.soluble = this.soluble+fiber.soluble;
+            this.inSoluble = this.inSoluble+fiber.inSoluble;
+            this.total = this.total+fiber.total;
+        }
+
+    }
 }

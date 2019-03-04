@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
 import com.techticz.app.model.mealplate.FoodItem;
 
 import org.parceler.Parcel;
+
+import androidx.room.TypeConverters;
 
 @Parcel
 public class Formula {
@@ -18,9 +21,11 @@ public class Formula {
 
     @SerializedName("ingredients")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<FoodItem> ingredients = null;
     @SerializedName("steps")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<String> steps = null;
 
     public List<FoodItem> getIngredients() {

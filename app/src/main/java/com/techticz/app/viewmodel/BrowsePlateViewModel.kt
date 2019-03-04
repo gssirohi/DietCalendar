@@ -41,6 +41,8 @@ constructor() : BaseViewModel() {
             Timber.d("Featured Plates Trigger received.")
             if (triggerMealType == null) {
                 return@switchMap AbsentLiveData.create<Resource<BrowsePlateResponse>>()
+            } else if(triggerMealType.equals("")){
+                return@switchMap injectedRepo?.fetchAllFeaturedPlates()
             } else {
                 return@switchMap injectedRepo?.fetchPlatesForMealType(triggerMealType)
             }

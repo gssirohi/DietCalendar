@@ -366,5 +366,13 @@
         android:layout_margin="8dp"
         android:text="Upload Nutrient Units"/>
 
+    <Button
+        android:id="@+id/bt_launching"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="Upload Launchings"/>
+
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

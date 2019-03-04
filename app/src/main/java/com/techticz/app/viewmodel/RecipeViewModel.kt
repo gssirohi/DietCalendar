@@ -2,6 +2,7 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
+import android.util.Log
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.RecipeResponse
@@ -26,6 +27,7 @@ constructor() : BaseViewModel() {
     @Inject
     lateinit var injectedRepo: RecipeRepository
     val triggerRecipeItem = MutableLiveData<RecipeItem>()
+    val liveStatus = MediatorLiveData<Status>()
     val liveRecipeResponse: LiveData<Resource<RecipeResponse>>
     var liveFoodViewModelList: MediatorLiveData<Resource<List<FoodViewModel>>>? = MediatorLiveData<Resource<List<FoodViewModel>>>()
     var liveImage: MediatorLiveData<Resource<ImageViewModel>>? = MediatorLiveData<Resource<ImageViewModel>>()
@@ -38,6 +40,7 @@ constructor() : BaseViewModel() {
                 return@switchMap AbsentLiveData.create<Resource<RecipeResponse>>()
             } else {
                 Timber.d("Recipe Trigger detected for:"+triggerLaunch?.id)
+                liveStatus.value = Status.LOADING
                 var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.EMPTY, null, "Empty Recipe foods..", DataSource.LOCAL)
                 liveFoodViewModelList?.value = foodViewModelListResource
 
@@ -94,7 +97,11 @@ constructor() : BaseViewModel() {
             when(resource?.status){
                 Status.SUCCESS->{
                     //load children view model here
+                    liveStatus.value = Status.SUCCESS
                     observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner)
+                }
+                Status.ERROR->{
+                    liveStatus.value = Status.COMPLETE
                 }
             }
         })
@@ -102,7 +109,12 @@ constructor() : BaseViewModel() {
 
     private fun observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner: LifecycleOwner) {
         liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->
-            when(resource?.status){ Status.EMPTY->loadFoodViewModels(lifecycleOwner)}
+            when(resource?.status){
+                Status.EMPTY->loadFoodViewModels(lifecycleOwner)
+                Status.COMPLETE->{
+                    liveStatus.value = Status.COMPLETE
+                }
+            }
         })
         liveImage?.observe(lifecycleOwner, Observer { resource->
             when(resource?.status){ Status.EMPTY->loadImageViewModel(lifecycleOwner)}
@@ -126,8 +138,12 @@ constructor() : BaseViewModel() {
             for (food in foods) {
                 var foodViewModel = FoodViewModel()
                 foodViewModel.triggerFoodItem.value = food
-                foodViewModel.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-                    Status.SUCCESS-> registerFoodChildCompletion();
+                foodViewModel.autoLoadChildren(lifecycleOwner)
+                foodViewModel.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
+                    Status.COMPLETE-> {
+                        Log.d("STATUS","Recipe Food completed:"+food.id)
+                        registerFoodChildCompletion()
+                    }
                 } })
                 foodViewModelList.add(foodViewModel)
             }
@@ -140,8 +156,7 @@ constructor() : BaseViewModel() {
     fun registerFoodChildCompletion() {
         var isAllCompleted = true
         for(child in this.liveFoodViewModelList?.value?.data!!){
-            if(child.liveFoodResponse?.value?.status == Status.SUCCESS ||
-                    child.liveFoodResponse?.value?.status == Status.ERROR){
+            if(child.liveStatus?.value == Status.COMPLETE){
                 //do nothing
             } else {
                 isAllCompleted = false
@@ -161,8 +176,11 @@ constructor() : BaseViewModel() {
         var vm = FoodViewModel()
         vm.autoLoadChildren(lifecycleOwner)
         vm.triggerFoodItem.value = foodItem
-        vm.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-            Status.SUCCESS-> registerFoodChildCompletion();
+        vm.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
+            Status.COMPLETE-> {
+                Log.d("STATUS","Food completed:"+foodItem.id)
+                registerFoodChildCompletion();
+            }
         } })
         newList.add(vm)
 
@@ -199,6 +217,49 @@ constructor() : BaseViewModel() {
 
     fun perServingCalPerUnitText(): CharSequence? {
         return "per "+liveRecipeResponse?.value?.data?.recipe?.standardServing?.servingType
+    }
+
+    fun getFruitPerServe(): Float {
+        var fruitPerServe:Float = 0f
+        var totalFruits:Float = 0f
+        var foodViewModelList = liveFoodViewModelList?.value?.data
+        if(foodViewModelList != null) {
+            for (foodViewModel in foodViewModelList!!) {
+                if(foodViewModel.liveFoodResponse.value?.data != null) {
+
+                    var fruit: Float = foodViewModel.getFruitPerPortion()
+                    var factoredFruit = fruit * foodViewModel.triggerFoodItem?.value?.qty!!.toFloat()
+                    totalFruits = totalFruits + factoredFruit
+                }
+            }
+        }
+        var totalServings = liveRecipeResponse?.value?.data?.recipe?.standardServing?.qty
+        if(totalServings == null || totalServings == 0)totalServings = 1
+        var perServeFactor:Float = 1f/(totalServings!!)
+        fruitPerServe = totalFruits* perServeFactor
+
+        return fruitPerServe
+    }
+    fun getVeggiesPerServe(): Float {
+        var veggiesPerServe:Float = 0f
+        var totalVeggies:Float = 0f
+        var foodViewModelList = liveFoodViewModelList?.value?.data
+        if(foodViewModelList != null) {
+            for (foodViewModel in foodViewModelList!!) {
+                if(foodViewModel.liveFoodResponse.value?.data != null) {
+
+                    var veggies: Float = foodViewModel.getVeggiesPerPortion()
+                    var factoredVeggies = veggies * foodViewModel.triggerFoodItem?.value?.qty!!.toFloat()
+                    totalVeggies = totalVeggies + factoredVeggies
+                }
+            }
+        }
+        var totalServings = liveRecipeResponse?.value?.data?.recipe?.standardServing?.qty
+        if(totalServings == null || totalServings == 0)totalServings = 1
+        var perServeFactor:Float = 1f/(totalServings!!)
+        veggiesPerServe = totalVeggies* perServeFactor
+
+        return veggiesPerServe
     }
 
 }

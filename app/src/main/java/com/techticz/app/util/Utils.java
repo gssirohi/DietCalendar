@@ -115,4 +115,13 @@ public class Utils {
         }
         return null;
     }
+
+    public static Float addFloats(Float output, Float input) {
+        if(output != null && input != null){
+            output = output+input;
+        } else if(input != null){
+            output = 0f+input;
+        }
+        return output;
+    }
 }

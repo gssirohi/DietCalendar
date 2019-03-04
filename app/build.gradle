@@ -82,6 +82,10 @@ dependencies {
 
     implementation REQUIRE.ARCH.ROOM.RUNTIME
     kapt REQUIRE.ARCH.ROOM.COMPILER
+    implementation 'android.arch.persistence.room:rxjava2: 2.1.0-alpha04'
+    implementation 'androidx.room:room-rxjava2: 2.1.0-alpha04'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
 
     implementation REQUIRE.DAGGER.DAGGER
     implementation REQUIRE.DAGGER.DAGGER_ANDROID
@@ -97,6 +101,7 @@ dependencies {
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
+    implementation 'com.facebook.android:facebook-android-sdk:4.9.0'
     api project(path: ':networking')
 }
 /*afterEvaluate {

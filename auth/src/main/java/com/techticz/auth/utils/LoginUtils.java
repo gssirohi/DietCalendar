@@ -3,6 +3,7 @@ package com.techticz.auth.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.techticz.auth.LoginActivity;
 import com.techticz.auth.constant.AuthProviders;
@@ -91,10 +92,18 @@ public class LoginUtils {
 
     public static String getCurrentUserId() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null) return null;
+        if(user == null){
+            Log.d("Login","Local user detected");
+            return "local";
+        }
         if(user.getUid() != null) {
+            Log.d("login","LoggedIn Firebase User:"+user.getUid());
             return user.getUid().toString();
         }
         return null;
+    }
+
+    public static boolean isUserLoggedIn(Context context) {
+        return (!TextUtils.isEmpty(LoginUtils.getFirbaseUserId(context)) && FirebaseAuth.getInstance().getCurrentUser() != null);
     }
 }

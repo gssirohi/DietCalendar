@@ -2,6 +2,7 @@ package com.techticz.app.ui.activity
 
 import android.os.Bundle
 import android.app.Activity
+import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.Observer
 
@@ -24,21 +25,30 @@ import kotlinx.android.synthetic.main.content_browse_plate.*
 
 class BrowsePlateActivity : BaseDIActivity(), BrowsePlatesAdapter.PlateViewCallBacks,FeaturedPlatesAdapter.PlateViewCallBacks {
     override fun onPlateViewClicked(mealPlate: MealPlate) {
-        var data = intent
-        data.putExtra("plateId",mealPlate.id)
-        setResult(Activity.RESULT_OK,data)
-        finish()
+        if(TextUtils.isEmpty(planId) || TextUtils.isEmpty(mealType)){
+
+        } else {
+            var data = intent
+            data.putExtra("plateId", mealPlate.id)
+            setResult(Activity.RESULT_OK, data)
+            finish()
+        }
     }
     override fun onFeaturedPlateViewClicked(mealPlate: MealPlate) {
-        var data = intent
-        data.putExtra("plateId",mealPlate.id)
-        setResult(Activity.RESULT_OK,data)
-        finish()
+        if(TextUtils.isEmpty(planId) || TextUtils.isEmpty(mealType)){
+
+        } else {
+            var data = intent
+            data.putExtra("plateId", mealPlate.id)
+            setResult(Activity.RESULT_OK, data)
+            finish()
+        }
     }
 
     private lateinit var browsePlatesViewModel: BrowsePlateViewModel
 
     private var mealType: String? = ""
+    private var planId: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +60,9 @@ class BrowsePlateActivity : BaseDIActivity(), BrowsePlatesAdapter.PlateViewCallB
             onCreatePlateClicked()
         }
         mealType = intent.getStringExtra("mealType")
-        var meal : Meals = Utils.getMealType(mealType)
-        tv_plate_meal_type.text = meal.mealName
+        planId = intent.getStringExtra("planId")
+
+
         browsePlatesViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(BrowsePlateViewModel::class.java)
         search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
@@ -91,7 +102,16 @@ class BrowsePlateActivity : BaseDIActivity(), BrowsePlatesAdapter.PlateViewCallB
             res->
             onMyPlatesDataLoaded(res)
         })
+
+        if(TextUtils.isEmpty(mealType)){
+
+        } else {
+            var meal : Meals = Utils.getMealType(mealType)
+            tv_plate_meal_type.text = meal.mealName
+        }
+
         browsePlatesViewModel?.triggerFeaturedPlateMealType.value  = mealType
+
         browsePlatesViewModel?.triggerMyPlates.value = ""
     }
 

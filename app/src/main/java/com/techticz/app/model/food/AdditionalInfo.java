@@ -4,11 +4,15 @@ package com.techticz.app.model.food;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
+
+import androidx.room.TypeConverters;
 
 public class AdditionalInfo {
 
     @SerializedName("alerts")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     private List<String> alerts = null;
     @SerializedName("region")
     @Expose

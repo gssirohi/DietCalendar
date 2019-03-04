@@ -265,10 +265,18 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     }
 
     fun startBrowsingRecipe() {
-        navigator.startBrowseRecipeScreen(this)
+        if(mode == MODE_NEW || mode == MODE_COPY_FROM_PLATE) {
+            navigator.startBrowseRecipeScreen(this,"new")
+        } else {
+            navigator.startBrowseRecipeScreen(this,plateId)
+        }
     }
     fun startBrowsingFood() {
-        navigator.startBrowseFoodScreen(this)
+        if(mode == MODE_NEW || mode == MODE_COPY_FROM_PLATE){
+            navigator.startBrowseFoodScreen(this,"new",null)
+        } else {
+            navigator.startBrowseFoodScreen(this,plateId,null)
+        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

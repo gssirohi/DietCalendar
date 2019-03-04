@@ -38,6 +38,7 @@ class DeveloperActivity : BaseDIActivity(), View.OnClickListener {
         bt_serving_types.setOnClickListener(this)
         bt_nutrient_units.setOnClickListener(this)
         bt_units.setOnClickListener(this)
+        bt_launching.setOnClickListener(this)
 
 
     }
@@ -54,6 +55,7 @@ class DeveloperActivity : BaseDIActivity(), View.OnClickListener {
             R.id.bt_serving_types->developerRepo.uploadServingTypes()
             R.id.bt_nutrient_units->developerRepo.uploadNutrientsUnit()
             R.id.bt_units->developerRepo.uploadUnits()
+            R.id.bt_launching->developerRepo.uploadLaunching()
         }
     }
 

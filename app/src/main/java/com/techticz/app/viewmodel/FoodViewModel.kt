@@ -26,7 +26,7 @@ class FoodViewModel @Inject
 constructor() : BaseViewModel() {
     @Inject
     lateinit var injectedRepo: FoodRepository
-
+    val liveStatus = MediatorLiveData<Status>()
     val triggerFoodItem = MutableLiveData<FoodItem>()
     val liveFoodResponse: LiveData<Resource<FoodResponse>>
     var liveImage: MediatorLiveData<Resource<ImageViewModel>>? = MediatorLiveData<Resource<ImageViewModel>>()
@@ -37,6 +37,7 @@ constructor() : BaseViewModel() {
                 return@switchMap AbsentLiveData.create<Resource<FoodResponse>>()
             } else {
                 Timber.d("Food Trigger detected for:"+triggerLaunch?.id)
+                liveStatus.value = Status.LOADING
                 var liveImageResource = Resource<ImageViewModel>(Status.EMPTY, null, "Empty image food..", DataSource.LOCAL)
                 liveImage?.value = liveImageResource
                 return@switchMap injectedRepo.fetchFoodResponse(triggerFoodItem.value)
@@ -52,8 +53,13 @@ constructor() : BaseViewModel() {
     fun isVeg(): Boolean {
         if(liveFoodResponse?.value?.status == Status.SUCCESS) {
             var cat = liveFoodResponse?.value?.data?.food?.basicInfo?.category
-            if (cat.equals(FoodCategories.EGG.id, true)
-                    || cat.equals(FoodCategories.MEAT.id, true)) {
+            if (cat.equals(FoodCategories.M.id, true)
+                    || cat.equals(FoodCategories.N.id, true)
+                    || cat.equals(FoodCategories.O.id, true)
+                    || cat.equals(FoodCategories.P.id, true)
+                    || cat.equals(FoodCategories.Q.id, true)
+                    || cat.equals(FoodCategories.R.id, true)
+                    || cat.equals(FoodCategories.S.id, true)) {
                 return false;
             }
             return true;
@@ -66,7 +72,11 @@ constructor() : BaseViewModel() {
             when(resource?.status){
                 Status.SUCCESS->{
                     //load children view model here
+                    liveStatus.value = Status.COMPLETE
                     observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner)
+                }
+                Status.ERROR->{
+                    liveStatus.value = Status.COMPLETE
                 }
             }
         })
@@ -107,6 +117,30 @@ constructor() : BaseViewModel() {
     }
     fun perServingCalPerUnitText(): CharSequence {
         return "per "+liveFoodResponse?.value?.data?.food?.standardServing?.portion+" "+liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
+    }
+
+    fun getFruitPerPortion(): Float {
+        var nutriFactPortion = liveFoodResponse?.value?.data?.food?.nutrition?.portion
+        if(nutriFactPortion == null) nutriFactPortion = 100
+        var perPortionFactor = (1/nutriFactPortion!!.toFloat())
+        liveFoodResponse?.value?.data?.food?.basicInfo?.category?.let {
+            if(it.equals("E")){
+                return 1f
+            }
+        }
+        return 0f
+    }
+
+    fun getVeggiesPerPortion(): Float {
+        var nutriFactPortion = liveFoodResponse?.value?.data?.food?.nutrition?.portion
+        if(nutriFactPortion == null) nutriFactPortion = 100
+        var perPortionFactor = (1/nutriFactPortion!!.toFloat())
+        liveFoodResponse?.value?.data?.food?.basicInfo?.category?.let {
+            if(it.equals("D") || it.equals("C")){
+                return 1f // 1 portion = 1 gram
+            }
+        }
+        return 0f
     }
 
 }

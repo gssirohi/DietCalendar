@@ -4,8 +4,11 @@ package com.techticz.app.model.mealplate;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
 
 import org.parceler.Parcel;
+
+import androidx.room.TypeConverters;
 
 @Parcel
 public class AdditionalInfo {
@@ -14,6 +17,7 @@ public class AdditionalInfo {
 
     @SerializedName("alerts")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<String> alerts = null;
     @SerializedName("region")
     @Expose

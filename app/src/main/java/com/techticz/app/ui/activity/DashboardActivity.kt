@@ -1,5 +1,8 @@
 package com.techticz.app.ui.activity
 
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,8 +11,14 @@ import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.share.Sharer
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.NutriPair
 import com.techticz.app.ui.adapter.DashBoardNutriAdapter
@@ -32,13 +41,28 @@ import kotlinx.android.synthetic.main.content_dashboard.*
 import kotlinx.android.synthetic.main.nav_header_dashboard.view.*
 import timber.log.Timber
 import java.util.*
+import com.facebook.share.model.ShareLinkContent
+import com.facebook.share.widget.ShareDialog
 
-class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelectedListener, FacebookCallback<Sharer.Result> {
+    override fun onSuccess(result: Sharer.Result?) {
+        Log.i("FB","Post shared successfully")
+    }
+
+    override fun onCancel() {
+        Log.i("FB","Post sharing cancelled")
+    }
+
+    override fun onError(error: FacebookException?) {
+        Log.e("FB","Post sharing Failed")
+    }
 
     lateinit var dietChartViewModel:DietChartViewModel
 
     private lateinit var nutriList: ArrayList<NutriPair>
-
+    lateinit var callbackManager: CallbackManager
+    lateinit var shareDialog : ShareDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
@@ -69,6 +93,11 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        FacebookSdk.sdkInitialize(applicationContext)
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog =  ShareDialog(this);
+        // this part is optional
+        shareDialog.registerCallback(callbackManager,  this);
     }
 
     private fun initUI() {
@@ -76,6 +105,10 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -98,6 +131,7 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
         baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
 
         var day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        Log.d("DASH","Day:"+day)
         tv_day.text = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.US)
         dietChartViewModel.autoLoadChildren(this, listOf(day))
 
@@ -159,30 +193,71 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
 
             }
             Status.COMPLETE->{
+                Log.d("STATUS","Day Meal Completed:"+day)
                 var dayNutrients = dietChartViewModel.getDayMealNutrients(day);
-
-                nutriList.add(NutriPair("Fat",dayNutrients?.principlesAndDietaryFibers?.fat,500f))
-                nutriList.add(NutriPair("Carb",dayNutrients?.principlesAndDietaryFibers?.carbohydrate,130f))
-                nutriList.add(NutriPair("Calory",Utils.calories(dayNutrients?.principlesAndDietaryFibers?.energy),800f))
-                nutriList.add(NutriPair("Protine",dayNutrients?.principlesAndDietaryFibers?.protien,20f))
-                nutriList.add(NutriPair("Iron",dayNutrients?.mineralsAndTraceElements?.iron,20f))
-                nutriList.add(NutriPair("Calcium",dayNutrients?.mineralsAndTraceElements?.calcium,20f))
+                var user = baseuserViewModel?.liveUserResponse?.value?.data?.user
+                user?.rda?.fat?.let {
+                    nutriList.add(NutriPair("Fat",dayNutrients?.principlesAndDietaryFibers?.fat,it))
+                }
+                user?.rda?.carbs?.let {
+                    nutriList.add(NutriPair("Carbs",dayNutrients?.principlesAndDietaryFibers?.carbohydrate,it))
+                }
+                user?.rda?.dailyCalories?.let {
+                    nutriList.add(NutriPair("Calories",Utils.calories(dayNutrients?.principlesAndDietaryFibers?.energy),it))
+                }
+                user?.rda?.protine?.let {
+                    nutriList.add(NutriPair("Protine",dayNutrients?.principlesAndDietaryFibers?.protien,it))
+                }
+                user?.rda?.totalFibers?.let {
+                    nutriList.add(NutriPair("Total Fibers",dayNutrients?.principlesAndDietaryFibers?.dietaryFiber?.total,it))
+                }
 
                 nutri_scroller.adapter?.notifyDataSetChanged()
                 nutri_scroller.layoutManager?.scrollToPosition(2)
 
                 var mealView = MealView(day,this)
-                mealView.fillDetails(dietChartViewModel.getDayMealViewModels(day)?.value?.data?.get(0)!!)
+                mealView.fillDetails(getDayMealBasedOnTime(day))
                 main_content.addView(mealView,2)
 
                 cgv_fruits.setImageRes(R.drawable.all_fruits)
-                cgv_fruits.start("Fruits",100f,40f,R.color.primaryDarkColor)
+                var fruits = dietChartViewModel.getDayFruitContent(day)
+                cgv_fruits.start("Fruits",""+fruits.toInt()+" gm",user?.rda?.fruits!!,fruits, R.color.secondaryColor)
 
+                var veggies = dietChartViewModel.getDayVeggiesContent(day)
                 cgv_veggies.setImageRes(R.drawable.all_veggies)
-                cgv_veggies.start("Veggies",100f,70f,R.color.primaryDarkColor)
+                cgv_veggies.start("Veggies",""+veggies.toInt()+" gm",user?.rda?.veggies!!,veggies,R.color.secondaryColor)
             }
             Status.ERROR->{}
         }
+    }
+
+    private fun getDayMealBasedOnTime(day: Int): MealPlateViewModel {
+        var cal = Calendar.getInstance()
+        var hour = cal.get(Calendar.HOUR_OF_DAY)
+        var mealIndex = 0
+        if(hour in 0.. 7){
+            mealIndex = 0
+        } else if(hour in 8..11){
+            mealIndex = 1
+        } else if(hour in 12..15){
+            mealIndex = 2
+        } else if(hour in 16..18){
+            mealIndex = 3
+        } else if(hour in 19..21){
+            mealIndex = 4
+        } else if(hour in 22..24){
+            mealIndex = 5
+        }
+
+        for (i in mealIndex..5) {
+            var vm = dietChartViewModel.getDayMealViewModels(day)?.value?.data?.get(i)!!
+            if(!TextUtils.isEmpty(vm.triggerMealPlateID?.value?.mealPlateId)){
+                return vm
+            }
+        }
+
+        var vm = dietChartViewModel.getDayMealViewModels(day)?.value?.data?.get(mealIndex)!!
+        return vm
     }
 
 
@@ -213,6 +288,12 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
+            R.id.action_diet_chart-> {
+                dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan?.let{
+                    navigator.startDietChartScreen(this,it)
+                }
+                return super.onOptionsItemSelected(item)
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -223,12 +304,25 @@ class DashboardActivity : BaseDIActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_plans -> {
                 navigator.startBrowsePlanScreen()
             }
+            R.id.nav_plates->{
+                navigator.startBrowsePlateScreen(this,"",0,"")
+            }
             R.id.nav_recipes -> {
 
+                navigator.startBrowseRecipeScreen(this,null)
             }
             R.id.nav_foods -> {
-
+                navigator.startBrowseFoodScreen(this,null,null)
             }
+            R.id.nav_share -> {
+                if (ShareDialog.canShow(ShareLinkContent::class.java)) {
+                    val linkContent = ShareLinkContent.Builder()
+                            .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
+                            .build()
+                    shareDialog.show(linkContent)
+                }
+            }
+
             R.id.nav_settings -> {
                 navigator.startSettingsScreen()
             }

@@ -4,6 +4,7 @@ package com.techticz.dietcalendar.di
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 
+import android.content.Context
 import com.techticz.app.base.BaseViewModel
 import com.techticz.app.repo.ImageRepository
 import com.techticz.app.viewmodel.*
@@ -17,7 +18,7 @@ import dagger.android.AndroidInjectionModule
 @Singleton
 @Component(modules = [(AndroidInjectionModule::class),
 
-(AppActivityModule::class),
+
 (AppModule::class)
 ])
 interface AppComponent {
@@ -38,4 +39,5 @@ interface AppComponent {
     fun inject(viewModel: MealPlateViewModel)
     fun inject(viewModel: DietChartViewModel)
     fun inject(viewModel: BaseViewModel)
+
 }

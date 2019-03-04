@@ -3,6 +3,7 @@ package com.techticz.app.model.food;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.util.Utils;
 
 public class FatyAcid {
 
@@ -51,4 +52,20 @@ public class FatyAcid {
         this.cholesterol = cholesterol;
     }
 
+    public FatyAcid applyFactor(Float finalQtyFactor) {
+        FatyAcid fatyAcid = new FatyAcid();
+        fatyAcid.cholesterol = this.cholesterol == null? 0f : this.cholesterol * finalQtyFactor;
+        fatyAcid.totalMonoUnsaturatedFattyAcids = this.totalMonoUnsaturatedFattyAcids == null? 0f : this.totalMonoUnsaturatedFattyAcids * finalQtyFactor;
+        fatyAcid.totalPolyUnsaturatedFattyAcids = this.totalPolyUnsaturatedFattyAcids == null? 0f : this.totalPolyUnsaturatedFattyAcids * finalQtyFactor;
+        fatyAcid.totalSaturatedFatyAcids = this.totalSaturatedFatyAcids == null? 0f : this.totalSaturatedFatyAcids * finalQtyFactor;
+
+        return fatyAcid;
+    }
+
+    public void add(FatyAcid fatyAcid) {
+        this.cholesterol = Utils.addFloats(this.cholesterol,fatyAcid.cholesterol);
+        this.totalMonoUnsaturatedFattyAcids = Utils.addFloats(this.totalMonoUnsaturatedFattyAcids,fatyAcid.totalMonoUnsaturatedFattyAcids);
+        this.totalPolyUnsaturatedFattyAcids = Utils.addFloats(this.totalPolyUnsaturatedFattyAcids,fatyAcid.totalPolyUnsaturatedFattyAcids);
+        this.totalSaturatedFatyAcids = Utils.addFloats(this.totalSaturatedFatyAcids,fatyAcid.totalSaturatedFatyAcids);
+    }
 }

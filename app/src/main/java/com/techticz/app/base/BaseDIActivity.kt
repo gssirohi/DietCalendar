@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.app_bar_dashboard.view.*
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.techticz.app.repo.PrefRepo
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 
 
@@ -45,6 +46,7 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var baseuserViewModel: UserViewModel
+    lateinit var prefRepo: PrefRepo
     private var progressDialog: ProgressDialog? = null
 
     var activityToolbar: Toolbar? = null
@@ -64,14 +66,17 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //baseuserViewModel = ViewModelProviders.of(this, viewModelFactory!!).get(UserViewModel::class.java)
+        navigator = Navigator(this)
+        prefRepo = PrefRepo(this)
         baseuserViewModel = DietCalendarApplication.getAppUserViewModel()
         if(baseuserViewModel.triggerUserId.value != null && baseuserViewModel.triggerUserId.value.equals(LoginUtils.getCurrentUserId())) {
 
         } else {
+            //first activity (Launcher ACtivity) will execute this code after that above code will be executed
             baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
             baseuserViewModel.autoLoadChildren(this)
         }
+
 
     }
 

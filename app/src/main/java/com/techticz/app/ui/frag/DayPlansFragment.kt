@@ -24,7 +24,7 @@ import timber.log.Timber
 class DayPlansFragment : BaseDIFragment(), DayMealsAdapter.MealCardCallBacks {
 
 
-    private var sectionNumber: Int? = 0
+    private var sectionNumber: Int? = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -4,8 +4,12 @@ package com.techticz.app.model.mealplate;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
 
 import org.parceler.Parcel;
+
+import androidx.room.Embedded;
+import androidx.room.TypeConverters;
 
 @Parcel
 public class Items {
@@ -14,9 +18,11 @@ public class Items {
 
     @SerializedName("recipies")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<RecipeItem> recipies = null;
     @SerializedName("foods")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     List<FoodItem> foods = null;
 
     public List<RecipeItem> getRecipies() {

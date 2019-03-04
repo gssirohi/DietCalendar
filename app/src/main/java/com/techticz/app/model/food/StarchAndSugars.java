@@ -3,6 +3,7 @@ package com.techticz.app.model.food;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.util.Utils;
 
 public class StarchAndSugars {
 
@@ -84,4 +85,27 @@ public class StarchAndSugars {
         this.totalFreeSugar = totalFreeSugar;
     }
 
+    public StarchAndSugars applyFactor(Float finalQtyFactor) {
+        StarchAndSugars starchAndSugars = new StarchAndSugars();
+        starchAndSugars.cho = this.cho == null? 0f : this.cho * finalQtyFactor;
+        starchAndSugars.fructose = this.fructose == null? 0f : this.fructose * finalQtyFactor;
+        starchAndSugars.glucose = this.glucose == null? 0f : this.glucose * finalQtyFactor;
+        starchAndSugars.maltos = this.maltos == null? 0f : this.maltos * finalQtyFactor;
+        starchAndSugars.starch = this.starch == null? 0f : this.starch * finalQtyFactor;
+        starchAndSugars.sucrose = this.sucrose == null? 0f : this.sucrose * finalQtyFactor;
+        starchAndSugars.totalFreeSugar = this.totalFreeSugar == null? 0f : this.totalFreeSugar * finalQtyFactor;
+
+        return starchAndSugars;
+    }
+
+    public void add(StarchAndSugars starchAndSugars) {
+        if(starchAndSugars == null) return;
+        this.cho = Utils.addFloats(this.cho,starchAndSugars.cho);
+        this.fructose = Utils.addFloats(this.fructose,starchAndSugars.fructose);
+        this.glucose = Utils.addFloats(this.glucose,starchAndSugars.glucose);
+        this.maltos = Utils.addFloats(this.maltos,starchAndSugars.maltos);
+        this.starch = Utils.addFloats(this.starch,starchAndSugars.starch);
+        this.sucrose = Utils.addFloats(this.sucrose,starchAndSugars.sucrose);
+        this.totalFreeSugar = Utils.addFloats(this.totalFreeSugar,starchAndSugars.totalFreeSugar);
+    }
 }

@@ -6,7 +6,13 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 @Parcel
+@Entity
 public class DietPlan {
 
     public DietPlan() {
@@ -14,19 +20,25 @@ public class DietPlan {
 
     @SerializedName("id")
     @Expose
+    @PrimaryKey
+    @NonNull
     String id;
     @SerializedName("basicInfo")
     @Expose
+    @Embedded
     BasicInfo basicInfo;
     @SerializedName("calendar")
     @Expose
+    @Embedded
     Calendar calendar;
     @SerializedName("caloryDistribution")
     @Expose
+    @Embedded
     CaloryDistribution caloryDistribution;
 
     @SerializedName("adminInfo")
     @Expose
+    @Embedded
     AdminInfo adminInfo;
 
     public String getId() {

@@ -73,7 +73,7 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
         if(foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion) {
             foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
-            plateView?.mealPlateViewModel?.registerChildCompletion()
+            plateView?.mealPlateViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
 //            foodViewModel?.liveFoodResponse?.value = newRes
             if( foodViewModel?.triggerFoodItem?.value?.qty!! <= stdPortion){
@@ -93,7 +93,7 @@ class MealFoodView(parent: ViewGroup?, val plateView: PlateView) : FrameLayout(p
         if(foodViewModel?.triggerFoodItem?.value?.qty!! < 3000) {
             foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + stdPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
-            plateView?.mealPlateViewModel?.registerChildCompletion()
+            plateView?.mealPlateViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
 //            foodViewModel?.liveFoodViewModelList?.value = newRes
             if( foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion){

@@ -5,6 +5,9 @@ import android.content.Context;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,7 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
     private DecoView mDecoView;
     private TextView mTvValue;
     private TextView mTvLabel;
+    private TextView mTvHeader;
     private float mDataSeriesMax = 50f;
     private int mBackIndex;
     private int mDataSeriesIndex;
@@ -62,22 +66,37 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
         mTvValue = (TextView)findViewById(R.id.tv_graph_circle_value);
         mTvMax = (TextView)findViewById(R.id.tv_graph_circle_max);
         mTvLabel = (TextView)findViewById(R.id.tv_circle_graph_bottom);
+        mTvHeader = (TextView)findViewById(R.id.tv_circle_graph_top);
         createBackSeries();
-        createCompletedSeries();
+        //createCompletedSeries();
         mDecoView.addEvent(new DecoEvent.Builder(100)
                 .setIndex(mBackIndex)
                 .setDuration(2000)
                 .setDelay(100)
                 .build());
         setOnClickListener(this);
-        mColor = getResources().getColor(R.color.primaryColor);
+        mColor = getResources().getColor(R.color.secondaryColor);
     }
 
     public void start(String label,float max,float value,int color){
+        start("",label,max,value,color);
+    }
+    public void start(String header,String label,float max,float value,int color){
+        if(TextUtils.isEmpty(header)){
+            mTvHeader.setVisibility(View.GONE);
+        } else {
+            mTvHeader.setText(header);
+        }
         if(color == 0){
-            mColor = getResources().getColor(R.color.primaryColor);
-        }else{
-            mColor = color;
+            mColor = getResources().getColor(R.color.secondaryColor);
+        }else if (value > max){
+            if(value/max < 1.5f) {
+                mColor = getResources().getColor(R.color.primaryColor);
+            } else {
+                mColor = getResources().getColor(R.color.errorColor);
+            }
+        } else {
+            mColor = getResources().getColor(color);
         }
         mTvLabel.setText(label);
         mLabel = label;
@@ -125,7 +144,7 @@ public class CircleGraphView extends FrameLayout implements View.OnClickListener
     }
 
     private void createBackSeries() {
-        SeriesItem seriesItem = new SeriesItem.Builder(getResources().getColor(R.color.secondaryColor))
+        SeriesItem seriesItem = new SeriesItem.Builder(getResources().getColor(R.color.black_overlay))
                 .setRange(0, mDataSeriesMax, 0)
                 .setInitialVisibility(true)
                 .build();

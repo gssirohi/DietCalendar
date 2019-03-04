@@ -3,6 +3,7 @@ package com.techticz.app.viewmodel
 import androidx.lifecycle.*
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.meal.Meal
@@ -29,6 +30,7 @@ constructor() : BaseViewModel() {
     lateinit var injectedRepo: MealPlateRepository
 
     val triggerMealPlateID = MutableLiveData<Meal>()
+    val liveStatus = MediatorLiveData<Status>()
     val liveMealPlateResponse: LiveData<Resource<MealPlateResponse>>
     var liveRecipeViewModelList:MediatorLiveData<Resource<List<RecipeViewModel>>>? = MediatorLiveData<Resource<List<RecipeViewModel>>>()
     var liveFoodViewModelList: MediatorLiveData<Resource<List<FoodViewModel>>>? = MediatorLiveData<Resource<List<FoodViewModel>>>()
@@ -37,9 +39,10 @@ constructor() : BaseViewModel() {
         DietCalendarApplication.getAppComponent().inject(this)
         liveMealPlateResponse = Transformations.switchMap(triggerMealPlateID) { triggerMeal ->
 
-            if (triggerMeal == null || TextUtils.isEmpty(triggerMeal.mealPlateId)) {
+            if (triggerMeal == null ) {
                 return@switchMap AbsentLiveData.create<Resource<MealPlateResponse>>()
             } else {
+                liveStatus.value = Status.LOADING
                 Timber.d("MealPlate Trigger detected for:"+triggerMeal?.mealPlateId)
                 var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.EMPTY, null, "Empty Meal recipes..", DataSource.LOCAL)
                 liveRecipeViewModelList?.value = recipeViewModelListResource
@@ -55,7 +58,10 @@ constructor() : BaseViewModel() {
         }
     }
     fun perPlateCal(): Float? {
-        return Utils.calories(getNutrientsPerPlate()?.principlesAndDietaryFibers?.energy!!)
+        getNutrientsPerPlate()?.principlesAndDietaryFibers?.energy?.let {
+            return Utils.calories(it)
+        }
+        return 0f
     }
     fun getNutrientsPerPlate(): Nutrients? {
         var nutrientsFood = Nutrients()
@@ -119,7 +125,11 @@ constructor() : BaseViewModel() {
             when(resource?.status){
                 Status.SUCCESS->{
                     //load children view model here
+                   liveStatus.value = Status.SUCCESS
                    observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner)
+                }
+                Status.ERROR->{
+                    liveStatus.value = Status.COMPLETE
                 }
             }
         })
@@ -131,12 +141,33 @@ constructor() : BaseViewModel() {
             when(resource?.status){
                 Status.EMPTY->{
                     var recipes = liveMealPlateResponse?.value?.data?.mealPlate?.items?.recipies
-                    recipes?.let { loadRecipeViewModels(lifecycleOwner, it)}
+                    if(recipes == null || recipes.isEmpty()){
+                        registerRecipeChildCompletion()
+                    } else {
+                        loadRecipeViewModels(lifecycleOwner, recipes)
+                    }
+                }
+                Status.COMPLETE->{
+                    Log.d("STATUS","Plate All Recipes Completed")
+                    registerAllChildCompletion()
                 }
             }
         })
         liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->
-            when(resource?.status){ Status.EMPTY->loadFoodViewModels(lifecycleOwner)}
+            when(resource?.status){
+                Status.EMPTY->{
+                    var foods = liveMealPlateResponse?.value?.data?.mealPlate?.items?.foods
+                    if(foods == null || foods.isEmpty()){
+                        registerFoodChildCompletion()
+                    } else {
+                        loadFoodViewModels(lifecycleOwner,foods)
+                    }
+                }
+                Status.COMPLETE->{
+                    Log.d("STATUS","Plate All Foods Completed")
+                    registerAllChildCompletion()
+                }
+            }
         })
         liveImage?.observe(lifecycleOwner, Observer { resource->
             when(resource?.status){ Status.EMPTY->loadImageViewModel(lifecycleOwner)}
@@ -150,8 +181,7 @@ constructor() : BaseViewModel() {
         liveImage?.value = imageRes
     }
 
-    private fun loadFoodViewModels(lifecycleOwner: LifecycleOwner) {
-        var foods = liveMealPlateResponse?.value?.data?.mealPlate?.items?.foods
+    private fun loadFoodViewModels(lifecycleOwner: LifecycleOwner,foods:List<FoodItem>) {
 
         var foodViewModelList = ArrayList<FoodViewModel>()
 
@@ -160,8 +190,11 @@ constructor() : BaseViewModel() {
                 var foodViewModel = FoodViewModel()
                 foodViewModel.autoLoadChildren(lifecycleOwner)
                 foodViewModel.triggerFoodItem.value = food
-                foodViewModel.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-                    Status.SUCCESS-> registerChildCompletion();
+                foodViewModel.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
+                    Status.COMPLETE-> {
+                        Log.d("STATUS","Meal Food completed:"+food.id)
+                        registerFoodChildCompletion()
+                    }
                 } })
                 foodViewModelList.add(foodViewModel)
             }
@@ -180,8 +213,11 @@ constructor() : BaseViewModel() {
                 var recipeViewModel = RecipeViewModel()
                 recipeViewModel.triggerRecipeItem.value = recipe
                 recipeViewModel.autoLoadChildren(lifecycleOwner)
-                recipeViewModel.liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-                    Status.COMPLETE-> registerChildCompletion();
+                recipeViewModel.liveStatus?.observe(lifecycleOwner, Observer { resource->when(resource){
+                    Status.COMPLETE-> {
+                        Log.d("STATUS","Meal Recipe completed:"+recipe.id)
+                        registerRecipeChildCompletion()
+                    }
                 } })
                 recipeViewModelList.add(recipeViewModel)
             }
@@ -232,8 +268,8 @@ constructor() : BaseViewModel() {
         var vm = RecipeViewModel()
         vm.autoLoadChildren(lifecycleOwner)
         vm.triggerRecipeItem.value = recipeItem
-        vm.liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-            Status.COMPLETE-> registerChildCompletion();
+        vm.liveStatus?.observe(lifecycleOwner, Observer { resource->when(resource){
+            Status.COMPLETE-> registerRecipeChildCompletion()
         } })
         newList.add(vm)
 
@@ -248,8 +284,9 @@ constructor() : BaseViewModel() {
         var vm = FoodViewModel()
         vm.autoLoadChildren(lifecycleOwner)
         vm.triggerFoodItem.value = foodItem
-        vm.liveFoodResponse.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-            Status.SUCCESS-> registerChildCompletion();
+        vm.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
+            Status.SUCCESS-> registerFoodChildCompletion();
+            Status.COMPLETE->registerFoodChildCompletion();
         } })
         newList.add(vm)
 
@@ -257,29 +294,12 @@ constructor() : BaseViewModel() {
         liveFoodViewModelList?.value= foodViewModelListResource
     }
 
-    fun registerChildCompletion() {
+    fun registerRecipeChildCompletion() {
         var isAllCompleted = true
-        this.liveFoodViewModelList?.value?.data?.let {
-            for (child in it) {
-                if (child.liveFoodResponse?.value?.status == Status.SUCCESS ||
-                        child.liveFoodResponse?.value?.status == Status.ERROR) {
-                    //do nothing
-                } else {
-                    isAllCompleted = false
-                }
-            }
-        }
-
-        if(isAllCompleted){
-            var newRes = liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
-            liveFoodViewModelList?.value = newRes
-        }
-
-        isAllCompleted = true
 
         this.liveRecipeViewModelList?.value?.data?.let {
             for (child in it) {
-                if (child.liveFoodViewModelList?.value?.status == Status.COMPLETE) {
+                if (child.liveStatus.value == Status.COMPLETE) {
                     //do nothing
                 } else {
                     isAllCompleted = false
@@ -292,10 +312,99 @@ constructor() : BaseViewModel() {
             liveRecipeViewModelList?.value = newRes
         }
     }
+    fun registerFoodChildCompletion() {
+        var isAllCompleted = true
+        this.liveFoodViewModelList?.value?.data?.let {
+            for (child in it) {
+                if (child.liveStatus.value == Status.COMPLETE) {
+                    //do nothing
+                } else {
+                    isAllCompleted = false
+                }
+            }
+        }
+
+        if(isAllCompleted){
+            var newRes = liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
+            liveFoodViewModelList?.value = newRes
+        }
+
+    }
+    fun registerAllChildCompletion() {
+        var isAllCompleted = true
+        if(this.liveFoodViewModelList?.value?.status == Status.COMPLETE
+        && this.liveRecipeViewModelList?.value?.status == Status.COMPLETE){
+
+        } else {
+            isAllCompleted = false
+        }
+
+
+        if(isAllCompleted){
+           liveStatus.value = Status.COMPLETE
+        }
+    }
 
     fun hasItems(): Boolean {
         liveRecipeViewModelList?.value?.data?.let { if(it.size >= 1) return true }
         liveFoodViewModelList?.value?.data?.let { if(it.size >= 1) return true }
         return false
+    }
+
+    fun getFruitContentPerPlate(): Float {
+        var perPlateFruit = 0f
+
+        var foodViewModelList = liveFoodViewModelList?.value?.data
+        if(foodViewModelList != null) {
+            for (foodViewModel in foodViewModelList!!) {
+                if(foodViewModel.liveFoodResponse.value?.data != null) {
+                    var fruit: Float = foodViewModel.getFruitPerPortion()
+                    var factoredFruit = fruit * foodViewModel.triggerFoodItem?.value?.qty!!.toFloat()
+                    perPlateFruit = perPlateFruit + factoredFruit
+                }
+            }
+        }
+
+
+        var recipeViewModelList = liveRecipeViewModelList?.value?.data
+        if(recipeViewModelList != null) {
+            for (recipeViewModel in recipeViewModelList!!) {
+                if(recipeViewModel.liveRecipeResponse.value?.data != null) {
+                    var fruit: Float = recipeViewModel.getFruitPerServe()
+                    var factoredFruits = fruit * recipeViewModel.triggerRecipeItem?.value?.qty!!.toFloat()
+                    perPlateFruit = perPlateFruit + factoredFruits
+                }
+            }
+        }
+
+        return perPlateFruit
+    }
+    fun getVeggieContentPerPlate(): Float {
+        var perPlateVeggie = 0f
+
+        var foodViewModelList = liveFoodViewModelList?.value?.data
+        if(foodViewModelList != null) {
+            for (foodViewModel in foodViewModelList!!) {
+                if(foodViewModel.liveFoodResponse.value?.data != null) {
+                    var veggie: Float = foodViewModel.getVeggiesPerPortion()
+                    var factoredVeggie = veggie * foodViewModel.triggerFoodItem?.value?.qty!!.toFloat()
+                    perPlateVeggie = perPlateVeggie + factoredVeggie
+                }
+            }
+        }
+
+
+        var recipeViewModelList = liveRecipeViewModelList?.value?.data
+        if(recipeViewModelList != null) {
+            for (recipeViewModel in recipeViewModelList!!) {
+                if(recipeViewModel.liveRecipeResponse.value?.data != null) {
+                    var veggie: Float = recipeViewModel.getVeggiesPerServe()
+                    var factoredVeggies = veggie * recipeViewModel.triggerRecipeItem?.value?.qty!!.toFloat()
+                    perPlateVeggie = perPlateVeggie + factoredVeggies
+                }
+            }
+        }
+
+        return perPlateVeggie
     }
 }

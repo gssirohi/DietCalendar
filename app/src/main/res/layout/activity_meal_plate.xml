@@ -31,7 +31,7 @@
                 android:id="@+id/aiv_meal_plate_app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/bg_night"
+                android:src="@drawable/banner_plates"
                 android:scaleType="fitXY"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

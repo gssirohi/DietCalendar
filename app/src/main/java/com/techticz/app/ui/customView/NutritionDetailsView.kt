@@ -19,6 +19,7 @@ import com.techticz.app.util.Utils
 import kotlinx.android.synthetic.main.nutrition_layout.view.*
 import kotlinx.android.synthetic.main.recipe_food_layout.view.*
 import timber.log.Timber
+import java.util.function.Consumer
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 8/10/18.
@@ -41,6 +42,7 @@ class NutritionDetailsView(parent: ViewGroup?,var title:String,var itemHeader1:S
 
     private fun initData() {
         // add principles segment
+        var segments = ArrayList<NutriSegment>()
         segments = ArrayList()
         var principleSeg = NutriSegment()
 
@@ -121,11 +123,93 @@ class NutritionDetailsView(parent: ViewGroup?,var title:String,var itemHeader1:S
         vitaminsSeg.nutriItems.add(NutriItem("Ascorbic Acid",getValue1(ascorbic_1,"mg"),getValue2(ascorbic_1,ascorbic_2,"mg")))
 
         segments.add(vitaminsSeg)
+
+        var mineralSeg = NutriSegment()
+        mineralSeg.title = "Minerals and Trace Elements"
+
+        var alum_1 = nutrition1.nutrients.mineralsAndTraceElements.aluminium
+        var arse_1 = nutrition1.nutrients.mineralsAndTraceElements.arsenic
+        var cadi_1 = nutrition1.nutrients.mineralsAndTraceElements.cadium
+        var calci1 = nutrition1.nutrients.mineralsAndTraceElements.calcium
+        var chrom_1 = nutrition1.nutrients.mineralsAndTraceElements.chromium
+        var cobal_1 = nutrition1.nutrients.mineralsAndTraceElements.cobalt
+        var copper_1 = nutrition1.nutrients.mineralsAndTraceElements.copper
+        var iron_1 = nutrition1.nutrients.mineralsAndTraceElements.iron
+        var led_1 = nutrition1.nutrients.mineralsAndTraceElements.led
+        var lithi_1 = nutrition1.nutrients.mineralsAndTraceElements.lithium
+        var magnes_1 = nutrition1.nutrients.mineralsAndTraceElements.magnesium
+        var mangne_1 = nutrition1.nutrients.mineralsAndTraceElements.manganees
+        var mercu_1 = nutrition1.nutrients.mineralsAndTraceElements.mercury
+        var moleb_1 = nutrition1.nutrients.mineralsAndTraceElements.molebdeum
+        var nickl_1 = nutrition1.nutrients.mineralsAndTraceElements.nickle
+        var phosp_1 = nutrition1.nutrients.mineralsAndTraceElements.phosphorus
+        var potas_1 = nutrition1.nutrients.mineralsAndTraceElements.potassium
+        var selen_1 = nutrition1.nutrients.mineralsAndTraceElements.selenium
+        var sodiu_1 = nutrition1.nutrients.mineralsAndTraceElements.sodium
+        var zinc_1 = nutrition1.nutrients.mineralsAndTraceElements.zinc
+
+        var alum_2 = nutrition2.nutrients.mineralsAndTraceElements.aluminium
+        var arse_2 = nutrition2.nutrients.mineralsAndTraceElements.arsenic
+        var cadi_2 = nutrition2.nutrients.mineralsAndTraceElements.cadium
+        var calci2 = nutrition2.nutrients.mineralsAndTraceElements.calcium
+        var chrom_2 = nutrition2.nutrients.mineralsAndTraceElements.chromium
+        var cobal_2 = nutrition2.nutrients.mineralsAndTraceElements.cobalt
+        var copper_2 = nutrition2.nutrients.mineralsAndTraceElements.copper
+        var iron_2 = nutrition2.nutrients.mineralsAndTraceElements.iron
+        var led_2 = nutrition2.nutrients.mineralsAndTraceElements.led
+        var lithi_2 = nutrition2.nutrients.mineralsAndTraceElements.lithium
+        var magnes_2 = nutrition2.nutrients.mineralsAndTraceElements.magnesium
+        var mangne_2 = nutrition2.nutrients.mineralsAndTraceElements.manganees
+        var mercu_2 = nutrition2.nutrients.mineralsAndTraceElements.mercury
+        var moleb_2 = nutrition2.nutrients.mineralsAndTraceElements.molebdeum
+        var nickl_2 = nutrition2.nutrients.mineralsAndTraceElements.nickle
+        var phosp_2 = nutrition2.nutrients.mineralsAndTraceElements.phosphorus
+        var potas_2 = nutrition2.nutrients.mineralsAndTraceElements.potassium
+        var selen_2 = nutrition2.nutrients.mineralsAndTraceElements.selenium
+        var sodiu_2 = nutrition2.nutrients.mineralsAndTraceElements.sodium
+        var zinc_2 = nutrition2.nutrients.mineralsAndTraceElements.zinc
+
+        mineralSeg.nutriItems.add(NutriItem("Aluminium",getValue1(alum_1,"mg"),getValue2(alum_1,alum_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Arsenic",getValue1(arse_1,"ug"),getValue2(arse_1,arse_2,"ug")))
+        mineralSeg.nutriItems.add(NutriItem("Cadium",getValue1(cadi_1,"mg"),getValue2(cadi_1,cadi_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Calcium",getValue1(calci1,"mg"),getValue2(calci1,calci2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Chromium",getValue1(chrom_1,"mg"),getValue2(chrom_1,chrom_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Cobalt",getValue1(cobal_1,"mg"),getValue2(cobal_1,cobal_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Copper",getValue1(copper_1,"mg"),getValue2(copper_1,copper_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Iron",getValue1(iron_1,"mg"),getValue2(iron_1,iron_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Led",getValue1(led_1,"mg"),getValue2(led_1,led_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Lithium",getValue1(lithi_1,"mg"),getValue2(lithi_1,lithi_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Magnesium",getValue1(magnes_1,"mg"),getValue2(magnes_1,magnes_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Manganees",getValue1(mangne_1,"mg"),getValue2(mangne_1,mangne_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Mercury",getValue1(mercu_1,"ug"),getValue2(mercu_1,mercu_2,"ug")))
+        mineralSeg.nutriItems.add(NutriItem("Nickle",getValue1(nickl_1,"mg"),getValue2(nickl_1,nickl_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Phosphorus",getValue1(phosp_1,"mg"),getValue2(phosp_1,phosp_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Potassium",getValue1(potas_1,"mg"),getValue2(potas_1,potas_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Selenium",getValue1(selen_1,"ug"),getValue2(selen_1,selen_2,"ug")))
+        mineralSeg.nutriItems.add(NutriItem("Sodium",getValue1(sodiu_1,"mg"),getValue2(sodiu_1,sodiu_2,"mg")))
+        mineralSeg.nutriItems.add(NutriItem("Zinc",getValue1(zinc_1,"mg"),getValue2(zinc_1,zinc_2,"mg")))
+
+        segments.add(mineralSeg)
+
+        // remove empty Fields
+        this.segments = ArrayList()
+        segments.forEach {
+            var items = ArrayList<NutriItem>()
+            it.nutriItems.forEach {
+                if(!it.value1.equals("0.0 mg") && !it.value1.equals("0.0 ug") && !it.value1.equals("-")){
+                    items.add(it)
+                }
+            }
+            if(!items.isEmpty()){
+                it.nutriItems = items
+                this.segments.add(it)
+            }
+        }
     }
 
     private fun getValue1(value1: Float?, unit: String): String {
         if(value1 != null) {
-            return "" + value1 + " " + unit
+            return "" + Utils.roundUpFloatToOneDecimal(value1) + " " + unit
         } else {
             return "-"
         }
@@ -136,7 +220,7 @@ class NutritionDetailsView(parent: ViewGroup?,var title:String,var itemHeader1:S
             return getRDAValue(value1,value2)
         } else {
             if(value2 != null) {
-                return "" + value2 + " " + unit
+                return "" + Utils.roundUpFloatToOneDecimal(value2) + " " + unit
             } else {
                 return "-"
             }
@@ -145,9 +229,9 @@ class NutritionDetailsView(parent: ViewGroup?,var title:String,var itemHeader1:S
 
     private fun getRDAValue(amount: Float?, rdaAmount: Float?): String {
         if(amount != null && rdaAmount != null){
-            return ""+(amount*100)/rdaAmount + " %"
+            return ""+Utils.roundUpFloatToOneDecimal((amount*100)/rdaAmount) + " %"
         } else if(amount == null){
-            return "0 %"
+            return "0.0 %"
         } else {
             return "-"
         }

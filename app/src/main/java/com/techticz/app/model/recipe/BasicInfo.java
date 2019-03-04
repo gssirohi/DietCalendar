@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import androidx.room.Embedded;
+
 @Parcel
 public class BasicInfo {
     public BasicInfo() {
@@ -14,6 +16,7 @@ public class BasicInfo {
 
     @SerializedName("name")
     @Expose
+    @Embedded
     Name name;
     @SerializedName("desc")
     @Expose

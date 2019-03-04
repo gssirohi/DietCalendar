@@ -4,31 +4,46 @@ package com.techticz.app.model.food;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Food {
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
+    @NonNull
     private String id;
     @SerializedName("basicInfo")
     @Expose
+    @Embedded
     private BasicInfo basicInfo;
     @SerializedName("standardServing")
     @Expose
+    @Embedded
     private StandardServing standardServing;
     @SerializedName("basicProperty")
     @Expose
+    @Embedded
     private BasicProperty basicProperty;
     @SerializedName("additionalInfo")
     @Expose
+    @Embedded
     private AdditionalInfo additionalInfo;
     @SerializedName("cost")
     @Expose
+    @Embedded
     private Cost cost;
     @SerializedName("nutrition")
     @Expose
+    @Embedded
     private Nutrition nutrition;
     @SerializedName("adminInfo")
     @Expose
+    @Embedded
     private AdminInfo adminInfo;
 
     public String getId() {

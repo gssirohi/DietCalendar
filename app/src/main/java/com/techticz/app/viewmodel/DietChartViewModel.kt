@@ -3,6 +3,7 @@ package com.techticz.app.viewmodel
 import androidx.lifecycle.*
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.DietPlanResponse
 import com.techticz.app.model.dietplan.DayPlan
@@ -118,26 +119,27 @@ constructor() : BaseViewModel() {
     public fun getDayMealViewModels(sectionNumber:Int): MediatorLiveData<Resource<List<MealPlateViewModel>>>? {
         when(sectionNumber){
             1->{
-                return liveMondayViewModelList;
+                return liveSundayViewModelList
             }
             2->{
-                return liveTuesdayViewModelList
+                return liveMondayViewModelList;
             }
             3->{
-                return liveWednesdayViewModelList
+                return liveTuesdayViewModelList
             }
             4->{
-                return liveThursdayViewModelList
+                return liveWednesdayViewModelList
             }
             5->{
-                return liveFridayViewModelList
+                return liveThursdayViewModelList
             }
             6->{
-               return liveSaturdayViewModelList
+                return liveFridayViewModelList
             }
             7->{
-               return liveSundayViewModelList
+               return liveSaturdayViewModelList
             }
+
         }
         return null
     }
@@ -180,12 +182,13 @@ constructor() : BaseViewModel() {
             var mealPlateViewModel = MealPlateViewModel()
             mealPlateViewModel.triggerMealPlateID.value = meal
             mealPlateViewModel.autoLoadChildren(lifecycleOwner)
-            mealPlateViewModel.liveFoodViewModelList?.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-                Status.COMPLETE-> registerChildCompletion(sectionNumber);
+            mealPlateViewModel.liveStatus?.observe(lifecycleOwner, Observer { resource->when(resource){
+                Status.COMPLETE-> {
+                    Log.d("STATUS","Meal Plate completed:"+meal.mealPlateId)
+                    registerChildCompletion(sectionNumber)
+                }
             } })
-            mealPlateViewModel.liveRecipeViewModelList?.observe(lifecycleOwner, Observer { resource->when(resource?.status){
-                Status.COMPLETE-> registerChildCompletion(sectionNumber);
-            } })
+
             viewModelList.add(mealPlateViewModel)
         }
 
@@ -212,28 +215,8 @@ constructor() : BaseViewModel() {
         var isAllCompleted = true
         var liveModelList = getDayMealViewModels(section)
         for(child in liveModelList?.value?.data!!){
-            if(child.triggerMealPlateID.value != null && child.liveMealPlateResponse.value?.status == Status.SUCCESS) {
-                if (child.liveFoodViewModelList?.value?.status == Status.COMPLETE) {
-                    //do nothing
-                } else {
-                    isAllCompleted = false
-                }
-            }
-        }
+            if(child.liveStatus.value == Status.COMPLETE) {
 
-/*
-        if(isAllCompleted){
-            var newRes = liveModelList?.value?.createCopy(Status.COMPLETE)
-            liveModelList?.value = newRes
-        }
-
-        isAllCompleted = true
-
-*/
-
-        for(child in liveModelList?.value?.data!!){
-            if(child.liveRecipeViewModelList?.value?.status == Status.COMPLETE){
-                //do nothing
             } else {
                 isAllCompleted = false
             }
@@ -275,5 +258,33 @@ constructor() : BaseViewModel() {
 
         injectedRepo.updatePlan(dietPlan,listner)
 
+    }
+
+    fun getDayFruitContent(day: Int): Float {
+        var mealModelList = getDayMealViewModels(day)
+        var dayFruitContent:Float = 0f
+        if(mealModelList != null) {
+            for (mealModel in mealModelList?.value?.data!!) {
+                if(mealModel.liveMealPlateResponse.value?.data != null) {
+                    var fruitContent: Float = mealModel.getFruitContentPerPlate()
+                    dayFruitContent = dayFruitContent+fruitContent
+                }
+            }
+        }
+        return dayFruitContent
+    }
+
+    fun getDayVeggiesContent(day: Int): Float {
+        var mealModelList = getDayMealViewModels(day)
+        var dayVeggiesContent:Float = 0f
+        if(mealModelList != null) {
+            for (mealModel in mealModelList?.value?.data!!) {
+                if(mealModel.liveMealPlateResponse.value?.data != null) {
+                    var veggiesContent: Float = mealModel.getVeggieContentPerPlate()
+                    dayVeggiesContent = dayVeggiesContent+veggiesContent
+                }
+            }
+        }
+        return dayVeggiesContent
     }
 }

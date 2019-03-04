@@ -3,8 +3,12 @@ package com.techticz.app.model.dietplan;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.techticz.app.db.converters.FoodTypeConverters;
 
 import org.parceler.Parcel;
+
+import androidx.room.Embedded;
+import androidx.room.TypeConverters;
 
 @Parcel
 public class Calendar {
@@ -21,24 +25,31 @@ public class Calendar {
 
     @SerializedName("monday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan monday;
     @SerializedName("tuesday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan tuesday;
     @SerializedName("wednesday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan wednesday;
     @SerializedName("thursday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan thursday;
     @SerializedName("friday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan friday;
     @SerializedName("saturday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan saturday;
     @SerializedName("sunday")
     @Expose
+    @TypeConverters(FoodTypeConverters.class)
     DayPlan sunday;
 
     public DayPlan getMonday() {

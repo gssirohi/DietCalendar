@@ -1,16 +1,22 @@
 package com.techticz.dietcalendar.di
 
+import android.content.Context
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.di.BaseActivityModule
 import com.techticz.app.ui.activity.DietPlanActivity
 import com.techticz.app.ui.activity.*
 import com.techticz.dietcalendar.ui.activity.LauncherActivity
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dagger.Provides
+import javax.inject.Named
+
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
-@Module
+@Module(includes = [BaseActivityModule::class])
 abstract class AppActivityModule {
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeLauncherActivity(): LauncherActivity
@@ -40,4 +46,7 @@ abstract class AppActivityModule {
     abstract fun contributeUserProfileActivity(): UserProfileActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeBaseDIActivity(): BaseDIActivity
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeOnboardingActivity(): OnboardingActivity
+
 }

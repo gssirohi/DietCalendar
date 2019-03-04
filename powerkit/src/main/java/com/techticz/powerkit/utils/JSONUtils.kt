@@ -5,6 +5,7 @@ import android.R.attr.name
 import android.os.Environment
 import android.util.Log
 import java.io.*
+import java.lang.Exception
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
@@ -18,9 +19,14 @@ class JSONUtils{
         var mDir:String = Environment.DIRECTORY_DOCUMENTS;
         var mPath : File = Environment.getExternalStoragePublicDirectory(mDir);
         public fun readJsonFromFile(context: Context,fileName:String):String{
-            var textfileName = fileName.replace("json","txt")
-            var f:File =  File(mPath, textfileName);
-            val iStream = f.inputStream()
+            var iStream:InputStream?
+            try {
+                var textfileName = fileName.replace("json", "txt")
+                var f: File = File(mPath, textfileName);
+                iStream = f.inputStream()
+            } catch (e:Exception){
+                iStream = context.getAssets().open(fileName)
+            }
             //val iStream = context.getAssets().open(fileName)
             val textBuilder = StringBuilder()
             BufferedReader(InputStreamReader(iStream, Charset.forName(StandardCharsets.UTF_8.name()))).use({ reader ->

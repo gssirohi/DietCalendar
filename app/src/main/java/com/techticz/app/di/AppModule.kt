@@ -1,6 +1,7 @@
 package com.techticz.dietcalendar.di
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.techticz.app.repo.ImageRepository
@@ -8,6 +9,7 @@ import com.techticz.app.ui.Navigator
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import com.techticz.networking.model.AppExecutors
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.db.AppDatabase
 import com.techticz.app.di.ContextModule
 import com.techticz.app.di.RepoModule
 
@@ -29,10 +31,12 @@ class AppModule{
         return "Welcome to Diet Calendar!"
     }
 
+/*
     @Provides
     internal fun providesNavigator(context:Context): Navigator {
         return Navigator(context)
     }
+*/
 
     @Singleton
     @Provides
@@ -40,6 +44,16 @@ class AppModule{
         Timber.d("Providing :" + "FirebaseFirestore DB")
         // Access a Cloud Firestore instance from your Activity
         val db = FirebaseFirestore.getInstance()
+
+        return db
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideAppDb(application:DietCalendarApplication): AppDatabase {
+        Timber.d("Providing :" + "AppDatabase")
+        // Access a Cloud Firestore instance from your Activity
+        val db = AppDatabase.getAppDataBase(application)
 
         return db
     }
