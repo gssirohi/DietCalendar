@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.NumberPicker
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.techticz.app.model.FoodResponse
 import com.techticz.app.viewmodel.FoodViewModel
 import com.techticz.dietcalendar.R
@@ -48,6 +51,12 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
         fab_plus.setOnClickListener({onFabPlusClicked()})
         fab_minus.setOnClickListener({onFabMinusClicked()})
         fab_remove.setOnClickListener({onFabRemoveClicked()})
+        tv_pivot.setOnClickListener { MaterialDialog(context).show {
+            listItemsSingleChoice(items =listOf("1","10","50","100")) { dialog, index, text ->
+                pivotPortion = text.toInt()
+                tv_pivot.text = ""+pivotPortion
+            }
+        }}
         foodViewModel?.autoLoadChildren(context as BaseDIActivity)
         foodViewModel?.liveFoodResponse?.observe(context as BaseDIActivity, Observer {
             resource ->
@@ -69,16 +78,14 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
     }
 
     private fun onFabMinusClicked() {
-        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
-        if(stdPortion == null) stdPortion = 100
 
-        if(foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - stdPortion
+        if(foodViewModel?.triggerFoodItem?.value?.qty!! > pivotPortion) {
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - pivotPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
 //            foodViewModel?.liveFoodResponse?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= stdPortion){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= pivotPortion){
                 fab_remove.visibility = View.VISIBLE
                 fab_minus.visibility = View.GONE
             } else {
@@ -89,16 +96,14 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
     }
 
     private fun onFabPlusClicked() {
-        var stdPortion = foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion
-        if(stdPortion == null) stdPortion = 100
 
         if(foodViewModel?.triggerFoodItem?.value?.qty!! < 2000) {
-            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + stdPortion
+            foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + pivotPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
 //            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
 //            foodViewModel?.liveFoodViewModelList?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! > stdPortion){
+            if( foodViewModel?.triggerFoodItem?.value?.qty!! > pivotPortion){
                 fab_remove.visibility = View.GONE
                 fab_minus.visibility = View.VISIBLE
             } else {
@@ -133,6 +138,8 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
         onFoodLoaded(resource)
     }
 
+    private var pivotPortion: Int = 10
+
     private fun onFoodLoaded(resource: Resource<FoodResponse>?) {
         resource?.isFresh = false
         //launcherBinding?.viewModel1 = launcherViewModel
@@ -148,7 +155,10 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
                 tv_food_calory_per.text = foodViewModel?.perServingCalPerUnitText()
                 tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty
                 tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
-
+                foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion?.let{
+                    pivotPortion = it
+                }
+                tv_pivot.text = ""+pivotPortion
                 observeChildViewModels(resource)
 
                 when(foodViewModel?.isVeg()){

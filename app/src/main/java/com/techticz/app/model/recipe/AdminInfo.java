@@ -4,10 +4,12 @@ package com.techticz.app.model.recipe;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.Nullable;
 import org.parceler.Parcel;
 
 @Parcel
 public class AdminInfo {
+
     public AdminInfo() {
     }
 
@@ -41,6 +43,11 @@ public class AdminInfo {
     @SerializedName("lastModifiedOn")
     @Expose
     String lastModifiedOn;
+
+    @SerializedName("lastModifiedBy")
+    @Expose
+    String lastModifiedBy;
+
 
     public String getCreatedOn() {
         return createdOn;
@@ -120,5 +127,13 @@ public class AdminInfo {
 
     public void setFeatured(Boolean featured) {
         this.featured = featured;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 }

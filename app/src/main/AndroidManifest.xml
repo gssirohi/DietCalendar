@@ -8,12 +8,14 @@
 
     <application
         android:name=".ui.DietCalendarApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.activity.LauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -96,6 +98,23 @@
             android:label="@string/title_activity_recipe_details"
             android:theme="@style/AppTheme.Recipe"
             android:windowSoftInputMode="adjustResize" ></activity>
+
+        <activity
+            android:name="com.supercilex.poiandroid.demo.ToolActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+
+        </provider>
+
     </application>
 
 </manifest>

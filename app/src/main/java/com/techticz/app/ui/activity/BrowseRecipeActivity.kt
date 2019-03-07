@@ -115,8 +115,8 @@ class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCa
         when(res?.status){
             Status.SUCCESS->{
                 spin_kit_my_recipes.visibility = View.INVISIBLE
-                (recycler_featured_recipes.adapter as AutoBrowseRecipeAdapter).recipes = res?.data?.recipes!!
-                (recycler_featured_recipes.adapter as AutoBrowseRecipeAdapter).notifyDataSetChanged()
+                (recycler_my_recipes.adapter as AutoBrowseRecipeAdapter).recipes = res?.data?.recipes!!
+                (recycler_my_recipes.adapter as AutoBrowseRecipeAdapter).notifyDataSetChanged()
             }
         }
     }

@@ -45,8 +45,13 @@ dependencies {
 
     api fileTree(include: ['*.jar'], dir: 'libs')
 
+    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
     api project(':powerkit')
     api project(':auth')
+    implementation project(path: ':poi', configuration: 'compile')
+
     implementation REQUIRE.UI.DIALOG
     implementation REQUIRE.UI.SCROLLER
     implementation REQUIRE.KOTLIN.JRE

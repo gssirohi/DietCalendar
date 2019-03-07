@@ -41,7 +41,7 @@ class RecipeStepsAdapter constructor(var recipeActivity: RecipeDetailsActivity, 
             }
             (holder as StepViewHolder).stepView.til_step.editText?.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    recipeActivity?.steps.set(position,s.toString())
+                    recipeActivity?.steps?.set(position,s.toString())
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

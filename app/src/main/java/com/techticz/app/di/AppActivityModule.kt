@@ -1,6 +1,7 @@
 package com.techticz.dietcalendar.di
 
 import android.content.Context
+import com.supercilex.poiandroid.demo.ToolActivity
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.di.BaseActivityModule
 import com.techticz.app.ui.activity.DietPlanActivity
@@ -48,5 +49,8 @@ abstract class AppActivityModule {
     abstract fun contributeBaseDIActivity(): BaseDIActivity
     @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
     abstract fun contributeOnboardingActivity(): OnboardingActivity
+
+    @ContributesAndroidInjector(modules = arrayOf(AppFragmentModule::class))
+    abstract fun contributeToolActivity(): ToolActivity
 
 }

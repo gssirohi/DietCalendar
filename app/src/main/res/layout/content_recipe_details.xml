@@ -4,214 +4,448 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.techticz.app.ui.activity.RecipeDetailsActivity"
-    android:windowSoftInputMode="adjustResize"
     tools:showIn="@layout/activity_recipe_details">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:windowSoftInputMode="adjustResize">
+
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit_recipe_desc"
+            style="@style/SpinKitView.Small.Wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            app:SpinKit_Color="?attr/colorAccent"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_recipe_name"
+            style="?attr/textAppearanceHeadline6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:windowSoftInputMode="adjustResize"
-            android:orientation="vertical">
-            
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:layout_weight="1"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/spin_kit_recipe_desc"
-                style="@style/SpinKitView.Small.Wave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:visibility="visible"
-                android:visibility="invisible"
-                app:SpinKit_Color="?attr/colorAccent" />
-            <TextView
-                android:id="@+id/tv_recipe_name"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            tools:text="Recipe Name" />
+
+        <TextView
+            android:id="@+id/tv_recipe_desc"
+            style="?attr/textAppearanceBody2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            tools:text="Recipe Description" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_recipe_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_margin="8dp"
+            android:hint="Recipe Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="?attr/textAppearanceSubtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Recipe Name"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
-                style="?attr/textAppearanceHeadline6"/>
-            <TextView
-                android:id="@+id/tv_recipe_desc"
+                tools:text="My Recipe"
+                tools:visibility="visible" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_recipe_desc"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_recipe_name"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|bottom"
+            android:layout_margin="8dp"
+            android:layout_weight="4"
+            android:gravity="left"
+            android:hint="Recipe Description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="?attr/textAppearanceBody2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Recipe Description"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                style="?attr/textAppearanceBody2"/>
+                tools:text="My Recipe Description"
+                tools:visibility="visible" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_recipe_qty_serving"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_recipe_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:id="@+id/til_recipe_serving_qty"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|top"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left|bottom"
                 android:layout_margin="8dp"
-                android:hint="Recipe Name">
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Serving Quantity">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    style="?attr/textAppearanceSubtitle2"
+                    style="?attr/textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="My Recipe"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    android:drawableTint="?attr/colorAccent"
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="2"
                     tools:visibility="visible" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_recipe_desc"
-                android:layout_weight="4"
-                android:layout_below="@+id/til_recipe_name"
-                android:layout_width="match_parent"
-                android:gravity="left"
-                android:layout_margin="8dp"
-                android:layout_gravity="left|bottom"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:hint="Recipe Description"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:visibility="visible"
-                    tools:text="My Recipe Description"
-                    style="?attr/textAppearanceBody2"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_serving_type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:layout_margin="8dp"
-                android:layout_gravity="left|bottom"
                 android:layout_alignParentLeft="true"
-                android:hint="Serving Type"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+                android:layout_gravity="left|bottom"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Serving Type">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    style="?attr/textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:focusable="false"
                     android:clickable="true"
-                    tools:visibility="visible"
                     android:drawableEnd="@drawable/ic_keyboard_arrow_right"
                     android:drawableTint="?attr/colorAccent"
-                    tools:text="Tablespoon"
-                    style="?attr/textAppearanceBody2"
-                    />
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="Bowl"
+                    tools:visibility="visible" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <include layout="@layout/content_desc_layout"/>
-            <LinearLayout
-                android:id="@+id/ll_recipe_content"
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_recipe_category_approx_cal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_recipe_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left|bottom"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Category">
 
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.textfield.TextInputEditText
+                    style="?attr/textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/Surface">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    android:drawableTint="?attr/colorAccent"
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="Beverages"
+                    tools:visibility="visible" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                            <TextView
-                                android:id="@+id/tv_foods_header"
-                                tools:visibility="visible"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:layout_marginBottom="4dp"
-                                android:layout_gravity="center|left"
-                                style="?attr/textAppearanceSubtitle1"
-                                android:textStyle="bold"
-                                android:textAllCaps="true"
-                                android:text="Foods"/>
-                            <com.github.ybq.android.spinkit.SpinKitView
-                                xmlns:app="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/spin_kit_recipe_foods"
-                                style="@style/SpinKitView.Small.Wave"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                tools:visibility="invisible"
-                                android:layout_marginLeft="16dp"
-                                android:layout_gravity="center"
-                                app:SpinKit_Color="@color/secondaryColor"
-                                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_approx_cal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left|bottom"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Approx. Cal/Serve">
 
-                        </LinearLayout>
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/foodRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:layout_height="140dp"
-                            tools:listitem="@layout/recipe_food_layout">
-
-                        </androidx.recyclerview.widget.RecyclerView>
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/b_add_food"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_horizontal"
-                            style="@style/Widget.MaterialComponents.Button.Icon"
-                            app:icon="@drawable/ic_action_add"
-                            android:text="Add Food"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.textfield.TextInputEditText
+                    style="?attr/textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/Surface">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/tv_steps_header"
-                            tools:visibility="visible"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="4dp"
-                            style="?attr/textAppearanceSubtitle1"
-                            android:textStyle="bold"
-                            android:textAllCaps="true"
-                            android:layout_marginBottom="4dp"
-                            android:layout_gravity="center|left"
-                            android:visibility="visible"
-                            android:layout_height="wrap_content"
-                            android:text="Steps"/>
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/stepsRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:windowSoftInputMode="adjustResize"
-                            tools:layout_height="140dp"
-                            tools:listitem="@layout/recipe_step_layout">
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    android:drawableTint="?attr/colorAccent"
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="250"
+                    tools:visibility="visible" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                        </androidx.recyclerview.widget.RecyclerView>
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/b_add_steps"
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_horizontal"
-                            style="@style/Widget.MaterialComponents.Button.Icon"
-                            app:icon="@drawable/ic_action_add"
-                            android:text="Add Step"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
         </LinearLayout>
+        
+        <include layout="@layout/content_desc_layout" />
+
+        <LinearLayout
+            android:id="@+id/ll_recipe_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            tools:visibility="gone">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/Surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_foods_header"
+                            style="?attr/textAppearanceSubtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|left"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:text="Foods"
+                            android:textAllCaps="true"
+                            android:textStyle="bold"
+                            tools:visibility="visible" />
+
+                        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/spin_kit_recipe_foods"
+                            style="@style/SpinKitView.Small.Wave"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="16dp"
+                            app:SpinKit_Color="@color/secondaryColor"
+                            tools:visibility="invisible" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/foodRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:layout_height="140dp"
+                        tools:listitem="@layout/recipe_food_layout">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/b_add_food"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Add Food"
+                        app:icon="@drawable/ic_action_add" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/Surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_steps_header"
+                        style="?attr/textAppearanceSubtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|left"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Steps"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/stepsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:windowSoftInputMode="adjustResize"
+                        tools:layout_height="140dp"
+                        tools:listitem="@layout/recipe_step_layout">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/b_add_steps"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Add Step"
+                        app:icon="@drawable/ic_action_add" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_recipe_region_sub_region"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_recipe_region"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left|bottom"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Region">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="?attr/textAppearanceBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    android:drawableTint="?attr/colorAccent"
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="North India"
+                    tools:visibility="visible" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_course"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="left|bottom"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="Meal Course">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="?attr/textAppearanceBody2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                    android:drawableTint="?attr/colorAccent"
+                    android:enabled="false"
+                    android:focusable="false"
+                    tools:text="Dessert"
+                    tools:visibility="visible" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <TextView
+            style="?attr/textAppearanceHeadline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Preferred Meals" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_pref_meal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableTint="?attr/colorAccent"
+            android:orientation="horizontal"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_early_morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:layout_marginLeft="4dp"
+                android:text="Early Morning"
+                app:chipBackgroundColor="?attr/colorAccent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_breakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:layout_marginLeft="4dp"
+                android:text="Breakfast"
+                app:chipBackgroundColor="?attr/colorAccent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Lunch"
+                android:layout_marginLeft="4dp"
+                app:chipBackgroundColor="?attr/colorAccent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_snacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Evening Snacks"
+                android:layout_marginLeft="4dp"
+                app:chipBackgroundColor="?attr/colorAccent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_dinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Dinner"
+                android:layout_marginLeft="4dp"
+                app:chipBackgroundColor="?attr/colorAccent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_bed_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:layout_marginLeft="4dp"
+                android:text="Bed Time"
+                app:chipBackgroundColor="?attr/colorAccent" />
+        </com.google.android.material.chip.ChipGroup>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="64dp"></View>
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>

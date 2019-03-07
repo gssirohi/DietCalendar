@@ -1,1 +1,1 @@
-include ':app', ':powerkit', ':networking', ':auth'
+include ':app', ':powerkit', ':networking', ':auth',':poi'

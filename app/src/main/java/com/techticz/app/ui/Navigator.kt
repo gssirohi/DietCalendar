@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.supercilex.poiandroid.demo.ToolActivity
 import com.techticz.app.model.dietplan.DietPlan
 import com.techticz.app.ui.activity.*
 import javax.inject.Inject
@@ -141,6 +142,10 @@ fun startDashBoard(){
         activity.startActivityForResult(intent,2)
     }
 
+    fun navigateToExcelExplorer() {
+        var intent = Intent(context, ToolActivity::class.java)
+        context.startActivity(intent)
+    }
 
 
 }
