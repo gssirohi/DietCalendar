@@ -27,7 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import android.util.Log;
+import timber.log.Timber;
 import android.widget.ImageView;
 
 import com.techticz.dietcalendar.BuildConfig;
@@ -205,7 +205,7 @@ public abstract class ImageWorker {
             bitmapWorkerTask.cancel(true);
             if (BuildConfig.DEBUG) {
                 final Object bitmapData = bitmapWorkerTask.mData;
-                Log.d(TAG, "cancelWork - cancelled work for " + bitmapData);
+                Timber.d(TAG, "cancelWork - cancelled work for " + bitmapData);
             }
         }
     }
@@ -225,7 +225,7 @@ public abstract class ImageWorker {
             if (bitmapData == null || !bitmapData.equals(data)) {
                 bitmapWorkerTask.cancel(true);
                 if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "cancelPotentialWork - cancelled work for " + data);
+                    Timber.d(TAG, "cancelPotentialWork - cancelled work for " + data);
                 }
             } else {
                 // The same work is already in progress.
@@ -279,7 +279,7 @@ public abstract class ImageWorker {
         protected BitmapDrawable doInBackground(Void... params) {
             //BEGIN_INCLUDE(load_bitmap_in_background)
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "doInBackground - starting work");
+                Timber.d(TAG, "doInBackground - starting work");
             }
 
             final String dataString = String.valueOf(mData);
@@ -333,7 +333,7 @@ public abstract class ImageWorker {
             }
 
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "doInBackground - finished work");
+                Timber.d(TAG, "doInBackground - finished work");
             }
 
             return drawable;
@@ -355,7 +355,7 @@ public abstract class ImageWorker {
             final ImageView imageView = getAttachedImageView();
             if (value != null && imageView != null) {
                 if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "onPostExecute - setting bitmap");
+                    Timber.d(TAG, "onPostExecute - setting bitmap");
                 }
                 success = true;
                 setImageDrawable(imageView, value);

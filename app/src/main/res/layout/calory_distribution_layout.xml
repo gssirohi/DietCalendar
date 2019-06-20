@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Calory Distribution"
+        style="?attr/textAppearanceSearchResultTitle"
+        android:layout_margin="16dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fl_arcView"
+        android:layout_gravity="right">
+        <com.hookedonplay.decoviewlib.DecoView
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/arcView"
+            android:layout_gravity="center"
+            custom:dv_arc_gravity_horizontal="Fill"
+            custom:dv_arc_gravity_vertical="Bottom"
+            custom:dv_lineWidth="36dp"
+            android:layout_margin="8dp"/>
+        <TextView
+            android:id="@+id/tv_calory_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0 %"
+            style="?attr/textAppearanceHeadline4"/>
+    </FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_em"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Early Morning"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_em"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/tv_em"
+                android:layout_alignBaseline="@+id/tv_em"
+                android:layout_margin="8dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_bf"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_below="@+id/tv_em"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Breakfast"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_bf"
+                android:layout_toRightOf="@+id/tv_bf"
+                android:layout_alignBaseline="@+id/tv_bf"
+                android:layout_width="match_parent"
+                android:layout_margin="8dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_ln"
+                android:layout_below="@+id/tv_bf"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Lunch"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_lc"
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@+id/tv_ln"
+                android:layout_alignBaseline="@+id/tv_ln"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_es"
+                android:layout_below="@+id/tv_ln"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Evening Snacks"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_es"
+                android:layout_toRightOf="@+id/tv_es"
+                android:layout_alignBaseline="@+id/tv_es"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_dn"
+                android:layout_below="@+id/tv_es"
+                android:layout_margin="8dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Dinner"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_dn"
+                android:layout_margin="8dp"
+                android:layout_toRightOf="@+id/tv_dn"
+                android:layout_alignBaseline="@+id/tv_dn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_bt"
+                android:layout_below="@+id/tv_dn"
+                android:layout_margin="8dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                style="?attr/textAppearanceSubtitle2"
+                android:text="Bed Time"/>
+            <com.techticz.powerkit.customview.SeekBarWithValues
+                android:id="@+id/sbv_bt"
+                android:layout_toRightOf="@+id/tv_bt"
+                android:layout_alignBaseline="@+id/tv_bt"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </FrameLayout>
+
+
+</merge>

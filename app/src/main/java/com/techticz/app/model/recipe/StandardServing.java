@@ -13,7 +13,7 @@ public class StandardServing {
 
     @SerializedName("qty")
     @Expose
-    Integer qty;
+    Integer qty = 1;
     @SerializedName("servingType")
     @Expose
     String servingType;

@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
+import timber.log.Timber;
 import android.widget.ImageView;
 
 import com.techticz.app.model.ImageResponse;
@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 26/8/17.
@@ -31,7 +32,7 @@ import java.net.URL;
 
 public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
     private String url;
-    private ImageViewModel viewModel;
+    public ImageViewModel viewModel;
 
     public AppImageView(Context context) {
         super(context);
@@ -48,6 +49,7 @@ public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     public void setImageViewModel(@Nullable ImageViewModel viewModel,LifecycleOwner owner) {
+        setImageResource(R.drawable.select_image_placeholder);
         this.viewModel = viewModel;
         viewModel.getLiveImageResponse().observe(owner, res->{
             onImageLoaded(res);
@@ -64,6 +66,16 @@ public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
         }
     }
 
+  /*  public void showImageGallary(){
+        ArrayList<String> imageUrls = new ArrayList<String>();
+        imageUrls.add(viewModel.getTriggerImageUrl().getValue());
+        new ImageGallery.Builder()
+                .with(context)
+                .urls(imageUrls)
+                .sharedPosition(0)
+//                .sharedElement(ivImage)
+                .build();
+    }*/
     public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 
         private final WeakReference<ImageView> imageViewReference;
@@ -122,11 +134,11 @@ public class AppImageView extends androidx.appcompat.widget.AppCompatImageView {
                     return bitmap;
                 }
             } catch (Exception e) {
-                Log.d("URLCONNECTIONERROR", e.toString());
+                Timber.d("URLCONNECTIONERROR", e.toString());
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
-                Log.w("ImageDownloader", "Error downloading image from " + url);
+                Timber.w("ImageDownloader", "Error downloading image from " + url);
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();

@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.content_browse_plate.*
 class BrowsePlateActivity : BaseDIActivity(), BrowsePlatesAdapter.PlateViewCallBacks,FeaturedPlatesAdapter.PlateViewCallBacks {
     override fun onPlateViewClicked(mealPlate: MealPlate) {
         if(TextUtils.isEmpty(planId) || TextUtils.isEmpty(mealType)){
-
+            navigator.startExplorePlateScreen(mealPlate?.id)
         } else {
             var data = intent
             data.putExtra("plateId", mealPlate.id)

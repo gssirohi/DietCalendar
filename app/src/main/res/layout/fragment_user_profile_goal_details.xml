@@ -18,7 +18,7 @@
             android:layout_marginTop="50dp"
             android:elevation="10dp"
             android:layout_gravity="center_horizontal|bottom"
-            android:theme="@style/Surface">
+            android:theme="@style/Surface.Pop">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -181,14 +181,15 @@
                 android:gravity="center"
                 style="?attr/textAppearanceHeadline5"
                 android:textStyle = "bold" />
+                <com.techticz.powerkit.customview.SeekBarWithValues
+                    android:id="@+id/sbv_target_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    >
 
-            <SeekBar
-                android:id="@+id/sb_target_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="96"
-                android:min="1"
-                android:layout_margin="8dp"/>
+                </com.techticz.powerkit.customview.SeekBarWithValues>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,14 +208,14 @@
                 android:gravity="center"
                 style="?attr/textAppearanceHeadline5"
                 android:textStyle = "bold" />
+                <com.techticz.powerkit.customview.SeekBarWithValues
+                    android:id="@+id/sbv_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    >
 
-            <SeekBar
-                android:id="@+id/sb_duration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="48"
-                android:min="1"
-                android:layout_margin="8dp"/>
+                </com.techticz.powerkit.customview.SeekBarWithValues>
 
             <LinearLayout
                 android:layout_width="match_parent"

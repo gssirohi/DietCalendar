@@ -1,6 +1,6 @@
 package com.techticz.app.db.dao;
 
-import android.util.Log;
+import timber.log.Timber;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -101,7 +101,7 @@ public abstract class BaseDao<T> {
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(
                 "select * from " + getTableName()
         );
-        Log.d("ROOM",query.getSql());
+        Timber.d("ROOM",query.getSql());
         return doFindAll(query);
     }
 
@@ -110,7 +110,16 @@ public abstract class BaseDao<T> {
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(
                 "select * from " + getTableName()+" WHERE "+property+" = "+value
         );
-        Log.d("ROOM",query.getSql());
+        Timber.d("ROOM",query.getSql());
+        return doFindAllByProperty(query);
+    }
+
+    @NotNull
+    public Maybe<List<T>> orderByProperty(@NotNull String property, @NotNull String order) {
+        SimpleSQLiteQuery query = new SimpleSQLiteQuery(
+                "select * from " + getTableName()+" ORDER BY "+property+"  "+order
+        );
+        Timber.d("ROOM",query.getSql());
         return doFindAllByProperty(query);
     }
 
@@ -119,7 +128,7 @@ public abstract class BaseDao<T> {
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(
                 "select * FROM " + getTableName()+" WHERE "+property+" LIKE \"%"+value+"%\""
         );
-        Log.d("ROOM",query.getSql());
+        Timber.d("ROOM",query.getSql());
         return doFindAllByProperty(query);
     }
 
@@ -129,7 +138,7 @@ public abstract class BaseDao<T> {
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(
                 "select * from " + getTableName()+" WHERE "+property+" = "+value
         );
-        Log.d("ROOM",query.getSql());
+        Timber.d("ROOM",query.getSql());
         return doFindByProperty(query);
     }
 

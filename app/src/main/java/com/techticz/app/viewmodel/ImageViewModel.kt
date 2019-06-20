@@ -27,6 +27,7 @@ constructor(context: Context) : BaseViewModel() {
 
     val triggerImageUrl = MutableLiveData<String>()
     val liveImageResponse: LiveData<Resource<ImageResponse>>
+    var pickedBitmap: Bitmap? = null
 
     init {
         DietCalendarApplication.getAppComponent().inject(this)
@@ -53,12 +54,18 @@ constructor(context: Context) : BaseViewModel() {
                 return liveImageResponse?.value?.data?.bitmap
             }
             Status.EMPTY->{
-                return null
+                return pickedBitmap
             }
             Status.ERROR->{
                 return null
             }
         }
-        return null
+        return pickedBitmap
+    }
+
+    fun savePickedImage(fileName:String):String {
+        pickedBitmap?.let{
+            return injectedRepo?.saveImageOnDevice(it,fileName)
+        }
     }
 }

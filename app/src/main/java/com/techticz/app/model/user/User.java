@@ -33,12 +33,24 @@ public class User {
     @SerializedName("myPlans")
     @Expose
     private List<String> myPlans = new ArrayList<>();
+    @SerializedName("myPlates")
+    @Expose
+    private List<String> myPlates = new ArrayList<>();
     @SerializedName("myRecipes")
     @Expose
     private List<String> myRecipes = new ArrayList<>();
     @SerializedName("myFoods")
     @Expose
     private List<String> myFoods = new ArrayList<>();
+    @SerializedName("planLockKeys")
+    @Expose
+    private List<String> planLockKeys = new ArrayList<>();
+    @SerializedName("plateLockKeys")
+    @Expose
+    private List<String> plateLockKeys = new ArrayList<>();
+    @SerializedName("recipeLockKeys")
+    @Expose
+    private List<String> recipeLockKeys = new ArrayList<>();
     @SerializedName("access")
     @Expose
     private Access access;
@@ -48,10 +60,19 @@ public class User {
         basicInfo = new BasicInfo();
         healthProfile = new HealthProfile();
         mealPref = new MealPref();
+        goal = new Goal();
+        myPlans = new ArrayList<>();
+        myPlates = new ArrayList<>();
+        myRecipes = new ArrayList<>();
+        myFoods = new ArrayList<>();
+        planLockKeys = new ArrayList<>();
+        plateLockKeys = new ArrayList<>();
+        recipeLockKeys = new ArrayList<>();
         access = new Access();
     }
 
     public User() {
+        new User("");
     }
 
 
@@ -172,10 +193,12 @@ public class User {
         return 24;
     }
     public Float getBMR() {
+        if(getBasicInfo() == null || getHealthProfile() == null) return 0f;
         String gender = getBasicInfo().getGender();
         Float weightInKg = getHealthProfile().getWeight();
         Float heightInCm = getHealthProfile().getHeight();
 
+        if(weightInKg == null || heightInCm == null) return 0f;
         Integer age = getAge();
         Double bmr = null;
         if(gender != null && gender.equalsIgnoreCase("male")){
@@ -214,9 +237,12 @@ public class User {
     }
 
     public Float getDailyRequiredCaloriesAsPerGoal() {
+        if(getGoal() == null) return 0f;
+
         Float targetWeight = getGoal().getTargetWeight();
         Integer duration = getGoal().getDurationInWeek();
 
+        if(getHealthProfile() == null) return 0f;
         Float weightInKg = getHealthProfile().getWeight();
 
         Float maintainCalory = getDailyCaloriesToMaintainWeight();
@@ -250,5 +276,49 @@ public class User {
     public RDA getRDA(){
         RDA rda = new RDA(getAge(),getBasicInfo().getGender(),getHealthProfile().getActivityLevel(),getDailyRequiredCaloriesAsPerGoal());
         return rda;
+    }
+
+    public boolean hasKeyForPlanLock(String lock){
+     if(planLockKeys == null) return false;
+     return planLockKeys.contains(lock);
+    }
+
+    public void saveKeyForPlanLock(String key){
+        if(planLockKeys == null){
+            planLockKeys = new ArrayList<>();
+        }
+        planLockKeys.add(key);
+    }
+
+    public List<String> getMyPlates() {
+        return myPlates;
+    }
+
+    public void setMyPlates(List<String> myPlates) {
+        this.myPlates = myPlates;
+    }
+
+    public List<String> getPlanLockKeys() {
+        return planLockKeys;
+    }
+
+    public void setPlanLockKeys(List<String> planLockKeys) {
+        this.planLockKeys = planLockKeys;
+    }
+
+    public List<String> getPlateLockKeys() {
+        return plateLockKeys;
+    }
+
+    public void setPlateLockKeys(List<String> plateLockKeys) {
+        this.plateLockKeys = plateLockKeys;
+    }
+
+    public List<String> getRecipeLockKeys() {
+        return recipeLockKeys;
+    }
+
+    public void setRecipeLockKeys(List<String> recipeLockKeys) {
+        this.recipeLockKeys = recipeLockKeys;
     }
 }

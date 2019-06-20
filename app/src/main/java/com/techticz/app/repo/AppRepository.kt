@@ -54,13 +54,13 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
                 /*.addOnSuccessListener { documentSnapshot ->
                     val launching = documentSnapshot.toObject(Launching::class.java!!)
                     if(launching != null) {
-                        Log.d("AppRepo","CACHED response received")
+                        Timber.d("AppRepo","CACHED response received")
                         var fetchedRes = LauncherResponse()
                         fetchedRes.launching = launching
                         var resource = Resource<LauncherResponse>(Status.SUCCESS, fetchedRes, "Loading Success- Launching:"+launching?.id, DataSource.REMOTE)
                         live.value = resource
                     } else {
-                        Log.d("AppRepo","CACHED response received as NULL")
+                        Timber.d("AppRepo","CACHED response received as NULL")
                         var resource = Resource<LauncherResponse>(Status.ERROR, null, "Loading Failed- Launching", DataSource.REMOTE)
                         live.value = resource
                     }
@@ -71,19 +71,19 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
                     if (task.isSuccessful) {
                         val launching = task.result?.toObject(Launching::class.java!!)
                         if(launching != null) {
-                            Log.d("AppRepo","CACHED response received")
+                            Timber.d("AppRepo","CACHED response received")
                             var fetchedRes = LauncherResponse()
                             fetchedRes.launching = launching
                             var resource = Resource<LauncherResponse>(Status.SUCCESS, fetchedRes, "Loading Task Success- Launching:"+launching?.id, DataSource.REMOTE)
                             live.value = resource
                         } else {
-                            Log.d("AppRepo","CACHED response received as NULL")
+                            Timber.d("AppRepo","CACHED response received as NULL")
                             var resource = Resource<LauncherResponse>(Status.ERROR, null, "Loading Task Success- Launching Null", DataSource.REMOTE)
                             live.value = resource
                         }
                     } else {
 
-                        Log.e("Repo", "Loading Failed- Launching from Cache", task.exception)
+                        Timber.e("Repo", "Loading Failed- Launching from Cache", task.exception)
                         var resource = Resource<LauncherResponse>(Status.ERROR, null, "Loading Task Failed- Launching", DataSource.REMOTE)
                         live.value = resource
 
@@ -93,19 +93,19 @@ constructor(private val appExecutors: AppExecutors/*, private val syncPrefDao: S
                                     if (task.isSuccessful) {
                                         val launching = task.result?.toObject(Launching::class.java!!)
                                         if(launching != null) {
-                                            Log.d("AppRepo","SERVER response received")
+                                            Timber.d("AppRepo","SERVER response received")
                                             var fetchedRes = LauncherResponse()
                                             fetchedRes.launching = launching
                                             var resource = Resource<LauncherResponse>(Status.SUCCESS, fetchedRes, "Loading Task Success- Launching:"+launching?.id, DataSource.REMOTE)
                                             live.value = resource
                                         } else {
-                                            Log.d("AppRepo","SERVER response received as NULL")
+                                            Timber.d("AppRepo","SERVER response received as NULL")
                                             var resource = Resource<LauncherResponse>(Status.ERROR, null, "Loading Task Success- Launching Null", DataSource.REMOTE)
                                             live.value = resource
                                         }
                                     } else {
 
-                                        Log.e("Repo", "Loading Failed- Launching from Server", task.exception)
+                                        Timber.e("Repo", "Loading Failed- Launching from Server", task.exception)
                                         var resource = Resource<LauncherResponse>(Status.ERROR, null, "Loading Task Failed- Launching", DataSource.REMOTE)
                                         live.value = resource
                                     }

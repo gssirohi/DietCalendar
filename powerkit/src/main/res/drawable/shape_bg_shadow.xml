@@ -10,9 +10,9 @@
             android:thickness="8dp"
             android:innerRadius="5dp"
             android:orientation="vertical">
-            <stroke
+            <!--<stroke
                 android:width=".5dp"
-                android:color="?attr/colorPrimaryDark" />
+                android:color="?attr/colorPrimaryDark" />-->
             <solid android:color="?attr/colorBackgroundFloating" />
 
 

@@ -42,7 +42,17 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_app_bar"></FrameLayout>
+                android:background="@drawable/bg_app_bar">
+                <View
+                    android:id="@+id/view_image_placeholder"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="16dp"
+                    android:layout_gravity="right|top|center"
+                    android:background="@drawable/ic_menu_gallery"
+                    android:backgroundTint="@color/white"
+                    ></View>
+            </FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

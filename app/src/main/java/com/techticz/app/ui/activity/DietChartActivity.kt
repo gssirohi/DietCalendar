@@ -39,7 +39,7 @@ import javax.inject.Inject
 class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, DietPlanRepository.DietPlanCallBack,NutritionDialogFragment.Listener {
 
 
-    override fun onUpdated(id: String) {
+    override fun onUserUpdated(id: String) {
         showError("Plan activated successfully..")
         baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
         baseuserViewModel.liveUserResponse.observe(this, Observer {
@@ -47,7 +47,7 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
         })
     }
 
-    override fun onUpdateFailure() {
+    override fun onUserUpdateFailure() {
         hideProgress()
         showError("Error while activating plan..")
     }
@@ -238,11 +238,11 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
         showError("Plan could not be updated!")
     }
 
-    override fun onRegistered(userId: String) {
+    override fun onUserRegistered(userId: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onRegistrationFailure() {
+    override fun onUserRegistrationFailure() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -273,7 +273,7 @@ class DietChartActivity : BaseDIActivity(), UserRepository.UserProfileCallback, 
     }
 
     fun createPlanCopy() {
-        navigator.startCopyPlanActivity(this,dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
+        navigator.startDietPlanActivity(DietPlanActivity.MODE_COPY_FROM_PLAN,dietChartViewModel?.liveDietPlanResponse?.value?.data?.dietPlan)
         this.finish()
     }
 }

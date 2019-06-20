@@ -10,6 +10,9 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.techticz.auth.utils.LoginUtils
 import com.techticz.dietcalendar.R
 import com.techticz.dietcalendar.model.LauncherResponse
@@ -146,7 +149,7 @@ class LauncherActivity : BaseDIActivity() {
                 tv_bottom?.text = resource?.message
             }
             Status.SUCCESS -> {
-                Log.d("Launcher","document synced"+resource.data)
+                Timber.d("document synced"+resource.data)
                 var current = prefRepo.documentVersion
 
 
@@ -162,7 +165,7 @@ class LauncherActivity : BaseDIActivity() {
                 tv_bottom?.text = resource.message
             }
             Status.COMPLETE -> {
-                Log.d("Launcher","All sync completed!!!")
+                Timber.d("All sync completed!!!")
                 tv_bottom?.text = resource.message
                 executeUserLoginCheck(prefRepo?.launching)
             }
@@ -198,14 +201,14 @@ class LauncherActivity : BaseDIActivity() {
             } else {
                 //check if registered
                 //user Id must have been set and data fetched while onCreate of base activity
-                Log.d("LOGIN", "Checking online user profile..")
+                Timber.d( "Checking online user profile..")
                 tv_bottom?.text = "Checking online profile.."
                 baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
                 baseuserViewModel.liveUserResponse.observe(this, Observer { res -> onUserLoaded(res) })
             }
         } else {
             // offline user is always logged In : Just need to check if offline registered
-            Log.d("LOGIN", "Checking offline user profile..")
+            Timber.d( "Checking offline user profile..")
             tv_bottom?.text = "Checking offline user profile.."
             baseuserViewModel.liveUserResponse.observe(this, Observer { res -> onUserLoaded(res) })
         }
@@ -216,7 +219,7 @@ class LauncherActivity : BaseDIActivity() {
         if (requestCode == 11 && resultCode == Activity.RESULT_OK) {
             if (!TextUtils.isEmpty(LoginUtils.getFirbaseUserId(this))) {
                 //check if user is already registered
-                Log.d("LOGIN","Checking profile..")
+                Timber.d("Checking profile..")
                 baseuserViewModel.liveUserResponse.observe(this, Observer { res->onUserLoaded(res) })
 
                 baseuserViewModel.triggerUserId.value = LoginUtils.getCurrentUserId()
@@ -230,11 +233,11 @@ class LauncherActivity : BaseDIActivity() {
                 if(res?.data?.user != null){
                     //user is registered
                     if(TextUtils.isEmpty(res?.data?.user?.activePlan)){
-                        Log.d("LOGIN", "Starting Browse Plan..")
+                        Timber.d( "Starting Browse Plan..")
                         tv_bottom?.text = "Starting Browse Plan.."
                         navigator.startBrowsePlanScreen()
                     } else {
-                        Log.d("LOGIN", "Starting Dashboard..")
+                        Timber.d("Starting Dashboard..")
                         tv_bottom?.text = "Starting Dashboard.."
                         navigator.startDashBoard()
                     }
@@ -243,11 +246,10 @@ class LauncherActivity : BaseDIActivity() {
             }
 
             Status.EMPTY->{
-                Log.d("LOGIN","Onboarding User..")
+                Timber.d("Onboarding User..")
                 tv_bottom?.text = "Onboarding User.."
-                // showError(res?.message.toString())
-                // navigator.startUserProfileScreen()
-                navigator.startOnboarding()
+                navigator.startUserProfileScreen()
+                //navigator.startOnboarding()
                 finish()
 
             }

@@ -1,14 +1,10 @@
 package com.techticz.app.repo
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
-import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.constants.AppCollections
 import com.techticz.app.model.UserResponse
 import com.techticz.app.model.user.User
@@ -16,7 +12,6 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIRepository
-import com.techticz.dietcalendar.di.DaggerAppComponent
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -60,7 +55,7 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
                             live.value = resource
                         }
                     }.addOnFailureListener { e ->
-                        Timber.e("Error fetching User:" + userId, e)
+                        Timber.e("Error fetching User: %s" + userId, e)
                         var resource = Resource<UserResponse>(Status.ERROR, UserResponse(), "Couldn't load- User:" + userId, DataSource.REMOTE)
                         live.value = resource
                     }
@@ -74,7 +69,7 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
         Timber.d("Registering user..:"+user.id)
         if(user.id.equals("local")){
             prefRepo.user = user
-            listner.onRegistered(user.id)
+            listner.onUserRegistered(user.id)
         } else {
             var batch: WriteBatch = db.batch()
             var ref: DocumentReference = db.collection(AppCollections.USERS.collectionName).document(user.id)
@@ -85,14 +80,14 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
                         Timber.d(message)
                         //hideProgress()
                         //showSuccess(message!!)
-                        listner.onRegistered(user.id)
+                        listner.onUserRegistered(user.id)
                     }
                     .addOnFailureListener { task ->
                         var message = AppCollections.USERS.collectionName + " register failed"
                         Timber.e(message)
                         //hideProgress()
                         //showError(message!!)
-                        listner.onRegistrationFailure()
+                        listner.onUserRegistrationFailure()
                     }
         }
     }
@@ -100,7 +95,7 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
     fun updateUser(user: User, listner: UserProfileCallback){
         if(user.id.equals("local")){
             prefRepo.user = user
-            listner.onUpdated(user.id)
+            listner.onUserUpdated(user.id)
         } else {
             var batch: WriteBatch = db.batch()
             var ref: DocumentReference = db.collection(AppCollections.USERS.collectionName).document(user.id)
@@ -109,14 +104,14 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
                     .addOnSuccessListener { task ->
                         var message = AppCollections.USERS.collectionName.toString() + " update success"
                         Timber.d(message)
-                        listner.onUpdated(user.id)
+                        listner.onUserUpdated(user.id)
 //                    hideProgress()
 //                    showSuccess(message!!)
                     }
                     .addOnFailureListener { task ->
                         var message = AppCollections.USERS.collectionName + " update failed"
                         Timber.d(message)
-                        listner.onUpdateFailure()
+                        listner.onUserUpdateFailure()
                         //                   hideProgress()
                         //                  showError(message!!)
                     }
@@ -128,10 +123,10 @@ class UserRepository @Inject constructor(private val prefRepo:PrefRepo,private v
     }
 
 interface UserProfileCallback{
-    fun onRegistered(userId:String)
-    fun onRegistrationFailure()
-    fun onUpdated(id: String)
-    fun onUpdateFailure()
+    fun onUserRegistered(userId:String)
+    fun onUserRegistrationFailure()
+    fun onUserUpdated(id: String)
+    fun onUserUpdateFailure()
 }
 
 }

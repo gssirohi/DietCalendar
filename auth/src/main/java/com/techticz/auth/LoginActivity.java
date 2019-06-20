@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
+import timber.log.Timber;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -39,6 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import androidx.fragment.app.FragmentTransaction;
+import timber.log.Timber;
 
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,UserDetailsFragment.OnUserFragInteractionListener,LoginFragment.OnLoginFragInteractionListener, FacebookCallback<LoginResult> {
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Log.d(TAG,"Google Signin Status:"+result.getStatus().toString());
+            Timber.d("Google Signin Status:"+result.getStatus().toString());
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
@@ -147,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Timber.d( "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         showProgressDialog();
         // [END_EXCLUDE]
@@ -159,13 +160,13 @@ public class LoginActivity extends AppCompatActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Timber.d( "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             LoginUtils.performAppLogin(LoginActivity.this,user,AuthProviders.GOOGLE);
                             displayUserDetails(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Timber.e( "signInWithCredential:failure: %s", task.getException());
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
                                 Toast.makeText(LoginActivity.this, "An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address",Toast.LENGTH_SHORT).show();
                             }
@@ -221,7 +222,7 @@ public class LoginActivity extends AppCompatActivity implements
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        Timber.d( "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
@@ -295,13 +296,13 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onSuccess(LoginResult loginResult) {
-        Log.d(TAG, "facebook:onSuccess:" + loginResult);
+        Timber.d( "facebook:onSuccess:" + loginResult);
         handleFacebookAccessToken(loginResult.getAccessToken());
     }
 
     @Override
     public void onCancel() {
-        Log.d(TAG, "facebook:onCancel");
+        Timber.d( "facebook:onCancel");
         // [START_EXCLUDE]
         Toast.makeText(LoginActivity.this, "Facebook Login canceled.",
                 Toast.LENGTH_SHORT).show();
@@ -310,7 +311,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     @Override
     public void onError(FacebookException error) {
-        Log.d(TAG, "facebook:onError", error);
+        Timber.d( "facebook:onError %s", error);
         // [START_EXCLUDE]
         Toast.makeText(LoginActivity.this, "Facebook Login failed.",
                 Toast.LENGTH_SHORT).show();
@@ -319,7 +320,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     // [START auth_with_facebook]
     private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
+        Timber.d( "handleFacebookAccessToken:" + token);
         // [START_EXCLUDE silent]
         showProgressDialog();
         // [END_EXCLUDE]
@@ -331,13 +332,13 @@ public class LoginActivity extends AppCompatActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Timber.d( "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             LoginUtils.performAppLogin(LoginActivity.this,user,AuthProviders.FACEBOOK);
                             displayUserDetails(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure:", task.getException());
+                            Timber.e( "signInWithCredential:failure: %s", task.getException());
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
                                 Toast.makeText(LoginActivity.this, "An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address",Toast.LENGTH_SHORT).show();
                             }

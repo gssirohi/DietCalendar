@@ -98,6 +98,8 @@ class MealView(val daySection:Int?, parent:Context?) : FrameLayout(parent) {
             fab_add_plate.visibility = View.GONE
             if(context is DietChartActivity) {
                 b_remove_plate.visibility = View.VISIBLE
+            } else {
+                b_remove_plate.visibility = View.GONE
             }
             fab_expand_collapse.visibility = View.VISIBLE
  //           tv_meal_plate_name.setText(mealViewModel.triggerMealPlateID.value?.mealPlateId)

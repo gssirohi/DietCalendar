@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.NumberPicker
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.techticz.app.model.FoodResponse
@@ -16,6 +15,7 @@ import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.constants.FoodServings
 import com.techticz.app.ui.activity.RecipeDetailsActivity
 import com.techticz.app.viewmodel.ImageViewModel
 import kotlinx.android.synthetic.main.meal_food_layout.view.*
@@ -46,15 +46,25 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
         tv_food_name.setText(foodViewModel?.triggerFoodItem?.value?.id)
 
         tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
-        tv_food_qty_unit.setText(" serving")
+        tv_food_qty_unit.setText(foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel)
 
         fab_plus.setOnClickListener({onFabPlusClicked()})
         fab_minus.setOnClickListener({onFabMinusClicked()})
         fab_remove.setOnClickListener({onFabRemoveClicked()})
-        tv_pivot.setOnClickListener { MaterialDialog(context).show {
-            listItemsSingleChoice(items =listOf("1","10","50","100")) { dialog, index, text ->
-                pivotPortion = text.toInt()
-                tv_pivot.text = ""+pivotPortion
+        tv_food_serving_type.setOnClickListener { MaterialDialog(context).show {
+            listItemsSingleChoice(items=FoodServings.getAllNames()) { dialog, index, text ->
+                var foodServing = FoodServings.getEnumByLabel(text)
+                foodViewModel?.triggerFoodItem?.value?.serving = foodServing.serving
+
+                tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
+                tv_food_qty_unit.setText(foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel)
+                tv_conversion.text = foodViewModel?.getConversionText()
+                //pivotPortion = text.toInt()
+                tv_food_serving_type.text = ""+text
+                tv_food_calory.text = ""+foodViewModel?.getCaloriesPerFoodServing()!! +" Cal"
+                tv_food_calory_per.text = " / "+foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel
+                recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
+                updateRemoveButtonVisibility()
             }
         }}
         foodViewModel?.autoLoadChildren(context as BaseDIActivity)
@@ -73,6 +83,18 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
         //foodViewModel?.triggerFoodItem?.value = foodViewModel?.triggerFoodItem?.value
     }
 
+    private fun updateRemoveButtonVisibility() {
+        if(recipeActivity?.mode != RecipeDetailsActivity.MODE_EXPLORE) {
+            if (foodViewModel?.triggerFoodItem?.value?.qty!! <= pivotPortion) {
+                fab_remove.visibility = View.VISIBLE
+                fab_minus.visibility = View.GONE
+            } else {
+                fab_remove.visibility = View.GONE
+                fab_minus.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun onFabRemoveClicked(){
         recipeActivity?.removeFood(context as BaseDIActivity,foodViewModel?.triggerFoodItem?.value)
     }
@@ -83,15 +105,7 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
             foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! - pivotPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
-//            var newRes = foodViewModel?.liveFoodResponse?.value?.createCopy(Status.SUCCESS)
-//            foodViewModel?.liveFoodResponse?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! <= pivotPortion){
-                fab_remove.visibility = View.VISIBLE
-                fab_minus.visibility = View.GONE
-            } else {
-                fab_remove.visibility = View.GONE
-                fab_minus.visibility = View.VISIBLE
-            }
+            updateRemoveButtonVisibility()
         }
     }
 
@@ -101,15 +115,8 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
             foodViewModel?.triggerFoodItem?.value?.qty = foodViewModel?.triggerFoodItem?.value?.qty!! + pivotPortion
             tv_food_qty.setText("" + foodViewModel?.triggerFoodItem?.value?.qty)
             recipeActivity?.recipeViewModel?.registerFoodChildCompletion()
-//            var newRes = foodViewModel?.liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
-//            foodViewModel?.liveFoodViewModelList?.value = newRes
-            if( foodViewModel?.triggerFoodItem?.value?.qty!! > pivotPortion){
-                fab_remove.visibility = View.GONE
-                fab_minus.visibility = View.VISIBLE
-            } else {
-                fab_remove.visibility = View.VISIBLE
-                fab_minus.visibility = View.GONE
-            }
+
+            updateRemoveButtonVisibility()
         }
 
     }
@@ -117,7 +124,7 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
     private fun configureUIinEditMode(yes: Boolean) {
         if(yes){
             fab_plus.visibility = View.VISIBLE
-
+            tv_food_serving_type.visibility = View.VISIBLE
             if( foodViewModel?.triggerFoodItem?.value?.qty!! > 1){
                 fab_remove.visibility = View.GONE
                 fab_minus.visibility = View.VISIBLE
@@ -127,6 +134,7 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
             }
 
         } else {
+            tv_food_serving_type.visibility = View.GONE
             fab_minus.visibility = View.GONE
             fab_plus.visibility = View.GONE
             fab_remove.visibility = View.GONE
@@ -138,7 +146,7 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
         onFoodLoaded(resource)
     }
 
-    private var pivotPortion: Int = 10
+    private var pivotPortion: Int = 1
 
     private fun onFoodLoaded(resource: Resource<FoodResponse>?) {
         resource?.isFresh = false
@@ -151,14 +159,16 @@ class RecipeDetailsFoodView(parent: ViewGroup?, val recipeActivity: RecipeDetail
             {
                 spin_kit.visibility = View.INVISIBLE
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
-                tv_food_calory.text = foodViewModel?.perServingCalText()
-                tv_food_calory_per.text = foodViewModel?.perServingCalPerUnitText()
+                tv_food_calory.text = ""+foodViewModel?.getCaloriesPerFoodServing()!! +" Cal"
+                tv_food_calory_per.text = " / "+foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel
                 tv_food_qty.text = ""+ foodViewModel?.triggerFoodItem?.value?.qty
-                tv_food_qty_unit.text = ""+foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
-                foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.portion?.let{
+                tv_food_qty_unit.text = ""+foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel
+                tv_conversion.text = foodViewModel?.getConversionText()
+                /*foodViewModel?.liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion?.let{
                     pivotPortion = it
-                }
-                tv_pivot.text = ""+pivotPortion
+                }*/
+                tv_food_serving_type.text = ""+foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel
+                updateRemoveButtonVisibility()
                 observeChildViewModels(resource)
 
                 when(foodViewModel?.isVeg()){

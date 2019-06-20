@@ -15,6 +15,12 @@ public class BasicProperty {
     public BasicProperty() {
     }
 
+    @SerializedName("course")
+    @Expose
+    String course;
+    @SerializedName("cookTime")
+    @Expose
+    String cookTime;
     @SerializedName("availability")
     @Expose
     Integer availability;
@@ -39,4 +45,19 @@ public class BasicProperty {
         this.prefMeals = prefMeals;
     }
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(String cookTime) {
+        this.cookTime = cookTime;
+    }
 }

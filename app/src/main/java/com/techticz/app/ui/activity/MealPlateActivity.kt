@@ -2,6 +2,7 @@ package com.techticz.app.ui.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -16,8 +17,10 @@ import com.techticz.app.model.meal.Meal
 import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
+import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.repo.MealPlateRepository
 import com.techticz.app.ui.customView.PlateView
+import com.techticz.app.ui.frag.ImagePickerFragment
 import com.techticz.app.ui.frag.NutritionDialogFragment
 import com.techticz.app.viewmodel.ImageViewModel
 import com.techticz.app.viewmodel.MealPlateViewModel
@@ -32,9 +35,10 @@ import kotlinx.android.synthetic.main.meal_plate_content_layout.view.*
 import kotlinx.android.synthetic.main.plate_desc_layout.view.*
 import org.parceler.Parcels
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
-class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryCallback,NutritionDialogFragment.Listener {
+class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryCallback,NutritionDialogFragment.Listener,ImagePickerFragment.Listener {
 
 
     @Inject
@@ -43,6 +47,7 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     private var mode: Int = 0
     private var plateId: String? = null
     private lateinit var plateViewModel: MealPlateViewModel
+
     companion object{
         var MODE_NEW = 0
         var MODE_EXPLORE = 1
@@ -68,7 +73,7 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
 
         mode = intent.getIntExtra("mode",0)
         if(mode == MODE_NEW){
-
+            plateViewModel?.thePlate = MealPlate()
         } else if(mode == MODE_EXPLORE){
             plateId = intent.getStringExtra("plateId")
         } else if(mode == MODE_COPY_FROM_PLATE){
@@ -85,21 +90,21 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
             supportActionBar?.title = "Plate Details"
             plateView = PlateView(1,this,PlateView.MODE_EXPLORE,fl_plate_container)
 
-            fab.visibility = View.GONE
+            (fab as View).visibility = View.GONE
             // if allowed
             configureUIinEditMode(false)
         } else if(mode == MODE_NEW){
             supportActionBar?.title = "Create Plate"
             plateView = PlateView(1,this,PlateView.MODE_NEW,fl_plate_container)
 
-            fab.visibility = View.VISIBLE
+            (fab as View).visibility = View.VISIBLE
             configureUIinEditMode(true)
         } else if(mode == MODE_COPY_FROM_PLATE){
             plateViewModel?.triggerMealPlateID.value = Meal(Meals.BREAKFAST, sourcePlate?.id)
             supportActionBar?.title = "Create Plate Copy"
             plateView = PlateView(1,this,PlateView.MODE_COPY_FROM_PLATE,fl_plate_container)
 
-            fab.visibility = View.VISIBLE
+            (fab as View).visibility = View.VISIBLE
             configureUIinEditMode(true)
         }
         plateViewModel?.autoLoadChildren(this)
@@ -121,6 +126,9 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
         fab_nutri.setOnClickListener({
             onNutriInfoClicked()
         })
+        view_image_placeholder.setOnClickListener{
+            ImagePickerFragment.newInstance().show(supportFragmentManager, "ImagePickerDialog")
+        }
     }
     override fun getNutrition1(): Nutrition {
         var nutrition = Nutrition()
@@ -172,11 +180,21 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     private fun createNewPlate(){
         showProgress("Creating plate..")
         var plate = plateView?.prepareNewPlate()
+        aiv_meal_plate_app_bar.viewModel?.pickedBitmap?.let{
+            // save picked bitmap image
+            var localUri = aiv_meal_plate_app_bar.viewModel.savePickedImage(plate.basicInfo?.name?.english+ Calendar.getInstance().timeInMillis.toString())
+            plate.basicInfo?.image = localUri
+        }
         repo.createPlate(plate,this)
     }
     private fun savePlateChanges() {
         showProgress("Saving changes..")
         var plate = plateView?.getModifiedPlate()
+        aiv_meal_plate_app_bar.viewModel?.pickedBitmap?.let{
+            // save picked bitmap image
+            var localUri = aiv_meal_plate_app_bar.viewModel.savePickedImage(plate.basicInfo?.name?.english+ Calendar.getInstance().timeInMillis.toString())
+            plate.basicInfo?.image = localUri
+        }
         repo.updatePlate(plate,this)
     }
 
@@ -214,9 +232,13 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
     private fun configureUIinEditMode(yes:Boolean) {
         if(yes) {
             fab.setImageResource(R.drawable.ic_check)
+            fab.invalidate()
+            view_image_placeholder.visibility = View.VISIBLE
             plateView?.configureUIinEditMode(true)
         } else {
             fab.setImageResource(R.drawable.ic_mode_edit)
+            fab.invalidate()
+            view_image_placeholder.visibility = View.GONE
             plateView?.configureUIinEditMode(false)
         }
     }
@@ -229,7 +251,7 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
                 var creater = resource?.data?.mealPlate?.adminInfo?.createdBy
                 var user = LoginUtils.getUserCredential()
                 creater?.let { if(creater!!.equals(user,true)){
-                    fab.visibility = View.VISIBLE
+                    (fab as View).visibility = View.VISIBLE
                 } else{
                     if(mode != MODE_COPY_FROM_PLATE) {
                         var createCopyView = View.inflate(this, R.layout.create_plate_copy_layout, null)
@@ -291,9 +313,10 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
             plateView?.recipeRecyclerView?.adapter?.notifyDataSetChanged()
         } else if(requestCode == 2 && resultCode == Activity.RESULT_OK){
             var foodId = data?.getStringExtra("foodId")
-            var foodStdServing = data?.getIntExtra("stdServing",100)
-            if(foodStdServing == null) foodStdServing = 100
-            var foodItem = FoodItem(foodId,foodStdServing)
+            var foodPopularServingQty = data?.getIntExtra("popularServingQty",100)
+            var foodPopularServingType = data?.getStringExtra("popularServingType")
+            if(foodPopularServingQty == null) foodPopularServingQty = 100
+            var foodItem = FoodItem(foodId,foodPopularServingQty,foodPopularServingType)
 
             //add recipe to this plate
             plateView?.mealPlateViewModel?.addFoodViewModel(this,foodItem)
@@ -302,5 +325,12 @@ class MealPlateActivity : BaseDIActivity(), MealPlateRepository.PlateRepositoryC
         }
     }
 
-
+    override fun onBitmapPicked(bitmap: Bitmap) {
+        // this bitmap is still not saved: Save it while saving recipe
+        if(aiv_meal_plate_app_bar.viewModel == null){
+            aiv_meal_plate_app_bar.viewModel = ImageViewModel(this)
+        }
+        aiv_meal_plate_app_bar.viewModel.pickedBitmap = bitmap
+        aiv_meal_plate_app_bar.setImageBitmap(bitmap)
+    }
 }

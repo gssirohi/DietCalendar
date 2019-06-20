@@ -2,6 +2,7 @@ package com.techticz.app.ui.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import com.techticz.app.constants.FoodServings
 import com.techticz.app.model.food.Food
 import com.techticz.app.ui.activity.BrowseFoodActivity
 import com.techticz.app.viewmodel.ImageViewModel
@@ -20,7 +21,7 @@ class BrowseFoodsAdapter (var foods: List<Food>, var callBack: FoodViewCallBacks
             // holder.mItem = mValues.get(position);
             var calPerStdPortion = foods.get(position)?.getCaloriesPerStdPortion()
             if(calPerStdPortion != null){
-                (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+calPerStdPortion+"\uD83D\uDD25"+" KCAL/"+foods.get(position)?.standardServing?.portion+" "+foods.get(position)?.standardServing?.servingUnit
+                (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+calPerStdPortion+"\uD83D\uDD25"+" KCAL/"+foods.get(position)?.standardServing?.stdPortion+" "+FoodServings.STANDARD_PORTION.servingLabel
                 (holder as FoodViewHolder).foodView.tv_food_cal.visibility = View.VISIBLE
             } else {
                 (holder as FoodViewHolder).foodView.tv_food_cal.visibility = View.GONE

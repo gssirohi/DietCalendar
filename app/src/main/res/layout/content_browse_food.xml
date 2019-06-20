@@ -28,6 +28,7 @@
             android:id="@+id/recycler_foods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:layout_height="100dp"
             tools:listitem="@layout/meal_food_list_item_view"
             >
 
@@ -49,6 +50,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:layout_height="100dp"
             android:layout_margin="0dp"
             app:contentPadding="0dp">
             <LinearLayout
@@ -109,6 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
+            tools:layout_height="100dp"
             app:contentPadding="0dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,17 +151,17 @@
                         android:textAllCaps="true"
                         style="?attr/textAppearanceOverline"/>
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="8dp"
                     android:id="@+id/recycler_vegitables"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     android:visibility="visible"
                     tools:layout_height="250dp"
                     tools:layout_width="600dp"
-                    tools:listitem="@layout/food_featured_list_item_view"
-                    >
+                    tools:listitem="@layout/food_featured_list_item_view">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
@@ -179,7 +182,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Egg or egg products"
+                        android:text="Food Rich In:"
                         android:textStyle="bold"
                         android:gravity="left|center"
                         android:layout_weight="1"
@@ -197,6 +200,7 @@
                         android:layout_gravity="center"
                         app:SpinKit_Color="?attr/colorAccent" />
                     <TextView
+                        android:id="@+id/tv_select_nutrient"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""

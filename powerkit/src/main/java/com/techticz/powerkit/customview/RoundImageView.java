@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
+import timber.log.Timber;
 import android.widget.ImageView;
 
 
@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 26/8/17.
@@ -100,11 +101,11 @@ public class RoundImageView extends CircleImageView {
                     return bitmap;
                 }
             } catch (Exception e) {
-                Log.d("URLCONNECTIONERROR", e.toString());
+                Timber.d("URLCONNECTIONERROR%s", e.toString());
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
-                Log.w("ImageDownloader", "Error downloading image from " + url);
+                Timber.e("ImageDownloader Error downloading image from " + url);
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();

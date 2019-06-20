@@ -33,6 +33,7 @@ import com.techticz.app.repo.RecipeRepository
 import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Status
 import kotlinx.android.synthetic.main.content_tool.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -48,24 +49,24 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
     val FOOD_HEDAR_LAST_ROW_INDEX = 5 - 1
     val FOOD_UNIT_ROW_INDEX = 5
     val FOOD_START_ROW_INDEX = 6
-    var FOOD_MAX_ROW_INDEX = 380-1//10-1 //15 // 375
+    var FOOD_MAX_ROW_INDEX = 362-1//10-1 //15 // 375
     val FOOD_SHEET_NAME = "food"
 
     val RECIPE_LAST_COLUMN_INDEX = ((26 * 1) + 2) - 1
     val RECIPE_HEDAR_LAST_ROW_INDEX = 3 - 1
     val RECIPE_UNIT_ROW_INDEX = 4-1
     val RECIPE_START_ROW_INDEX = 5-1
-    var RECIPE_MAX_ROW_INDEX = 78-1/*357 - 1*/
+    var RECIPE_MAX_ROW_INDEX = 88-1/*357 - 1*/
     val RECIPE_SHEET_NAME = "recipe"
 
     val PLATE_LAST_COLUMN_INDEX = ((26 * 1) ) - 1
     val PLATE_HEDAR_LAST_ROW_INDEX = 3 - 1
     val PLATE_UNIT_ROW_INDEX = 4-1
     val PLATE_START_ROW_INDEX = 5-1
-    var PLATE_MAX_ROW_INDEX = 54-1/*357 - 1*/
+    var PLATE_MAX_ROW_INDEX = 32-1/*357 - 1*/
     val PLATE_SHEET_NAME = "plate"
 
-    val PLAN_LAST_COLUMN_INDEX = ((26 * 2) + 6) - 1
+    val PLAN_LAST_COLUMN_INDEX = ((26 * 2) + 9) - 1
     val PLAN_HEDAR_LAST_ROW_INDEX = 3 - 1
     val PLAN_UNIT_ROW_INDEX = 4-1
     val PLAN_START_ROW_INDEX = 5-1
@@ -90,7 +91,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
             Toast.makeText(this, "Excel is converted to json", Toast.LENGTH_LONG).show()
             hideProgressDialog()
         }.addOnFailureListener {
-            Log.e("SpreadsheetExporter", "Export failed", it)
+            Timber.e("SpreadsheetExporter", "Export failed", it)
             Toast.makeText(this, it.stackTrace.toList().toString(), Toast.LENGTH_LONG).show()
         }
 
@@ -143,7 +144,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
             Toast.makeText(this, "Excel is converted to json", Toast.LENGTH_LONG).show()
             hideProgressDialog()
         }.addOnFailureListener {
-            Log.e("SpreadsheetExporter", "Export failed", it)
+            Timber.e("SpreadsheetExporter", "Export failed", it)
             Toast.makeText(this, it.stackTrace.toList().toString(), Toast.LENGTH_LONG).show()
         }
     }
@@ -200,7 +201,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
         }
 
         fun traverse(obj: JSONObject, row: XSSFRow, unitRow:XSSFRow) {
-            Log.i("TREE","Traversing "+this.toString())
+            Timber.i("TREE","Traversing "+this.toString())
             var it = children.iterator();
             var childJson = JSONObject()
             var childJsonPresent = false
@@ -213,7 +214,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
                 if (childJson.length() == 0 && !childJsonPresent) {
                     var cell = row.getCell((this.value as Header).column)
                     if (cell == null) {
-                        Log.e("SHEET", "Cell is NULL at row:" + row.rowNum + " column:" + (this.value as Header).column)
+                        Timber.e("SHEET", "Cell is NULL at row:" + row.rowNum + " column:" + (this.value as Header).column)
                         return
                     }
                     var label = getLabel(cell)
@@ -221,7 +222,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
                     var unitLabel = getLabel(unitCell)
 
                     if (label.equals("") && !unitLabel.equals("String", true)) {
-                        Log.e("SHEET", "Cell is EMPTY at row:" + row.rowNum + " column:" + (this.value as Header).column)
+                        Timber.e("SHEET", "Cell is EMPTY at row:" + row.rowNum + " column:" + (this.value as Header).column)
                         obj.put(this.value.toString(), null)
                     } else {
                         if (unitLabel.equals("Integer", true)) {
@@ -254,7 +255,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
                     obj.put(this.value.toString(), childJson)
                 }
             } catch (e:Exception){
-                Log.e("ERROR","EXCEPTION at row:" + row.rowNum + " column:" + (this.value as Header).column)
+                Timber.e("ERROR","EXCEPTION at row:" + row.rowNum + " column:" + (this.value as Header).column)
                 e.printStackTrace()
             }
         }
@@ -311,13 +312,13 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
             var myInput: InputStream;
             var assetManager = assets
             //  Don't forget to Change to your assets folder excel sheet
-            Log.d("SHEET","Reading...........")
+            Timber.d("SHEET","Reading...........")
             myInput = assetManager.open("DietCalendar.xlsx");
 
             // Create a workbook using the File System
             var myWorkBook: XSSFWorkbook = XSSFWorkbook(myInput);
             return myWorkBook
-            Log.d("SHEET","....Reading Complete....")
+            Timber.d("SHEET","....Reading Complete....")
 
         } catch (e: Exception) {
             e.printStackTrace();
@@ -350,7 +351,7 @@ class ToolActivity : BaseDIActivity(), View.OnClickListener {
     }
 
     private fun fetchSheetJson(sheetName:String,myWorkBook:XSSFWorkbook,lastColumnIndex:Int,unitRowIndex:Int,startIndex:Int,endIndex:Int):JSONArray {
-        Log.d("SHEET","Processing sheet :"+sheetName+" .........")
+        Timber.d("SHEET","Processing sheet :"+sheetName+" .........")
         // Get the first sheet from workbook
         var sheet: XSSFSheet = myWorkBook.getSheet(sheetName)
 
@@ -465,7 +466,7 @@ fun writeFile( filename:String,data:String) {
             return
         }
 
-        Log.d("TREE","finding children of "+parent.value.label+" From Column "+start+" to "+end+" At Row "+row)
+        Timber.d("TREE","finding children of "+parent.value.label+" From Column "+start+" to "+end+" At Row "+row)
 
         var itrCell = mySheet.getRow(row).cellIterator()
         //forward iterator till parent column index
@@ -473,7 +474,7 @@ fun writeFile( filename:String,data:String) {
         while(itrCell.hasNext() && currentIndex < start){
             currentIndex = itrCell.next().columnIndex
         }
-        Log.i("TREE","Fast Forwarded till:"+currentIndex)
+        Timber.i("TREE","Fast Forwarded till:"+currentIndex)
         var isFirstCell = true
 
         do{
@@ -486,7 +487,7 @@ fun writeFile( filename:String,data:String) {
             }
 
             var label = getLabel(thisCell as XSSFCell)
-            Log.d("TREE","For "+parent.value.label+", Found:"+label+" at column:"+thisCell.columnIndex)
+            Timber.d("TREE","For "+parent.value.label+", Found:"+label+" at column:"+thisCell.columnIndex)
             //find range of children of this cell to add
             var it = mySheet.getRow(row).cellIterator()
             var nextCell:XSSFCell? = null;
@@ -566,7 +567,7 @@ fun writeFile( filename:String,data:String) {
 
         try {
             var f: File = File("" + externalCacheDir + "/Documents/diet_calendar_1.xlxs");
-            Log.d("EXCEL", "Creating file at :" + f.absolutePath)
+            Timber.d("EXCEL", "Creating file at :" + f.absolutePath)
             var outputStream: OutputStream = FileOutputStream(f);
             var buffer: ByteArray = ByteArray(1024 * 3)
             var length = 0;

@@ -101,7 +101,7 @@ public class Utils {
     }
 
     public static Float roundUpFloatToOneDecimal(Float value) {
-        double rounded = (Math.round(value*10.0)/10.0);
+        double rounded = (Math.round(value));
         return Float.parseFloat(""+rounded);
     }
 
@@ -123,5 +123,10 @@ public class Utils {
             output = 0f+input;
         }
         return output;
+    }
+
+    @Nullable
+    public static Float kCalFromCal(float Cal) {
+        return  Cal* 4.18f;
     }
 }

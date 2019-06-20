@@ -15,6 +15,7 @@ import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.ui.activity.DietPlanActivity
+import timber.log.Timber
 import javax.inject.Named
 
 
@@ -23,7 +24,7 @@ import javax.inject.Named
  */
 class Navigator @Inject constructor(val context: Context)  {
     init {
-        Log.d("DI","providing navigator")
+        Timber.d("DI","providing navigator")
     }
 fun startDashBoard(){
     var intent = Intent(context,DashboardActivity::class.java)
@@ -55,17 +56,13 @@ fun startDashBoard(){
         activity.startActivityForResult(intent,1)
     }
 
-    fun startCreatePlanActivity() {
+    fun startDietPlanActivity(mode: Int,plan: DietPlan?) {
         var intent = Intent(context, DietPlanActivity::class.java)
+        intent.putExtra("mode",mode)
+        plan?.let{intent.putExtra("plan", Parcels.wrap<DietPlan>(it))}
         context.startActivity(intent)
     }
 
-    fun startCopyPlanActivity(activity: Activity, plan: DietPlan?) {
-        var intent = Intent(context, DietPlanActivity::class.java)
-        intent.putExtra("plan", Parcels.wrap<DietPlan>(plan))
-        intent.putExtra("mode", DietPlanActivity.MODE_COPY_FROM_PLAN)
-        activity.startActivityForResult(intent,1)
-    }
 
     fun navigateToLoginActivity(activity:BaseDIActivity) {
         activity.startActivityForResult(Intent(activity, LoginActivity::class.java), 11)
@@ -146,6 +143,7 @@ fun startDashBoard(){
         var intent = Intent(context, ToolActivity::class.java)
         context.startActivity(intent)
     }
+
 
 
 }

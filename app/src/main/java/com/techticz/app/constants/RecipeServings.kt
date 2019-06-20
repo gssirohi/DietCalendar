@@ -10,5 +10,4 @@ enum class RecipeServings(val serving: String) {
     TEASPOON("Tea Spoon"),
     GLASS("Glass"),
     PIECE("Piece")
-
 }

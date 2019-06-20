@@ -49,6 +49,10 @@ class FoodRepository @Inject constructor(private val db: FirebaseFirestore,priva
         return fetchAllDocsByProperty("category", FieldPath.of("basicInfo","category"),triggerCategory!!)
     }
 
+    fun fetchFoodsForNutrient(nutrientName: String?): LiveData<Resource<BrowseFoodResponse>>? {
+        return fetchAllDocsOrderByProperty(nutrientName!!, FieldPath.of("basicInfo","category"),"DESC")
+    }
+
     fun sync(): LiveData<Resource<String>>? {
         return syncDocuments()
     }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="32dp"
-    android:background="?attr/colorSecondary"
+    android:background="@color/primaryLightColor"
     tools:context="com.techticz.auth.LoginActivity">
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -54,7 +54,6 @@
                     android:layout_marginTop="8dp"
                     android:text="Gyanendra Singh"
                     style="?attr/textAppearanceHeadline5"
-                    android:textAllCaps="true"
                     android:id="@+id/tv_user_name"
                     />
 
@@ -64,9 +63,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Email not available"
                     android:gravity="center"
-                    android:layout_marginTop="8dp"
                     style="?attr/textAppearanceBody2"
-                    android:textColor="@color/secondaryColor"
                     />
 
                 <TextView
@@ -75,9 +72,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Phone number not available"
                     android:gravity="center"
-                    android:layout_marginTop="8dp"
                     style="?attr/textAppearanceBody2"
-                    android:textColor="@color/secondaryColor"
                     />
 
 

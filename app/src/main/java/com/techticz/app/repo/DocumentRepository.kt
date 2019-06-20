@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import android.util.Log
 import androidx.lifecycle.Observer
 import com.google.firebase.firestore.*
+import com.google.gson.Gson
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
@@ -72,7 +73,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading published " + getCollectionName() + "s is successful", DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading published " + getCollectionName() + "s is failed!", task.exception)
+                            Timber.e("Repo", "Loading published " + getCollectionName() + "s is failed!", task.exception)
                         }
                     }
         }
@@ -117,7 +118,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading featured " + getCollectionName() + "s is successful", DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading featured " + getCollectionName() + "s is failed!", task.exception)
+                            Timber.e("Repo", "Loading featured " + getCollectionName() + "s is failed!", task.exception)
                         }
                     }
         }
@@ -163,7 +164,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading my docs " + getCollectionName() + "s is successful", DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading my docs " + getCollectionName() + "s is failed!", task.exception)
+                            Timber.e("Repo", "Loading my docs " + getCollectionName() + "s is failed!", task.exception)
                         }
                     }
         }
@@ -209,7 +210,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading Success- "+getCollectionName(), DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading Failed- "+getCollectionName(), task.exception)
+                            Timber.e("Repo", "Loading Failed- "+getCollectionName(), task.exception)
                         }
                     }
         }
@@ -241,6 +242,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                     }.subscribe({
                         //success
                         doc ->   if (doc != null) {
+                           Timber.d("Fetched ${doc}"+ Gson().toJson(doc).toString())
                            var fetchedRes = getResponseInstance(doc)
                            var resource = Resource<S_RespT>(Status.SUCCESS, fetchedRes, "Loading Success- Doc DB "+getCollectionName() , DataSource.LOCAL)
                            live.value = resource
@@ -250,7 +252,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                         }
                     },{
                         //error
-                        Log.e("DOCUMENT","ERROR loading :"+docId)
+                        Timber.e("DOCUMENT","ERROR loading :"+docId)
                         var resource = Resource<S_RespT>(Status.ERROR, null, "Loading Failed- Doc DB :" +getCollectionName(), DataSource.LOCAL)
                         live.value = resource
                     })
@@ -277,6 +279,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
 
     fun createDocument(id:String,newDoc: DocT,listner:DocumentCallBack<DocT>) {
         Timber.d("creating document:"+getCollectionName()+":"+id)
+        Timber.d("Document:"+ Gson().toJson(newDoc).toString())
         if(true){
             getDao().insert(newDoc)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -310,6 +313,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
 
     fun updateDocument(id:String,newDoc: DocT,listner:DocumentCallBack<DocT>) {
         Timber.d("updating document:"+getCollectionName()+":"+id)
+        Timber.d("Document:"+ Gson().toJson(newDoc).toString())
         if(true){
             getDao().update(newDoc)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -356,17 +360,17 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeOn(Schedulers.io())
                                 .doOnSuccess {
-                                    Log.d("Repo", "Syncing success -"+getCollectionName()+"s")
+                                    Timber.d("Repo", "Syncing success -"+getCollectionName()+"s")
                                     var resource = Resource<String>(Status.SUCCESS, "synced", "Syncing Success- "+getCollectionName(), DataSource.LOCAL)
                                     live.value = resource
                                 }.doOnError {
-                                    Log.e("Repo", "Syncing error - "+getCollectionName())
+                                    Timber.e("Repo", "Syncing error - "+getCollectionName())
                                     var resource = Resource<String>(Status.ERROR, "synced", "Syncing Error- "+getCollectionName(), DataSource.LOCAL)
                                     live.value = resource
                                 }.subscribe()
 
                     } else {
-                        Log.e("Repo", "Syncing Failed- "+getCollectionName(), task.exception)
+                        Timber.e("Repo", "Syncing Failed- "+getCollectionName(), task.exception)
                         var resource = Resource<String>(Status.ERROR, "sync_failed", "Syncing Error- "+getCollectionName(), DataSource.LOCAL)
                         live.value = resource
                     }
@@ -409,7 +413,49 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading docs " + getCollectionName() + "s is successful", DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading docs " + getCollectionName() + "s is failed!", task.exception)
+                            Timber.e("Repo", "Loading docs " + getCollectionName() + "s is failed!", task.exception)
+                        }
+                    }
+        }
+        return live
+    }
+
+    fun fetchAllDocsOrderByProperty(dbProperty:String,path:FieldPath,order:String):LiveData<Resource<M_RespT>>{
+        var resp = getListResponseInstance(null)
+        var resource = Resource<M_RespT>(Status.LOADING, resp, "Loading docs "+getCollectionName()+"s..", DataSource.LOCAL)
+        var live :MediatorLiveData<Resource<M_RespT>> =  MediatorLiveData<Resource<M_RespT>>()
+        live.value = resource
+
+        if(true){
+            getDao().orderByProperty(dbProperty,order)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .doOnSuccess {docs ->   if (docs != null) {
+                        var fetchedRes = getListResponseInstance(docs)
+                        var resource = Resource<M_RespT>(Status.SUCCESS, fetchedRes, "Loading Success- Docs DB "+getCollectionName() , DataSource.LOCAL)
+                        live.value = resource
+                    } else {
+                        var resource = Resource<M_RespT>(Status.ERROR, null, "Loading Failed- Docs DB:" +getCollectionName(), DataSource.LOCAL)
+                        live.value = resource
+                    }}
+                    .doOnError {
+                        var resource = Resource<M_RespT>(Status.ERROR, null, "Loading Failed- Docs DB :" +getCollectionName(), DataSource.LOCAL)
+                        live.value = resource
+                    }
+                    .subscribe()
+        } else {
+            db.collection(getCollectionName())
+                    .orderBy(path, Query.Direction.DESCENDING)
+                    .get()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            var docs: List<DocT> = task.result!!.toObjects(getDocType())
+                            //callback.onPlansFetched(plans)
+                            var resp = getListResponseInstance(docs)
+                            var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading docs " + getCollectionName() + "s is successful", DataSource.LOCAL)
+                            live.value = resource
+                        } else {
+                            Timber.e("Repo", "Loading docs " + getCollectionName() + "s is failed!", task.exception)
                         }
                     }
         }
@@ -452,7 +498,7 @@ abstract class DocumentRepository<DocT,M_RespT,S_RespT> constructor(private val 
                             var resource = Resource<M_RespT>(Status.SUCCESS, resp, "Loading docs " + getCollectionName() + "s is successful", DataSource.LOCAL)
                             live.value = resource
                         } else {
-                            Log.e("Repo", "Loading docs " + getCollectionName() + "s is failed!", task.exception)
+                            Timber.e("Repo", "Loading docs " + getCollectionName() + "s is failed!", task.exception)
                         }
                     }
         }

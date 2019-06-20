@@ -1,7 +1,7 @@
 package com.techticz.networking.retrofit;
 
 import android.content.Context;
-import android.util.Log;
+import timber.log.Timber;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -75,7 +75,7 @@ public class RetrofitProvider {
               /*.logger(new Logger() {
                   @Override
                   public void log(int level, String tag, String msg) {
-                      Log.w(tag, msg);
+                      Timber.w(tag, msg);
                   }
               })*/
                     .build();
@@ -115,7 +115,7 @@ public class RetrofitProvider {
               /*.logger(new Logger() {
                   @Override
                   public void log(int level, String tag, String msg) {
-                      Log.w(tag, msg);
+                      Timber.w(tag, msg);
                   }
               })*/
                     .build();

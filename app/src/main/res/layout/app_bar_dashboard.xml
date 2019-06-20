@@ -56,7 +56,8 @@
         android:layout_gravity="bottom|end"
         android:elevation="9dp"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_action_calendar_day" />
 
     <include layout="@layout/content_dashboard" />
     <TextView

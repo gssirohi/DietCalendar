@@ -19,7 +19,7 @@ class CategoryFoodAdapter (var foods: List<Food>, var callBack: FoodViewCallBack
         if (holder is FoodViewHolder) {
             // holder.mItem = mValues.get(position);
 
-            (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+foods.get(position)?.nutrition?.nutrients?.principlesAndDietaryFibers?.energy
+            (holder as FoodViewHolder).foodView.tv_food_cal.text = ""+callBack.getFoodNutrient(foods.get(position))
             (holder as FoodViewHolder).foodView.tv_food_name.text = ""+foods.get(position)?.basicInfo?.name?.english
             (holder as FoodViewHolder).foodView.tv_food_desc.text = ""+foods.get(position)?.basicInfo?.desc
             (holder as FoodViewHolder).foodView.setOnClickListener(View.OnClickListener {
@@ -64,5 +64,6 @@ class CategoryFoodAdapter (var foods: List<Food>, var callBack: FoodViewCallBack
 
     interface FoodViewCallBacks{
         fun onFeaturedFoodViewClicked(mealFood:Food)
+        fun getFoodNutrient(get: Food): Float
     }
 }

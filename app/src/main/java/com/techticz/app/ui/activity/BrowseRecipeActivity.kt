@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.model.BrowseRecipeResponse
+import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.Recipe
 import com.techticz.app.ui.adapter.AutoBrowseRecipeAdapter
 import com.techticz.app.ui.adapter.BrowseRecipesAdapter
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.content_browse_recipe.*
 class BrowseRecipeActivity : BaseDIActivity(), BrowseRecipesAdapter.RecipeViewCallBacks, AutoBrowseRecipeAdapter.RecipeViewCallBacks {
     override fun onFeaturedRecipeViewClicked(mealRecipe: Recipe) {
         if(TextUtils.isEmpty(plateId)){
-
+            navigator.startExploreRecipeScreen(RecipeItem(mealRecipe?.id,1))
         } else {
             var data = intent
             data.putExtra("recipeId", mealRecipe.id)

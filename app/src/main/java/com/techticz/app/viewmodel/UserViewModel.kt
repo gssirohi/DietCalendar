@@ -78,5 +78,10 @@ constructor() : BaseViewModel() {
         }
     }
 
+    fun updateUser(listner: UserRepository.UserProfileCallback) {
+        liveUserResponse?.value?.data?.user?.let{
+            injectedRepo.updateUser(it,listner)
+        }
+    }
 
 }

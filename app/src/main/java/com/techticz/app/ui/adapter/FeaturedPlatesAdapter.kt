@@ -34,19 +34,6 @@ class FeaturedPlatesAdapter (var dayMeals: List<MealPlate>, var callBack: PlateV
         }
     }
 
-/*    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
-        if (holder is PlateViewHolder) {
-            holder!!.setIsRecyclable(false)
-        }
-        super.onViewAttachedToWindow(holder)
-    }
-
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-        if (holder is PlateViewHolder) {
-            holder!!.setIsRecyclable(true)
-        }
-        super.onViewDetachedFromWindow(holder)
-    }*/
     override fun getItemCount(): Int {
         return dayMeals?.size
     }

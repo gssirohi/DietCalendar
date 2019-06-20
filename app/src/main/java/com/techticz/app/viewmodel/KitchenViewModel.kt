@@ -68,7 +68,7 @@ constructor() : BaseViewModel() {
                             var resource = Resource<String>(Status.COMPLETE, resp, result.message, DataSource.LOCAL)
                             live.value = resource
                         } else if(result.data.equals("synced",true)){
-                            Log.d("Kitchen","food sync completed!")
+                            Timber.d("Kitchen","food sync completed!")
                             var resource = Resource<String>(Status.SUCCESS, "food", result.message, DataSource.LOCAL)
                             live.value = resource
                         }
@@ -101,7 +101,7 @@ constructor() : BaseViewModel() {
                             var resource = Resource<String>(Status.COMPLETE, resp, result.message, DataSource.LOCAL)
                             live.value = resource
                         } else if(result.data.equals("synced",true)){
-                            Log.d("Kitchen","recipe sync completed!")
+                            Timber.d("Kitchen","recipe sync completed!")
                             var resource = Resource<String>(Status.SUCCESS, "recipe", result.message, DataSource.LOCAL)
                             live.value = resource
                         }
@@ -133,7 +133,7 @@ constructor() : BaseViewModel() {
                             var resource = Resource<String>(Status.COMPLETE, resp, result.message, DataSource.LOCAL)
                             live.value = resource
                         } else if(result.data.equals("synced",true)){
-                            Log.d("Kitchen","plate sync completed!")
+                            Timber.d("Kitchen","plate sync completed!")
                             var resource = Resource<String>(Status.SUCCESS, "plate", result.message, DataSource.LOCAL)
                             live.value = resource
                         }
@@ -161,11 +161,11 @@ constructor() : BaseViewModel() {
                         planSynced = true
 
                         if(foodSynced && recipeSynced && plateSynced && planSynced){
-                            Log.d("Kitchen","all doc sync completed!")
+                            Timber.d("Kitchen","all doc sync completed!")
                             var resource = Resource<String>(Status.COMPLETE, resp, result.message, DataSource.LOCAL)
                             live.value = resource
                         } else if(result.data.equals("synced",true)){
-                            Log.d("Kitchen","plan sync completed!")
+                            Timber.d("Kitchen","plan sync completed!")
                             var resource = Resource<String>(Status.SUCCESS, "plan", result.message, DataSource.LOCAL)
                             live.value = resource
                         }

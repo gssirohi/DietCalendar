@@ -166,14 +166,13 @@
                     style="?attr/textAppearanceHeadline5"
                     android:textStyle = "bold" />
 
-                <SeekBar
-                    android:id="@+id/sb_height"
+                <com.techticz.powerkit.customview.SeekBarWithValues
+                    android:id="@+id/sbv_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="250"
-                    android:min="100"
-                    android:layout_margin="8dp"/>
+                    >
 
+                </com.techticz.powerkit.customview.SeekBarWithValues>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -192,14 +191,13 @@
                     android:gravity="center"
                     style="?attr/textAppearanceHeadline5"
                     android:textStyle = "bold" />
-
-                <SeekBar
-                    android:id="@+id/sb_weight"
+                <com.techticz.powerkit.customview.SeekBarWithValues
+                    android:id="@+id/sbv_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="120"
-                    android:min="20"
-                    android:layout_margin="8dp"/>
+                    >
+
+                </com.techticz.powerkit.customview.SeekBarWithValues>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

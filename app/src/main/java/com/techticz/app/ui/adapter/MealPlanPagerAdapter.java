@@ -16,7 +16,9 @@ import android.widget.TextView;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.techticz.app.base.BaseDIActivity;
 import com.techticz.app.model.dietplan.DietPlan;
+import com.techticz.app.model.user.User;
 import com.techticz.app.viewmodel.ImageViewModel;
 import com.techticz.dietcalendar.R;
 import com.techticz.app.ui.customView.AppImageView;
@@ -97,9 +99,44 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<RecyclerView.View
             imageViewModel.getTriggerImageUrl().setValue(data.get(position).getBasicInfo().getImage());
             ((MealPlanViewHolder)holder).planImage.setImageViewModel(imageViewModel, (LifecycleOwner) context);
 
+            User user = ((BaseDIActivity) context).getBaseuserViewModel().getLiveUserResponse().getValue().data.getUser();
+            List<String> lockKeys = user.getPlanLockKeys();
+            if(!(data.get(position).getAdminInfo().getHasLock() != null && data.get(position).getAdminInfo().getHasLock())){
+                ((MealPlanViewHolder)holder).planAccess.setText("Free");
+                ((MealPlanViewHolder)holder).planAccess.setCompoundDrawables(null,null,null,null);
+                ((View)((MealPlanViewHolder)holder).bExplore).setVisibility(View.GONE);
+            } else if((lockKeys != null && lockKeys.contains(data.get(position).getId()))){
+                ((MealPlanViewHolder)holder).planAccess.setText("Free");
+                ((MealPlanViewHolder)holder).planAccess.setCompoundDrawables(null,null,context.getResources().getDrawable(R.drawable.ic_lock_open),null);
+                ((View)((MealPlanViewHolder)holder).bExplore).setVisibility(View.VISIBLE);
+                ((MealPlanViewHolder)holder).bExplore.setImageResource(R.drawable.ic_lock_open);
+            } else {
+                ((MealPlanViewHolder)holder).planAccess.setText("Free");
+                ((MealPlanViewHolder)holder).planAccess.setCompoundDrawables(null,null,context.getResources().getDrawable(R.drawable.ic_lock),null);
+                ((View)((MealPlanViewHolder)holder).bExplore).setVisibility(View.VISIBLE);
+                ((MealPlanViewHolder)holder).bExplore.setImageResource(R.drawable.ic_lock);
+            }
+            String activePlan = user.getActivePlan();
+            if(activePlan != null && activePlan.equals(data.get(position).getId())){
+                ((MealPlanViewHolder)holder).itemView.findViewById(R.id.shape_plan_active_lable).setVisibility(View.VISIBLE);
+            } else {
+                ((MealPlanViewHolder)holder).itemView.findViewById(R.id.shape_plan_active_lable).setVisibility(View.GONE);
+            }
+            if(data.get(position).isRecommonded()){
+                ((MealPlanViewHolder)holder).itemView.findViewById(R.id.shape_recommonded_plan).setVisibility(View.VISIBLE);
+            } else {
+                ((MealPlanViewHolder)holder).itemView.findViewById(R.id.shape_recommonded_plan).setVisibility(View.GONE);
+            }
             ((MealPlanViewHolder)holder).bExplore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    callBack.onMealPlanItemClicked(data.get(position));
+                }
+            });
+
+            ((MealPlanViewHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     callBack.onMealPlanItemClicked(data.get(position));
                 }
             });
@@ -126,7 +163,7 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<RecyclerView.View
             this.itemView = itemView;
         }
     }
-    class MealPlanViewHolder extends RecyclerView.ViewHolder {
+    public class MealPlanViewHolder extends RecyclerView.ViewHolder {
 
         private FloatingActionButton bExplore;
         private AppImageView planImage;
@@ -135,6 +172,7 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<RecyclerView.View
         private TextView planCalory;
         private TextView planAuthor;
         private TextView planType;
+        private TextView planAccess;
 
         public MealPlanViewHolder(View itemView) {
             super(itemView);
@@ -144,12 +182,14 @@ public class MealPlanPagerAdapter extends RecyclerView.Adapter<RecyclerView.View
             planType = (TextView)itemView.findViewById(R.id.plan_type);
             planCalory = (TextView)itemView.findViewById(R.id.tv_daily_cal);
             planAuthor = (TextView)itemView.findViewById(R.id.tv_plan_author);
+            planAccess = (TextView)itemView.findViewById(R.id.plan_access);
             bExplore = (FloatingActionButton)itemView.findViewById(R.id.b_explore);
         }
     }
 
 
     public interface CallBack{
+        void onMealPlanCalendarClicked(DietPlan plan);
         void onMealPlanItemClicked(DietPlan plan);
         void onAddMealPlanClicked();
     }

@@ -70,9 +70,9 @@ class RecipeFoodView(parent: ViewGroup?, val recipeView: MealRecipeView) : Frame
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
                 tv_food_qty.setText(""+
                         foodViewModel?.triggerFoodItem?.value?.qty+"\n"+
-                        resource.data?.food?.standardServing?.servingUnit)
-                tv_food_calory.text = foodViewModel?.perServingCalText()
-                tv_food_calory_per.text = foodViewModel?.perServingCalPerUnitText()
+                        foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel)
+                tv_food_calory.text = foodViewModel?.perStdServingCalText()
+                tv_food_calory_per.text = foodViewModel?.perStdServingCalPerUnitText()
                 tv_food_name.visibility = View.VISIBLE
 
                 when(foodViewModel?.isVeg()){

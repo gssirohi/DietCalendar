@@ -2,7 +2,6 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import android.text.Html
 import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.FoodResponse
 import com.techticz.app.model.food.Nutrients
@@ -13,6 +12,7 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
+import com.techticz.app.constants.FoodServings
 import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
 import timber.log.Timber
@@ -77,6 +77,7 @@ constructor() : BaseViewModel() {
                 }
                 Status.ERROR->{
                     liveStatus.value = Status.COMPLETE
+                    Timber.e("Error in loading food:"+triggerFoodItem.value?.id)
                 }
             }
         })
@@ -99,24 +100,63 @@ constructor() : BaseViewModel() {
         return Utils.calories(getNutrientPerStdServing()?.principlesAndDietaryFibers?.energy!!)
     }
 
-    fun getNutrientPerStdServing(): Nutrients? {
-        var stdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.portion
-        return getNutrientPerPortion()?.applyFactor(stdPortion!!.toFloat())
+    fun getCaloriesPerFoodServing(): Float? {
+        return Utils.calories(getNutrientPerFoodServing()?.principlesAndDietaryFibers?.energy!!)
     }
 
-    fun getNutrientPerPortion(): Nutrients? {
+    fun getNutrientPerStdServing(): Nutrients? {
+        var stdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion
+        return getNutrientPerGramPortion()?.applyFactor(stdPortion!!.toFloat())
+    }
+
+    fun getNutrientPerPopularServing(): Nutrients? {
+        var stdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion
+        var popularServing = FoodServings.getEnum(liveFoodResponse?.value?.data?.food?.standardServing?.popularServingType!!)
+        var popularServingGrams = popularServing.getGrams(stdPortion)
+        return getNutrientPerGramPortion()?.applyFactor(popularServingGrams)
+    }
+
+    fun getNutrientPerFoodServing(): Nutrients? {
+        var stdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion
+        var foodServing = triggerFoodItem?.value?.foodServing
+        var popularServingGrams = foodServing?.getGrams(stdPortion)
+        return getNutrientPerGramPortion()?.applyFactor(popularServingGrams)
+    }
+
+    fun getNutrientsForFoodItem(): Nutrients? {
+        if(liveFoodResponse?.value?.data?.food == null){
+            return null;
+        }
+        var gramsInStdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion
+
+        var foodServing: FoodServings? = triggerFoodItem?.value?.getFoodServing();
+        var gramsPerServing = foodServing?.getGrams(gramsInStdPortion);
+        var totalGramsForFoodItem = triggerFoodItem?.value?.qty!!*gramsPerServing!!
+        return getNutrientPerGramPortion()?.applyFactor(totalGramsForFoodItem)
+    }
+
+    fun getNutrientPerGramPortion(): Nutrients? {
         var nutriFactPortion = liveFoodResponse?.value?.data?.food?.nutrition?.portion
         if(nutriFactPortion == null) nutriFactPortion = 100
         var perPortionFactor = (1/nutriFactPortion!!.toFloat())
         return getNutrients()?.applyFactor(perPortionFactor)
     }
 
+    fun getConversionText(): CharSequence? {
+        var gramsInStdPortion = liveFoodResponse?.value?.data?.food?.standardServing?.stdPortion
 
+        var foodServing: FoodServings? = triggerFoodItem?.value?.getFoodServing();
+        var gramsPerServing = foodServing?.getGrams(gramsInStdPortion);
+        return "1 "+foodServing?.servingLabel+" = "+gramsPerServing+" grams"
+    }
     fun perServingCalText(): CharSequence {
         return ""+getCaloriesPerStdServing()+"\uD83D\uDD25"+" KCAL"
     }
-    fun perServingCalPerUnitText(): CharSequence {
-        return "per "+liveFoodResponse?.value?.data?.food?.standardServing?.portion+" "+liveFoodResponse?.value?.data?.food?.standardServing?.servingUnit
+    fun perStdServingCalText(): CharSequence {
+        return ""+getCaloriesPerStdServing()+"\uD83D\uDD25"+" KCAL"
+    }
+    fun perStdServingCalPerUnitText(): CharSequence {
+        return "per "+triggerFoodItem?.value?.qty+" "+triggerFoodItem?.value?.foodServing?.servingLabel
     }
 
     fun getFruitPerPortion(): Float {
@@ -142,5 +182,8 @@ constructor() : BaseViewModel() {
         }
         return 0f
     }
+
+
+
 
 }

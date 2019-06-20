@@ -26,7 +26,7 @@ public class Formula {
     @SerializedName("steps")
     @Expose
     @TypeConverters(FoodTypeConverters.class)
-    List<String> steps = null;
+    ArrayList<String> steps = new ArrayList();
 
     public List<FoodItem> getIngredients() {
         return ingredients;
@@ -36,11 +36,11 @@ public class Formula {
         this.ingredients = ingredients;
     }
 
-    public List<String> getSteps() {
+    public ArrayList<String> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<String> steps) {
+    public void setSteps(ArrayList<String> steps) {
         this.steps = steps;
     }
 

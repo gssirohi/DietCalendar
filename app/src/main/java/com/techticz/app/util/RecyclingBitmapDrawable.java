@@ -19,7 +19,7 @@ package com.techticz.app.util;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
+import timber.log.Timber;
 
 import com.techticz.dietcalendar.BuildConfig;
 
@@ -93,7 +93,7 @@ public class RecyclingBitmapDrawable extends BitmapDrawable {
         if (mCacheRefCount <= 0 && mDisplayRefCount <= 0 && mHasBeenDisplayed
                 && hasValidBitmap()) {
             if (BuildConfig.DEBUG) {
-                Log.d(TAG, "No longer being used or cached so recycling. "
+                Timber.d(TAG, "No longer being used or cached so recycling. "
                         + toString());
             }
 

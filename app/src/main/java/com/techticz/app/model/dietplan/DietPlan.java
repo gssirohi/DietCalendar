@@ -9,6 +9,7 @@ import org.parceler.Parcel;
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Parcel
@@ -16,6 +17,10 @@ import androidx.room.PrimaryKey;
 public class DietPlan {
 
     public DietPlan() {
+        this.basicInfo = new BasicInfo();
+        this.calendar = new Calendar();
+        this.caloryDistribution = new CaloryDistribution();
+        this.adminInfo = new AdminInfo();
     }
 
     @SerializedName("id")
@@ -40,6 +45,9 @@ public class DietPlan {
     @Expose
     @Embedded
     AdminInfo adminInfo;
+
+    @Ignore
+    boolean recommonded = false;
 
     public String getId() {
         return id;
@@ -82,5 +90,13 @@ public class DietPlan {
 
     public void setCaloryDistribution(CaloryDistribution caloryDistribution) {
         this.caloryDistribution = caloryDistribution;
+    }
+
+    public boolean isRecommonded() {
+        return recommonded;
+    }
+
+    public void setRecommonded(boolean recommonded) {
+        this.recommonded = recommonded;
     }
 }

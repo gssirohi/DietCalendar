@@ -1,9 +1,9 @@
 package com.techticz.app.repo
 
-import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import android.content.Context
+import android.content.ContextWrapper
 import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
@@ -13,21 +13,20 @@ import javax.inject.Inject
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import androidx.fragment.app.FragmentManager
+import android.media.MediaScannerConnection
+import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
 import com.cloudinary.Cloudinary
 import com.techticz.app.constants.CloudinaryConstants
 import com.techticz.app.model.ImageResponse
 import com.techticz.app.util.ImageCache
-import com.techticz.app.util.ImageFetcher
 import com.techticz.app.util.RecyclingBitmapDrawable
 import com.techticz.app.util.Utils
-import com.techticz.dietcalendar.R
-import com.techticz.app.base.BaseDIActivity
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
 import javax.inject.Singleton
 
 
@@ -54,7 +53,7 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
     }
 
     fun fetchImageResponse(url: String?): LiveData<Resource<ImageResponse>> {
-        Log.d("IMAGE","Fetching image :"+url)
+        Timber.d("IMAGE","Fetching image :"+url)
         var dummyRes = ImageResponse(url,"",null)
         var resource = Resource<ImageResponse>(Status.LOADING, dummyRes, "Loading Image:" + url, DataSource.REMOTE)
         var live : MediatorLiveData<Resource<ImageResponse>> = MediatorLiveData<Resource<ImageResponse>>()
@@ -78,19 +77,33 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
                         source = DataSource.LOCAL
                         updateLiveImageData(url,bitmap,live,source,status)
                     } else {
-                        appExecutors.networkIO().execute({
-                            bitmap = fetchImageFromNetwork(url)
+                        if(url!!.contains("com.techticz.dietcalendar")){
+                            bitmap = fetchBitmapFromDevice(url)
                             if (bitmap != null) {
                                 addBitmapToCache(bitmap, url)
                                 status = Status.SUCCESS
                                 source = DataSource.REMOTE
-                                updateLiveImageData(url,bitmap,live,source,status)
+                                updateLiveImageData(url, bitmap, live, source, status)
                             } else {
                                 status = Status.EMPTY
                                 source = DataSource.REMOTE
-                                updateLiveImageData(url,bitmap,live,source,status)
+                                updateLiveImageData(url, bitmap, live, source, status)
                             }
-                        })
+                        } else {
+                            appExecutors.networkIO().execute({
+                                bitmap = fetchImageFromNetwork(url)
+                                if (bitmap != null) {
+                                    addBitmapToCache(bitmap, url)
+                                    status = Status.SUCCESS
+                                    source = DataSource.REMOTE
+                                    updateLiveImageData(url, bitmap, live, source, status)
+                                } else {
+                                    status = Status.EMPTY
+                                    source = DataSource.REMOTE
+                                    updateLiveImageData(url, bitmap, live, source, status)
+                                }
+                            })
+                        }
 
                     }
                 })
@@ -104,9 +117,23 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
     return live
     }
 
+    private fun fetchBitmapFromDevice(url: String): Bitmap? {
+        Timber.d("Fetching Image from device:"+url)
+        var sd: File = Environment.getExternalStorageDirectory()
+        var image: File = File(url);
+        var bmOptions: BitmapFactory.Options = BitmapFactory.Options();
+        try {
+            var bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
+            return bitmap
+        } catch (e:java.lang.Exception){
+            e.printStackTrace()
+            return null
+        }
+    }
+
     private fun updateLiveImageData(url:String?,bitmap:Bitmap?,live: MediatorLiveData<Resource<ImageResponse>>, source: DataSource, status: Status) {
         appExecutors.mainThread().execute({
-            Log.d("IMAGE","Updating live image:"+url)
+            Timber.d("IMAGE","Updating live image:"+url)
             var imageResp = ImageResponse(url,"",bitmap)
             var resource = Resource<ImageResponse>(status, imageResp, "Loading Image:"+status.name+"->" + url,source )
             live.value = resource
@@ -132,12 +159,12 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
     }
 
     private fun fetchBitmapFromDiskCache(key: String?): Bitmap? {
-        Log.d("IMAGE","Fetching image from DiskCache:"+key)
+        Timber.d("IMAGE","Fetching image from DiskCache:"+key)
         return mImageCache?.getBitmapFromDiskCache(key);
     }
 
     private fun fetchBitmapFromMemCache(key: String?): Bitmap? {
-        Log.d("IMAGE","Fetching image from MemCache:"+key)
+        Timber.d("IMAGE","Fetching image from MemCache:"+key)
         return mImageCache?.getBitmapFromMemCache(key)?.bitmap;
     }
 
@@ -146,8 +173,39 @@ class ImageRepository @Inject constructor(val context:Context) : BaseDIRepositor
         fun onImageUploaded(url: String)
     }
 
-fun fetchImageFromNetwork(servingUrl:String?):Bitmap?{
-    Log.d("IMAGE","Fetching image from network:"+servingUrl)
+    fun saveImageOnDevice(myBitmap: Bitmap,fileName:String):String {
+        val wrapper = ContextWrapper(context)
+
+        // Initializing a new file
+        // The bellow line return a directory in internal storage
+        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+
+
+        // Create a file to save the image
+        file = File(file, fileName+"${UUID.randomUUID()}.jpg")
+
+        try {
+            // Get the file output stream
+            val stream: OutputStream = FileOutputStream(file)
+
+            // Compress bitmap
+            myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+            // Flush the stream
+            stream.flush()
+
+            // Close stream
+            stream.close()
+        } catch (e: IOException){ // Catch the exception
+            e.printStackTrace()
+        }
+
+        // Return the saved image uri
+        return file.absolutePath
+    }
+
+        fun fetchImageFromNetwork(servingUrl:String?):Bitmap?{
+    Timber.d("IMAGE","Fetching image from network:"+servingUrl)
     val imageURL: URL
     try {
         if (!TextUtils.isEmpty(servingUrl)) {
@@ -170,7 +228,7 @@ fun fetchImageFromNetwork(servingUrl:String?):Bitmap?{
     } catch(e:Exception){
         e.printStackTrace()
     }
-    Log.d("IMAGE","Fetching network image Successful:"+servingUrl)
+    Timber.d("IMAGE","Fetching network image Successful:"+servingUrl)
         return null
     }
 

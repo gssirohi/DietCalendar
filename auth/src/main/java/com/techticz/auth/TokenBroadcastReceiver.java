@@ -20,7 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
+import timber.log.Timber;
 
 /**
  * Receiver to capture tokens broadcast via ADB and insert them into the
@@ -35,7 +35,7 @@ public abstract class TokenBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "onReceive:" + intent);
+        Timber.d( "onReceive:" + intent);
 
         if (ACTION_TOKEN.equals(intent.getAction())) {
             String token = intent.getExtras().getString(EXTRA_KEY_TOKEN);

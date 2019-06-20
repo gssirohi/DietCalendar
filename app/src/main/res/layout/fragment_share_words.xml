@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.techticz.app.ui.activity.DietPlanActivity"
+    android:theme="@style/AppTheme.Showcase"
+    android:background="@color/primaryDarkColor5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_share_word_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spread the words"
+            android:layout_gravity="center|left"
+            android:layout_margin="16dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/lobster_two_italic"
+            android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/tv_spread_word_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spread the the good words and good things will come to you!"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/lobster_two_italic"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shout_out"
+            />
+
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_spreading_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_gravity="center"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_spread_words"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Spread the words"/>
+    <TextView
+        android:id="@+id/tv_reward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Just a click away \u261Dfrom the Reward \u261F"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lobster_two_italic"/>
+    <FrameLayout
+        android:id="@+id/fl_reward_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="center">
+
+    </FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_claim_reward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:text="Claim your Reward!"/>
+</LinearLayout>

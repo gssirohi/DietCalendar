@@ -25,7 +25,8 @@ android:orientation="vertical">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:visibility="invisible"
+        tools:visibility="visible"
+        android:visibility="invisible"
         app:SpinKit_Color="?attr/colorAccent" />
     <TextView
         android:id="@+id/tv_plate_name"
@@ -84,6 +85,65 @@ android:orientation="vertical">
                 style="?attr/textAppearanceBody2"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/tv_pref_meal_header"
+        style="?attr/textAppearanceSubtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Preferred Meals" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_plate_pref_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:drawableTint="?attr/colorAccent"
+        android:orientation="horizontal"
+        >
+
+    </com.google.android.material.chip.ChipGroup>
+    <LinearLayout
+        android:id="@+id/ll_plate_approx_cal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="Declaring Approx. Calory of Plate will help you to add foods and recipes with right quantity"
+            style="?attr/textAppearanceCaption"
+            android:textSize="10sp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_plate_approx_cal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|bottom"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:hint="Approx. Cal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="?attr/textAppearanceBody2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="number"
+                tools:text="250"
+                tools:visibility="visible" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
     <include
         layout="@layout/content_desc_layout" />
 

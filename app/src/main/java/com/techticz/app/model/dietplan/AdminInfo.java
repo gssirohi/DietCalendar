@@ -23,6 +23,7 @@ public class AdminInfo {
     @SerializedName("featured")
     @Expose
     Boolean featured;
+
     @SerializedName("publishedOn")
     @Expose
     String publishedOn;
@@ -41,6 +42,12 @@ public class AdminInfo {
     @SerializedName("lastModifiedOn")
     @Expose
     String lastModifiedOn;
+    @SerializedName("lastModifiedBy")
+    @Expose
+    String lastModifiedBy;
+    @SerializedName("hasLock")
+    @Expose
+    Boolean hasLock;
 
     public String getCreatedOn() {
         return createdOn;
@@ -120,5 +127,21 @@ public class AdminInfo {
 
     public void setFeatured(Boolean featured) {
         this.featured = featured;
+    }
+
+    public Boolean getHasLock() {
+        return hasLock;
+    }
+
+    public void setHasLock(Boolean hasLock) {
+        this.hasLock = hasLock;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 }

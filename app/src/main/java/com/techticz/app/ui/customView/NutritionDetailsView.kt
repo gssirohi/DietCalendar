@@ -13,6 +13,7 @@ import com.techticz.dietcalendar.R
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseDIActivity
+import com.techticz.app.constants.FoodServings
 import com.techticz.app.model.food.Nutrition
 import com.techticz.app.ui.adapter.NutriSegmentAdapter
 import com.techticz.app.util.Utils
@@ -303,9 +304,9 @@ class NutritionDetailsView(parent: ViewGroup?,var title:String,var itemHeader1:S
                 tv_food_name.text = resource.data?.food?.basicInfo?.name?.english
                 tv_food_qty.setText(""+
                         foodViewModel?.triggerFoodItem?.value?.qty+"\n"+
-                        resource.data?.food?.standardServing?.servingUnit)
+                        foodViewModel?.triggerFoodItem?.value?.foodServing?.servingLabel)
                 tv_food_calory.text = ""+foodViewModel?.getCaloriesPerStdServing()+
-                        "\nKcal/"+resource.data?.food?.standardServing?.servingUnit
+                        "\nKcal/"+FoodServings.STANDARD_PORTION.servingLabel
                 tv_food_name.visibility = View.VISIBLE
 
                 when(foodViewModel?.isVeg()){

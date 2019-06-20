@@ -17,9 +17,26 @@ class FoodTypeConverters: BaseTypeConverters(){
     }
 
     @TypeConverter
+    fun arrayListToString(model:ArrayList<String>?):String?{
+        if(model == null) return null
+        return model?.joinToString()
+    }
+
+    @TypeConverter
     fun stringToList(dbvalue:String?):List<String>?{
         var separater = ", "
         return dbvalue?.split(separater)
+    }
+
+    @TypeConverter
+    fun stringToArrayList(dbvalue:String?):ArrayList<String>?{
+        var separater = ", "
+        var list =  dbvalue?.split(separater)
+        var arrayList = ArrayList<String>()
+        list?.forEach {
+            arrayList.add(it)
+        }
+        return arrayList
     }
 
     @TypeConverter

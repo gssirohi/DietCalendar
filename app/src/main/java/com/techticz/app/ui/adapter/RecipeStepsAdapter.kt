@@ -18,7 +18,7 @@ class RecipeStepsAdapter constructor(var recipeActivity: RecipeDetailsActivity, 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is StepViewHolder) {
             // holder.mItem = mValues.get(position);
-            var step = recipeActivity?.recipeViewModel?.liveRecipeResponse?.value?.data?.recipe?.formula?.steps?.get(position)
+            var step = recipeActivity?.theRecipe.formula?.steps?.get(position)
             (holder as StepViewHolder).stepView.til_step.hint = "Step "+(position+1)
             (holder as StepViewHolder).stepView.til_step.editText?.setText(step)
             if(recipeActivity.mode == RecipeDetailsActivity.MODE_EXPLORE){
@@ -41,7 +41,9 @@ class RecipeStepsAdapter constructor(var recipeActivity: RecipeDetailsActivity, 
             }
             (holder as StepViewHolder).stepView.til_step.editText?.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    recipeActivity?.steps?.set(position,s.toString())
+                    if(position < recipeActivity?.theRecipe?.formula?.steps?.size!!) {
+                        recipeActivity?.theRecipe?.formula?.steps?.set(position, s.toString())
+                    }
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -53,17 +55,15 @@ class RecipeStepsAdapter constructor(var recipeActivity: RecipeDetailsActivity, 
                 }
 
             })
-            (holder as StepViewHolder).stepView.fab_remove_step.setOnClickListener(View.OnClickListener {
-             callBack?.onRemoveStepClicked(position,step)
-            })
-           /* if(position == itemCount -1){
-                (holder as StepViewHolder).stepView.divider.visibility = View.GONE
-            }*/
+            (holder as StepViewHolder).stepView.fab_remove_step.setOnClickListener {
+                callBack?.onRemoveStepClicked(position,step)
+            }
+
         }
     }
 
     override fun getItemCount(): Int {
-        return recipeActivity?.steps?.size
+        return recipeActivity?.theRecipe?.formula?.steps?.size!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {

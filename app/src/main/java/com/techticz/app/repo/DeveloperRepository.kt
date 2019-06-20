@@ -47,7 +47,7 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                             batch.set(ref, item)
                         } catch (e:Exception){
                             e.printStackTrace()
-                            Log.e("UPLOADING","Error uploading Food:"+item.id+" Name:"+item.basicInfo.name.english)
+                            Timber.e("Error uploading Food:"+item.id+" Name:"+item.basicInfo.name.english)
                         }
                     }
                 }
@@ -102,6 +102,7 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                         showError(message)
                     })
         } catch (e:Exception){
+            e.printStackTrace()
             showError(e.toString())
         }
 
@@ -121,11 +122,11 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                 .document(food.id)
                 .set(food)
                 .addOnSuccessListener { documentReference ->
-                    Log.d("appRepo", "Food added with ID: ")
+                    Timber.d("appRepo", "Food added with ID: ")
                     hideProgress()
                     (hostActivityContext as BaseDIActivity).showSuccess("Food added with ID: " + documentReference)
                 }
-                .addOnFailureListener { e -> Log.w("appRepo", "Error adding food", e) }
+                .addOnFailureListener { e -> Timber.w("appRepo", "Error adding food", e) }
     }
 
     private fun getUsers() {
@@ -134,10 +135,10 @@ class DeveloperRepository @Inject constructor(private val db: FirebaseFirestore)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (document in task.result!!) {
-                            Log.d("Repo", document.id + " => " + document.data)
+                            Timber.d("Repo", document.id + " => " + document.data)
                         }
                     } else {
-                        Log.w("Repo", "Error getting documents.", task.exception)
+                        Timber.w("Repo", "Error getting documents.", task.exception)
                     }
                 }
     }

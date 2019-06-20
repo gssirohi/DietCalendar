@@ -2,8 +2,6 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import android.text.TextUtils
-import android.util.Log
 import com.techticz.app.model.MealPlateResponse
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.meal.Meal
@@ -11,6 +9,7 @@ import com.techticz.networking.livedata.AbsentLiveData
 import com.techticz.networking.model.Resource
 import com.techticz.app.base.BaseViewModel
 import com.techticz.app.model.mealplate.FoodItem
+import com.techticz.app.model.mealplate.MealPlate
 import com.techticz.app.model.mealplate.RecipeItem
 import timber.log.Timber
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class MealPlateViewModel @Inject
 constructor() : BaseViewModel() {
     @Inject
     lateinit var injectedRepo: MealPlateRepository
-
+    lateinit var thePlate: MealPlate
     val triggerMealPlateID = MutableLiveData<Meal>()
     val liveStatus = MediatorLiveData<Status>()
     val liveMealPlateResponse: LiveData<Resource<MealPlateResponse>>
@@ -70,9 +69,8 @@ constructor() : BaseViewModel() {
         if(foodViewModelList != null) {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerPortion()
-                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
-                    nutrientsFood.addUpNutrients(factoredNutrients)
+                    var nutrientsForFoodItem:Nutrients? = foodViewModel.getNutrientsForFoodItem()
+                    nutrientsFood.addUpNutrients(nutrientsForFoodItem)
                 }
             }
         }
@@ -130,6 +128,7 @@ constructor() : BaseViewModel() {
                 }
                 Status.ERROR->{
                     liveStatus.value = Status.COMPLETE
+                    Timber.e("Error in loading Plate:"+triggerMealPlateID.value?.mealPlateId)
                 }
             }
         })
@@ -148,7 +147,7 @@ constructor() : BaseViewModel() {
                     }
                 }
                 Status.COMPLETE->{
-                    Log.d("STATUS","Plate All Recipes Completed")
+                    Timber.i("Plate:"+triggerMealPlateID.value?.mealPlateId+"-All Recipes Completed")
                     registerAllChildCompletion()
                 }
             }
@@ -164,7 +163,7 @@ constructor() : BaseViewModel() {
                     }
                 }
                 Status.COMPLETE->{
-                    Log.d("STATUS","Plate All Foods Completed")
+                    Timber.i("Plate:"+triggerMealPlateID.value?.mealPlateId+"-All Foods Completed")
                     registerAllChildCompletion()
                 }
             }
@@ -185,19 +184,22 @@ constructor() : BaseViewModel() {
 
         var foodViewModelList = ArrayList<FoodViewModel>()
 
-        if (foods != null) {
+        if (foods != null && !foods.isEmpty()) {
             for (food in foods) {
                 var foodViewModel = FoodViewModel()
                 foodViewModel.autoLoadChildren(lifecycleOwner)
                 foodViewModel.triggerFoodItem.value = food
                 foodViewModel.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
                     Status.COMPLETE-> {
-                        Log.d("STATUS","Meal Food completed:"+food.id)
+                        Timber.d("Plate Food completed:"+food.id)
                         registerFoodChildCompletion()
                     }
                 } })
                 foodViewModelList.add(foodViewModel)
             }
+        } else {
+            var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.COMPLETE, foodViewModelList, "Meal foods complete(empty)..", DataSource.LOCAL)
+            liveFoodViewModelList?.value = foodViewModelListResource
         }
         var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Meal foods..", DataSource.LOCAL)
         liveFoodViewModelList?.value = foodViewModelListResource
@@ -208,19 +210,23 @@ constructor() : BaseViewModel() {
 
         var recipeViewModelList = ArrayList<RecipeViewModel>()
 
-        if (recipes != null) {
+        if (recipes != null && !recipes.isEmpty()) {
             for (recipe in recipes) {
                 var recipeViewModel = RecipeViewModel()
                 recipeViewModel.triggerRecipeItem.value = recipe
                 recipeViewModel.autoLoadChildren(lifecycleOwner)
                 recipeViewModel.liveStatus?.observe(lifecycleOwner, Observer { resource->when(resource){
                     Status.COMPLETE-> {
-                        Log.d("STATUS","Meal Recipe completed:"+recipe.id)
+                        Timber.d("Plate Recipe completed:"+recipe.id)
                         registerRecipeChildCompletion()
                     }
                 } })
                 recipeViewModelList.add(recipeViewModel)
             }
+        } else {
+            var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.COMPLETE, recipeViewModelList, "Meal recipes complete (Empty)", DataSource.LOCAL)
+            liveRecipeViewModelList?.value = recipeViewModelListResource
+            return
         }
         var recipeViewModelListResource = Resource<List<RecipeViewModel>>(Status.LOADING, recipeViewModelList, "Loading Meal recipes..", DataSource.LOCAL)
         liveRecipeViewModelList?.value = recipeViewModelListResource
@@ -296,17 +302,20 @@ constructor() : BaseViewModel() {
 
     fun registerRecipeChildCompletion() {
         var isAllCompleted = true
-
+        var count = 0
+        var totalCount = 0
         this.liveRecipeViewModelList?.value?.data?.let {
             for (child in it) {
                 if (child.liveStatus.value == Status.COMPLETE) {
                     //do nothing
+                    count++
                 } else {
                     isAllCompleted = false
                 }
+                totalCount++
             }
         }
-
+        Timber.i("Plate:"+triggerMealPlateID.value?.mealPlateId+" "+count+" out of "+totalCount+" Recipes Completed")
         if(isAllCompleted){
             var newRes = liveRecipeViewModelList?.value?.createCopy(Status.COMPLETE)
             liveRecipeViewModelList?.value = newRes
@@ -314,16 +323,22 @@ constructor() : BaseViewModel() {
     }
     fun registerFoodChildCompletion() {
         var isAllCompleted = true
+
+        var count = 0
+        var totalCount = 0
         this.liveFoodViewModelList?.value?.data?.let {
             for (child in it) {
                 if (child.liveStatus.value == Status.COMPLETE) {
                     //do nothing
+                    count++
                 } else {
                     isAllCompleted = false
                 }
+                totalCount++
             }
-        }
 
+        }
+        Timber.i("Plate:"+triggerMealPlateID.value?.mealPlateId+" "+count+" out of "+totalCount+" Foods Completed")
         if(isAllCompleted){
             var newRes = liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
             liveFoodViewModelList?.value = newRes

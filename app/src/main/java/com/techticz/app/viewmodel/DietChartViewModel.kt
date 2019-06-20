@@ -2,7 +2,6 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import android.text.TextUtils
 import android.util.Log
 import com.techticz.app.constants.Meals
 import com.techticz.app.model.DietPlanResponse
@@ -92,13 +91,13 @@ constructor() : BaseViewModel() {
         })
 
     }
-    private fun loadImageViewModel(lifecycleOwner: LifecycleOwner) {
+    fun loadImageViewModel(lifecycleOwner: LifecycleOwner) {
         var imageViewModel = ImageViewModel(lifecycleOwner as Context)
         imageViewModel.triggerImageUrl.value = liveDietPlanResponse?.value?.data?.dietPlan?.basicInfo?.image
         var imageRes = Resource<ImageViewModel>(Status.LOADING,imageViewModel,"Loading diet plan image model ..",DataSource.REMOTE)
         liveImage?.value = imageRes
     }
-    private fun observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner: LifecycleOwner,day:Int) {
+    fun observeAndLoadChildrenViewModelsIfRequired(lifecycleOwner: LifecycleOwner,day:Int) {
         Timber.d("Observing dayMealsModels.... :"+day)
         getDayMealViewModels(day)?.observe(lifecycleOwner, Observer { resource->
             when(resource?.status){ Status.EMPTY->{
@@ -112,8 +111,8 @@ constructor() : BaseViewModel() {
         Timber.d(" loading dayMealModels .... :"+day)
         var list = createDayMealViewModels(lifecycleOwner,day)
         var liveDayModel = getDayMealViewModels(day)
-        var recipeViewModelListResource = Resource<List<MealPlateViewModel>>(Status.LOADING, list, "Loading Day meals..", DataSource.LOCAL)
-        liveDayModel?.value = recipeViewModelListResource
+        var plateViewModelListResource = Resource<List<MealPlateViewModel>>(Status.LOADING, list, "Loading Day meals..", DataSource.LOCAL)
+        liveDayModel?.value = plateViewModelListResource
     }
 
     public fun getDayMealViewModels(sectionNumber:Int): MediatorLiveData<Resource<List<MealPlateViewModel>>>? {
@@ -148,26 +147,27 @@ constructor() : BaseViewModel() {
         var dayPlan: DayPlan? = DayPlan()
         when(sectionNumber){
             1->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.monday
-            }
-            2->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.tuesday
-            }
-            3->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.wednesday
-            }
-            4->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.thursday
-            }
-            5->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.friday
-            }
-            6->{
-                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.saturday
-            }
-            7->{
                 dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.sunday
             }
+            2->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.monday
+            }
+            3->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.tuesday
+            }
+            4->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.wednesday
+            }
+            5->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.thursday
+            }
+            6->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.friday
+            }
+            7->{
+                dayPlan = liveDietPlanResponse?.value?.data?.dietPlan?.calendar?.saturday
+            }
+
         }
         var meals :ArrayList<Meal> = ArrayList<Meal>()
         meals.add(Meal(Meals.EARLY_MORNING,dayPlan?.earlyMorning))
@@ -184,7 +184,7 @@ constructor() : BaseViewModel() {
             mealPlateViewModel.autoLoadChildren(lifecycleOwner)
             mealPlateViewModel.liveStatus?.observe(lifecycleOwner, Observer { resource->when(resource){
                 Status.COMPLETE-> {
-                    Log.d("STATUS","Meal Plate completed:"+meal.mealPlateId)
+                    Timber.d("Plate completed:"+meal.mealPlateId)
                     registerChildCompletion(sectionNumber)
                 }
             } })
@@ -213,15 +213,20 @@ constructor() : BaseViewModel() {
 
     private fun registerChildCompletion(section: Int) {
         var isAllCompleted = true
+        var count = 0
+        var totalCount = 0
         var liveModelList = getDayMealViewModels(section)
-        for(child in liveModelList?.value?.data!!){
-            if(child.liveStatus.value == Status.COMPLETE) {
-
-            } else {
-                isAllCompleted = false
+        liveModelList?.let {
+            for (child in liveModelList?.value?.data!!) {
+                if (child.liveStatus.value == Status.COMPLETE) {
+                    count++
+                } else {
+                    isAllCompleted = false
+                }
+                totalCount++
             }
         }
-
+        Timber.i("DayMeals:"+section+" "+count+" out of "+totalCount+" Plates Completed")
         if(isAllCompleted){
             var newRes = liveModelList?.value?.createCopy(Status.COMPLETE)
             liveModelList?.value = newRes
@@ -238,13 +243,13 @@ constructor() : BaseViewModel() {
 
         var dayPlan = dietPlan?.calendar?.monday
         when(daySection){
-            1-> dayPlan = dietPlan?.calendar?.monday
-            2->dayPlan = dietPlan?.calendar?.tuesday
-            3->dayPlan = dietPlan?.calendar?.wednesday
-            4->dayPlan = dietPlan?.calendar?.thursday
-            5->dayPlan = dietPlan?.calendar?.friday
-            6->dayPlan = dietPlan?.calendar?.saturday
-            7->dayPlan = dietPlan?.calendar?.sunday
+            1->dayPlan = dietPlan?.calendar?.sunday
+            2-> dayPlan = dietPlan?.calendar?.monday
+            3->dayPlan = dietPlan?.calendar?.tuesday
+            4->dayPlan = dietPlan?.calendar?.wednesday
+            5->dayPlan = dietPlan?.calendar?.thursday
+            6->dayPlan = dietPlan?.calendar?.friday
+            7->dayPlan = dietPlan?.calendar?.saturday
         }
 
         when(mealType){
@@ -286,5 +291,17 @@ constructor() : BaseViewModel() {
             }
         }
         return dayVeggiesContent
+    }
+
+    fun removeAllObservers(lifecycleOwner: LifecycleOwner) {
+        liveDietPlanResponse.removeObservers(lifecycleOwner)
+        liveImage?.removeObservers(lifecycleOwner)
+        liveSundayViewModelList?.removeObservers(lifecycleOwner)
+        liveMondayViewModelList?.removeObservers(lifecycleOwner)
+        liveTuesdayViewModelList?.removeObservers(lifecycleOwner)
+        liveWednesdayViewModelList?.removeObservers(lifecycleOwner)
+        liveThursdayViewModelList?.removeObservers(lifecycleOwner)
+        liveFridayViewModelList?.removeObservers(lifecycleOwner)
+        liveSaturdayViewModelList?.removeObservers(lifecycleOwner)
     }
 }

@@ -20,6 +20,14 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import kotlinx.android.synthetic.main.activity_browse_diet_plans.*
 import kotlinx.android.synthetic.main.content_browse_diet_plan.*
 import timber.log.Timber
+import android.widget.Toast
+import com.techticz.app.ui.event.FreshLoadPlans
+import com.techticz.app.ui.event.FreshLoadUser
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
+
 
 class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack {
 
@@ -71,10 +79,12 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
 
     }
 
-    private fun onCreatePlanClicked() {
-        navigator.startCreatePlanActivity()
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    fun onEvent(event: FreshLoadPlans) {
+        EventBus.getDefault().removeStickyEvent(event)
+        scroller_featured_plans.adapter?.notifyDataSetChanged()
+        scroller_my_plans.adapter?.notifyDataSetChanged()
     }
-
     private fun onUserLoaded(res: Resource<UserResponse>?) {
         when(res?.status){
             Status.SUCCESS->{
@@ -87,6 +97,7 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
         }
 
     }
+
     private fun onFeaturedPlanDataLoaded(resource: Resource<BrowseDietPlanResponse>?) {
         Timber.d("dietPlansViewModel?.featuredDietPlansResponse? Data Changed : Status="+resource?.status+" : Source=" + resource?.dataSource)
         when(resource?.status){
@@ -96,9 +107,18 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
             Status.SUCCESS->
             {
                 showSuccess("Diet Plan Fetched")
+                var plans = resource?.data?.plans
+                var dailyCal = baseuserViewModel?.liveUserResponse?.value?.data?.user?.dailyRequiredCaloriesAsPerGoal
+                plans?.forEach {
+                    var diff = it.basicInfo?.dailyCalories!! - dailyCal!!.toInt()
+                    if(diff < 0){diff = 0-diff}
+                    if(diff<300){
+                        it.apply { isRecommonded = true }
+                    }
+                }
                 hideProgress()
                 (scroller_featured_plans.adapter as MealPlanPagerAdapter).data.clear()
-                (scroller_featured_plans.adapter as MealPlanPagerAdapter).data.addAll(resource?.data?.plans!!)
+                (scroller_featured_plans.adapter as MealPlanPagerAdapter).data.addAll(plans!!)
                 (scroller_featured_plans.adapter as MealPlanPagerAdapter).notifyDataSetChanged()
               //  scroller.getRecycledViewPool().setMaxRecycledViews(1,0);
 
@@ -140,14 +160,21 @@ class BrowseDietPlansActivity : BaseDIActivity(), MealPlanPagerAdapter.CallBack 
 
     }
 
-    override fun onMealPlanItemClicked(plan: DietPlan?) {
+    override fun onMealPlanCalendarClicked(plan: DietPlan?) {
         navigator.startDietChartScreen(this,plan)
+    }
+
+    override fun onMealPlanItemClicked(plan: DietPlan?) {
+        navigator.startDietPlanActivity(DietPlanActivity.MODE_EXPLORE,plan);
     }
 
     override fun onAddMealPlanClicked() {
         onCreatePlanClicked()
     }
 
+    private fun onCreatePlanClicked() {
+        navigator.startDietPlanActivity(DietPlanActivity.MODE_CREATE_NEW,null)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 1 && resultCode == Activity.RESULT_OK){

@@ -28,14 +28,21 @@ import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.techticz.app.repo.PrefRepo
+import com.techticz.app.repo.UserRepository
+import com.techticz.app.ui.event.FreshLoadPlans
+import com.techticz.app.ui.event.FreshLoadUser
+import com.techticz.app.ui.event.NewFCMToken
 import com.techticz.dietcalendar.ui.DietCalendarApplication
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 /**
  * Created by YATRAONLINE\gyanendra.sirohi on 31/8/18.
  */
 
-open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
+open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector, UserRepository.UserProfileCallback {
 
     @Inject
     lateinit var  navigator: Navigator
@@ -188,4 +195,33 @@ open class BaseDIActivity : AppCompatActivity(), HasSupportFragmentInjector {
             snackbar.show()
         }
     }
+
+    public override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    public override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: FreshLoadUser) {
+        Toast.makeText(this, event.javaClass.canonicalName, Toast.LENGTH_SHORT).show()
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    fun onEvent(event: NewFCMToken) {
+        EventBus.getDefault().removeStickyEvent(event)
+        baseuserViewModel?.liveUserResponse.value?.data?.user?.let{
+            it?.basicInfo?.fcm = event.token
+            baseuserViewModel?.updateUser(this)
+        }
+    }
+
+
+    override fun onUserRegistered(userId:String){}
+    override fun onUserRegistrationFailure(){}
+    override fun onUserUpdated(id: String){}
+    override fun onUserUpdateFailure(){}
 }

@@ -43,19 +43,19 @@ import java.util.*
 
 
 class OnboardingActivity : BaseDIActivity(), UserRepository.UserProfileCallback {
-    override fun onRegistered(userId: String) {
+    override fun onUserRegistered(userId: String) {
         baseuserViewModel.triggerUserId.value = userId
     }
 
-    override fun onRegistrationFailure() {
+    override fun onUserRegistrationFailure() {
 
     }
 
-    override fun onUpdated(id: String) {
+    override fun onUserUpdated(id: String) {
 
     }
 
-    override fun onUpdateFailure() {
+    override fun onUserUpdateFailure() {
 
     }
 

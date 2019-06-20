@@ -23,7 +23,7 @@
             app:expandedTitleTextAppearance="@style/TitleStyle"
             app:expandedTitleGravity="center_horizontal|bottom"
             app:contentScrim="?attr/colorPrimary"
-            app:title="Diet Plans"
+            app:title="Choose Diet Plan"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
             <com.techticz.app.ui.customView.AppImageView

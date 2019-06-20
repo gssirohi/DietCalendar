@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:padding="4dp"
     android:layout_height="wrap_content">
-<com.techticz.app.ui.customView.AppImageViewRound
+<com.techticz.app.ui.customView.AppImageView
     android:id="@+id/aiv_food"
     android:layout_width="64dp"
     android:layout_height="64dp"

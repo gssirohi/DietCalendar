@@ -22,7 +22,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.util.Log;
+import timber.log.Timber;
 
 import com.techticz.dietcalendar.BuildConfig;
 
@@ -90,7 +90,7 @@ public class ImageResizer extends ImageWorker {
      */
     private Bitmap processBitmap(int resId) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, "processBitmap - " + resId);
+            Timber.d( "processBitmap - " + resId);
         }
         return decodeSampledBitmapFromResource(mResources, resId, mImageWidth,
                 mImageHeight, getImageCache());

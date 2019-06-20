@@ -37,7 +37,7 @@ dependencies {
     implementation REQUIRE.FIREBASE.CORE
     implementation REQUIRE.FIREBASE.FIRESTORE
     implementation REQUIRE.FIREBASE.AUTH
-
+    implementation REQUIRE.NETWORKING.TIMBER
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     // Twitter Android SDK (only required for Twitter Login)
     /*compile('com.twitter.sdk.android:twitter-core:2.3.0@aar') {

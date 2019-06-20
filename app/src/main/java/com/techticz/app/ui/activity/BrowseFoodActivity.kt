@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.techticz.app.base.BaseDIActivity
 import com.techticz.app.constants.FoodCategories
 import com.techticz.app.model.BrowseFoodResponse
@@ -27,13 +29,33 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
         onFoodViewClicked(mealFood)
     }
 
+    override fun getFoodNutrient(food: Food): Float {
+        return when(tv_select_nutrient.text.toString().toUpperCase()){
+            "ENERGY"-> food.nutrition.nutrients.principlesAndDietaryFibers.energy
+            "PROTIEN"->food.nutrition.nutrients.principlesAndDietaryFibers.protien
+            "FAT"->food.nutrition.nutrients.principlesAndDietaryFibers.fat
+            "CARBOHYDRATE"->food.nutrition.nutrients.principlesAndDietaryFibers.carbohydrate
+            "TOTALB6"->food.nutrition.nutrients.waterSolubleVitamins.totalB6
+            "BIOINB7"->food.nutrition.nutrients.waterSolubleVitamins.bioinB7
+            "TOTALFOLATESB9"->food.nutrition.nutrients.waterSolubleVitamins.totalFolatesB9
+            "IRON"->food.nutrition.nutrients.mineralsAndTraceElements.iron
+            "CALCIUM"->food.nutrition.nutrients.mineralsAndTraceElements.calcium
+            "COPPER"->food.nutrition.nutrients.mineralsAndTraceElements.copper
+            "ZINC"->food.nutrition.nutrients.mineralsAndTraceElements.zinc
+            "POTASSIUM"->food.nutrition.nutrients.mineralsAndTraceElements.potassium
+            "TOTAL"->food.nutrition.nutrients.principlesAndDietaryFibers.dietaryFiber.total
+            else->0f
+        }
+    }
+
     override fun onFoodViewClicked(food: Food) {
         if(TextUtils.isEmpty(plateId) && TextUtils.isEmpty(recipeId) ){
-
+            //navigator.startFoodDetails()
         } else {
             var data = intent
             data.putExtra("foodId", food.id)
-            data.putExtra("stdServing", food.standardServing.portion)
+            data.putExtra("popularServingQty", food.standardServing.popularServing)
+            data.putExtra("popularServingType", food.standardServing.popularServingType)
             setResult(Activity.RESULT_OK, data)
             finish()
         }
@@ -103,10 +125,29 @@ class BrowseFoodActivity : BaseDIActivity(), BrowseFoodsAdapter.FoodViewCallBack
             onEggOrMeatDataLoaded(res)
         })
 
+        tv_select_nutrient.setOnClickListener { MaterialDialog(this).show {
+            listItemsSingleChoice(items =listOf("energy","carbohydrate","fat","protien",
+                    "thiamineB1","riboflavinB2","niacinB3","pentothenicAcidB5","totalB6","bioinB7","totalFolatesB9","totalAscorbicAcid",
+                    "aluminium","calcium","copper","iron","magnesium","potassium","sodium","zinc",
+                    "total",
+                    "starch","glucose","sucrose","maltos","totalFreeSugar","cho",
+                    "totalSaturatedFatyAcids","totalMonoUnsaturatedFattyAcids","totalPolyUnsaturatedFattyAcids","cholesterol",
+                    "citricAcid","mallicAcid",
+                    "totalCarotenids"
+            )) { dialog, index, text ->
+                onCategorySelected(text)
+            }
+        } }
+        tv_select_nutrient.setText("Select Nutrient ->")
         browseFoodViewModel.triggerFruits.value = FoodCategories.E.id
         browseFoodViewModel.triggerVegitables.value = FoodCategories.C.id
-        browseFoodViewModel.triggerEggOrMeat.value = FoodCategories.M.id
 
+
+    }
+
+    private fun onCategorySelected(text: String) {
+        tv_select_nutrient.text = ""+text
+        browseFoodViewModel.triggerEggOrMeat.value = text
     }
 
     private fun onFoodsDataLoaded(res: Resource<BrowseFoodResponse>?) {

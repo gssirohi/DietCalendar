@@ -114,7 +114,7 @@ public class Food {
         try {
             Integer portionFact = this.nutrition.getPortion();
             Nutrients portionFactNutrients = this.getNutrition().getNutrients();
-            Integer stdPortion = this.getStandardServing().getPortion();
+            Integer stdPortion = this.getStandardServing().getStdPortion();
             if (stdPortion == null) stdPortion = nutrition.getPortion();
 
             Float factor = (Float) (stdPortion.floatValue() / portionFact.floatValue());

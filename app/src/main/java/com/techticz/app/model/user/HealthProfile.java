@@ -8,10 +8,10 @@ public class HealthProfile {
 
     @SerializedName("weight")
     @Expose
-    private Float weight;
+    private Float weight = 40f;
     @SerializedName("height")
     @Expose
-    private Float height;
+    private Float height = 160f;
     @SerializedName("heightUnit")
     @Expose
     private String heightUnit;

@@ -4,6 +4,8 @@ package com.techticz.app.model.user;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 public class BasicInfo {
 
     @SerializedName("name")
@@ -21,6 +23,10 @@ public class BasicInfo {
     @SerializedName("dob")
     @Expose
     private String dob;
+    @NotNull
+    @SerializedName("fcm")
+    @Expose
+    public String fcm;
 
     public String getName() {
         return name;

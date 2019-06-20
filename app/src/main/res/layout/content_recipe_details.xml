@@ -148,30 +148,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_recipe_category"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="left|bottom"
-                android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:gravity="left"
-                android:hint="Category">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    style="?attr/textAppearanceBody2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
-                    android:drawableTint="?attr/colorAccent"
-                    android:enabled="false"
-                    android:focusable="false"
-                    tools:text="Beverages"
-                    tools:visibility="visible" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="8dp"
+                android:layout_gravity="center_vertical"
+                android:text="Declaring Approx. Calory of recipe will help you to add foods and ingedients with right quantity"
+                style="?attr/textAppearanceCaption"
+                android:textSize="10sp"
+                />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_approx_cal"
@@ -189,11 +175,8 @@
                     style="?attr/textAppearanceBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/ic_keyboard_arrow_right"
-                    android:drawableTint="?attr/colorAccent"
                     android:enabled="false"
-                    android:focusable="false"
+                    android:inputType="number"
                     tools:text="250"
                     tools:visibility="visible" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -208,7 +191,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="8dp"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -246,7 +229,8 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="16dp"
                             app:SpinKit_Color="@color/secondaryColor"
-                            tools:visibility="invisible" />
+                            tools:visibility="visible"
+                            android:visibility="invisible"/>
 
                     </LinearLayout>
 
@@ -318,13 +302,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_recipe_region_sub_region"
+            android:id="@+id/ll_recipe_category_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_recipe_region"
+                android:id="@+id/til_recipe_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -333,7 +317,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:hint="Region">
+                android:hint="Category">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="?attr/textAppearanceBody2"
@@ -344,7 +328,7 @@
                     android:drawableTint="?attr/colorAccent"
                     android:enabled="false"
                     android:focusable="false"
-                    tools:text="North India"
+                    tools:text="Beverages"
                     tools:visibility="visible" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -375,7 +359,7 @@
 
         </LinearLayout>
         <TextView
-            style="?attr/textAppearanceHeadline6"
+            style="?attr/textAppearanceSubtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -390,7 +374,7 @@
             android:orientation="horizontal"
             >
 
-            <com.google.android.material.chip.Chip
+           <!-- <com.google.android.material.chip.Chip
                 android:id="@+id/chip_early_morning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -442,7 +426,7 @@
                 android:checkable="true"
                 android:layout_marginLeft="4dp"
                 android:text="Bed Time"
-                app:chipBackgroundColor="?attr/colorAccent" />
+                app:chipBackgroundColor="?attr/colorAccent" />-->
         </com.google.android.material.chip.ChipGroup>
         <View
             android:layout_width="match_parent"

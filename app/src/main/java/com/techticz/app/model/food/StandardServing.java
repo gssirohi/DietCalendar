@@ -8,29 +8,63 @@ import androidx.room.ColumnInfo;
 
 public class StandardServing {
 
-    @SerializedName("portion")
+    @SerializedName("measPortion")
     @Expose
-    @ColumnInfo(name = "ser_portion")
-    private Integer portion;
-    @SerializedName("servingUnit")
+    //@ColumnInfo(name = "ser_portion")
+    private Integer measPortion;
+    @SerializedName("measPortionUnit")
     @Expose
-    private String servingUnit;
+    private String measPortionUnit;
 
-    
-    public Integer getPortion() {
-        return portion;
+    @SerializedName("stdPortion")
+    @Expose
+    private Integer stdPortion;
+
+    @SerializedName("popularServing")
+    @Expose
+    private Integer popularServing;
+
+    @SerializedName("popularServingType")
+    @Expose
+    private String popularServingType;
+
+    public Integer getMeasPortion() {
+        return measPortion;
     }
 
-    public void setPortion(Integer portion) {
-        this.portion = portion;
+    public void setMeasPortion(Integer measPortion) {
+        this.measPortion = measPortion;
     }
 
-    public String getServingUnit() {
-        return servingUnit;
+    public String getMeasPortionUnit() {
+        return measPortionUnit;
     }
 
-    public void setServingUnit(String servingUnit) {
-        this.servingUnit = servingUnit;
+    public void setMeasPortionUnit(String measPortionUnit) {
+        this.measPortionUnit = measPortionUnit;
     }
 
+    public Integer getStdPortion() {
+        return stdPortion;
+    }
+
+    public void setStdPortion(Integer stdPortion) {
+        this.stdPortion = stdPortion;
+    }
+
+    public Integer getPopularServing() {
+        return popularServing;
+    }
+
+    public void setPopularServing(Integer popularServing) {
+        this.popularServing = popularServing;
+    }
+
+    public String getPopularServingType() {
+        return popularServingType;
+    }
+
+    public void setPopularServingType(String popularServingType) {
+        this.popularServingType = popularServingType;
+    }
 }

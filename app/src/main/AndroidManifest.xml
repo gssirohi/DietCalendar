@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".ui.DietCalendarApplication"
@@ -30,6 +31,7 @@
         <activity
             android:name="com.techticz.app.ui.activity.DashboardActivity"
             android:label="@string/title_activity_dashboard"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -46,11 +48,18 @@
             android:label="@string/title_activity_developer"
             android:parentActivityName="com.techticz.app.ui.activity.DashboardActivity"
             android:theme="@style/AppTheme.Showcase"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.techticz.app.ui.activity.BrowseDietPlansActivity"
             android:parentActivityName="com.techticz.app.ui.activity.DashboardActivity"
             android:theme="@style/AppTheme.Plan"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.techticz.app.ui.activity.DietChartActivity"
@@ -61,6 +70,7 @@
         <activity
             android:name="com.techticz.app.ui.activity.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -76,6 +86,7 @@
         <activity
             android:name="com.techticz.app.ui.activity.BrowsePlateActivity"
             android:label="@string/title_activity_browse_plate"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Plate"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -86,12 +97,14 @@
         <activity
             android:name="com.techticz.app.ui.activity.BrowseRecipeActivity"
             android:label="@string/title_activity_browse_recipe"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Recipe"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.techticz.app.ui.activity.BrowseFoodActivity"
             android:label="@string/title_activity_browse_food"
             android:theme="@style/AppTheme.Food"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.techticz.app.ui.activity.RecipeDetailsActivity"
@@ -115,6 +128,13 @@
 
         </provider>
 
+        <service
+            android:name="com.techticz.app.service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

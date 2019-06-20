@@ -75,13 +75,14 @@ dependencies {
     implementation REQUIRE.DAGGER.DAGGER_SUPPORT
     kapt REQUIRE.DAGGER.PROCESSOR
     kapt REQUIRE.DAGGER.COMPILER
+    implementation REQUIRE.NETWORKING.TIMBER
 
     testImplementation REQUIRE.TEST.JUNIT
     androidTestImplementation REQUIRE.TEST.RUNNER
     androidTestImplementation REQUIRE.TEST.ESPRESSO_CORE
 
     api 'de.hdodenhof:circleimageview:2.1.0'
-    api 'com.github.bmarrdev:android-DecoView-charting:v0.9.3'
+    api 'com.github.bmarrdev:android-DecoView-charting:v1.2'
 
 
 }

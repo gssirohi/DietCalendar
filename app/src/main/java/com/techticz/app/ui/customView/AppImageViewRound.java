@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
+import timber.log.Timber;
 import android.widget.ImageView;
 
 import com.techticz.app.model.ImageResponse;
@@ -123,11 +123,11 @@ public class AppImageViewRound extends CircleImageView {
                     return bitmap;
                 }
             } catch (Exception e) {
-                Log.d("URLCONNECTIONERROR", e.toString());
+                Timber.d("URLCONNECTIONERROR", e.toString());
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
-                Log.w("ImageDownloader", "Error downloading image from " + url);
+                Timber.w("ImageDownloader", "Error downloading image from " + url);
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();

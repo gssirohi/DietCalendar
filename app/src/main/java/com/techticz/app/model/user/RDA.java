@@ -39,7 +39,7 @@ public class RDA {
         veggies = (10 * dailyCalories)/100;
 
         //water
-        if(activityLevel.equals("low") || activityLevel.equals("moderate")){
+        if(activityLevel != null && (activityLevel.equals("low") || activityLevel.equals("moderate"))){
             waterGlasses = 8;
         } else {
             waterGlasses = 9;

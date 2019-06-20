@@ -2,7 +2,6 @@ package com.techticz.app.viewmodel
 
 import androidx.lifecycle.*
 import android.content.Context
-import android.util.Log
 import com.techticz.app.model.food.Nutrients
 import com.techticz.app.model.mealplate.RecipeItem
 import com.techticz.app.model.recipe.RecipeResponse
@@ -12,6 +11,7 @@ import com.techticz.networking.model.DataSource
 import com.techticz.networking.model.Resource
 import com.techticz.networking.model.Status
 import com.techticz.app.base.BaseViewModel
+import com.techticz.app.constants.FoodServings
 import com.techticz.app.model.mealplate.FoodItem
 import com.techticz.app.util.Utils
 import com.techticz.dietcalendar.ui.DietCalendarApplication
@@ -53,7 +53,10 @@ constructor() : BaseViewModel() {
     fun perServingCal(): Float? {
         return Utils.calories(getNutrientsPerServe()?.principlesAndDietaryFibers?.energy!!)
     }
-    fun getNutrientsPerServe(): Nutrients? {
+    fun perServingCal(totalServing:Int): Float? {
+        return Utils.calories(getNutrientsPerServe(totalServing)?.principlesAndDietaryFibers?.energy!!)
+    }
+    fun getNutrientsPerServe(totalServings:Int): Nutrients? {
         var nutrients = Nutrients()
         var totalNutrients = Nutrients()
         var foodViewModelList = liveFoodViewModelList?.value?.data
@@ -61,20 +64,24 @@ constructor() : BaseViewModel() {
             for (foodViewModel in foodViewModelList!!) {
                 if(foodViewModel.liveFoodResponse.value?.data != null) {
 
-                    var foodNutrients: Nutrients? = foodViewModel.getNutrientPerPortion()
-                    var factoredNutrients = foodNutrients?.applyFactor(foodViewModel.triggerFoodItem?.value?.qty!!.toFloat())
-                    totalNutrients.addUpNutrients(factoredNutrients)
+                    var nutrientsForFoodItem:Nutrients? = foodViewModel.getNutrientsForFoodItem()
+                    totalNutrients.addUpNutrients(nutrientsForFoodItem)
                 }
             }
         }
-        var totalServings = liveRecipeResponse?.value?.data?.recipe?.standardServing?.qty
-        if(totalServings == null || totalServings == 0)totalServings = 1
+
         var perServeFactor:Float = 1f/(totalServings!!)
         nutrients = totalNutrients.applyFactor(perServeFactor)
 
         //apply cooking factor
 
         return nutrients.applyFactor(0.90f)
+    }
+    fun getNutrientsPerServe(): Nutrients? {
+        var totalServings = liveRecipeResponse?.value?.data?.recipe?.standardServing?.qty
+        if(totalServings == null || totalServings == 0)totalServings = 1
+
+        return getNutrientsPerServe(totalServings)
     }
 
     fun isVeg(): Boolean {
@@ -102,6 +109,7 @@ constructor() : BaseViewModel() {
                 }
                 Status.ERROR->{
                     liveStatus.value = Status.COMPLETE
+                    Timber.e("Error in loading Recipe:"+triggerRecipeItem.value?.id)
                 }
             }
         })
@@ -134,19 +142,23 @@ constructor() : BaseViewModel() {
 
         var foodViewModelList = ArrayList<FoodViewModel>()
 
-        if (foods != null) {
+        if (foods != null && !foods.isEmpty()) {
             for (food in foods) {
                 var foodViewModel = FoodViewModel()
                 foodViewModel.triggerFoodItem.value = food
                 foodViewModel.autoLoadChildren(lifecycleOwner)
                 foodViewModel.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
                     Status.COMPLETE-> {
-                        Log.d("STATUS","Recipe Food completed:"+food.id)
+                        Timber.d("Recipe Food completed:"+food.id)
                         registerFoodChildCompletion()
                     }
                 } })
                 foodViewModelList.add(foodViewModel)
             }
+        } else {
+            var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.COMPLETE, foodViewModelList, "Recipe foods complete(Empty)..", DataSource.LOCAL)
+            this.liveFoodViewModelList?.value = foodViewModelListResource
+            return
         }
         var foodViewModelListResource = Resource<List<FoodViewModel>>(Status.LOADING, foodViewModelList, "Loading Recipe foods..", DataSource.LOCAL)
         this.liveFoodViewModelList?.value = foodViewModelListResource
@@ -155,13 +167,18 @@ constructor() : BaseViewModel() {
 
     fun registerFoodChildCompletion() {
         var isAllCompleted = true
+        var count = 0
+        var totalCount = 0
         for(child in this.liveFoodViewModelList?.value?.data!!){
             if(child.liveStatus?.value == Status.COMPLETE){
                 //do nothing
+                count++
             } else {
                 isAllCompleted = false
             }
+            totalCount++
         }
+        Timber.i("Recipe:"+triggerRecipeItem.value?.id+" "+count+" out of "+totalCount+" Foods Completed")
         if(isAllCompleted){
             var newRes = liveFoodViewModelList?.value?.createCopy(Status.COMPLETE)
             liveFoodViewModelList?.value = newRes
@@ -178,7 +195,7 @@ constructor() : BaseViewModel() {
         vm.triggerFoodItem.value = foodItem
         vm.liveStatus.observe(lifecycleOwner, Observer { resource->when(resource){
             Status.COMPLETE-> {
-                Log.d("STATUS","Food completed:"+foodItem.id)
+                Timber.d("Food completed:"+foodItem.id)
                 registerFoodChildCompletion();
             }
         } })

@@ -14,27 +14,27 @@ public class CaloryDistribution {
 
     @SerializedName("earlyMorning")
     @Expose
-    Integer earlyMorning;
+    Integer earlyMorning = 0;
 
     @SerializedName("breakfast")
     @Expose
-    Integer breakfast;
+    Integer breakfast = 0;
 
     @SerializedName("lunch")
     @Expose
-    Integer lunch;
+    Integer lunch = 0;
 
     @SerializedName("eveningSnacks")
     @Expose
-    Integer eveningSnacks;
+    Integer eveningSnacks = 0;
 
     @SerializedName("dinner")
     @Expose
-    Integer dinner;
+    Integer dinner = 0;
 
     @SerializedName("bedTime")
     @Expose
-    Integer bedTime;
+    Integer bedTime = 0;
 
     public CaloryDistribution(int em, int bf, int ln, int es, int dn, int bt) {
         earlyMorning = em;
@@ -91,5 +91,9 @@ public class CaloryDistribution {
 
     public void setBedTime(Integer bedTime) {
         this.bedTime = bedTime;
+    }
+
+    public int sum() {
+        return earlyMorning+breakfast+lunch+eveningSnacks+dinner+bedTime;
     }
 }

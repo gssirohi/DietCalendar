@@ -63,7 +63,7 @@ constructor() : BaseViewModel() {
             if (triggerCategory == null) {
                 return@switchMap AbsentLiveData.create<Resource<BrowseFoodResponse>>()
             } else {
-                return@switchMap injectedRepo?.fetchFoodsWithCategory(triggerCategory)
+                return@switchMap injectedRepo?.fetchFoodsForNutrient(triggerCategory)
             }
         }
 

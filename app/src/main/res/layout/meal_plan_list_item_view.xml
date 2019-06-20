@@ -20,13 +20,46 @@
     android:orientation="vertical"
     >
 
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.techticz.app.ui.customView.AppImageView
         android:id="@+id/aiv_plan_image"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:src="@drawable/bg_afternoon"
         android:scaleType="centerCrop"/>
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/shape_recommonded_plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|start|top"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        tools:visibility="visible"
+        android:elevation="0dp"
+        app:shape_roundRect_bottomLeftRadius="10dp"
+        app:shape_roundRect_bottomRightRadius="10dp"
+        app:shape_roundRect_topLeftRadius="10dp"
+        app:shape_roundRect_topRightRadius="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            style="?attr/textAppearanceOverline"
+            android:textSize="8sp"
+            android:textColor="@color/white"
+            android:background="@color/primaryDarkColor1"
+            android:text="Recommended"
+            />
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
+</FrameLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -76,15 +109,50 @@
         android:layout_height="wrap_content"
         android:padding="4dp"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/plan_access"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text = "Free"
-            android:gravity="start|center_vertical"
-            android:layout_gravity="center_vertical"
-            style="?attr/textAppearanceHeadline5"
-            />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/plan_access"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text = "Free"
+                android:gravity="start|center_vertical"
+                android:layout_gravity="center_vertical"
+                style="?attr/textAppearanceHeadline5"
+                />
+            <com.github.florent37.shapeofview.shapes.RoundRectView
+                android:id="@+id/shape_plan_active_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|end|center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:elevation="0dp"
+                app:shape_roundRect_bottomLeftRadius="10dp"
+                app:shape_roundRect_bottomRightRadius="10dp"
+                app:shape_roundRect_topLeftRadius="10dp"
+                app:shape_roundRect_topRightRadius="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    style="?attr/textAppearanceOverline"
+                    android:textSize="8sp"
+                    android:textColor="@color/white"
+                    android:background="@color/primaryColor5"
+                    android:text="Active Plan"
+                    />
+            </com.github.florent37.shapeofview.shapes.RoundRectView>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_plan_author"
             android:layout_width="wrap_content"

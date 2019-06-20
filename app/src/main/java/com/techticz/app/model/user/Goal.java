@@ -8,7 +8,7 @@ public class Goal {
 
     @SerializedName("targetWeight")
     @Expose
-    private Float targetWeight;
+    private Float targetWeight = 60f;
 
     @SerializedName("goalType")
     @Expose
@@ -16,7 +16,7 @@ public class Goal {
 
     @SerializedName("durationInWeek")
     @Expose
-    private Integer durationInWeek;
+    private Integer durationInWeek = 30;
 
     public Float getTargetWeight() {
         return targetWeight;

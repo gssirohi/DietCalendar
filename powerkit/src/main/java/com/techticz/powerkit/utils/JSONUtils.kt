@@ -4,6 +4,7 @@ import android.content.Context
 import android.R.attr.name
 import android.os.Environment
 import android.util.Log
+import timber.log.Timber
 import java.io.*
 import java.lang.Exception
 import java.nio.charset.Charset
@@ -37,7 +38,7 @@ class JSONUtils{
                 }
             })
             var text = textBuilder.toString().replace("\uFFFF","")
-            Log.d("JSONUtils","Treated Json:"+text)
+            Timber.d("JSONUtils Treated Json:"+text)
             return text
         }
     }
